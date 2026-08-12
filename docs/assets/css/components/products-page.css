@@ -1,0 +1,652 @@
+/* =============================================================================
+   PRODUCTS PAGE — Page-specific components
+   Pages: assets/html/generated/products.html
+          assets/html/generated/product-detail.html
+
+   Cascade note: careers-page.css is loaded before this file.
+   The following classes are already defined there and cascade here:
+     .tag--pill, .section-subhead, .rich-text, .pagination-wrap/.pagination/*
+     .inquiry-inner, .inquiry-head, .inquiry-contact-line, .inquiry-form-panel
+     .hp-field, .form-submit-row, .form-privacy-note, .field-hint, .input--file
+
+   Components defined in this file:
+     PROD-001  Products Archive Section  — wrapper + filter chip active state
+     PROD-002  Product Card Grid (C-53)  — 3-col product card grid
+     PROD-003  Product Card (C-52)       — image + body card
+     PROD-004  Empty State (BEM variant) — products.html zero-results state
+     PROD-005  Pagination Ellipsis       — products.html extended pagination
+     PROD-006  Product Detail Grid       — 2-col: gallery + info (product-detail.html)
+     PROD-007  Product Gallery           — main image + thumbnail strip
+     PROD-008  Product Info Panel        — tags + name + specs + CTA
+     PROD-009  Spec Table (C-55)         — definition-list specifications table
+     PROD-010  Product Downloads (C-56)  — download card grid
+     PROD-011  Related Products          — section + reuses .prod-grid
+     PROD-012  Product Inquiry Section   — section wrapper + .form-status
+============================================================================= */
+
+/* =============================================================================
+   PROD-001 — PRODUCTS ARCHIVE SECTION
+   Archive wrapper and .cat-filter / .cat--active active state for filter chips.
+   Base .cat, .cat-grid, .cat-ico are defined in cards.css.
+============================================================================= */
+
+.products-archive-section {
+  background: var(--bg);
+  padding: 72px 0 80px;
+}
+
+/* Active filter chip — mirrors .cat hover state, frozen */
+.cat--active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.cat--active .cat-ico {
+  background: rgba(255, 255, 255, .15);
+  border-color: rgba(255, 255, 255, .2);
+}
+
+.cat--active .cat-ico svg {
+  color: #fff;
+}
+
+/* Archive meta bar — result count row */
+.archive-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* .result-count already styled in careers-page.css */
+
+/* =============================================================================
+   PROD-002 — PRODUCT CARD GRID (C-53)
+   Responsive grid: 3 cols desktop → 2 tablet → 1 mobile.
+   <!-- [CMS: prod-grid | controlled by WooCommerce/CPT loop] -->
+============================================================================= */
+
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 1080px) {
+  .prod-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .prod-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* =============================================================================
+   PROD-003 — PRODUCT CARD (C-52)
+   Image area with overlaid tag + card body with meta, name, excerpt, link.
+   <!-- [CMS: prod-card | fields: image, tag, dosage_form, strength, name, excerpt] -->
+============================================================================= */
+
+.prod-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--t-slow), transform var(--t-slow);
+}
+
+.prod-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-5px);
+}
+
+/* Image area */
+.prod-card-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg), #dde8f4);
+}
+
+.prod-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--t-slow);
+}
+
+.prod-card:hover .prod-card-img img {
+  transform: scale(1.04);
+}
+
+/* Division tag overlaid on image */
+.prod-card-img .tag--pill {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(4px);
+  border-color: rgba(16, 98, 172, .12);
+}
+
+/* Card body */
+.prod-card-body {
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Meta line: dosage form · separator · strength */
+.prod-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.prod-dosage-form {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--blue);
+}
+
+.sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: .4;
+  flex-shrink: 0;
+}
+
+.prod-strength-meta {
+  font-size: .7rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+
+/* Product name */
+.prod-card-name {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+/* Short excerpt */
+.prod-card-excerpt {
+  font-size: .86rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 14px;
+}
+
+/* .learn arrow link inherits from cards.css */
+
+@media (prefers-reduced-motion: reduce) {
+  .prod-card:hover {
+    transform: none;
+  }
+
+  .prod-card:hover .prod-card-img img {
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   PROD-004 — EMPTY STATE (BEM variant for products.html)
+   Note: careers-jobs.html uses block-element naming (.empty-state-icon etc.)
+   products.html uses BEM double-underscore (.empty-state__icon etc.)
+   Both variants need styling.
+============================================================================= */
+
+.empty-state__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(16, 98, 172, .06);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 24px;
+}
+
+.empty-state__icon svg {
+  width: 30px;
+  height: 30px;
+  color: var(--blue);
+  opacity: .5;
+}
+
+.empty-state__title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.empty-state__body {
+  font-size: .92rem;
+  color: var(--muted);
+  max-width: 440px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+
+/* =============================================================================
+   PROD-005 — PAGINATION ELLIPSIS
+   Extra item type used in the products.html extended pagination.
+   Base pagination styles inherit from careers-page.css.
+============================================================================= */
+
+.pagination__item--ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-width: 28px;
+  font-size: .88rem;
+  color: var(--muted);
+  user-select: none;
+}
+
+/* =============================================================================
+   PROD-006 — PRODUCT DETAIL GRID
+   Two-column layout: image gallery (left) + product info (right).
+============================================================================= */
+
+.product-overview {
+  background: var(--white);
+}
+
+.prod-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .prod-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* =============================================================================
+   PROD-007 — PRODUCT GALLERY (C-52 Gallery)
+   Main large image with a horizontal thumbnail strip below.
+   Thumbnail active state toggled by ProductController.
+============================================================================= */
+
+.prod-gallery {
+  position: sticky;
+  top: 96px;
+}
+
+/* Main product image */
+.prod-img-main {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, var(--bg), #dde8f4);
+  margin-bottom: 14px;
+}
+
+.prod-img-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Thumbnail strip */
+.prod-thumbs {
+  display: flex;
+  gap: 10px;
+}
+
+.prod-thumb {
+  width: 76px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--line);
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  background: var(--bg);
+  transition: border-color var(--t-fast);
+  flex-shrink: 0;
+}
+
+.prod-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.prod-thumb:hover {
+  border-color: rgba(16, 98, 172, .4);
+}
+
+.prod-thumb.active {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px rgba(16, 98, 172, .18);
+}
+
+@media (max-width: 1024px) {
+  .prod-gallery {
+    position: static;
+  }
+}
+
+/* =============================================================================
+   PROD-008 — PRODUCT INFO PANEL
+   Right column on product-detail.html: tags, name, meta, CTA.
+   <!-- [CMS: prod_info | fields: tags, name, generic, strength, pack_size, desc] -->
+============================================================================= */
+
+/* Tag pills row */
+.prod-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+/* Product status badge */
+.prod-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  line-height: 1.4;
+}
+
+.prod-status--active {
+  color: #166534;
+  background: rgba(22, 101, 52, .08);
+  border: 1px solid rgba(22, 101, 52, .18);
+}
+
+.prod-status--discontinued {
+  color: var(--muted);
+  background: rgba(90, 107, 140, .08);
+  border: 1px solid rgba(90, 107, 140, .18);
+}
+
+/* Product name heading */
+.prod-name {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+/* Generic name + meta rows */
+.prod-generic,
+.prod-meta-row {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.prod-generic strong,
+.prod-meta-row strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Section divider */
+.prod-divider {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 20px 0;
+}
+
+/* Overview description paragraph */
+.prod-overview-desc {
+  font-size: .96rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+/* CTA button row */
+.prod-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* =============================================================================
+   PROD-009 — SPECIFICATION TABLE (C-55)
+   Definition list (<dl>) styled as a two-column table.
+   <!-- [CMS: prod_specs repeater | fields: label, value] -->
+============================================================================= */
+
+.product-spec {
+  background: var(--bg);
+}
+
+.spec-table {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.spec-table dt,
+.spec-table dd {
+  padding: 14px 20px;
+  font-size: .9rem;
+  line-height: 1.55;
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+}
+
+.spec-table dt:last-of-type,
+.spec-table dd:last-of-type {
+  border-bottom: none;
+}
+
+.spec-table dt {
+  font-weight: 700;
+  color: var(--text);
+  background: var(--bg);
+  white-space: nowrap;
+  padding-right: 28px;
+  min-width: 180px;
+}
+
+.spec-table dd {
+  color: var(--muted);
+}
+
+.spec-table dd .prod-status {
+  vertical-align: middle;
+}
+
+@media (max-width: 640px) {
+  .spec-table {
+    grid-template-columns: 1fr;
+  }
+
+  .spec-table dt {
+    padding-bottom: 4px;
+    border-bottom: none;
+    background: var(--white);
+    padding-top: 16px;
+  }
+
+  .spec-table dd {
+    padding-top: 0;
+    padding-bottom: 16px;
+  }
+}
+
+/* =============================================================================
+   PROD-010 — PRODUCT DOWNLOADS (C-56)
+   Grid of document download cards.
+   <!-- [CMS: prod_downloads repeater | fields: title, file_url, file_meta, available] -->
+============================================================================= */
+
+.product-downloads {
+  background: var(--white);
+}
+
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.download-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--t-slow), transform var(--t-slow), border-color var(--t-slow);
+}
+
+a.download-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+  border-color: rgba(16, 98, 172, .2);
+}
+
+.download-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(16, 98, 172, .08), rgba(62, 65, 148, .08));
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.download-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--blue);
+}
+
+.download-info {
+  min-width: 0;
+}
+
+.download-title {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0 0 3px;
+}
+
+.download-meta {
+  font-size: .76rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (max-width: 880px) {
+  .downloads-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .downloads-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .download-card {
+    padding: 16px 18px;
+  }
+}
+
+/* =============================================================================
+   PROD-011 — RELATED PRODUCTS
+   Section with alternating background, reuses .prod-grid layout.
+============================================================================= */
+
+.related-products {
+  background: var(--bg);
+}
+
+/* product-desc-section gets white bg by default */
+.product-desc-section {
+  background: var(--white);
+}
+
+/* =============================================================================
+   PROD-012 — PRODUCT INQUIRY SECTION
+   Section wrapper with background.
+   Inquiry layout (.inquiry-inner etc.) inherits from careers-page.css.
+============================================================================= */
+
+.product-inquiry {
+  background: var(--bg);
+}
+
+/* Form status alert — inline success/error feedback */
+.form-status {
+  font-size: .9rem;
+  line-height: 1.55;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+
+.form-status:empty {
+  display: none;
+}
+
+.form-status.success {
+  color: #166534;
+  background: rgba(22, 101, 52, .08);
+  border: 1px solid rgba(22, 101, 52, .18);
+}
+
+.form-status.error {
+  color: #991b1b;
+  background: rgba(153, 27, 27, .07);
+  border: 1px solid rgba(153, 27, 27, .18);
+}

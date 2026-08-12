@@ -1,0 +1,1335 @@
+/* =============================================================================
+   CAREERS PAGE — Page-specific components
+   Pages: assets/html/generated/careers.html
+          assets/html/generated/careers-jobs.html
+          assets/html/generated/career-detail.html
+
+   Components defined in this file:
+     CAR-PAGE-001  Employer Stats Strip    — 4-col stats band (careers.html)
+     CAR-PAGE-002  Benefits Grid           — 4×2 benefit cards (careers.html)
+     CAR-PAGE-003  Hiring Process Steps    — 5-step horizontal flow (careers.html)
+     CAR-PAGE-004  Tag Pill + Job Badge    — classification tags (all careers pages)
+     CAR-PAGE-005  Job Cards               — standard + featured variants (all careers)
+     CAR-PAGE-006  Featured Grid + CTA     — 3-col featured grid + section CTA
+     CAR-PAGE-007  Careers CTA Band        — dark closing CTA section (careers.html)
+     CAR-PAGE-008  Jobs Search Toolbar     — filter form (careers-jobs.html)
+     CAR-PAGE-009  Jobs Archive Meta Bar   — count + toggle + sort (careers-jobs.html)
+     CAR-PAGE-010  Featured Jobs Block     — archive featured block (careers-jobs.html)
+     CAR-PAGE-011  Jobs View Grid/List     — toggleable grid/list (careers-jobs.html)
+     CAR-PAGE-012  Empty State             — no-results state (careers-jobs.html)
+     CAR-PAGE-013  Pagination              — C-54 paginator (careers-jobs.html)
+     CAR-PAGE-014  C-60 Job Meta Bar       — 5-fact details strip (career-detail.html)
+     CAR-PAGE-015  Job Detail Article      — prose sections + subheads
+     CAR-PAGE-016  Rich Text Module        — C-57 prose block (career-detail.html)
+     CAR-PAGE-017  Job Apply + Inquiry     — apply form + shared inquiry layout
+============================================================================= */
+
+/* =============================================================================
+   CAR-PAGE-001 — EMPLOYER STATS STRIP
+   4-column stats band, white bg with bottom divider line.
+   Appears immediately below the compact hero.
+   <!-- [CMS: careers_stats repeater | fields: stat_num, stat_label] -->
+============================================================================= */
+
+.employer-stats-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.employer-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.employer-stat {
+  padding: 34px 20px;
+  text-align: center;
+  border-right: 1px solid var(--line);
+}
+
+.employer-stat:last-child {
+  border-right: none;
+}
+
+.employer-stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -.01em;
+}
+
+.employer-stat-label {
+  font-size: .77rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: .04em;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .employer-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .employer-stat:nth-child(2n) {
+    border-right: none;
+  }
+
+  .employer-stat:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+
+  .employer-stat {
+    padding: 24px 16px;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-002 — BENEFITS GRID
+   8 benefit cards in 4×2 grid on var(--bg) background.
+   Inline style="background:var(--bg)" on .benefits-section removed; defined here.
+   <!-- [CMS: careers_benefits repeater | fields: icon_svg, title, text] -->
+============================================================================= */
+
+.benefits-section {
+  background: var(--bg);
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.benefit-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  transition: box-shadow var(--t-slow), transform var(--t-slow);
+}
+
+.benefit-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+}
+
+.benefit-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(16, 98, 172, .08), rgba(62, 65, 148, .08));
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+}
+
+.benefit-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--blue);
+}
+
+.benefit-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.benefit-text {
+  font-size: .86rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+@media (max-width: 1080px) {
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .benefit-card {
+    padding: 22px 18px;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-003 — HIRING PROCESS STEPS
+   5 numbered steps with connector lines.
+   Desktop: horizontal row. Mobile: vertical stack.
+   <!-- [CMS: careers_process repeater | fields: title, description] -->
+============================================================================= */
+
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.process-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.process-step-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--indigo) 100%);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 20px rgba(16, 98, 172, .28);
+  position: relative;
+  z-index: 1;
+  transition: transform var(--t-medium), box-shadow var(--t-medium);
+}
+
+.process-step:hover .process-step-num {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(16, 98, 172, .38);
+}
+
+.process-step-title {
+  font-size: .97rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.process-step-desc {
+  font-size: .84rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Connector line between steps */
+.process-connector {
+  flex-shrink: 0;
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--indigo));
+  margin-top: 27px;
+  opacity: .3;
+}
+
+@media (max-width: 880px) {
+  .process-steps {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .process-step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    padding: 0 0 28px;
+    width: 100%;
+  }
+
+  .process-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process-step-num {
+    margin-bottom: 0;
+  }
+
+  .process-connector {
+    width: 2px;
+    height: 28px;
+    margin: 0 0 0 27px;
+  }
+}
+
+@media (max-width: 640px) {
+  .process-step-num {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  .process-connector {
+    margin-left: 21px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-step:hover .process-step-num {
+    transform: none;
+    box-shadow: 0 6px 20px rgba(16, 98, 172, .28);
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-004 — TAG PILL + JOB BADGE FEATURED
+   Small classification tags used on all job cards.
+============================================================================= */
+
+.tag--pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: rgba(16, 98, 172, .08);
+  border: 1px solid rgba(16, 98, 172, .15);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.job-badge-featured {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #92400e;
+  background: rgba(217, 119, 6, .09);
+  border: 1px solid rgba(217, 119, 6, .22);
+  border-radius: var(--radius-pill);
+  padding: 3px 9px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* =============================================================================
+   CAR-PAGE-005 — JOB CARDS
+   Standard card and --featured modifier.
+   Shared across careers.html, careers-jobs.html.
+   <!-- [CMS: job_cards repeater | fields: title, dept, location, exp, date, excerpt] -->
+============================================================================= */
+
+.job-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--t-slow), transform var(--t-slow), border-color var(--t-slow);
+}
+
+.job-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+  border-color: rgba(16, 98, 172, .2);
+}
+
+.job-card--featured {
+  border-color: rgba(16, 98, 172, .18);
+}
+
+.job-card--featured:hover {
+  border-color: rgba(16, 98, 172, .35);
+}
+
+.job-card-body {
+  padding: 24px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Header variants */
+/* careers.html featured: pill + badge side by side */
+.job-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* careers-jobs.html: pill/badge left, code right */
+.job-card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* Main content block (careers-jobs.html structure) */
+.job-card-main {
+  flex: 1;
+}
+
+/* Job reference code */
+.job-card-code {
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--muted);
+  font-family: ui-monospace, 'Cascadia Mono', monospace;
+  flex-shrink: 0;
+}
+
+/* Department label */
+.job-card-dept {
+  display: block;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+/* Job title */
+.job-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+/* Short excerpt — featured cards on careers.html only */
+.job-card-excerpt {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+/* Meta row: location, experience, closing date */
+.job-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+
+.job-meta-loc,
+.job-meta-date,
+.job-meta-exp {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .78rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.job-meta-loc svg,
+.job-meta-date svg,
+.job-meta-exp svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: var(--blue);
+  opacity: .65;
+}
+
+/* .learn arrow link inherits from cards.css */
+
+@media (max-width: 640px) {
+  .job-card-body {
+    padding: 20px 20px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job-card:hover {
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-006 — FEATURED GRID + SECTION CTA
+   3-column featured job card grid used on careers.html and careers-jobs.html.
+   <!-- [CMS: careers_featured repeater | fields: job_ref] -->
+============================================================================= */
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* Move inline style="background:var(--bg)" to CSS */
+.featured-opps-section {
+  background: var(--bg);
+}
+
+.featured-opps-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+@media (max-width: 1080px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .featured-opps-cta {
+    margin-top: 32px;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-007 — CAREERS CTA BAND
+   Dark gradient CTA section at the bottom of careers.html.
+   <!-- [CMS: careers_cta | fields: eyebrow, heading, body, cta_label_1, cta_url_1, cta_label_2, cta_url_2] -->
+============================================================================= */
+
+.careers-cta-band {
+  background: linear-gradient(135deg, var(--navy) 0%, #13264c 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0;
+}
+
+.careers-cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 50%, rgba(16, 98, 172, .2), transparent 50%),
+    radial-gradient(circle at 90% 50%, rgba(62, 65, 148, .14), transparent 50%);
+  pointer-events: none;
+}
+
+.careers-cta-band .wrap {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.careers-cta-band .eyebrow {
+  color: var(--light-blue);
+}
+
+.careers-cta-band .eyebrow::before {
+  background: rgba(255, 255, 255, .5);
+}
+
+.careers-cta-band h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.careers-cta-band p {
+  font-size: 1.05rem;
+  color: var(--on-dark-reel-body);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.careers-cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .careers-cta-band {
+    padding: 64px 0;
+  }
+
+  .careers-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-008 — JOBS SEARCH SECTION
+   Wrapper section for the jobs archive (careers-jobs.html).
+============================================================================= */
+
+.jobs-search-section {
+  background: var(--bg);
+  padding: 72px 0 80px;
+}
+
+/* =============================================================================
+   CAR-PAGE-009 — SEARCH TOOLBAR (C-63)
+   Department / location / type / keyword filters + search button.
+   Desktop: single row | Tablet: 2 rows | Mobile: stacked.
+   <!-- [CMS: careers_search_toolbar_enabled (bool)] -->
+============================================================================= */
+
+.search-toolbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.toolbar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 130px;
+}
+
+.toolbar-search-field {
+  flex: 1.5;
+}
+
+.toolbar-field-label {
+  font-size: .67rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.toolbar-sep {
+  width: 1px;
+  height: 46px;
+  background: var(--line);
+  flex-shrink: 0;
+  align-self: flex-end;
+  margin-bottom: 2px;
+}
+
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-end;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.toolbar-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 880px) {
+  .toolbar-sep {
+    display: none;
+  }
+
+  .toolbar-field {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 130px;
+  }
+
+  .toolbar-search-field {
+    flex: 1 1 100%;
+  }
+
+  .toolbar-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-toolbar {
+    padding: 16px 18px;
+    gap: 14px;
+  }
+
+  .toolbar-field {
+    flex: 1 1 100%;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-010 — JOBS ARCHIVE META BAR (C-65 view toggle)
+   Result count, grid/list toggle, sort control.
+   <!-- [CMS: careers_visitor_toggle (bool)] -->
+============================================================================= */
+
+.jobs-archive-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.meta-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.meta-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-count {
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.result-count strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Grid / list toggle */
+.jobs-view-toggle {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.view-btn + .view-btn {
+  border-left: 1px solid var(--line);
+}
+
+.view-btn:hover,
+.view-btn--active {
+  background: var(--blue);
+  color: #fff;
+}
+
+.view-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Sort control */
+.results-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.sort-select {
+  font-size: .85rem;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  background: var(--white);
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .jobs-archive-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-011 — FEATURED JOBS BLOCK
+   "Featured Opportunities" header above the 2-card featured grid
+   on the jobs archive page.
+   <!-- [CMS: careers_featured_jobs_enabled (bool)] -->
+============================================================================= */
+
+.featured-jobs {
+  margin-bottom: 44px;
+}
+
+.featured-jobs-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.featured-jobs-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+/* =============================================================================
+   CAR-PAGE-012 — ALL POSITIONS HEADING + JOBS VIEW
+   Section label and the toggleable grid/list container.
+   <!-- [CMS: careers_grid_list_default = "grid" | "list"] -->
+============================================================================= */
+
+.jobs-section-head {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.jobs-view {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* List view — JS toggles data-view="list" on the container */
+.jobs-view[data-view="list"] {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.jobs-view[data-view="list"] .job-card-body {
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 22px;
+}
+
+.jobs-view[data-view="list"] .job-card-header-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  min-width: 90px;
+}
+
+.jobs-view[data-view="list"] .job-card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.jobs-view[data-view="list"] .job-card-title {
+  font-size: .95rem;
+  margin-bottom: 4px;
+}
+
+.jobs-view[data-view="list"] .job-card-meta {
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+}
+
+.jobs-view[data-view="list"] .learn {
+  margin-left: auto;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 1080px) {
+  .jobs-view {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .jobs-view {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .jobs-view[data-view="list"] .job-card-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .jobs-view[data-view="list"] .learn {
+    margin-left: 0;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-013 — EMPTY STATE (C-58)
+   Zero-results panel shown when search returns no jobs.
+============================================================================= */
+
+.empty-state {
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.empty-state-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(16, 98, 172, .06);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 24px;
+}
+
+.empty-state-icon svg {
+  width: 30px;
+  height: 30px;
+  color: var(--blue);
+  opacity: .5;
+}
+
+.empty-state-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.empty-state-text {
+  font-size: .92rem;
+  color: var(--muted);
+  max-width: 440px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+
+/* =============================================================================
+   CAR-PAGE-014 — PAGINATION (C-54)
+   Page navigation bar for the jobs archive.
+============================================================================= */
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  gap: 6px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.pagination__num,
+.pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pagination__num:hover,
+.pagination__btn:hover {
+  background: rgba(16, 98, 172, .06);
+  border-color: rgba(16, 98, 172, .22);
+  color: var(--blue);
+}
+
+.pagination__item--active .pagination__num {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.pagination__item--active .pagination__num:hover {
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+  color: #fff;
+}
+
+.pagination__item--disabled .pagination__btn {
+  opacity: .38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination__btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   CAR-PAGE-015 — C-60 JOB META BAR
+   5-item horizontal key-facts strip at top of career-detail.html.
+   Desktop: horizontal row. Tablet: 2×2+1. Mobile: stacked.
+============================================================================= */
+
+.c60-meta-bar {
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.c60-meta-inner {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.c60-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 28px;
+  border-right: 1px solid var(--line);
+  flex: 1;
+  min-width: 130px;
+}
+
+.c60-meta-item:last-child {
+  border-right: none;
+}
+
+.c60-meta-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: rgba(16, 98, 172, .08);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.c60-meta-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--blue);
+}
+
+.c60-meta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.c60-meta-label {
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+
+.c60-meta-value {
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 880px) {
+  .c60-meta-inner {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .c60-meta-item {
+    flex: 1 1 calc(50% - 1px);
+    min-width: 0;
+  }
+
+  .c60-meta-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .c60-meta-item:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 480px) {
+  .c60-meta-item {
+    flex: 1 1 100%;
+    border-right: none;
+    border-top: 1px solid var(--line);
+    padding: 16px 20px;
+  }
+
+  .c60-meta-item:first-child {
+    border-top: none;
+  }
+}
+
+/* =============================================================================
+   CAR-PAGE-016 — JOB DETAIL ARTICLE
+   Article wrapper with alternating section backgrounds.
+   .section-subhead used as h2 inside detail sections.
+============================================================================= */
+
+.job-detail-article {
+  /* Structural wrapper — no own styles */
+}
+
+.section-subhead {
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--line);
+  line-height: 1.25;
+}
+
+/* Alternating backgrounds for article sections */
+.job-description   { background: var(--white); }
+.job-responsibilities { background: var(--bg); }
+.job-skills        { background: var(--white); }
+
+/* =============================================================================
+   CAR-PAGE-017 — RICH TEXT PROSE MODULE (C-57)
+   Styled prose block for job descriptions and skills lists.
+============================================================================= */
+
+.rich-text {
+  font-size: .97rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 780px;
+}
+
+.rich-text p {
+  margin-bottom: 1.2em;
+}
+
+.rich-text p:last-child {
+  margin-bottom: 0;
+}
+
+.rich-text ul,
+.rich-text ol {
+  margin: 0 0 1.2em 0;
+  padding-left: 1.4em;
+}
+
+.rich-text li {
+  margin-bottom: .5em;
+}
+
+.rich-text h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 1.5em 0 .7em;
+}
+
+.rich-text h3:first-child {
+  margin-top: 0;
+}
+
+.rich-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.rich-text a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-color: rgba(16, 98, 172, .35);
+}
+
+.rich-text a:hover {
+  text-decoration-color: var(--blue);
+}
+
+/* =============================================================================
+   CAR-PAGE-018 — JOB APPLY SECTION + SHARED INQUIRY LAYOUT
+   Apply section wrapper + two-column inquiry layout shared with product inquiries.
+   Note: .inquiry-inner / .inquiry-head / .inquiry-form-panel reused on
+         product-detail.html (products-page.css will extend this cascade).
+============================================================================= */
+
+.job-apply {
+  background: var(--bg);
+}
+
+/* Shared C-57 two-column inquiry layout */
+.inquiry-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+.inquiry-head {
+  padding-top: 8px;
+}
+
+.inquiry-head .eyebrow {
+  margin-bottom: 14px;
+}
+
+.inquiry-head h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.inquiry-head p {
+  font-size: .96rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.inquiry-contact-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.inquiry-contact-line svg {
+  width: 16px;
+  height: 16px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.inquiry-contact-line a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.inquiry-contact-line a:hover {
+  text-decoration: underline;
+}
+
+.inquiry-form-panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Honeypot anti-spam field */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Form submit row */
+.form-submit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.form-privacy-note {
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.form-privacy-note a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.form-privacy-note a:hover {
+  text-decoration: underline;
+}
+
+/* Field hint text (below file input) */
+.field-hint {
+  display: block;
+  font-size: .74rem;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+/* File input styling */
+.input--file {
+  cursor: pointer;
+  padding: 10px 14px;
+}
+
+@media (max-width: 880px) {
+  .inquiry-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .inquiry-form-panel {
+    padding: 24px 20px;
+  }
+}

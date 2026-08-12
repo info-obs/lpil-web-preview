@@ -1,0 +1,840 @@
+/* =============================================================================
+   LEGAL OVERVIEW PAGE — Page-specific components
+   Page: assets/html/generated/legal.html
+   URL:  /legal/
+
+   Component Registry:
+     C-142  Legal Document Card   .lov-doc-card
+
+   Additional structural sections (no component ID):
+     LOV-002  Commitment Overview  .lov-intro-grid
+     LOV-003  Documents Grid       .lov-docs
+     LOV-004  Privacy Feature      .lov-privacy
+     LOV-005  Pharmacovigilance    .lov-pv-band
+     LOV-006  Accessibility        .lov-access
+     LOV-007  Assistance Grid      .lov-assist
+
+   Reused global components (no duplication):
+     C-06   hero--compact          hero.css / inner-hero.css
+     C-12   .eyebrow               base.css
+     C-13   .section-head          layout.css
+     C-23   .btn.*                 buttons.css
+     C-44   .contact-band          contact.css
+     C-51   .breadcrumb            inner-hero.css
+
+   PROMPT: LEGAL-001-P2
+============================================================================= */
+
+
+/* =============================================================================
+   LOV-002 — COMMITMENT OVERVIEW GRID
+   2-column: text left, highlight cards right.
+   Pattern mirrors Products Overview POV-002.
+   CMS: legal_overview_eyebrow, legal_overview_headline, legal_overview_body,
+        legal_commitments repeater (icon_svg, headline, body)
+============================================================================= */
+
+.lov-intro {
+  background: var(--white);
+}
+
+.lov-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.lov-intro-text .eyebrow {
+  margin-bottom: 16px;
+}
+
+.lov-intro-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+.lov-intro-text p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.lov-intro-text p:last-of-type {
+  margin-bottom: 28px;
+}
+
+.lov-commitments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lov-commitment {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.lov-commitment:hover {
+  border-color: rgba(16, 98, 172, .25);
+  box-shadow: var(--shadow-sm);
+}
+
+.lov-commitment-ico {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 98, 172, .08);
+  border-radius: var(--radius-sm);
+  color: var(--blue);
+}
+
+.lov-commitment-body h3 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.lov-commitment-body p {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+
+/* =============================================================================
+   C-142 — LEGAL DOCUMENT CARD (LOV-003)
+   Grid of legal document cards — one per legal resource.
+   CMS: legal_documents repeater (icon_svg, title, description, last_updated,
+        status, cta_label, cta_url) on WP Options / Legal CPT
+   [CMS: data-legal-status="active|coming-soon" — determines card variant]
+============================================================================= */
+
+.lov-docs {
+  background: var(--bg);
+}
+
+.lov-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+/* C-142 — Card base */
+.lov-doc-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--t-medium), border-color var(--t-fast), transform var(--t-medium);
+}
+
+.lov-doc-card:not([data-status="coming-soon"]):hover {
+  box-shadow: var(--shadow);
+  border-color: rgba(16, 98, 172, .25);
+  transform: translateY(-3px);
+}
+
+/* Top accent bar (4px) */
+.lov-doc-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--blue);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* Pharmacovigilance — red accent (patient safety urgency) */
+.lov-doc-card[data-domain="pharmacovigilance"]::before {
+  background: linear-gradient(90deg, #EB3236, #c02020);
+}
+
+/* Coming Soon variant — muted */
+.lov-doc-card[data-status="coming-soon"] {
+  background: #FAFBFC;
+  opacity: 0.8;
+}
+
+.lov-doc-card[data-status="coming-soon"]::before {
+  background: var(--line);
+}
+
+/* Card icon */
+.lov-doc-ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: rgba(16, 98, 172, .07);
+  border-radius: 12px;
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-bottom: 18px;
+  transition: background var(--t-fast);
+}
+
+.lov-doc-card:not([data-status="coming-soon"]):hover .lov-doc-ico {
+  background: rgba(16, 98, 172, .13);
+}
+
+.lov-doc-card[data-domain="pharmacovigilance"] .lov-doc-ico {
+  background: rgba(235, 50, 54, .07);
+  color: #EB3236;
+}
+
+.lov-doc-card[data-domain="pharmacovigilance"]:hover .lov-doc-ico {
+  background: rgba(235, 50, 54, .12);
+}
+
+/* Card title */
+.lov-doc-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+/* Card description */
+.lov-doc-desc {
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--muted);
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+/* Last updated meta */
+.lov-doc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.lov-doc-updated {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.lov-doc-updated svg {
+  color: var(--soft-blue);
+  flex-shrink: 0;
+}
+
+/* Status badge — Coming Soon */
+.lov-doc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill, 999px);
+  background: rgba(16, 98, 172, .08);
+  color: var(--blue);
+}
+
+.lov-doc-badge--soon {
+  background: rgba(90, 107, 140, .1);
+  color: var(--muted);
+}
+
+/* Card CTA link */
+.lov-doc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-decoration: none;
+  margin-top: auto;
+  transition: gap var(--t-fast), color var(--t-fast);
+}
+
+.lov-doc-cta svg {
+  transition: transform var(--t-fast);
+}
+
+.lov-doc-card:not([data-status="coming-soon"]):hover .lov-doc-cta {
+  gap: 9px;
+}
+
+.lov-doc-card:not([data-status="coming-soon"]):hover .lov-doc-cta svg {
+  transform: translateX(3px);
+}
+
+.lov-doc-cta--disabled {
+  color: var(--muted);
+  cursor: default;
+  pointer-events: none;
+}
+
+
+/* =============================================================================
+   LOV-004 — PRIVACY & DATA PROTECTION FEATURE
+   2-column: intro text left + callout box right.
+   CMS: privacy_headline, privacy_body, privacy_points repeater,
+        privacy_callout_items repeater
+============================================================================= */
+
+.lov-privacy {
+  background: var(--white);
+}
+
+.lov-privacy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.lov-privacy-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.lov-privacy-text p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.lov-privacy-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lov-privacy-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.lov-privacy-point-ico {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  margin-top: 1px;
+}
+
+/* Right-side callout box */
+.lov-privacy-callout {
+  background: linear-gradient(135deg, #eef4fb, #dceaf8);
+  border: 1px solid rgba(16, 98, 172, .15);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+}
+
+.lov-privacy-callout h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(16, 98, 172, .15);
+}
+
+.lov-privacy-facts {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lov-privacy-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.lov-privacy-fact-ico {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 98, 172, .1);
+  border-radius: var(--radius-sm);
+  color: var(--blue);
+  margin-top: 1px;
+}
+
+.lov-privacy-fact-body strong {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.lov-privacy-fact-body span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+
+/* =============================================================================
+   LOV-005 — PHARMACOVIGILANCE BAND
+   Dark navy gradient. Patient safety section.
+   CMS: pv_headline, pv_body, pv_items repeater, pv_email
+============================================================================= */
+
+.lov-pv-band {
+  background: linear-gradient(125deg, #0c1730, #0b1f44 55%, #13264c);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.lov-pv-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 30%, rgba(235, 50, 54, .08), transparent 35%),
+    radial-gradient(circle at 90% 70%, rgba(16, 98, 172, .15), transparent 40%);
+  pointer-events: none;
+}
+
+.lov-pv-band .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.lov-pv-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.lov-pv-text .eyebrow {
+  color: rgba(255, 255, 255, .6);
+}
+
+.lov-pv-text .eyebrow::before {
+  background: rgba(235, 50, 54, .8);
+}
+
+.lov-pv-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.lov-pv-text p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--on-dark-reel-body, rgba(255,255,255,.75));
+  margin-bottom: 24px;
+}
+
+.lov-pv-contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--radius-md);
+}
+
+.lov-pv-contact-ico {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(235, 50, 54, .15);
+  border-radius: var(--radius-sm);
+  color: #ff6b6b;
+}
+
+.lov-pv-contact-body {
+  font-size: 0.84rem;
+}
+
+.lov-pv-contact-body strong {
+  display: block;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.lov-pv-contact-body a {
+  color: var(--light-blue, #B7D0EC);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.lov-pv-contact-body a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Right column: PV obligation cards */
+.lov-pv-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lov-pv-card {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+
+.lov-pv-card:hover {
+  background: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .18);
+}
+
+.lov-pv-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.lov-pv-card-ico {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, .1);
+  border-radius: 8px;
+  color: #fff;
+}
+
+.lov-pv-card h3 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.lov-pv-card p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .7);
+  margin: 0;
+}
+
+
+/* =============================================================================
+   LOV-006 — ACCESSIBILITY COMMITMENT
+   Light tinted section. 3-commitment cards.
+   CMS: access_headline, access_body, access_commitments repeater
+============================================================================= */
+
+.lov-access {
+  background: linear-gradient(180deg, #eef4fb, var(--white));
+}
+
+.lov-access-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.lov-access-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.lov-access-text p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.lov-access-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lov-access-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.lov-access-card:hover {
+  border-color: rgba(16, 98, 172, .2);
+  box-shadow: var(--shadow);
+}
+
+.lov-access-card-ico {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 98, 172, .07);
+  border-radius: var(--radius-sm);
+  color: var(--blue);
+}
+
+.lov-access-card-body h3 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.lov-access-card-body p {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+
+/* =============================================================================
+   LOV-007 — NEED ASSISTANCE? (Contact Directory)
+   5-tile grid: Legal / Compliance / Privacy / Pharmacovigilance / General
+   CMS: assist_contacts repeater (icon, role, email, body)
+============================================================================= */
+
+.lov-assist {
+  background: var(--white);
+}
+
+.lov-assist-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.lov-assist-tile {
+  text-align: center;
+  padding: 28px 16px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.lov-assist-tile:hover {
+  border-color: rgba(16, 98, 172, .25);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.lov-assist-tile-ico {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 98, 172, .08);
+  border-radius: 14px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+/* Pharmacovigilance tile: red accent */
+.lov-assist-tile[data-role="pharmacovigilance"] .lov-assist-tile-ico {
+  background: rgba(235, 50, 54, .07);
+  color: #EB3236;
+}
+
+.lov-assist-tile-role {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.lov-assist-tile-desc {
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--muted);
+  flex: 1;
+}
+
+.lov-assist-tile-email {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--blue);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+.lov-assist-tile-email:hover,
+.lov-assist-tile-email:focus-visible {
+  color: var(--blue-dark);
+  text-decoration: underline;
+}
+
+
+/* =============================================================================
+   RESPONSIVE — Tablet (≤960px)
+============================================================================= */
+
+@media (max-width: 960px) {
+
+  .lov-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .lov-docs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lov-privacy-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .lov-pv-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .lov-access-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .lov-assist-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+/* =============================================================================
+   RESPONSIVE — Mobile (≤620px)
+============================================================================= */
+
+@media (max-width: 620px) {
+
+  .lov-docs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lov-assist-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .lov-assist-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .lov-doc-card,
+  .lov-commitment,
+  .lov-access-card,
+  .lov-assist-tile,
+  .lov-pv-card,
+  .lov-doc-cta svg {
+    transition: none;
+  }
+
+}

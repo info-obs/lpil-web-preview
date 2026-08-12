@@ -1,0 +1,1014 @@
+/* =============================================================================
+   CONTACT PAGE — contact-page.css  (CONTACT-001-P1-R3)
+   Page:     /contact/
+   File:     assets/html/generated/contact.html
+   Sections: Hero (C-06 compact) · Routing Tiles · Department Directory ·
+             Smart Contact Form · Corporate HQ · International Offices ·
+             Manufacturing Block · FAQ (C-70) · Contact Band (C-44)
+
+   Class prefix: ctc-  (Contact page classes)
+   Reused global: .section, .wrap, .eyebrow, .btn, .reveal, .field, .input,
+                  .select, .textarea, .form-grid, .form-grid-2, .section-head,
+                  .c70-faq-* (from quality-page.css via main.css)
+   Never: .search-toolbar, .esc-*, .qlt-*, .res-*  (other page namespaces)
+============================================================================= */
+
+/* ── 1. Hero — uses global hero--compact-sm variant (inner-hero.css) ─────────── */
+/* Size and image positioning handled by .hero--compact-sm in inner-hero.css.   */
+/* Only page-specific layout below (CTA row).                                   */
+
+.ctc-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+/* ── 2. How Can We Help? — routing tiles ────────────────────────────────────── */
+
+.ctc-help-section {
+  background: var(--white);
+}
+
+.ctc-help-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+
+.ctc-help-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.ctc-help-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 18px 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: left;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.ctc-help-tile:hover {
+  border-color: rgba(16, 98, 172, .28);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.ctc-help-tile:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.ctc-help-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 98, 172, .07);
+  border-radius: 10px;
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.ctc-help-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* .ctc-help-title is the class used in HTML (was .ctc-help-label in P1 CSS) */
+.ctc-help-title,
+.ctc-help-label {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-heading);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.ctc-help-desc {
+  font-size: .76rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.ctc-help-cta {
+  font-size: .71rem;
+  font-weight: 600;
+  color: var(--blue);
+  margin-top: 6px;
+  opacity: .7;
+  transition: opacity var(--t-fast);
+}
+
+.ctc-help-tile:hover .ctc-help-cta {
+  opacity: 1;
+}
+
+/* ── 3. Department Directory ─────────────────────────────────────────────────── */
+
+.ctc-dept-section {
+  background: var(--bg);
+}
+
+.ctc-dept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 14px;
+}
+
+.ctc-dept-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.ctc-dept-card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.ctc-dept-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ctc-dept-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 98, 172, .07);
+  border-radius: 10px;
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ctc-dept-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ctc-dept-name {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 3px;
+  font-family: var(--font-heading);
+  line-height: 1.3;
+}
+
+.ctc-dept-desc {
+  font-size: .76rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.ctc-dept-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.ctc-dept-link {
+  font-size: .76rem;
+  color: var(--blue);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 500;
+  transition: color var(--t-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ctc-dept-link:hover {
+  color: var(--navy);
+}
+
+.ctc-dept-link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.ctc-dept-link svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+/* ── 4. Smart Contact Form ───────────────────────────────────────────────────── */
+
+.ctc-form-section {
+  background: var(--white);
+}
+
+.ctc-form-layout {
+  display: grid;
+  grid-template-columns: 2fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.ctc-form-panel {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+/* Animated form heading (driven by routing JS) */
+#ctc-form-heading {
+  transition: opacity 120ms ease;
+}
+
+#ctc-form-heading.is-transitioning {
+  opacity: 0;
+}
+
+/* Context hint shown when routing tile is selected */
+.ctc-form-context {
+  font-size: .875rem;
+  color: var(--blue);
+  font-weight: 500;
+  margin: 4px 0 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 200ms ease, opacity 200ms ease;
+}
+
+.ctc-form-context.is-visible {
+  max-height: 80px;
+  opacity: 1;
+}
+
+.ctc-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* Submit loading state */
+.ctc-submit-btn.is-loading {
+  opacity: .72;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@keyframes ctc-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ctc-spinner {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  animation: ctc-spin .8s linear infinite;
+}
+
+.ctc-field-optional {
+  font-size: .72rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ── Textarea ────────────────────────────────────────────────────────────────── */
+
+.ctc-form-panel .textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ── Consistent focus ring for all form fields ───────────────────────────────── */
+
+.ctc-form-panel .input:focus-visible,
+.ctc-form-panel .select:focus-visible,
+.ctc-form-panel .textarea:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 0;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(16, 98, 172, .12);
+}
+
+/* ── File Upload — CRITICAL BUG FIX (R1) ────────────────────────────────────── */
+/* position:relative MUST be on .ctc-file-drop to scope the absolute input     */
+/* to the drop zone only. Without it the input covers the entire form panel.   */
+.ctc-file-drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+  overflow: hidden;
+}
+
+.ctc-file-drop:hover,
+.ctc-file-drop:focus-within {
+  border-color: var(--blue);
+  background: rgba(16, 98, 172, .02);
+}
+
+.ctc-file-drop.is-dragging {
+  border-color: var(--blue);
+  background: rgba(16, 98, 172, .05);
+  box-shadow: 0 0 0 3px rgba(16, 98, 172, .14);
+}
+
+.ctc-file-drop.has-file {
+  border-style: solid;
+  border-color: rgba(16, 98, 172, .38);
+  background: rgba(16, 98, 172, .02);
+}
+
+.ctc-file-drop input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.ctc-file-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  flex: 1;
+}
+
+.ctc-file-placeholder svg {
+  width: 18px;
+  height: 18px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.ctc-file-placeholder span {
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+.ctc-file-placeholder strong {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.ctc-file-hint {
+  font-size: .7rem;
+  color: var(--muted);
+  margin: 0;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* ── Consent block ───────────────────────────────────────────────────────────── */
+
+.ctc-consent {
+  padding: 14px 16px;
+  background: rgba(16, 98, 172, .03);
+  border: 1px solid rgba(16, 98, 172, .1);
+  border-radius: var(--radius);
+}
+
+.ctc-consent .field--checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+}
+
+.ctc-consent input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.ctc-consent input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.ctc-consent label {
+  font-size: .77rem;
+  color: var(--muted);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.ctc-consent label a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Form aside (quick contact cards) ───────────────────────────────────────── */
+
+.ctc-form-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 90px;
+}
+
+/* Trust panel — replaces duplicate contact info cards */
+
+.ctc-trust-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: sticky;
+  top: 90px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  background: var(--white);
+}
+
+.ctc-trust-img {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.ctc-trust-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .45s ease;
+}
+
+.ctc-trust-panel:hover .ctc-trust-img img {
+  transform: scale(1.03);
+}
+
+.ctc-trust-body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ctc-trust-heading {
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.ctc-trust-sub {
+  font-size: .825rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+.ctc-trust-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ctc-trust-bullet {
+  font-size: .82rem;
+  color: var(--text);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.ctc-trust-bullet::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: .65;
+}
+
+.ctc-trust-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  transition: color var(--t-fast), gap var(--t-fast);
+}
+
+.ctc-trust-cta:hover {
+  color: var(--navy);
+  gap: 10px;
+}
+
+.ctc-trust-cta:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── 5. Corporate Headquarters ───────────────────────────────────────────────── */
+
+.ctc-hq-section {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctc-hq-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(16, 98, 172, .08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ctc-hq-section .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.ctc-hq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.ctc-hq-map {
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 445px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 200ms ease;
+}
+
+.ctc-hq-map:hover {
+  box-shadow: var(--shadow), 0 12px 40px rgba(0, 0, 0, .1);
+}
+
+.ctc-hq-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.ctc-hq-ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+.ctc-hq-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ctc-hq-info > .eyebrow {
+  margin-bottom: 6px;
+}
+
+.ctc-hq-info > h2 {
+  margin: 0 0 10px;
+}
+
+.ctc-hq-lead {
+  font-size: .875rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0 0 22px;
+}
+
+.ctc-hq-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.ctc-hq-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ctc-hq-detail-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 98, 172, .07);
+  border-radius: 8px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.ctc-hq-detail-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ctc-hq-detail-label {
+  font-size: .61rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 1px;
+}
+
+.ctc-hq-detail-value {
+  font-size: .875rem;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  font-style: normal;
+}
+
+.ctc-hq-detail-value a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.ctc-hq-detail-value a:hover {
+  text-decoration: underline;
+}
+
+/* ── 6. International Offices + Manufacturing Block ──────────────────────────── */
+
+.ctc-global-section {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* Override inline eyebrow colour set in HTML */
+.ctc-global-section .eyebrow {
+  color: rgba(255, 255, 255, .55);
+}
+
+.ctc-global-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* Left column: International Offices */
+.ctc-global-offices {
+  display: flex;
+  flex-direction: column;
+}
+
+.ctc-global-offices > h2 {
+  color: var(--white);
+  margin: 6px 0 10px;
+}
+
+.ctc-global-lead {
+  font-size: .86rem;
+  color: rgba(255, 255, 255, .6);
+  line-height: 1.65;
+  margin: 0 0 22px;
+}
+
+.ctc-office-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 26px;
+  list-style: none;
+  padding: 0;
+}
+
+.ctc-office-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--radius);
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+
+.ctc-office-pill:hover {
+  background: rgba(255, 255, 255, .11);
+  border-color: rgba(255, 255, 255, .2);
+}
+
+.ctc-office-flag {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, .09);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.ctc-office-flag svg {
+  width: 13px;
+  height: 13px;
+  color: rgba(255, 255, 255, .65);
+}
+
+.ctc-office-city {
+  display: block;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.ctc-office-country {
+  display: block;
+  font-size: .69rem;
+  color: rgba(255, 255, 255, .48);
+  margin-top: 1px;
+}
+
+.ctc-global-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .83rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .7);
+  text-decoration: none;
+  transition: color var(--t-fast);
+  margin: 0 0 0 2%;
+}
+
+.ctc-global-link:hover {
+  color: var(--white);
+}
+
+.ctc-global-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, .6);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.ctc-global-link svg {
+  width: 15px;
+  height: 15px;
+  transition: transform var(--t-fast);
+}
+
+.ctc-global-link:hover svg {
+  transform: translateX(3px);
+}
+
+/* Right column: Manufacturing */
+.ctc-mfg-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.ctc-mfg-col > .eyebrow {
+  margin-bottom: 2.5%;
+}
+
+.ctc-mfg-heading {
+  color: var(--white);
+  font-size: 1.45rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  margin: 6px 0 10px;
+}
+
+.ctc-mfg-lead {
+  font-size: .86rem;
+  color: rgba(255, 255, 255, .6);
+  line-height: 1.65;
+  margin: 0 0 22px;
+}
+
+.ctc-mfg-banner {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .11);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin: 0 0 26px;
+}
+
+.ctc-mfg-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 20px;
+  margin-bottom: 20px;
+}
+
+.ctc-mfg-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ctc-mfg-stat-value {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--white);
+  font-family: var(--font-heading);
+  line-height: 1;
+}
+
+.ctc-mfg-stat-label {
+  font-size: .69rem;
+  color: rgba(255, 255, 255, .5);
+  line-height: 1.35;
+}
+
+.ctc-mfg-banner .btn {
+  margin-top: 0px;
+  padding: 1%;
+}
+
+/* ── 9. FAQ — reuses C-70 accordion from quality-page.css ───────────────────── */
+
+.ctc-faq-section {
+  background: var(--white);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1200px) {
+  .ctc-form-layout {
+    grid-template-columns: 2fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ctc-form-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .ctc-trust-panel {
+    position: static;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .ctc-trust-img {
+    width: 280px;
+    flex-shrink: 0;
+    aspect-ratio: auto;
+    min-height: 220px;
+  }
+
+  .ctc-hq-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .ctc-hq-map {
+    height: 340px;
+  }
+
+  .ctc-global-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 860px) {
+  .ctc-help-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ctc-hq-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .ctc-hq-map {
+    height: 320px;
+  }
+
+  .ctc-global-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .ctc-trust-panel {
+    flex-direction: column;
+  }
+
+  .ctc-trust-img {
+    width: 100%;
+    min-height: auto;
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .ctc-hq-grid { gap: 24px; }
+
+  .ctc-hq-map { height: 280px; }
+}
+
+@media (max-width: 640px) {
+  .ctc-help-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .ctc-form-panel {
+    padding: 20px 16px;
+  }
+
+  .ctc-mfg-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ctc-hq-ctas {
+    flex-direction: column;
+  }
+
+  .ctc-hero-actions { gap: 8px; }
+
+  .ctc-file-hint { display: none; }
+}
+
+@media (max-width: 480px) {
+  .ctc-help-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctc-global-grid { gap: 28px; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .ctc-trust-img img,
+  .ctc-help-tile,
+  .ctc-dept-card,
+  #ctc-form-heading,
+  .ctc-form-context,
+  .ctc-trust-cta,
+  .ctc-hq-map,
+  .ctc-file-drop {
+    transition: none;
+  }
+
+  .ctc-spinner {
+    animation: none;
+  }
+}

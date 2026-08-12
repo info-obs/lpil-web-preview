@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script>(function(){if(sessionStorage.getItem("oktoberry_preview_authenticated")!=="1"){document.documentElement.style.visibility="hidden";try{sessionStorage.setItem("oktoberry_preview_redirect",location.href);}catch(e){}}})();</script>
+  <link rel="stylesheet" href="/assets/css/preview-gate.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+  ============================================================
+  PAGE: Legal Overview & Compliance Hub
+  URL pattern : /legal/
+  WordPress template: page-legal-overview.php
+  Components: C-142 (new) — C-44, C-51, C-06, C-12, C-13 (reused)
+  CSS: legal-overview.css (lov-* namespace)
+
+  This is NOT a legal document. It is the central hub for all
+  Laborate legal and compliance resources. Each card links to
+  an individual legal page. Future legal documents fit naturally
+  into the .lov-docs-grid by adding a new .lov-doc-card.
+  ============================================================
+  -->
+
+  <!-- [CMS: Rank Math SEO — meta description from page_description ACF field] -->
+  <meta name="description" content="Laborate Pharmaceuticals legal and compliance hub — find all policies, privacy notices, terms, cookie information, accessibility commitments, and pharmacovigilance obligations.">
+  <!-- [CMS: page title: Legal & Compliance — Laborate Pharmaceuticals India Ltd.] -->
+  <title>Legal &amp; Compliance — Laborate Pharmaceuticals India Ltd.</title>
+
+  <!-- [CMS: canonical: https://laborate.com/legal/] -->
+  <link rel="canonical" href="https://laborate.com/legal/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://laborate.com/legal/">
+  <meta property="og:title"       content="Legal &amp; Compliance — Laborate Pharmaceuticals India Ltd.">
+  <meta property="og:description" content="Find all Laborate Pharmaceuticals legal policies, privacy notices, accessibility commitments, and pharmacovigilance obligations.">
+  <meta property="og:image"       content="https://laborate.com/images/og-legal.jpg">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Legal &amp; Compliance — Laborate Pharmaceuticals India Ltd.">
+  <meta name="twitter:description" content="Find all Laborate Pharmaceuticals legal policies, privacy notices, accessibility commitments, and pharmacovigilance obligations.">
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",             "item": "https://laborate.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Legal & Compliance","item": "https://laborate.com/legal/" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Legal & Compliance",
+    "description": "Central hub for all Laborate Pharmaceuticals legal and compliance resources — privacy, terms, cookies, accessibility, pharmacovigilance.",
+    "url": "https://laborate.com/legal/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Laborate Pharmaceuticals India Ltd.",
+      "url": "https://laborate.com"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <!-- Legal Overview — C-142 + LOV-002 through LOV-007 -->
+  <!-- [CMS: enqueued via wp_enqueue_style('ocp-legal-overview') in page-legal-overview.php] -->
+  <link rel="stylesheet" href="/assets/css/components/legal-overview.css">
+
+</head>
+
+<body>
+
+  <!-- Skip navigation -->
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+
+  <!-- Scroll-progress bar (C-01) -->
+  <div
+    id="progress"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Site header (C-02) -->
+  <!-- [STB-007: Replace with 2-level dropdown nav from feature/html/navbar] -->
+  <header id="header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="logo" href="index.html" aria-label="Laborate Pharmaceuticals — Home">
+        <img
+          src="https://laborate.com/images/logo.png"
+          alt="Laborate Pharmaceuticals India Ltd."
+          height="34"
+          width="auto"
+        >
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+
+        <li class="nav-meta">
+          <a class="logo" href="index.html" aria-label="Laborate Pharmaceuticals — Home" tabindex="-1">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="28" width="auto">
+          </a>
+          <button class="nav-close" id="navClose" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </li>
+
+        <li class="has-children">
+          <a href="about.html">About Us</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand About Us submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="about/why-laborate.html">Why Laborate</a></li>
+            <li><a href="about/leadership.html">Leadership</a></li>
+            <li><a href="about/awards.html">Awards &amp; Recognition</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="brands.html">Brands</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Brands submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="brands/elite.html">Elite</a></li>
+            <li><a href="brands/aqualab.html">Aqualab</a></li>
+            <li><a href="brands/labolia-beaute.html">Labolia Beauté</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="products.html">Products</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Products submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="products/catalogue.html">Product Catalogue</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="manufacturing.html">Manufacturing</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Manufacturing submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="manufacturing/facilities.html">Facilities</a></li>
+          </ul>
+        </li>
+
+        <li><a href="quality.html">Quality</a></li>
+
+        <li class="has-children">
+          <a href="global.html">Global Presence</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Global Presence submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="global/map.html">Global Map</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="media.html">Media</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Media submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="media/press-releases.html">Press Releases</a></li>
+            <li><a href="media/news.html">News</a></li>
+            <li><a href="media/events.html">Events</a></li>
+            <li><a href="media/social.html">Social</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="business.html">Business</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Business submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="business/contract-manufacturing.html">Contract Manufacturing</a></li>
+            <li><a href="business/distributor.html">Distributor Partnerships</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="careers.html">Careers</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Careers submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="careers/jobs.html">Open Positions</a></li>
+          </ul>
+        </li>
+
+        <li><a href="contact.html">Contact Us</a></li>
+
+      </ul>
+      <div class="nav-right">
+        <a href="search.html" class="nav-search" aria-label="Search" data-nav-search>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true" tabindex="-1"></div>
+
+  <main id="main-content">
+
+
+    <!--
+    ============================================================
+    SECTION 1: Hero (C-06 hero--compact + C-51 Breadcrumb)
+    CMS: hero_headline, hero_subtitle, hero_cta_primary_label,
+         hero_cta_secondary_label (ACF — Legal Overview options)
+    ============================================================
+    -->
+    <section class="hero hero--compact" aria-labelledby="page-heading">
+
+      <div class="hero-media" aria-hidden="true">
+        <img
+          class="hero-fallback"
+          src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
+          alt=""
+          role="presentation"
+          loading="eager"
+        >
+      </div>
+
+      <div class="wrap">
+
+        <!-- C-51 Breadcrumb -->
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Legal &amp; Compliance</span></li>
+          </ol>
+        </nav>
+
+        <!-- [CMS: hero_eyebrow (ACF text)] -->
+        <span class="eyebrow hero-anim">Legal &amp; Compliance</span>
+
+        <!-- [CMS: hero_headline (ACF text)] -->
+        <h1 id="page-heading" class="hero-anim d1">Our Commitment to<br>Transparency and Trust</h1>
+
+        <!-- [CMS: hero_subtitle (ACF text)] -->
+        <p class="sub hero-anim d2">Laborate Pharmaceuticals operates with full legal and regulatory transparency. Find all our policies, notices, and compliance documents in one place.</p>
+
+        <div class="hero-ctas hero-anim d3">
+          <!-- [CMS: hero_cta_primary_label / hero_cta_primary_url (ACF)] -->
+          <a href="legal/privacy-policy.html" class="btn btn-primary">
+            View Privacy Policy <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <!-- [CMS: hero_cta_secondary_label / hero_cta_secondary_url (ACF)] -->
+          <a href="contact.html?type=general#ctc-form" class="btn btn-light">
+            Contact Compliance Team <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+      </div><!-- /.wrap -->
+
+    </section><!-- /.hero.hero--compact -->
+
+
+    <!--
+    ============================================================
+    SECTION 2: Commitment Overview (LOV-002)
+    2-col: intro text (left) + commitment cards (right)
+    CMS: legal_intro_headline, legal_intro_body (WP Options)
+         legal_commitments repeater (icon_svg, headline, body)
+    data-section-enabled="true" — CMS toggleable
+    ============================================================
+    -->
+    <section
+      class="section lov-intro"
+      id="legal-commitments"
+      aria-labelledby="intro-heading"
+      data-section-enabled="true"
+    >
+      <div class="wrap">
+
+        <div class="lov-intro-grid">
+
+          <!-- LEFT: intro text -->
+          <div class="lov-intro-text reveal">
+
+            <!-- [CMS: legal_intro_eyebrow (ACF)] -->
+            <span class="eyebrow">Our Legal Framework</span>
+
+            <!-- [CMS: legal_intro_headline (ACF)] -->
+            <h2 id="intro-heading">Why Legal Clarity Matters</h2>
+
+            <!-- [CMS: legal_intro_body_1 (ACF wysiwyg)] -->
+            <p>Laborate Pharmaceuticals publishes comprehensive legal and compliance documentation as a matter of principle, not merely regulation. Our stakeholders — patients, healthcare professionals, business partners, regulators, and website visitors — deserve to know exactly how we collect information, what obligations govern our website, and how we protect their interests.</p>
+
+            <!-- [CMS: legal_intro_body_2 (ACF wysiwyg)] -->
+            <p>Every document in this section is maintained by our Legal &amp; Compliance team, reviewed annually, and updated whenever applicable laws or our practices change. The effective date of each document is clearly stated.</p>
+
+            <a href="#legal-documents" class="btn btn-primary">
+              Browse All Documents <span class="arrow" aria-hidden="true">&darr;</span>
+            </a>
+
+          </div><!-- /.lov-intro-text -->
+
+          <!-- RIGHT: commitment cards -->
+          <!-- [CMS: legal_commitments repeater | fields: icon_svg, headline, body] -->
+          <div class="lov-commitments reveal">
+
+            <!-- Commitment 1 -->
+            <div class="lov-commitment">
+              <div class="lov-commitment-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="lov-commitment-body">
+                <!-- [CMS: commitment_headline] -->
+                <h3>Privacy &amp; Data Protection</h3>
+                <!-- [CMS: commitment_body] -->
+                <p>Aligned with India's DPDPA 2023 and GDPR principles. Minimal data collection, defined retention periods, and clear user rights.</p>
+              </div>
+            </div>
+
+            <!-- Commitment 2 -->
+            <div class="lov-commitment">
+              <div class="lov-commitment-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <div class="lov-commitment-body">
+                <h3>Clear Website Terms</h3>
+                <p>Transparent terms governing website use, intellectual property, liability limitations, and permitted content access — written in plain language.</p>
+              </div>
+            </div>
+
+            <!-- Commitment 3 -->
+            <div class="lov-commitment">
+              <div class="lov-commitment-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                </svg>
+              </div>
+              <div class="lov-commitment-body">
+                <h3>Accessibility First</h3>
+                <p>Targeting WCAG 2.2 AA conformance across the Laborate website. Known limitations documented openly; feedback welcomed and acted on.</p>
+              </div>
+            </div>
+
+            <!-- Commitment 4 -->
+            <div class="lov-commitment">
+              <div class="lov-commitment-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <div class="lov-commitment-body">
+                <h3>Patient Safety Obligations</h3>
+                <p>Pharmacovigilance reporting obligations under Schedule Y, ICH E6, and CDSCO guidelines — all adverse events treated as priority cases.</p>
+              </div>
+            </div>
+
+          </div><!-- /.lov-commitments -->
+
+        </div><!-- /.lov-intro-grid -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.lov-intro -->
+
+
+    <!--
+    ============================================================
+    SECTION 3: Legal Documents Grid (C-142)
+    Card grid — one card per legal resource.
+    CMS: legal_documents repeater on WP Options page or Legal CPT
+         Per item: icon_svg, title, description, last_updated, status,
+         cta_label, cta_url, domain (slug for accent theming)
+    data-section-enabled="true" — CMS toggleable
+    ============================================================
+    -->
+    <section
+      class="section lov-docs"
+      id="legal-documents"
+      aria-labelledby="docs-heading"
+      data-section-enabled="true"
+    >
+      <div class="wrap">
+
+        <div class="section-head">
+          <!-- [CMS: legal_docs_eyebrow (ACF options)] -->
+          <span class="eyebrow">All Documents</span>
+          <!-- [CMS: legal_docs_headline (ACF options)] -->
+          <h2 id="docs-heading">Legal &amp; Compliance Resources</h2>
+          <!-- [CMS: legal_docs_sub (ACF options)] -->
+          <p>Find the policy or notice you need. Each document is maintained by Laborate&rsquo;s Legal &amp; Compliance team and reviewed at least annually.</p>
+        </div>
+
+        <!-- [CMS: legal_documents repeater — one .lov-doc-card per item] -->
+        <ul class="lov-docs-grid" role="list">
+
+          <!-- Card 1: Privacy Policy -->
+          <!-- [CMS: legal_documents[0] — domain, status, title, desc, last_updated, cta fields] -->
+          <li>
+            <article class="lov-doc-card reveal" data-domain="privacy" data-status="active">
+              <!-- [CMS: doc_icon_svg] -->
+              <div class="lov-doc-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true" focusable="false">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <!-- [CMS: doc_title] -->
+              <h3 class="lov-doc-title">Privacy Policy</h3>
+              <!-- [CMS: doc_description] -->
+              <p class="lov-doc-desc">How we collect, use, share, and protect personal information submitted through the Laborate website and our business communications. Includes data retention schedules and your rights under DPDPA 2023.</p>
+              <!-- [CMS: doc_last_updated] -->
+              <div class="lov-doc-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span class="lov-doc-updated">Last Updated: January 2026</span>
+              </div>
+              <!-- [CMS: doc_cta_label / doc_cta_url] -->
+              <a href="legal/privacy-policy.html" class="lov-doc-cta" aria-label="Read Privacy Policy">
+                Read Policy
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+          </li>
+
+          <!-- Card 2: Terms & Conditions -->
+          <!-- [CMS: legal_documents[1]] -->
+          <li>
+            <article class="lov-doc-card reveal" data-domain="terms" data-status="active">
+              <div class="lov-doc-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true" focusable="false">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <h3 class="lov-doc-title">Terms &amp; Conditions</h3>
+              <p class="lov-doc-desc">Rules governing your use of the Laborate website, intellectual property rights, permitted and prohibited conduct, limitation of liability, and the governing law applicable to disputes.</p>
+              <div class="lov-doc-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span class="lov-doc-updated">Last Updated: January 2026</span>
+              </div>
+              <a href="legal/terms-and-conditions.html" class="lov-doc-cta" aria-label="Read Terms and Conditions">
+                Read Terms
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+          </li>
+
+          <!-- Card 3: Cookie Policy -->
+          <!-- [CMS: legal_documents[2]] -->
+          <li>
+            <article class="lov-doc-card reveal" data-domain="cookies" data-status="active">
+              <div class="lov-doc-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 8v4M12 16h.01"/>
+                </svg>
+              </div>
+              <h3 class="lov-doc-title">Cookie Policy</h3>
+              <p class="lov-doc-desc">What cookies we use, why we use them, their retention periods, and how to manage your browser cookie preferences. Includes the Cookie Registry and our consent management architecture.</p>
+              <div class="lov-doc-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span class="lov-doc-updated">Last Updated: January 2026</span>
+              </div>
+              <a href="legal/cookie-policy.html" class="lov-doc-cta" aria-label="Read Cookie Policy">
+                Read Policy
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+          </li>
+
+          <!-- Card 4: Disclaimer -->
+          <!-- [CMS: legal_documents[3]] -->
+          <li>
+            <article class="lov-doc-card reveal" data-domain="disclaimer" data-status="active">
+              <div class="lov-doc-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true" focusable="false">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </div>
+              <h3 class="lov-doc-title">Disclaimer</h3>
+              <p class="lov-doc-desc">Important notices about the informational nature of our content, medical and regulatory disclaimers, download rights, external link policies, and limitations of liability for website content.</p>
+              <div class="lov-doc-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span class="lov-doc-updated">Last Updated: January 2026</span>
+              </div>
+              <a href="legal/disclaimer.html" class="lov-doc-cta" aria-label="Read Disclaimer">
+                Read Disclaimer
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+          </li>
+
+          <!-- Card 5: Accessibility Statement -->
+          <!-- [CMS: legal_documents[4]] -->
+          <li>
+            <article class="lov-doc-card reveal" data-domain="accessibility" data-status="active">
+              <div class="lov-doc-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                </svg>
+              </div>
+              <h3 class="lov-doc-title">Accessibility Statement</h3>
+              <p class="lov-doc-desc">Our WCAG 2.2 AA conformance commitment, current accessibility features, known limitations, assistive technology compatibility, and our continuous improvement programme.</p>
+              <div class="lov-doc-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span class="lov-doc-updated">Last Updated: January 2026</span>
+              </div>
+              <a href="legal/accessibility-statement.html" class="lov-doc-cta" aria-label="Read Accessibility Statement">
+                Read Statement
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+          </li>
+
+          <!-- Card 6: Pharmacovigilance — COMING SOON -->
+          <!-- [CMS: legal_documents[5] — data-status="coming-soon" disables hover + CTA] -->
+          <li>
+            <article class="lov-doc-card" data-domain="pharmacovigilance" data-status="coming-soon" aria-label="Pharmacovigilance Notice — coming soon">
+              <div class="lov-doc-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true" focusable="false">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <h3 class="lov-doc-title">Pharmacovigilance</h3>
+              <p class="lov-doc-desc">Adverse drug reaction reporting obligations, patient safety commitments, and Laborate&rsquo;s pharmacovigilance framework under Schedule Y, ICH E6, and CDSCO guidelines.</p>
+              <div class="lov-doc-meta">
+                <!-- [CMS: doc_status_badge — shown when data-status="coming-soon"] -->
+                <span class="lov-doc-badge lov-doc-badge--soon" aria-label="Document status: coming soon">Coming Soon</span>
+              </div>
+              <!-- [CMS: when data-status="coming-soon", render disabled CTA] -->
+              <span class="lov-doc-cta lov-doc-cta--disabled" aria-hidden="true">
+                Available Shortly
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </article>
+          </li>
+
+          <!-- Card 7: Sitemap -->
+          <!-- [CMS: legal_documents[6]] -->
+          <li>
+            <article class="lov-doc-card reveal" data-domain="sitemap" data-status="active">
+              <div class="lov-doc-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                </svg>
+              </div>
+              <h3 class="lov-doc-title">Sitemap</h3>
+              <p class="lov-doc-desc">A complete human-readable overview of all sections and pages on the Laborate website, organised by domain. Useful for navigation assistance and accessibility support.</p>
+              <div class="lov-doc-meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span class="lov-doc-updated">Last Updated: January 2026</span>
+              </div>
+              <a href="legal/sitemap.html" class="lov-doc-cta" aria-label="View Sitemap">
+                View Sitemap
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+          </li>
+
+        </ul><!-- /.lov-docs-grid -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.lov-docs -->
+
+
+    <!--
+    ============================================================
+    SECTION 4: Privacy & Data Protection (LOV-004)
+    2-col: text + points (left) | callout box (right)
+    CMS: privacy_headline, privacy_body, privacy_points repeater,
+         privacy_facts repeater, privacy_cta_label (ACF options)
+    data-section-enabled="true" — CMS toggleable
+    ============================================================
+    -->
+    <section
+      class="section lov-privacy"
+      id="privacy-data"
+      aria-labelledby="privacy-heading"
+      data-section-enabled="true"
+    >
+      <div class="wrap">
+
+        <div class="lov-privacy-grid">
+
+          <!-- LEFT: text + points -->
+          <div class="lov-privacy-text reveal">
+
+            <!-- [CMS: privacy_eyebrow (ACF)] -->
+            <span class="eyebrow">Privacy &amp; Data Protection</span>
+
+            <!-- [CMS: privacy_headline (ACF)] -->
+            <h2 id="privacy-heading">How We Handle Your Personal Information</h2>
+
+            <!-- [CMS: privacy_body (ACF wysiwyg)] -->
+            <p>Laborate Pharmaceuticals aligns its data processing practices with the Digital Personal Data Protection Act 2023 (DPDPA), the Information Technology Act 2000, and GDPR principles. We operate on a minimal data collection model: we collect only what is necessary, for defined purposes, and retain it no longer than required.</p>
+
+            <!-- [CMS: privacy_points repeater] -->
+            <ul class="lov-privacy-points" role="list">
+              <li class="lov-privacy-point">
+                <span class="lov-privacy-point-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span><strong>Purpose limitation</strong> — We use data only for the purpose it was collected.</span>
+              </li>
+              <li class="lov-privacy-point">
+                <span class="lov-privacy-point-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span><strong>Data minimisation</strong> — We request only information we genuinely need.</span>
+              </li>
+              <li class="lov-privacy-point">
+                <span class="lov-privacy-point-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span><strong>Your rights</strong> — Access, correction, deletion, and objection rights clearly explained.</span>
+              </li>
+              <li class="lov-privacy-point">
+                <span class="lov-privacy-point-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span><strong>Secure handling</strong> — Industry-standard safeguards for all personal data.</span>
+              </li>
+            </ul>
+
+            <!-- [CMS: privacy_cta_label / privacy_cta_url (ACF)] -->
+            <a href="legal/privacy-policy.html" class="btn btn-primary">
+              Read Privacy Policy <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+
+          </div><!-- /.lov-privacy-text -->
+
+          <!-- RIGHT: callout box -->
+          <!-- [CMS: privacy_facts repeater | fields: icon_svg, fact_headline, fact_body] -->
+          <div class="lov-privacy-callout reveal">
+
+            <!-- [CMS: privacy_callout_title (ACF)] -->
+            <h3>Our Privacy at a Glance</h3>
+
+            <ul class="lov-privacy-facts" role="list">
+
+              <li class="lov-privacy-fact">
+                <div class="lov-privacy-fact-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true" focusable="false">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div class="lov-privacy-fact-body">
+                  <strong>DPDPA 2023 Aligned</strong>
+                  <span>India's Digital Personal Data Protection Act 2023 governs how we handle all personal data submitted through this website.</span>
+                </div>
+              </li>
+
+              <li class="lov-privacy-fact">
+                <div class="lov-privacy-fact-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true" focusable="false">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+                <div class="lov-privacy-fact-body">
+                  <strong>No Third-Party Advertising Data</strong>
+                  <span>We do not sell, rent, or trade personal data to advertising networks or data brokers.</span>
+                </div>
+              </li>
+
+              <li class="lov-privacy-fact">
+                <div class="lov-privacy-fact-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true" focusable="false">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </div>
+                <div class="lov-privacy-fact-body">
+                  <strong>Consent-Gated Analytics</strong>
+                  <span>Google Analytics (GA4) only loads after you have explicitly accepted analytics cookies via the Cookie Preference Centre.</span>
+                </div>
+              </li>
+
+              <li class="lov-privacy-fact">
+                <div class="lov-privacy-fact-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true" focusable="false">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+                <div class="lov-privacy-fact-body">
+                  <strong>30-Day Response Commitment</strong>
+                  <span>All data rights requests are acknowledged within 72 hours and resolved within 30 calendar days.</span>
+                </div>
+              </li>
+
+            </ul><!-- /.lov-privacy-facts -->
+
+            <a href="legal/privacy-policy.html" class="btn btn-primary">
+              Full Privacy Policy <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+
+          </div><!-- /.lov-privacy-callout -->
+
+        </div><!-- /.lov-privacy-grid -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.lov-privacy -->
+
+
+    <!--
+    ============================================================
+    SECTION 5: Patient Safety & Pharmacovigilance (LOV-005)
+    Dark navy band. Urgent patient safety tone.
+    CMS: pv_headline, pv_body, pv_obligations repeater, pv_contact_email
+    data-section-enabled="true" — CMS toggleable
+    ============================================================
+    -->
+    <section
+      class="section lov-pv-band"
+      id="pharmacovigilance"
+      aria-labelledby="pv-heading"
+      data-section-enabled="true"
+    >
+      <div class="wrap">
+
+        <div class="lov-pv-inner">
+
+          <!-- LEFT: text + contact -->
+          <div class="lov-pv-text reveal">
+
+            <!-- [CMS: pv_eyebrow (ACF)] -->
+            <span class="eyebrow">Patient Safety</span>
+
+            <!-- [CMS: pv_headline (ACF)] -->
+            <h2 id="pv-heading">Reporting Adverse Drug Events</h2>
+
+            <!-- [CMS: pv_body (ACF wysiwyg)] -->
+            <p>Laborate Pharmaceuticals maintains a formal Pharmacovigilance system under Schedule Y of the Drugs &amp; Cosmetics Act 1940, ICH E6 guidelines, and CDSCO requirements. All adverse drug reactions — whether serious or non-serious — must be reported promptly.</p>
+
+            <p>If you have experienced or observed an adverse drug reaction to a Laborate product, please contact our Pharmacovigilance team directly. All reports are treated as priority cases and handled by qualified medical assessors.</p>
+
+            <!-- [CMS: pv_contact_email (ACF)] -->
+            <div class="lov-pv-contact">
+              <div class="lov-pv-contact-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true" focusable="false">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <div class="lov-pv-contact-body">
+                <strong>Pharmacovigilance Team</strong>
+                <a href="mailto:pv@laborate.com">pv@laborate.com</a>
+              </div>
+            </div>
+
+            <a href="contact.html?type=general#ctc-form" class="btn btn-light">
+              Report an Adverse Event <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+
+          </div><!-- /.lov-pv-text -->
+
+          <!-- RIGHT: PV obligation cards -->
+          <!-- [CMS: pv_obligations repeater | fields: icon_svg, headline, body] -->
+          <div class="lov-pv-cards reveal">
+
+            <div class="lov-pv-card">
+              <div class="lov-pv-card-head">
+                <div class="lov-pv-card-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true" focusable="false">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4M12 16h.01"/>
+                  </svg>
+                </div>
+                <h3>Serious Adverse Events</h3>
+              </div>
+              <p>Events resulting in hospitalisation, disability, life-threatening situations, or death must be reported to our PV team within 15 days of awareness. All ICSRs are submitted to PvPI (Pharmacovigilance Programme of India).</p>
+            </div>
+
+            <div class="lov-pv-card">
+              <div class="lov-pv-card-head">
+                <div class="lov-pv-card-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true" focusable="false">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>
+                  </svg>
+                </div>
+                <h3>Non-Serious Reports Welcome</h3>
+              </div>
+              <p>All adverse events, including minor unexpected reactions, are valuable to our safety database. We encourage healthcare professionals and patients to report any unexpected product response, regardless of severity.</p>
+            </div>
+
+            <div class="lov-pv-card">
+              <div class="lov-pv-card-head">
+                <div class="lov-pv-card-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true" focusable="false">
+                    <path d="M4 6.5C4 5 5 4 6.5 4H9l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v2.5C20 19 19 20 17.5 20A14 14 0 0 1 4 6.5z"/>
+                  </svg>
+                </div>
+                <h3>Quality Complaints</h3>
+              </div>
+              <p>Product quality complaints — including defective packaging, contamination, mislabelling, or batch anomalies — should also be reported to our PV team at pv@laborate.com for immediate investigation.</p>
+            </div>
+
+          </div><!-- /.lov-pv-cards -->
+
+        </div><!-- /.lov-pv-inner -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.lov-pv-band -->
+
+
+    <!--
+    ============================================================
+    SECTION 6: Accessibility Commitment (LOV-006)
+    Light gradient section. 1-col text + cards.
+    CMS: access_headline, access_body, access_features repeater
+    data-section-enabled="true" — CMS toggleable
+    ============================================================
+    -->
+    <section
+      class="section lov-access"
+      id="accessibility"
+      aria-labelledby="access-heading"
+      data-section-enabled="true"
+    >
+      <div class="wrap">
+
+        <div class="lov-access-inner">
+
+          <!-- LEFT: text -->
+          <div class="lov-access-text reveal">
+
+            <!-- [CMS: access_eyebrow (ACF)] -->
+            <span class="eyebrow">Accessibility</span>
+
+            <!-- [CMS: access_headline (ACF)] -->
+            <h2 id="access-heading">Accessible by Design</h2>
+
+            <!-- [CMS: access_body (ACF wysiwyg)] -->
+            <p>We target WCAG 2.2 Level AA conformance across all Laborate web properties. Accessibility is built into our development lifecycle — not added as an afterthought.</p>
+
+            <p>Our Accessibility Statement documents where we are, where we are not yet, and our roadmap for improvement.</p>
+
+            <!-- [CMS: access_cta_label / access_cta_url (ACF)] -->
+            <a href="legal/accessibility-statement.html" class="btn btn-primary">
+              Read Accessibility Statement <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+
+          </div><!-- /.lov-access-text -->
+
+          <!-- RIGHT: accessibility feature cards -->
+          <!-- [CMS: access_features repeater | fields: icon_svg, headline, body] -->
+          <div class="lov-access-cards reveal">
+
+            <div class="lov-access-card">
+              <div class="lov-access-card-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <div class="lov-access-card-body">
+                <h3>WCAG 2.2 AA Target</h3>
+                <p>All new pages designed against WCAG 2.2 Level AA success criteria: perceivable, operable, understandable, robust.</p>
+              </div>
+            </div>
+
+            <div class="lov-access-card">
+              <div class="lov-access-card-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <div class="lov-access-card-body">
+                <h3>Full Keyboard Navigation</h3>
+                <p>All interactive elements are reachable and operable via keyboard alone. Focus indicators are visible and meet contrast requirements.</p>
+              </div>
+            </div>
+
+            <div class="lov-access-card">
+              <div class="lov-access-card-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <div class="lov-access-card-body">
+                <h3>Screen Reader Compatible</h3>
+                <p>Tested with NVDA, JAWS, and VoiceOver. ARIA landmarks, roles, and live regions used throughout for clear structural navigation.</p>
+              </div>
+            </div>
+
+            <div class="lov-access-card">
+              <div class="lov-access-card-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                </svg>
+              </div>
+              <div class="lov-access-card-body">
+                <h3>Report an Accessibility Barrier</h3>
+                <p>If part of our website is difficult to use, tell us. We investigate every report, prioritise fixes by severity, and respond within 10 business days.</p>
+              </div>
+            </div>
+
+          </div><!-- /.lov-access-cards -->
+
+        </div><!-- /.lov-access-inner -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.lov-access -->
+
+
+    <!--
+    ============================================================
+    SECTION 7: Need Assistance? (LOV-007)
+    5-tile contact directory for legal team functions.
+    CMS: assist_tiles repeater (icon_svg, role, role_slug, desc, email)
+    data-section-enabled="true" — CMS toggleable
+    ============================================================
+    -->
+    <section
+      class="section lov-assist"
+      id="legal-contact"
+      aria-labelledby="assist-heading"
+      data-section-enabled="true"
+    >
+      <div class="wrap">
+
+        <div class="section-head">
+          <!-- [CMS: assist_eyebrow (ACF options)] -->
+          <span class="eyebrow">Get in Touch</span>
+          <!-- [CMS: assist_headline (ACF options)] -->
+          <h2 id="assist-heading">Need Assistance?</h2>
+          <!-- [CMS: assist_sub (ACF options)] -->
+          <p>Our specialist teams are available to help with legal queries, data rights requests, compliance questions, and website support.</p>
+        </div>
+
+        <!-- [CMS: assist_tiles repeater — each tile renders one .lov-assist-tile] -->
+        <div class="lov-assist-grid" role="list">
+
+          <!-- [CMS: assist_tiles[0]] -->
+          <div class="lov-assist-tile reveal" data-role="legal" role="listitem">
+            <div class="lov-assist-tile-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <!-- [CMS: tile_role] -->
+            <p class="lov-assist-tile-role">Legal Team</p>
+            <!-- [CMS: tile_desc] -->
+            <p class="lov-assist-tile-desc">Policy questions, IP matters, governing law queries, and general legal correspondence.</p>
+            <!-- [CMS: tile_email] -->
+            <a href="mailto:legal@laborate.com" class="lov-assist-tile-email">legal@laborate.com</a>
+          </div>
+
+          <!-- [CMS: assist_tiles[1]] -->
+          <div class="lov-assist-tile reveal" data-role="compliance" role="listitem">
+            <div class="lov-assist-tile-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                <path d="M9 11l3 3L22 4"/>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+            </div>
+            <p class="lov-assist-tile-role">Compliance Team</p>
+            <p class="lov-assist-tile-desc">Regulatory compliance, export control, documentation, and certification queries.</p>
+            <a href="mailto:compliance@laborate.com" class="lov-assist-tile-email">compliance@laborate.com</a>
+          </div>
+
+          <!-- [CMS: assist_tiles[2]] -->
+          <div class="lov-assist-tile reveal" data-role="privacy" role="listitem">
+            <div class="lov-assist-tile-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <p class="lov-assist-tile-role">Privacy Team</p>
+            <p class="lov-assist-tile-desc">Data rights requests, privacy complaints, DPDPA 2023 queries, and consent management.</p>
+            <a href="mailto:privacy@laborate.com" class="lov-assist-tile-email">privacy@laborate.com</a>
+          </div>
+
+          <!-- [CMS: assist_tiles[3]] -->
+          <div class="lov-assist-tile reveal" data-role="pharmacovigilance" role="listitem">
+            <div class="lov-assist-tile-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            <p class="lov-assist-tile-role">Pharmacovigilance</p>
+            <p class="lov-assist-tile-desc">Adverse drug reaction reports, product quality complaints, and patient safety concerns. Priority response.</p>
+            <a href="mailto:pv@laborate.com" class="lov-assist-tile-email">pv@laborate.com</a>
+          </div>
+
+          <!-- [CMS: assist_tiles[4]] -->
+          <div class="lov-assist-tile reveal" data-role="general" role="listitem">
+            <div class="lov-assist-tile-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true" focusable="false">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <p class="lov-assist-tile-role">General Support</p>
+            <p class="lov-assist-tile-desc">Website support, broken link reports, content queries, and general website assistance.</p>
+            <a href="contact.html?type=general#ctc-form" class="lov-assist-tile-email">Contact Us</a>
+          </div>
+
+        </div><!-- /.lov-assist-grid -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.lov-assist -->
+
+
+    <!--
+    ============================================================
+    COMPONENT: Contact Band (C-44)
+    CMS: legal_assist_heading, legal_assist_body, legal_assist_cta_label
+    ============================================================
+    -->
+    <section class="contact-band" aria-labelledby="contact-band-heading">
+      <div class="wrap contact-inner reveal">
+        <div class="contact-left">
+          <div class="c-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <!-- [CMS: legal_assist_heading (ACF)] -->
+            <h3 id="contact-band-heading">Have a Question About Our Legal Policies?</h3>
+            <!-- [CMS: legal_assist_body (ACF)] -->
+            <p>Our Legal &amp; Compliance team is here to help with policy questions, data rights requests, and regulatory queries. We respond to all enquiries within 5 business days.</p>
+          </div>
+        </div>
+        <!-- [CMS: legal_assist_cta_label / legal_assist_cta_url (ACF)] -->
+        <a href="contact.html?type=general#ctc-form" class="btn btn-light">Contact Compliance Team <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+
+  </main><!-- /#main-content -->
+
+
+  <!--
+  ============================================================
+  COMPONENT: Footer (C-46)
+  ============================================================
+  -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+
+        <div class="foot-brand">
+          <a href="index.html" aria-label="Laborate Pharmaceuticals — Home">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="32" loading="lazy">
+          </a>
+          <p>A global pharmaceutical manufacturing and healthcare solutions company, delivering quality medicines from research to patients worldwide since 1985.</p>
+          <div class="foot-contact">
+            <span>E-11, Industrial Area, Panipat-132103, India</span>
+            <a href="mailto:info@laborate.com">info@laborate.com</a>
+            <a href="tel:+911803508200">+91-180-3508200</a>
+          </div>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/laborate-pharmaceuticals-india-limited/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4zM8 8h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.74 1.85-2.74 3.77V24H8z" /></svg></a>
+            <a href="https://www.facebook.com/laborate.india.ltd/" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.75-1.6 1.5V12h2.7l-.43 2.9h-2.3v7A10 10 0 0 0 22 12z" /></svg></a>
+            <a href="https://www.instagram.com/laborate.india.ltd/?hl=en" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.3.07 1.69.07 4.9s0 3.6-.07 4.9c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.3.06-1.69.07-4.9.07s-3.6 0-4.9-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.8 2.2 12 2.2zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38zm6.97-11.4a1.58 1.58 0 1 0 0 3.15 1.58 1.58 0 0 0 0-3.15z" /></svg></a>
+          </div>
+        </div>
+
+        <div class="foot-col">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="about.html">Company Overview</a></li>
+            <li><a href="about/leadership.html">Leadership</a></li>
+            <li><a href="about/awards.html">Awards &amp; Recognition</a></li>
+            <li><a href="about/why-laborate.html">Why Laborate</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html">Products Overview</a></li>
+            <li><a href="products/catalogue.html">Product Catalogue</a></li>
+            <li><a href="products/catalogue.html">Search Products</a></li>
+            <li><a href="contact.html?type=product#ctc-form">Product Enquiry</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Legal &amp; Compliance</h4>
+          <ul>
+            <li><a href="legal.html" aria-current="page">Legal Overview</a></li>
+            <li><a href="legal/privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="legal/terms-and-conditions.html">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="legal/disclaimer.html">Disclaimer</a></li>
+            <li><a href="legal/accessibility-statement.html">Accessibility</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="manufacturing.html">Manufacturing</a></li>
+            <li><a href="quality.html">Quality</a></li>
+            <li><a href="global.html">Global</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /.foot-top -->
+
+      <div class="foot-bottom">
+        <p>&copy; 2026 Laborate Pharmaceuticals India Ltd. All rights reserved.</p>
+        <div class="legal">
+          <a href="legal.html" aria-current="page">Legal &amp; Compliance</a>
+          <a href="legal/privacy-policy.html">Privacy Policy</a>
+          <a href="legal/terms-and-conditions.html">Terms &amp; Conditions</a>
+          <a href="legal/cookie-policy.html">Cookie Policy</a>
+          <a href="legal/disclaimer.html">Disclaimer</a>
+          <a href="legal/accessibility-statement.html">Accessibility</a>
+          <a href="legal/sitemap.html">Sitemap</a>
+        </div>
+        <div class="vendor-credit">
+          Powered by
+          <a href="https://www.oktoberry.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 116 167" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oktoberry">
+              <g id="berry" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <g><path d="m531.21 275.21c25.098 14.923 256.99 142.47 322.2 181.67-26.355 13.024-121.46 67.697-170.76 93.167-30.819-48.883-158.28-256.83-170.65-275.59 13.023 0.15475 12.286 0.42988 19.208 0.75503z" fill="#0c4269" /><path d="m170.65 462.99c58.347 27.536 135.66 69.198 170.68 87.195-4.2644 6.11-165.82 243.55-170.67 249.83-0.0262-9.9814-0.0508-329.71-0.0119-337.03z" fill="#1988d7" /><path d="m853.39 456.88c0.52027 47.958 0.35951 305.13-0.0146 343.12-4.0215-5.8717-170.71-249.96-170.71-249.96 42.689-22.387 138.65-77.425 170.73-93.159z" fill="#062337" /><path d="m512.05 1016.9c0.0744-11.808-0.5955-115.5-0.0492-172.85 60.841-7.7268 329.53-42.472 341.38-44.039 0 0-336.25 213.97-341.33 216.88z" /><path d="m512.01 844.04c-0.14148 57.245 0.16143 163.77 0.0427 172.86-46.625-25.866-303.75-194.75-341.4-216.89 54.722 7.007 221.54 21.896 341.35 44.033z" fill="#0a3452" /><path d="m170.67 462.99c71.769-44.473 208.19-126.17 321.24-187.35 5.8745-1.1628 13.439-1.0717 20.092-1.1948-54.813 86.485-158.39 256.45-170.67 275.71" fill="#5bafec" /></g>
+                <path d="m852.5 53.3c-0.45794-0.7872-0.15035-1.3261 0.68472-2.0475 0.24038 0.56464 0.0914 1.3908-0.68472 2.0475z" fill="#224f38" />
+                <g><path d="m512 274.45c6.4257 6.6504 167.58 270.74 170.66 275.58-3.6502-0.0455-339.39 0.14376-341.33 0.13047 1.0021-1.4787 164.27-267.37 170.66-275.71z" fill="#1365a0" /><path d="m341.33 550.17c3.0641 0.0176 323.33-0.41843 341.34-0.13493-6.3066 10.5-170.22 293.28-170.67 294.02-0.71653-1.1746-162.38-278.35-170.67-293.89z" fill="#0b3d60" /><path d="m341.33 550.17c6.1989 10.382 149.02 256.32 170.67 293.87-58.996-10.129-317.82-40.079-341.33-44.044 4.3815-5.9158 163.89-240.5 170.67-249.83z" fill="#115c92" /><path d="m512 844.05c2.2022-4.7744 167.81-289.45 170.67-294.02 4.815 7.0103 165.28 241.73 170.71 249.98-13.144 1.8281-315 41.036-341.38 44.042z" fill="#03111b" /></g>
+                <path d="m374.39 387.55c-0.917-0.23787-1.4729-0.82087-2.0288-1.4039 0.24138-0.23002 0.4828-0.46009 0.72416-0.6901 0.55524 0.58294 1.1106 1.1659 1.3047 2.094z" fill="#cda9d7" />
+              </g>
+              <g id="leaves" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <path d="m542.13 274.88c-6.7035 0.68517-17.083 0.23972-24.825-0.32194 48.528-83.188 208.91-166.17 330.83-221.53-31.735 150.69-165.75 212.4-306 221.85z" fill="#224f38" />
+                <path d="m517.3 274.55c-2.8104-0.0709-3.6594-0.094-6.5029-0.0649 23.129-168.51 180.79-245.37 338.08-221.15-13.701 6.8053-223.19 91.913-331.57 221.21z" fill="#83b149" />
+                <path d="m512 274.45c-3.2163 0.0569-7.8881 0.19224-10.931 0.2638-27.372-115.65-76.282-179.9-191.71-265.8 45.036 7.9968 89.138 20.814 125.5 49.995 60.193 48.767 98.875 138.97 77.137 215.54z" fill="#264f3b" />
+                <path d="m309.38 8.9225c14.552 10.351 28.399 20.55 42.064 30.989 63.487 48.502 125.69 124.46 149.64 234.81-1.735 0.0622-2.5166 0.11893-4.344 0.25622-25.293-59.867-56.832-96.438-80.395-111.1-27.886-17.346-55.033-28.8-76.595-54.481-34.588-41.195-35.595-94.03-30.364-100.48z" fill="#a3ca46" />
+              </g>
+            </svg>
+            Oktoberry Systems
+          </a>
+        </div>
+      </div><!-- /.foot-bottom -->
+
+    </div><!-- /.wrap -->
+  </footer>
+
+  <!-- ES module entry point -->
+  <script type="module" src="/assets/js/app.js"></script>
+
+<script src="/assets/js/preview-gate.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+/* =============================================================================
+   SECTION: DIVISIONS
+   Section shell for the pharmaceutical portfolio grid.
+   Card components (.div-grid, .div-card) live in cards.css.
+   Source: assets/html/source/homepage-approved-v1.html (line 760–762)
+============================================================================= */
+
+.divisions {
+  background: var(--grad-divisions)
+}

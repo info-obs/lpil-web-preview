@@ -1,0 +1,1369 @@
+/* =============================================================================
+   PRODUCT CATALOGUE — Enterprise Discovery Experience
+   Page: assets/html/generated/products/catalogue.html
+   URL:  /products/catalogue/
+
+   Component Registry (new):
+     C-135  Enterprise Search Bar      .pcat-search / .pcat-search-form
+     C-136  Filter Sidebar             .pcat-sidebar / .pcat-filter-group
+     C-137  Active Filter Chips        .pcat-chips-row / .pcat-chip
+     C-138  Product Card Enhanced      .pcat-card
+     C-139  Product List Item          .pcat-list-item
+     C-140  Mobile Filter Drawer       .pcat-drawer
+     C-141  Skeleton Card              .pcat-skeleton
+
+   Reused (no duplication):
+     C-06   .hero--compact             hero.css / inner-hero.css
+     C-12   .eyebrow                   base.css
+     C-23   .btn.*                     buttons.css
+     C-41   .tag--pill                 products-archive.css
+     C-44   .contact-band              contact.css
+     C-51   .breadcrumb                inner-hero.css
+     C-54   .pagination*               products-archive.css
+     C-58   .empty-state               products-archive.css
+
+   Division accent colours (CSS custom property --div-accent per card):
+     Elite     #1062AC
+     Aqualab   #27a045
+     OTC       #f07c00
+     CDMO      #3E4194
+     Exports   #EB3236
+
+   PROMPT: PRODUCT-001-P2
+============================================================================= */
+
+
+/* =============================================================================
+   PAGE SHELL
+============================================================================= */
+
+.pcat-page-bg {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+
+/* =============================================================================
+   HERO — compact, no image, gradient background
+============================================================================= */
+
+.pcat-hero {
+  background: var(--grad-quality);
+  padding: 82px 0 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pcat-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.pcat-hero .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.pcat-hero h1 {
+  color: #fff;
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  margin: 10px 0 8px;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+.pcat-hero-sub {
+  color: var(--on-dark-hero-subtitle);
+  font-size: .95rem;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+.pcat-hero .breadcrumb {
+  margin-bottom: 18px;
+}
+
+.pcat-hero .breadcrumb li,
+.pcat-hero .breadcrumb li a {
+  color: rgba(255,255,255,.65);
+}
+
+.pcat-hero .breadcrumb li a:hover {
+  color: #fff;
+}
+
+.pcat-hero .breadcrumb li::before {
+  color: rgba(255,255,255,.4);
+}
+
+
+/* =============================================================================
+   C-135 — ENTERPRISE SEARCH BAR
+   Sticky: after hero scrolls out, gains .pcat-search--stuck
+============================================================================= */
+
+.pcat-search {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 62px; /* header height */
+  z-index: 90;
+  transition: box-shadow .2s ease;
+}
+
+.pcat-search--stuck {
+  box-shadow: 0 4px 18px rgba(15,27,56,.10);
+}
+
+.pcat-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+}
+
+.pcat-search-form {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pcat-search-form .pcat-glass {
+  position: absolute;
+  left: 16px;
+  color: var(--muted);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.pcat-search-form input[type="search"],
+.pcat-search-form input[type="text"] {
+  width: 100%;
+  height: 48px;
+  padding: 0 100px 0 48px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: .95rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.pcat-search-form input:focus {
+  border-color: var(--blue);
+  background: var(--white);
+  box-shadow: var(--shadow-search-focus);
+}
+
+.pcat-search-form input::placeholder {
+  color: var(--muted);
+}
+
+/* Clear button — appears when input has value */
+.pcat-clear-btn {
+  position: absolute;
+  right: 56px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background: var(--line);
+  color: var(--muted);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background .15s ease;
+}
+
+.pcat-clear-btn:hover {
+  background: #d0dbe9;
+  color: var(--text);
+}
+
+.pcat-clear-btn--visible {
+  display: flex;
+}
+
+/* Search submit button */
+.pcat-search-submit {
+  position: absolute;
+  right: 6px;
+  height: 36px;
+  padding: 0 16px;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background .15s ease;
+}
+
+.pcat-search-submit:hover {
+  background: var(--blue-dark);
+}
+
+/* Mobile filter button (hidden on desktop) */
+.pcat-filter-btn {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  height: 48px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--text);
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color .15s ease, background .15s ease;
+  flex-shrink: 0;
+}
+
+.pcat-filter-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.pcat-filter-btn .pcat-filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--blue);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  font-size: .7rem;
+  font-weight: 700;
+}
+
+
+/* =============================================================================
+   CATALOGUE BODY LAYOUT
+============================================================================= */
+
+.pcat-body {
+  padding: 32px 0 72px;
+}
+
+.pcat-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+
+/* =============================================================================
+   C-136 — FILTER SIDEBAR
+============================================================================= */
+
+.pcat-sidebar {
+  position: sticky;
+  top: calc(72px + 77px); /* header + search bar */
+  max-height: calc(100vh - 72px - 77px - 32px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0 0 8px;
+}
+
+.pcat-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pcat-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pcat-sidebar::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+
+/* Sidebar header */
+.pcat-sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1;
+}
+
+.pcat-sidebar-title {
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text);
+}
+
+.pcat-clear-all {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.pcat-clear-all:hover {
+  color: var(--blue-dark);
+}
+
+/* Filter group — accordion */
+.pcat-filter-group {
+  border-bottom: 1px solid var(--line);
+}
+
+.pcat-filter-group:last-child {
+  border-bottom: none;
+}
+
+/* Accordion toggle button */
+.pcat-filter-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: .83rem;
+  font-weight: 600;
+  color: var(--text);
+  gap: 8px;
+  transition: color .15s ease;
+}
+
+.pcat-filter-toggle:hover {
+  color: var(--blue);
+}
+
+.pcat-filter-toggle svg {
+  flex-shrink: 0;
+  color: var(--muted);
+  transition: transform .2s ease;
+}
+
+.pcat-filter-group--open .pcat-filter-toggle svg {
+  transform: rotate(180deg);
+}
+
+/* Active indicator dot on toggle */
+.pcat-filter-toggle .pcat-active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--blue);
+  flex-shrink: 0;
+  display: none;
+}
+
+.pcat-filter-group--has-active .pcat-filter-toggle .pcat-active-dot {
+  display: block;
+}
+
+/* Filter options panel */
+.pcat-filter-options {
+  display: none;
+  padding: 0 18px 14px;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pcat-filter-group--open .pcat-filter-options {
+  display: flex;
+}
+
+/* Custom checkbox row */
+.pcat-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  cursor: pointer;
+  font-size: .82rem;
+  color: var(--text);
+  user-select: none;
+}
+
+.pcat-option:hover {
+  color: var(--blue);
+}
+
+.pcat-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.pcat-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.pcat-option input:checked ~ .pcat-checkbox {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.pcat-checkbox::after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
+  transform: rotate(-45deg) translate(1px, -1px);
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+
+.pcat-option input:checked ~ .pcat-checkbox::after {
+  opacity: 1;
+}
+
+.pcat-option-label {
+  flex: 1;
+  line-height: 1.3;
+}
+
+.pcat-option-count {
+  font-size: .72rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Quick filter toggles — pill buttons */
+.pcat-quick-group {
+  padding: 12px 18px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.pcat-quick-label {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.pcat-quick-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pcat-quick-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+
+.pcat-quick-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.pcat-quick-btn--active {
+  border-color: var(--blue);
+  background: rgba(16,98,172,.07);
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.pcat-quick-ico {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background: var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: .6rem;
+  transition: background .15s ease;
+}
+
+.pcat-quick-btn--active .pcat-quick-ico {
+  background: var(--blue);
+  color: var(--white);
+}
+
+/* A-Z alphabet filter */
+.pcat-alpha-group {
+  padding: 12px 18px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.pcat-alpha-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.pcat-alpha-btn {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color .12s ease, color .12s ease, background .12s ease;
+  padding: 0;
+}
+
+.pcat-alpha-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: rgba(16,98,172,.05);
+}
+
+.pcat-alpha-btn--active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+
+/* =============================================================================
+   RESULTS COLUMN
+============================================================================= */
+
+.pcat-results {
+  min-width: 0;
+}
+
+
+/* =============================================================================
+   RESULT META BAR
+============================================================================= */
+
+.pcat-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.pcat-meta-count {
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.pcat-meta-count strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.pcat-meta-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Sort select */
+.pcat-sort {
+  height: 36px;
+  padding: 0 32px 0 12px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  color: var(--text);
+  font-size: .82rem;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%235a6b8c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  outline: none;
+  transition: border-color .15s ease;
+}
+
+.pcat-sort:focus {
+  border-color: var(--blue);
+}
+
+/* View toggle buttons */
+.pcat-view-toggle {
+  display: flex;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.pcat-view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background .12s ease, color .12s ease;
+}
+
+.pcat-view-btn:first-child {
+  border-right: 1px solid var(--line);
+}
+
+.pcat-view-btn:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.pcat-view-btn--active {
+  background: var(--blue) !important;
+  color: var(--white) !important;
+}
+
+
+/* =============================================================================
+   C-137 — ACTIVE FILTER CHIPS
+============================================================================= */
+
+.pcat-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  min-height: 0;
+}
+
+.pcat-chips-row:empty {
+  display: none;
+}
+
+.pcat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 12px;
+  background: rgba(16,98,172,.1);
+  color: var(--blue);
+  border-radius: var(--radius-pill);
+  font-size: .78rem;
+  font-weight: 600;
+  border: 1px solid rgba(16,98,172,.2);
+  animation: chip-in .18s ease both;
+}
+
+@keyframes chip-in {
+  from { opacity: 0; transform: scale(.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.pcat-chip-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background: rgba(16,98,172,.2);
+  color: var(--blue);
+  border: none;
+  cursor: pointer;
+  font-size: .8rem;
+  line-height: 1;
+  padding: 0;
+  transition: background .12s ease;
+}
+
+.pcat-chip-remove:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.pcat-chip-clear-all {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color .12s ease;
+}
+
+.pcat-chip-clear-all:hover {
+  color: var(--text);
+}
+
+
+/* =============================================================================
+   PRODUCT GRID — card + list views via [data-view]
+============================================================================= */
+
+.pcat-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.pcat-grid[data-view="card"] {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.pcat-grid[data-view="list"] {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+
+/* =============================================================================
+   C-138 — PRODUCT CARD ENHANCED
+   Card view: structured data card, no image, division colour accent
+============================================================================= */
+
+.pcat-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+  position: relative;
+  border-top: 3px solid var(--div-accent, var(--blue));
+}
+
+.pcat-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  border-color: rgba(16,98,172,.2);
+  border-top-color: var(--div-accent, var(--blue));
+}
+
+.pcat-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px 0;
+}
+
+.pcat-card-division {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--div-accent, var(--blue)) 12%, transparent);
+  color: var(--div-accent, var(--blue));
+  white-space: nowrap;
+}
+
+.pcat-card-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  background: rgba(39,160,69,.1);
+  color: #1a7a32;
+  white-space: nowrap;
+}
+
+.pcat-card-body {
+  padding: 12px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.pcat-card-name {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.pcat-card-generic {
+  font-size: .78rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.pcat-card-attrs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.pcat-attr {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: .72rem;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.pcat-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pcat-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.pcat-tag--area {
+  background: rgba(16,98,172,.07);
+  color: var(--blue);
+}
+
+.pcat-tag--new {
+  background: rgba(39,160,69,.1);
+  color: #1a7a32;
+}
+
+.pcat-tag--featured {
+  background: rgba(235,50,54,.08);
+  color: var(--red);
+}
+
+.pcat-card-footer {
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+}
+
+.pcat-card-footer .btn {
+  font-size: .8rem;
+  padding: 8px 18px;
+}
+
+
+/* =============================================================================
+   C-139 — PRODUCT LIST ITEM
+   List view: compact single-row card
+============================================================================= */
+
+.pcat-grid[data-view="card"] .pcat-list-item { display: none; }
+.pcat-grid[data-view="list"] .pcat-card { display: none; }
+
+.pcat-list-item {
+  display: none; /* shown only in list view */
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--div-accent, var(--blue));
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  align-items: center;
+  gap: 16px;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+.pcat-list-item:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(16,98,172,.25);
+  border-left-color: var(--div-accent, var(--blue));
+}
+
+.pcat-grid[data-view="list"] .pcat-list-item {
+  display: flex;
+}
+
+.pcat-li-form-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--div-accent, var(--blue)) 10%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--div-accent, var(--blue));
+}
+
+.pcat-li-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.pcat-li-name {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pcat-li-generic {
+  font-size: .75rem;
+  color: var(--muted);
+  margin: 0;
+  font-style: italic;
+}
+
+.pcat-li-attrs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.pcat-li-attr {
+  font-size: .75rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.pcat-li-attr::before {
+  content: '·';
+  margin-right: 8px;
+  color: var(--line);
+}
+
+.pcat-li-attr:first-child::before {
+  display: none;
+}
+
+.pcat-li-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.pcat-li-cta {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-pill);
+  transition: border-color .12s ease, background .12s ease;
+}
+
+.pcat-li-cta:hover {
+  border-color: var(--blue);
+  background: rgba(16,98,172,.05);
+}
+
+
+/* =============================================================================
+   EMPTY STATE (extends C-58 pattern)
+============================================================================= */
+
+.pcat-empty {
+  text-align: center;
+  padding: 80px 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.pcat-empty-ico {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  background: var(--bg);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.pcat-empty h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.pcat-empty p {
+  font-size: .9rem;
+  color: var(--muted);
+  max-width: 400px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+}
+
+.pcat-empty-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+/* =============================================================================
+   C-141 — SKELETON LOADING CARDS (future AJAX)
+============================================================================= */
+
+.pcat-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.pcat-skeleton {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  overflow: hidden;
+}
+
+.pcat-skel-line {
+  height: 12px;
+  background: linear-gradient(90deg, var(--line) 0%, #eef3f8 50%, var(--line) 100%);
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.4s ease infinite;
+  border-radius: var(--radius-pill);
+  margin-bottom: 10px;
+}
+
+.pcat-skel-line:nth-child(1) { width: 40%; height: 8px; margin-bottom: 14px; }
+.pcat-skel-line:nth-child(2) { width: 80%; height: 14px; }
+.pcat-skel-line:nth-child(3) { width: 60%; height: 10px; }
+.pcat-skel-line:nth-child(4) { width: 95%; height: 8px; margin-top: 8px; }
+.pcat-skel-line:nth-child(5) { width: 55%; height: 8px; }
+.pcat-skel-line:nth-child(6) { width: 35%; height: 28px; border-radius: var(--radius-pill); margin-top: 14px; }
+
+@keyframes skel-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+
+/* =============================================================================
+   C-140 — MOBILE FILTER DRAWER
+============================================================================= */
+
+.pcat-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  pointer-events: none;
+}
+
+.pcat-drawer--open {
+  pointer-events: auto;
+}
+
+.pcat-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12,23,48,.5);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.pcat-drawer--open .pcat-drawer-overlay {
+  opacity: 1;
+}
+
+.pcat-drawer-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-radius: var(--radius) var(--radius) 0 0;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform .3s cubic-bezier(.25,.8,.25,1);
+}
+
+.pcat-drawer--open .pcat-drawer-panel {
+  transform: translateY(0);
+}
+
+.pcat-drawer-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--line);
+  border-radius: var(--radius-pill);
+  margin: 12px auto 4px;
+  flex-shrink: 0;
+}
+
+.pcat-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px 14px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.pcat-drawer-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pcat-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background .12s ease, color .12s ease;
+}
+
+.pcat-drawer-close:hover {
+  background: var(--line);
+  color: var(--text);
+}
+
+.pcat-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.pcat-drawer-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--line);
+  background: var(--white);
+  flex-shrink: 0;
+}
+
+.pcat-drawer-footer .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+
+/* =============================================================================
+   PRODUCT COUNT TICKER ANIMATION
+============================================================================= */
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pcat-count-anim {
+  animation: count-up .4s ease both;
+}
+
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+/* Large tablet: 2-col card grid */
+@media (max-width: 1100px) {
+  .pcat-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+  }
+
+  .pcat-grid[data-view="card"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pcat-skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet: hide sidebar, show filter button */
+@media (max-width: 860px) {
+  .pcat-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pcat-sidebar {
+    display: none;
+  }
+
+  .pcat-filter-btn {
+    display: flex;
+  }
+
+  .pcat-grid[data-view="card"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pcat-skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 580px) {
+  .pcat-hero {
+    padding: 32px 0 40px;
+  }
+
+  .pcat-hero h1 {
+    font-size: 1.65rem;
+  }
+
+  .pcat-search-inner {
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .pcat-search-form input {
+    font-size: .88rem;
+    padding-right: 80px;
+  }
+
+  .pcat-search-submit span {
+    display: none;
+  }
+
+  .pcat-search-submit {
+    padding: 0 10px;
+  }
+
+  .pcat-grid[data-view="card"] {
+    grid-template-columns: 1fr;
+  }
+
+  .pcat-skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pcat-meta-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pcat-li-attrs,
+  .pcat-li-badges {
+    display: none;
+  }
+
+  .pcat-alpha-grid {
+    grid-template-columns: repeat(9, 1fr);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pcat-card,
+  .pcat-list-item,
+  .pcat-drawer-panel,
+  .pcat-drawer-overlay,
+  .pcat-chip,
+  .pcat-filter-toggle svg {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .pcat-skel-line {
+    animation: none;
+    background: var(--line);
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "quality",
+  "land":          "#F3F0EA",
+  "landHover":     "#E8E0D0",
+  "water":         "#D5E7F7",
+  "border":        "#FFFFFF",
+  "borderWidth":   0.5,
+  "markerFill":    "#7B3F00",
+  "markerStroke":  "#FFFFFF",
+  "markerPulse":   "#BF7C3C",
+  "clusterFill":   "#8D4E15",
+  "clusterStroke": "#FFFFFF",
+  "clusterText":   "#FFFFFF"
+}

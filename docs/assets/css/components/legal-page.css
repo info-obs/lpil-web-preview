@@ -1,0 +1,1001 @@
+/*
+ * legal-page.css
+ * Legal Documentation Framework — Enterprise Documentation Template
+ * CSS prefix: lgf-* (legal framework)
+ *
+ * Loaded after main.css. Standalone page CSS — does not import from main.css.
+ * Reuses: .hero--compact, .hero--compact-sm, .breadcrumb (inner-hero.css)
+ *         .contact-band, .contact-inner, .contact-left, .c-ico (contact.css)
+ *         .btn, .btn-light (buttons.css)
+ *         .reveal (animations.css)
+ * New components: C-121 through C-126
+ *
+ * LEGAL-001-P1
+ */
+
+/* =====================================================================
+   C-121 — LEGAL METADATA PANEL
+   Full-width strip below the hero. Displays document version, dates,
+   owner, region, language, and a PDF download link.
+   [CMS: legal_version, legal_effective_date, legal_last_updated,
+    legal_next_review, legal_owner, legal_region, legal_language, legal_pdf_url]
+   ===================================================================== */
+
+.lgf-meta-band {
+  background: #F8FAFC;
+  border-bottom: 1px solid var(--line);
+}
+
+.lgf-meta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.lgf-meta-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.lgf-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 28px 0 0;
+  border-right: 1px solid var(--line);
+  margin-right: 28px;
+}
+
+.lgf-meta-item:last-child {
+  border-right: none;
+  margin-right: 0;
+}
+
+.lgf-meta-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.lgf-meta-value {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.lgf-meta-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid rgba(16, 98, 172, 0.2);
+  border-radius: 8px;
+  background: rgba(16, 98, 172, 0.04);
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.lgf-meta-download:hover {
+  background: rgba(16, 98, 172, 0.08);
+  border-color: rgba(16, 98, 172, 0.35);
+}
+
+.lgf-meta-download:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+
+/* =====================================================================
+   DOCUMENT BODY LAYOUT
+   Two-column grid: sticky TOC sidebar (260px) + flexible content column.
+   Wraps C-122, C-123, C-124, C-125.
+   ===================================================================== */
+
+.lgf-document-band {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.lgf-document-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 0 64px;
+  align-items: start;
+  padding-top: 60px;
+  padding-bottom: 80px;
+}
+
+
+/* =====================================================================
+   C-122 — STICKY LEGAL NAVIGATION
+   Desktop: sticky sidebar, auto-updates active link via JS IntersectionObserver.
+   Mobile: collapsed accordion triggered by .lgf-toc-toggle button.
+   JS: LegalPageController.js
+   [CMS: Auto-generated from H2 heading IDs — no manual CMS entry needed]
+   ===================================================================== */
+
+.lgf-toc {
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Thin scrollbar on desktop */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.lgf-toc::-webkit-scrollbar {
+  width: 4px;
+}
+
+.lgf-toc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lgf-toc::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
+/* Mobile toggle — hidden on desktop */
+.lgf-toc-toggle {
+  display: none;
+}
+
+.lgf-toc-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.lgf-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lgf-toc-link {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 12px 6px 10px;
+  border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  line-height: 1.45;
+  transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+}
+
+.lgf-toc-link:hover {
+  color: var(--text);
+  background: rgba(16, 98, 172, 0.04);
+  border-left-color: var(--line);
+}
+
+.lgf-toc-link.is-active {
+  color: var(--blue);
+  font-weight: 600;
+  background: rgba(16, 98, 172, 0.06);
+  border-left-color: var(--blue);
+}
+
+.lgf-toc-link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+
+/* =====================================================================
+   C-123 — LEGAL RICH CONTENT
+   Main content column. Hosts all document text, tables, blockquotes,
+   lists, definition blocks. Maximum prose width 72ch for readability.
+   [CMS: legal_content — WordPress WYSIWYG or ACF flexible content]
+   ===================================================================== */
+
+.lgf-content {
+  min-width: 0;
+  color: var(--text);
+}
+
+/* Each H2 section */
+.lgf-section {
+  padding-bottom: 52px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 52px;
+  scroll-margin-top: 90px;
+}
+
+.lgf-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* H2 — primary section headings */
+.lgf-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--line);
+  scroll-margin-top: 100px;
+}
+
+/* H3 — subsection headings */
+.lgf-h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+/* H4 — minor headings */
+.lgf-h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+/* Prose paragraphs */
+.lgf-content p {
+  font-size: 0.96rem;
+  line-height: 1.75;
+  color: var(--text);
+  max-width: 72ch;
+  margin-bottom: 16px;
+}
+
+.lgf-content p:last-child {
+  margin-bottom: 0;
+}
+
+.lgf-content a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--t-fast);
+}
+
+.lgf-content a:hover {
+  color: var(--blue-dark);
+}
+
+.lgf-content a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Unordered lists */
+.lgf-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 72ch;
+}
+
+.lgf-ul li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.lgf-ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: 0.55;
+}
+
+/* Ordered lists */
+.lgf-ol {
+  padding: 0 0 0 22px;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 72ch;
+}
+
+.lgf-ol li {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text);
+  padding-left: 4px;
+}
+
+.lgf-ol li::marker {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* Table */
+.lgf-table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  /* Show horizontal scroll affordance */
+}
+
+.lgf-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.lgf-table th {
+  background: #F0F5FB;
+  text-align: left;
+  padding: 11px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+
+.lgf-table th:first-child { border-radius: 9px 0 0 0; }
+.lgf-table th:last-child  { border-radius: 0 9px 0 0; }
+
+.lgf-table td {
+  padding: 11px 16px;
+  color: var(--text);
+  line-height: 1.55;
+  border-bottom: 1px solid var(--line);
+  white-space: normal;
+}
+
+.lgf-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.lgf-table tbody tr:nth-child(even) td {
+  background: #FAFCFE;
+}
+
+/* Definition block */
+.lgf-def-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 24px 0;
+  max-width: 72ch;
+}
+
+.lgf-def-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.lgf-def-item:last-child {
+  border-bottom: none;
+}
+
+.lgf-def-term {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  background: #F8FAFC;
+  padding: 14px 16px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  align-items: flex-start;
+}
+
+.lgf-def-desc {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.65;
+  padding: 14px 16px;
+  margin: 0;
+}
+
+/* Blockquote */
+.lgf-blockquote {
+  position: relative;
+  margin: 28px 0;
+  padding: 22px 24px 22px 28px;
+  border-left: 4px solid var(--blue);
+  background: rgba(16, 98, 172, 0.03);
+  border-radius: 0 10px 10px 0;
+  max-width: 72ch;
+}
+
+.lgf-blockquote p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.lgf-blockquote p:last-of-type {
+  margin-bottom: 0;
+}
+
+.lgf-blockquote footer {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: normal;
+  margin-top: 12px;
+}
+
+/* Contact blockquote variant */
+.lgf-blockquote--contact {
+  border-left-color: var(--line);
+  background: #F8FAFC;
+}
+
+.lgf-blockquote--contact p {
+  font-style: normal;
+}
+
+
+/* =====================================================================
+   C-124 — LEGAL CALLOUT
+   Contextual information box with left-accent border and icon.
+   Variants: info (blue), warning (amber), success (green), neutral (grey).
+   [CMS: callout_variant, callout_title (optional), callout_body]
+   ===================================================================== */
+
+.lgf-callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-radius: 10px;
+  border-left: 4px solid;
+  margin: 24px 0;
+  max-width: 72ch;
+}
+
+.lgf-callout-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lgf-callout-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.lgf-callout-body p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+.lgf-callout-title {
+  font-weight: 700;
+  font-size: 0.88rem !important;
+  margin-bottom: 5px !important;
+}
+
+/* Info — blue */
+.lgf-callout--info {
+  background: #EFF6FF;
+  border-left-color: #3B82F6;
+}
+
+.lgf-callout--info .lgf-callout-icon { color: #3B82F6; }
+.lgf-callout--info .lgf-callout-title { color: #1D4ED8; }
+
+/* Warning — amber */
+.lgf-callout--warning {
+  background: #FFFBEB;
+  border-left-color: #F59E0B;
+}
+
+.lgf-callout--warning .lgf-callout-icon { color: #D97706; }
+.lgf-callout--warning .lgf-callout-title { color: #92400E; }
+
+/* Success — green */
+.lgf-callout--success {
+  background: #ECFDF5;
+  border-left-color: #10B981;
+}
+
+.lgf-callout--success .lgf-callout-icon { color: #059669; }
+.lgf-callout--success .lgf-callout-title { color: #065F46; }
+
+/* Neutral — grey */
+.lgf-callout--neutral {
+  background: #F8FAFC;
+  border-left-color: var(--line);
+}
+
+.lgf-callout--neutral .lgf-callout-icon { color: var(--muted); }
+.lgf-callout--neutral .lgf-callout-title { color: var(--text); }
+
+
+/* =====================================================================
+   C-125 — DOCUMENT REVISION HISTORY
+   Vertical timeline of document versions. Newest version at top.
+   [CMS: legal_revision_history — ACF repeater field]
+   Fields: version (text), date (date picker), summary (textarea)
+   Unlimited revisions supported.
+   ===================================================================== */
+
+.lgf-revisions {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  position: relative;
+}
+
+/* Vertical timeline line */
+.lgf-revisions::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: var(--line);
+  border-radius: 1px;
+}
+
+.lgf-revision {
+  position: relative;
+  padding-left: 36px;
+  padding-bottom: 36px;
+}
+
+.lgf-revision:last-child {
+  padding-bottom: 0;
+}
+
+/* Timeline node */
+.lgf-revision::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--blue);
+  z-index: 1;
+}
+
+.lgf-revision:not(:first-child)::before {
+  background: var(--white);
+  box-shadow: 0 0 0 2px var(--line);
+}
+
+.lgf-revision-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.lgf-revision-version {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-heading);
+}
+
+.lgf-revision:first-child .lgf-revision-version {
+  color: var(--blue);
+}
+
+.lgf-revision-date {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.lgf-revision-summary {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+  max-width: 68ch;
+}
+
+
+/* =====================================================================
+   C-126 — RELATED LEGAL DOCUMENTS
+   Card grid linking to other legal/policy documents.
+   [CMS: legal_related_documents — ACF repeater field]
+   Fields: document_title, document_summary, document_url
+   Icon is rendered from a curated set per document_type.
+   ===================================================================== */
+
+.lgf-related-section {
+  background: #F8FAFC;
+  border-top: 1px solid var(--line);
+  padding: 72px 0;
+}
+
+.lgf-related-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.lgf-related-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 520px;
+}
+
+.lgf-related-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.lgf-related-sub {
+  font-size: 0.96rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.lgf-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lgf-related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+  position: relative;
+}
+
+.lgf-related-card:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-3px);
+}
+
+.lgf-related-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.lgf-related-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #E8F1FB, #DCE8F8);
+  border-radius: 10px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.lgf-related-card-title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0;
+  font-family: var(--font-heading);
+}
+
+.lgf-related-card:hover .lgf-related-card-title {
+  color: var(--blue);
+}
+
+.lgf-related-card-desc {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+
+.lgf-related-card-arrow {
+  font-size: 1rem;
+  color: var(--blue);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  align-self: flex-end;
+}
+
+.lgf-related-card:hover .lgf-related-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* =====================================================================
+   LEGAL ASSISTANCE (contact-band compact variant)
+   Reuses .contact-band + .contact-inner + .c-ico from contact.css.
+   .lgf-assist modifier reduces padding slightly for documentation pages.
+   ===================================================================== */
+
+.lgf-assist .contact-inner {
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+
+/* =====================================================================
+   RESPONSIVE — 1100px
+   Reduce document layout gap. Narrow TOC.
+   ===================================================================== */
+
+@media (max-width: 1100px) {
+  .lgf-document-layout {
+    grid-template-columns: 220px 1fr;
+    gap: 0 40px;
+  }
+}
+
+
+/* =====================================================================
+   RESPONSIVE — 960px
+   Collapse TOC to mobile accordion. Full-width single column layout.
+   ===================================================================== */
+
+@media (max-width: 960px) {
+  .lgf-document-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* TOC becomes accordion widget above the content */
+  .lgf-toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  /* Show mobile toggle button */
+  .lgf-toc-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 18px;
+    background: #F8FAFC;
+    border: none;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    border-radius: 0;
+    transition: background var(--t-fast);
+  }
+
+  .lgf-toc-toggle:hover {
+    background: #EEF4FC;
+  }
+
+  .lgf-toc-toggle:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: -2px;
+  }
+
+  .lgf-toc-toggle[aria-expanded="true"] .lgf-toc-toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .lgf-toc-toggle-icon {
+    transition: transform 220ms ease;
+    flex-shrink: 0;
+  }
+
+  /* TOC nav hidden by default on mobile */
+  .lgf-toc-nav {
+    display: none;
+    padding: 16px 18px 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .lgf-toc-nav.is-open {
+    display: block;
+  }
+
+  .lgf-toc-label {
+    display: none;
+  }
+}
+
+
+/* =====================================================================
+   RESPONSIVE — 760px
+   Metadata panel: stack to 2-column grid.
+   ===================================================================== */
+
+@media (max-width: 760px) {
+  .lgf-meta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .lgf-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 0;
+    width: 100%;
+  }
+
+  .lgf-meta-item {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+  }
+
+  .lgf-meta-item:nth-child(odd) {
+    padding-right: 16px;
+  }
+
+  .lgf-meta-item:last-child,
+  .lgf-meta-item:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .lgf-meta-download {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .lgf-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lgf-def-item {
+    grid-template-columns: 1fr;
+  }
+
+  .lgf-def-term {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+
+/* =====================================================================
+   RESPONSIVE — 540px
+   ===================================================================== */
+
+@media (max-width: 540px) {
+  .lgf-document-layout {
+    padding-top: 40px;
+    padding-bottom: 56px;
+  }
+
+  .lgf-h2 {
+    font-size: 1.2rem;
+  }
+
+  .lgf-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lgf-related-section {
+    padding: 56px 0;
+  }
+
+  .lgf-callout {
+    padding: 14px 16px;
+  }
+
+  .lgf-table-wrap {
+    border-radius: 8px;
+  }
+}
+
+
+/* =====================================================================
+   REDUCED MOTION
+   ===================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .lgf-toc-toggle-icon {
+    transition: none;
+  }
+
+  .lgf-related-card {
+    transition: border-color 0ms, box-shadow 0ms;
+  }
+
+  .lgf-related-card:hover {
+    transform: none;
+  }
+
+  .lgf-related-card-arrow {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

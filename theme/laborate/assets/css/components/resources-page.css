@@ -1,0 +1,997 @@
+/* =============================================================================
+   C-98 / C-99 — Resources & Downloads Page
+   resources.html — Enterprise Resource Centre
+   CSS prefix: res-
+
+   RES-001-P1-R3: Enterprise Search Console (C-63.2) replaces old filter toolbar.
+   Filter bar and active-chips styles moved to search-console.css.
+   This file: hero, overview, stats strip, categories, featured, doc library,
+   empty state, pagination, process steps. All res- prefixed classes.
+============================================================================= */
+
+/* ── SECTION 1: Hero — compact variant override ───────────────────────────── */
+/*
+   Selectors include .hero to raise specificity above inner-hero.css
+   (.hero--compact = 0,1,0) and hero.css (.hero p.sub = 0,2,1) baselines.
+*/
+
+.hero[data-section="res-hero"].hero--compact {
+  min-height: 380px;
+}
+
+.hero[data-section="res-hero"].hero--compact .wrap {
+  padding-top: 110px;
+  padding-bottom: 40px;
+}
+
+.hero[data-section="res-hero"] h1 {
+  margin-bottom: 14px;
+}
+
+.hero[data-section="res-hero"] p.sub {
+  margin-bottom: 22px;
+}
+
+.res-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ── SECTION 2: Resources Overview ───────────────────────────────────────── */
+
+.res-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px 72px;
+  align-items: start;
+}
+
+.res-overview-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.res-overview-text .eyebrow {
+  margin-bottom: 12px;
+}
+
+.res-overview-text h2 {
+  margin-bottom: 16px;
+}
+
+.res-overview-lead {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.65;
+  margin: 0 0 20px;
+}
+
+/* Trust Signal Grid — right column */
+.res-overview-trust {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-content: start;
+  align-self: start;
+}
+
+.res-trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-3xl);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.res-trust-item:hover {
+  border-color: rgba(13, 87, 162, .25);
+  box-shadow: 0 4px 16px rgba(0, 24, 68, .06);
+}
+
+.res-trust-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  background: rgba(16, 98, 172, .08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+}
+
+.res-trust-icon svg { width: 17px; height: 17px; }
+
+.res-trust-label {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 3px;
+  line-height: 1.3;
+}
+
+.res-trust-sub {
+  font-size: .73rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Capability checklist */
+.res-capability-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.res-capability-list li {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text);
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.res-capability-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background: rgba(16, 98, 172, .1);
+  border-radius: 50%;
+}
+
+.res-capability-list li::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 5px;
+  height: 8px;
+  border: 1.5px solid var(--blue);
+  border-top: none;
+  border-left: none;
+}
+
+/* ── SECTION 3: Stats Strip (C-78 mdc-stats-strip) ───────────────────────── */
+/*
+   Self-contained because business-page.css (where mdc-stats-strip was first
+   defined) is not imported on this branch. These styles are additive and will
+   be reconciled with the shared component when domains are merged.
+*/
+
+.mdc-stats-strip {
+  background: var(--navy);
+  padding: 64px 0;
+}
+
+.mdc-stats-strip .mdc-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+}
+
+.mdc-stats-strip .mdc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.mdc-stats-strip .mdc-stat:last-child {
+  border-right: none;
+}
+
+.mdc-stats-strip .mdc-stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -.03em;
+}
+
+.mdc-stats-strip .mdc-stat-num span {
+  display: inline;
+}
+
+.mdc-stats-strip .mdc-stat-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .55);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  line-height: 1.4;
+  max-width: 120px;
+}
+
+/* ── SECTION 4: Category Explorer — C-98 ─────────────────────────────────── */
+
+.res-categories-section { background: var(--bg); }
+
+.res-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+/* C-98 — Enterprise Resource Category Card */
+.res-cat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 18px 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.res-cat-card:hover {
+  border-color: var(--navy);
+  box-shadow: 0 8px 28px rgba(0, 24, 68, .1);
+  transform: translateY(-3px);
+}
+
+.res-cat-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* Category Icon — colour variants */
+.res-cat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.res-cat-icon svg { width: 22px; height: 22px; }
+
+.res-cat-icon--navy   { background: rgba(0, 24, 68, .08);    color: var(--navy); }
+.res-cat-icon--blue   { background: rgba(16, 98, 172, .1);   color: var(--blue); }
+.res-cat-icon--teal   { background: rgba(14, 116, 144, .1);  color: #0e7490; }
+.res-cat-icon--green  { background: rgba(21, 128, 61, .1);   color: #15803d; }
+.res-cat-icon--amber  { background: rgba(180, 83, 9, .1);    color: #b45309; }
+.res-cat-icon--indigo { background: rgba(67, 56, 202, .1);   color: #4338ca; }
+.res-cat-icon--rose   { background: rgba(190, 18, 60, .1);   color: #be123c; }
+.res-cat-icon--slate  { background: rgba(51, 65, 85, .1);    color: #334155; }
+.res-cat-icon--violet { background: rgba(109, 40, 217, .1);  color: #6d28d9; }
+.res-cat-icon--orange { background: rgba(194, 65, 12, .1);   color: #c2410c; }
+
+/* Hero count — prominent numeric display */
+.res-cat-count-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-top: auto;
+}
+
+.res-cat-num {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+.res-cat-unit {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+
+.res-cat-name {
+  font-family: var(--font-heading);
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.res-cat-arrow {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  transition: color var(--t-fast), transform var(--t-fast);
+}
+
+.res-cat-card:hover .res-cat-arrow {
+  color: var(--navy);
+  transform: translateX(3px);
+}
+
+/* Legacy stubs (kept for CSS non-breakage, unused in R1+ HTML) */
+.res-cat-body        { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.res-cat-desc        { font-size: .78rem; color: var(--muted); line-height: 1.6; margin: 0; }
+.res-cat-footer      { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--line); margin-top: auto; }
+.res-cat-count       { font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); background: rgba(16, 98, 172, .07); border-radius: 20px; padding: 3px 10px; }
+
+/* ── SECTION 5: Featured Downloads ──────────────────────────────────────── */
+
+.res-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.res-featured-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.res-featured-card:hover {
+  border-color: var(--navy);
+  box-shadow: 0 6px 24px rgba(0, 24, 68, .09);
+}
+
+.res-featured-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Category tag colours */
+.res-featured-tag {
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+.res-tag--corporate    { background: rgba(12, 23, 48, .07);  color: var(--navy); }
+.res-tag--certification{ background: rgba(21, 128, 61, .1);  color: #15803d; }
+.res-tag--catalogue    { background: rgba(16, 98, 172, .1);  color: var(--blue); }
+
+/* File type badges */
+.res-file-badge {
+  font-size: .6rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+.res-badge--pdf  { background: #fef2f2; color: #dc2626; border: 1px solid rgba(220,38,38,.2); }
+.res-badge--xlsx { background: #f0fdf4; color: #16a34a; border: 1px solid rgba(22,163,74,.2); }
+.res-badge--zip  { background: #fffbeb; color: #d97706; border: 1px solid rgba(217,119,6,.2); }
+.res-badge--pptx { background: #fff7ed; color: #ea580c; border: 1px solid rgba(234,88,12,.2); }
+.res-badge--docx { background: #eff6ff; color: #2563eb; border: 1px solid rgba(37,99,235,.2); }
+
+.res-featured-title {
+  font-family: var(--font-heading);
+  font-size: .93rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.res-featured-desc {
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+}
+
+.res-featured-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.res-featured-year,
+.res-featured-size,
+.res-featured-lang {
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.res-featured-year::after,
+.res-featured-size::after {
+  content: '·';
+  margin-left: 8px;
+  opacity: .4;
+}
+
+/* ── SECTION 6 + 7: Document Library ────────────────────────────────────── */
+/*
+   Filter bar, active chips, and meta bar are now in search-console.css (C-63.2).
+   This section: library section background + C-99 document cards.
+*/
+
+.res-library-section { background: var(--bg); }
+
+/* ── C-99 — Enterprise Download Card ────────────────────────────────────── */
+
+.res-doc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.res-doc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  height: 100%;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.res-doc-card:hover {
+  border-color: rgba(16, 98, 172, .3);
+  box-shadow: 0 4px 20px rgba(0, 24, 68, .07);
+}
+
+.res-doc-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.res-doc-type-badge {
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+
+/* Category chip colours */
+.res-doc-cat-chip {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  background: rgba(12, 23, 48, .06);
+  color: var(--navy);
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+
+.res-chip--green  { background: rgba(21, 128, 61, .08);   color: #15803d; }
+.res-chip--blue   { background: rgba(16, 98, 172, .08);   color: var(--blue); }
+.res-chip--amber  { background: rgba(180, 83, 9, .08);    color: #b45309; }
+.res-chip--teal   { background: rgba(14, 116, 144, .08);  color: #0e7490; }
+.res-chip--rose   { background: rgba(190, 18, 60, .08);   color: #be123c; }
+.res-chip--violet { background: rgba(109, 40, 217, .08);  color: #6d28d9; }
+.res-chip--orange { background: rgba(194, 65, 12, .08);   color: #c2410c; }
+.res-chip--indigo { background: rgba(67, 56, 202, .08);   color: #4338ca; }
+
+.res-doc-title {
+  font-family: var(--font-heading);
+  font-size: .87rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.res-doc-excerpt {
+  font-size: .76rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.res-doc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.res-doc-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: .67rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Doc card footer — tags + download button */
+.res-doc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+  gap: 8px;
+}
+
+.res-doc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+
+.res-doc-tag {
+  font-size: .6rem;
+  font-weight: 600;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.res-doc-download {
+  font-size: .76rem;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+/* Legacy stub */
+.res-doc-meta-item { display: flex; align-items: center; gap: 4px; font-size: .67rem; color: var(--muted); font-weight: 500; }
+
+/* Load more (kept for legacy; replaced by pagination) */
+.res-load-more { display: flex; justify-content: center; padding-top: 12px; }
+
+/* ── Empty state ──────────────────────────────────────────────────────────── */
+
+.res-empty-state {
+  text-align: center;
+  padding: 56px 24px;
+  background: var(--white);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+}
+
+.res-empty-icon {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 18px;
+  background: rgba(16, 98, 172, .06);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.res-empty-icon svg { width: 34px; height: 34px; }
+
+.res-empty-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.res-empty-text {
+  font-size: .87rem;
+  color: var(--muted);
+  margin: 0 auto 22px;
+  max-width: 440px;
+  line-height: 1.6;
+}
+
+.res-empty-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── Pagination ───────────────────────────────────────────────────────────── */
+
+.res-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 0 8px;
+}
+
+.res-page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.res-page-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  line-height: 1;
+  font-family: var(--font-body);
+}
+
+.res-page-btn:hover:not(:disabled):not(.res-page-active) {
+  background: rgba(16, 98, 172, .06);
+  border-color: rgba(16, 98, 172, .25);
+  color: var(--navy);
+}
+
+.res-page-btn:disabled,
+.res-page-btn[aria-disabled="true"] {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.res-page-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.res-page-num {
+  min-width: 36px;
+  justify-content: center;
+  padding: 7px 8px;
+}
+
+.res-page-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+.res-page-active:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+.res-page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 5px;
+  font-size: .8rem;
+  color: var(--muted);
+  cursor: default;
+}
+
+/* ── SECTION 8: Download Process ─────────────────────────────────────────── */
+
+.res-process-steps {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: start;
+  gap: 0;
+  margin-bottom: 48px;
+}
+
+.res-process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 0 16px;
+}
+
+.res-process-number {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--line);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.res-process-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(16, 98, 172, .07);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+}
+
+.res-process-icon svg { width: 26px; height: 26px; }
+
+.res-process-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.res-process-desc {
+  font-size: .83rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.res-process-connector {
+  width: 48px;
+  height: 2px;
+  background: var(--line);
+  margin-top: 76px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.res-process-connector::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  background: var(--line);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* Document Request CTA */
+.res-process-cta {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+}
+
+.res-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.res-cta-label {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+
+.res-cta-sub {
+  font-size: .83rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 1280px) {
+  .res-cat-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .res-cat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .res-doc-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .res-featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .res-overview-grid {
+    gap: 48px 56px;
+  }
+}
+
+@media (max-width: 960px) {
+  .res-overview-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .res-overview-trust {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .res-cat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .res-featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .res-doc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mdc-stats-strip .mdc-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .mdc-stats-strip .mdc-stat:nth-child(3) {
+    border-right: none;
+  }
+
+  .mdc-stats-strip .mdc-stat:nth-child(n+4) {
+    border-top: 1px solid rgba(255, 255, 255, .1);
+  }
+
+  .res-process-steps {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .res-process-connector {
+    width: 2px;
+    height: 28px;
+    margin: 0 auto;
+  }
+
+  .res-process-connector::after {
+    right: -4px;
+    top: auto;
+    bottom: -5px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  .res-process-step {
+    padding: 0;
+  }
+
+  .res-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-section="res-hero"].hero--compact .wrap {
+    padding-top: 90px;
+    padding-bottom: 32px;
+  }
+
+  .res-overview-trust {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .res-cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .res-featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .res-pagination {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .res-process-cta {
+    padding: 20px 18px;
+  }
+
+  .mdc-stats-strip {
+    padding: 48px 0;
+  }
+
+  .mdc-stats-strip .mdc-stat-num {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .res-overview-trust {
+    grid-template-columns: 1fr;
+  }
+
+  .res-cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .res-doc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .res-hero-actions {
+    flex-direction: column;
+  }
+
+  .res-hero-actions .btn {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .mdc-stats-strip .mdc-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mdc-stats-strip .mdc-stat:nth-child(2n) {
+    border-right: none;
+  }
+
+  .mdc-stats-strip .mdc-stat:nth-child(3) {
+    border-right: 1px solid rgba(255, 255, 255, .1);
+  }
+
+  .mdc-stats-strip .mdc-stat:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, .1);
+  }
+}
+
+@media (max-width: 360px) {
+  .res-cat-grid {
+    grid-template-columns: 1fr;
+  }
+}

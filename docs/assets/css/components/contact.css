@@ -1,0 +1,75 @@
+/* =============================================================================
+   SECTION: CONTACT BAND
+   Full-width blue gradient call-to-action strip: icon + text left, CTA right.
+   Source: assets/html/source/homepage-approved-v1.html (lines 1693–1738)
+============================================================================= */
+
+/* =============================================================================
+   SECTION SHELL
+============================================================================= */
+
+.contact-band {
+  background: var(--grad-contact)
+}
+
+/* =============================================================================
+   INNER LAYOUT
+============================================================================= */
+
+.contact-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 48px 0;
+  flex-wrap: wrap
+}
+
+/* =============================================================================
+   LEFT: ICON + COPY
+============================================================================= */
+
+.contact-left {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: #fff
+}
+
+.contact-left .c-ico {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .16);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, .25)
+}
+
+.contact-left .c-ico svg {
+  width: 30px;
+  height: 30px
+}
+
+.contact-left h3 {
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  font-weight: 700
+}
+
+.contact-left p {
+  color: var(--on-dark-contact-p);
+  font-size: .95rem;
+  max-width: 470px
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+@media (max-width: 880px) {
+  .contact-inner {
+    flex-direction: column;
+    align-items: flex-start
+  }
+}

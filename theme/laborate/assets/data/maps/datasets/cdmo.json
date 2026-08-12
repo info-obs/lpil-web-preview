@@ -1,0 +1,13 @@
+{
+  "uid": "CDMO",
+  "title": "Contract Manufacturing",
+  "type": "cdmo",
+  "description": "Contract Development and Manufacturing Organisation — regulated formulation manufacturing from WHO-GMP certified facilities.",
+  "locations": [
+    { "lat": 29.3909, "lng": 76.9635, "city": "Panipat",      "province": "IN-HR", "country": "IND", "region": "142" },
+    { "lat": 28.8744, "lng": 77.1027, "city": "Kundli",       "province": "IN-HR", "country": "IND", "region": "142" },
+    { "lat": 30.4336, "lng": 77.6246, "city": "Paonta Sahib", "province": "IN-HP", "country": "IND", "region": "142" },
+    { "lat": 30.9548, "lng": 76.7888, "city": "Baddi",        "province": "IN-HP", "country": "IND", "region": "142" },
+    { "lat": 30.9045, "lng": 77.0967, "city": "Solan",        "province": "IN-HP", "country": "IND", "region": "142" }
+  ]
+}

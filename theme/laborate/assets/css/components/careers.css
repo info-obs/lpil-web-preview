@@ -1,0 +1,72 @@
+/* =============================================================================
+   SECTION: CAREERS
+   Dark full-bleed section: navy background with translucent image overlay
+   and linear-gradient mask. Content constrained to max-width container.
+   Source: assets/html/source/homepage-approved-v1.html (lines 1638–1691)
+============================================================================= */
+
+/* =============================================================================
+   SECTION SHELL
+============================================================================= */
+
+.careers {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  background: var(--navy)
+}
+
+/* Background image layer */
+.careers .bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0
+}
+
+.careers .bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .32
+}
+
+/* Gradient mask over image */
+.careers::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg, var(--navy) 18%, rgba(12, 23, 48, .72) 52%, rgba(16, 98, 172, .28))
+}
+
+/* Wrap needs relative + z-index to sit above the ::after overlay */
+.careers .wrap {
+  position: relative;
+  z-index: 2;
+  padding: 96px 24px
+}
+
+/* =============================================================================
+   CONTENT
+============================================================================= */
+
+.careers-inner {
+  max-width: var(--container-careers)
+}
+
+.careers .eyebrow {
+  color: var(--light-blue)
+}
+
+.careers h2 {
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-weight: 800;
+  margin-bottom: 16px
+}
+
+.careers p {
+  color: var(--on-dark-careers-p);
+  font-size: 1.05rem;
+  margin-bottom: 28px;
+  max-width: 470px
+}

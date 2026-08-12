@@ -1,0 +1,771 @@
+/* =============================================================================
+   SECTION: MANUFACTURING
+   Two-column layout: text + checklist left, facility image right.
+   Source: assets/html/source/homepage-approved-v1.html (lines 1232–1313)
+============================================================================= */
+
+/* =============================================================================
+   SECTION SHELL
+============================================================================= */
+
+.mfg {
+  background: var(--grad-manufacturing)
+}
+
+/* =============================================================================
+   GRID
+============================================================================= */
+
+.mfg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 60px;
+  align-items: center
+}
+
+/* =============================================================================
+   TEXT PANEL
+============================================================================= */
+
+.mfg-text h2 {
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 18px;
+  line-height: 1.08
+}
+
+.mfg-text h2 .b {
+  color: var(--blue)
+}
+
+.mfg-text > p {
+  color: var(--muted);
+  margin-bottom: 26px;
+  max-width: 450px
+}
+
+/* =============================================================================
+   FEATURE CHECKLIST
+============================================================================= */
+
+.mfg-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  margin-bottom: 30px
+}
+
+.mfg-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 14px 18px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s, box-shadow .3s
+}
+
+.mfg-list li:hover {
+  transform: translateX(6px);
+  box-shadow: var(--shadow)
+}
+
+.mfg-list .chk {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--grad-mfg-check);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0
+}
+
+.mfg-list .chk svg {
+  width: 15px;
+  height: 15px
+}
+
+/* =============================================================================
+   MEDIA PANEL
+============================================================================= */
+
+.mfg-media .img-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4/3;
+  background: var(--grad-mfg-img-bg)
+}
+
+.mfg-media .img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+@media (max-width: 880px) {
+  .mfg-grid {
+    grid-template-columns: 1fr;
+    gap: 42px
+  }
+}
+
+/* =============================================================================
+   MANUFACTURING LANDING PAGE — ADDITIONAL STYLES
+   /manufacturing/ full landing page components.
+   Extends the homepage .mfg section styles above.
+   Components: C-66 Plant Card (NEW), stats strip, philosophy, CDMO CTA.
+============================================================================= */
+
+/* =============================================================================
+   MANUFACTURING STATS STRIP
+   6 headline metrics below the compact hero.
+   Visual language mirrors .employer-stats-strip from careers-landing.css.
+============================================================================= */
+
+.mfg-stats-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 44px 0;
+}
+
+.mfg-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.mfg-stat {
+  text-align: center;
+  padding: 0 36px;
+  border-right: 1px solid var(--line);
+  flex: 1;
+  min-width: 120px;
+}
+
+.mfg-stat:last-child {
+  border-right: none;
+}
+
+.mfg-stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+
+.mfg-stat-txt {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+
+.mfg-stat-label {
+  font-size: .76rem;
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+
+/* =============================================================================
+   MANUFACTURING PHILOSOPHY
+   Dark editorial section with large quote + supporting copy.
+   Pattern: C-33 Quality Blockquote adapted for manufacturing context.
+   Does NOT create a new component — extends quality blockquote pattern.
+============================================================================= */
+
+.mfg-philosophy {
+  background: linear-gradient(160deg, #091a36, #0f2a50);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.mfg-philosophy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.07), transparent 35%),
+    radial-gradient(circle at 90% 80%, rgba(16,98,172,.18), transparent 40%);
+}
+
+.mfg-philosophy .wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.mfg-philosophy-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.mfg-philosophy-text .eyebrow {
+  color: var(--light-blue);
+  justify-content: flex-start;
+}
+
+.mfg-philosophy-text .eyebrow::before {
+  background: var(--light-blue);
+}
+
+.mfg-philosophy-quote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -.02em;
+  margin-bottom: 20px;
+}
+
+.mfg-philosophy-quote .accent {
+  color: var(--light-blue);
+}
+
+.mfg-philosophy-body {
+  font-size: .92rem;
+  color: var(--on-dark-reel-body);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.mfg-philosophy-pillars {
+  display: grid;
+  gap: 14px;
+}
+
+.mfg-philosophy-pillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.mfg-philosophy-pillar-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(176, 212, 240, .15);
+  color: var(--light-blue);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.mfg-philosophy-pillar-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.mfg-philosophy-pillar-text strong {
+  display: block;
+  font-size: .86rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.mfg-philosophy-pillar-text span {
+  font-size: .8rem;
+  color: var(--on-dark-reel-body);
+  line-height: 1.5;
+}
+
+.mfg-philosophy-media .img-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4/3;
+  background: var(--grad-mfg-img-bg);
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.mfg-philosophy-media .img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================================================================
+   DOSAGE FORMS SECTION
+   Display-only dosage form chips on the manufacturing landing page.
+   Reuses .cat-grid and .cat from cards.css — non-interactive (div not anchor).
+============================================================================= */
+
+.mfg-dosage-section {
+  background: var(--white);
+}
+
+.mfg-dosage-grid {
+  grid-template-columns: repeat(8, 1fr);
+  gap: 14px;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* =============================================================================
+   MANUFACTURING CAPABILITIES SECTION
+   Icon-led capability cards.
+   Reuses .career-feature-grid and .career-feature-card (C-61).
+   No new CSS classes needed — full component reuse.
+============================================================================= */
+
+.mfg-capabilities-section {
+  background: var(--bg);
+}
+
+/* Override grid to 3 cols with up to 9 items */
+.mfg-capabilities-section .career-feature-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* =============================================================================
+   CERTIFICATIONS SECTION — LANDING PAGE
+   Reuses .cert-grid and .cert (C-34) but on a light background.
+   The quality page uses C-34 on the dark gradient; here it's on light bg.
+============================================================================= */
+
+.mfg-certs-section {
+  background: var(--grad-manufacturing);
+}
+
+/* On light bg, cert card shadow is lighter */
+.mfg-certs-section .cert {
+  box-shadow: var(--shadow);
+  background: var(--white);
+}
+
+.mfg-certs-section .cert:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* =============================================================================
+   PLANT NETWORK SECTION
+   Wrapper for the plant card grid on the manufacturing landing page.
+============================================================================= */
+
+.plant-network-section {
+  background: var(--white);
+}
+
+.plant-network-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* =============================================================================
+   C-66 — PLANT CARD (CMP-116)
+   Facility card for manufacturing plant listing.
+   Used on: Manufacturing Landing (featured), Plants Explorer (all).
+
+   <article class="plant-card">
+     <div class="plant-card-img">
+       <img src="..." alt="..." loading="lazy">
+       <span class="plant-card-code">PLT-01</span>
+     </div>
+     <div class="plant-card-body">
+       <p class="plant-card-location">…</p>
+       <h3 class="plant-card-name">…</h3>
+       <div class="plant-card-forms">
+         <span class="tag--pill">Tablets</span>…
+       </div>
+       <div class="plant-card-certs">
+         <span class="cert-badge" title="WHO GMP">WHO</span>…
+       </div>
+       <a class="learn" href="plant-detail.html">View Facility →</a>
+     </div>
+   </article>
+============================================================================= */
+
+.plant-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.plant-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--t-medium), box-shadow var(--t-medium);
+}
+
+.plant-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad-marquee);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-medium);
+  z-index: 4;
+}
+
+.plant-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.plant-card:hover::before {
+  transform: scaleX(1);
+}
+
+.plant-card-img {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--grad-mfg-img-bg);
+}
+
+.plant-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s;
+}
+
+.plant-card:hover .plant-card-img img {
+  transform: scale(1.06);
+}
+
+.plant-card-code {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(8, 18, 40, .72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  z-index: 2;
+}
+
+.plant-card-body {
+  padding: 20px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.plant-card-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .76rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.plant-card-location svg {
+  width: 12px;
+  height: 12px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.plant-card-name {
+  font-family: var(--font-heading);
+  font-size: .97rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* MR-004: Compact meta row — Established + Employees, single line */
+.plant-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.plant-card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.plant-card-meta-item svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.plant-card-forms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.plant-card-certs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.cert-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .6rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--grad-cert-ico);
+  border: 1px solid rgba(16, 98, 172, .15);
+  border-radius: var(--radius-sm);
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+
+.plant-card-body .learn {
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+/* =============================================================================
+   CDMO / CONTRACT MANUFACTURING CTA SECTION
+   Dark premium section targeting B2B enquiries.
+   Background: dark navy, gradient accent.
+============================================================================= */
+
+.mfg-cdmo-section {
+  background: linear-gradient(140deg, #0a1d3a 0%, #0e2a50 60%, #152d5e 100%);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.mfg-cdmo-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 85% 30%, rgba(16,98,172,.25), transparent 45%);
+}
+
+.mfg-cdmo-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+}
+
+.mfg-cdmo-text .eyebrow {
+  color: var(--light-blue);
+}
+
+.mfg-cdmo-text .eyebrow::before {
+  background: var(--light-blue);
+}
+
+.mfg-cdmo-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.mfg-cdmo-body {
+  font-size: .92rem;
+  color: var(--on-dark-reel-body);
+  line-height: 1.7;
+  max-width: 540px;
+  margin-bottom: 28px;
+}
+
+.mfg-cdmo-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.mfg-cdmo-feature {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .8rem;
+  color: var(--on-dark-reel-body);
+  font-weight: 500;
+}
+
+.mfg-cdmo-feature svg {
+  width: 14px;
+  height: 14px;
+  color: var(--light-blue);
+  flex-shrink: 0;
+}
+
+.mfg-cdmo-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.mfg-cdmo-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 220px;
+}
+
+.mfg-cdmo-stat-card {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--radius);
+  padding: 22px;
+  text-align: center;
+}
+
+.mfg-cdmo-stat-num {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--light-blue);
+  letter-spacing: -.03em;
+  line-height: 1;
+  display: block;
+}
+
+.mfg-cdmo-stat-label {
+  font-size: .74rem;
+  color: var(--on-dark-reel-label);
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+/* =============================================================================
+   RESPONSIVE — MANUFACTURING LANDING PAGE
+============================================================================= */
+
+@media (max-width: 1080px) {
+  .mfg-dosage-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 880px) {
+  .mfg-stats {
+    gap: 0;
+  }
+
+  .mfg-stat {
+    padding: 16px 20px;
+    flex: 1 1 33%;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mfg-stat:nth-child(3n) {
+    border-right: none;
+  }
+
+  .mfg-philosophy-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .mfg-dosage-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .plant-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mfg-cdmo-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .mfg-cdmo-aside {
+    flex-direction: row;
+  }
+
+  .mfg-cdmo-stat-card {
+    flex: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .mfg-stats-strip {
+    padding: 32px 0;
+  }
+
+  .mfg-stat {
+    flex: 1 1 50%;
+  }
+
+  .mfg-stat:nth-child(3n) {
+    border-right: 1px solid var(--line);
+  }
+
+  .mfg-stat:nth-child(2n) {
+    border-right: none;
+  }
+
+  .mfg-dosage-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .plant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mfg-cdmo-aside {
+    flex-direction: column;
+  }
+
+  .mfg-capabilities-section .career-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

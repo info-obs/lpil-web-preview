@@ -1,0 +1,149 @@
+/* =============================================================================
+   SECTION: GLOBAL PRESENCE
+   Two-column layout: stats + region tags left, interactive map right.
+   Uses ping/beat animations defined in animations.css.
+   Source: assets/html/source/homepage-approved-v1.html (lines 1421–1543)
+============================================================================= */
+
+/* =============================================================================
+   GRID
+============================================================================= */
+
+.global-grid {
+  display: grid;
+  grid-template-columns: .9fr 1.3fr;
+  gap: 54px;
+  align-items: center
+}
+
+/* =============================================================================
+   TEXT PANEL
+============================================================================= */
+
+.global-text h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 700;
+  margin-bottom: 16px
+}
+
+.global-text p {
+  color: var(--muted);
+  margin-bottom: 18px;
+  max-width: 400px
+}
+
+/* Live indicator pill */
+.global-text .now {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(235, 50, 54, .1);
+  color: var(--red);
+  font-weight: 700;
+  font-size: .8rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 20px
+}
+
+.global-text .now .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--red);
+  animation: beat 1.8s infinite
+}
+
+/* =============================================================================
+   REGION TAGS
+============================================================================= */
+
+.region-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px
+}
+
+.region-tags span {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--blue);
+  background: rgba(16, 98, 172, .09);
+  padding: 7px 14px;
+  border-radius: var(--radius-pill)
+}
+
+/* =============================================================================
+   MAP PANEL
+============================================================================= */
+
+.map-panel {
+  position: relative;
+  background: var(--grad-map-panel);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+  overflow: hidden
+}
+
+.map-panel svg.worldmap {
+  width: 100%;
+  height: auto;
+  display: block
+}
+
+.map-panel .land {
+  fill: #9cc0e6;
+  opacity: .85
+}
+
+/* =============================================================================
+   LOCATION PINS
+============================================================================= */
+
+.pin {
+  position: absolute;
+  width: 14px;
+  height: 14px
+}
+
+.pin .dot {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: var(--red);
+  box-shadow: 0 0 0 3px rgba(235, 50, 54, .25)
+}
+
+.pin .ring {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--red);
+  animation: ping 2.4s var(--ease-ping) infinite
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+@media (max-width: 880px) {
+  .global-grid {
+    grid-template-columns: 1fr;
+    gap: 40px
+  }
+}
+
+/* =============================================================================
+   REDUCED MOTION — pause continuous animations
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .pin .ring {
+    animation: none
+  }
+  .global-text .now .pulse {
+    animation: none
+  }
+}

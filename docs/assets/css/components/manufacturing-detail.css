@@ -1,0 +1,993 @@
+/* =============================================================================
+   MANUFACTURING PLANT DETAIL — CSS
+   /manufacturing/plants/{slug}/ — complete facility profile page.
+
+   Component Registry:
+     C-60 ext   Facility Meta Bar — extends Job Meta Bar for plant key facts
+     C-67       Facility Gallery (NEW — CMP-117)
+     C-68       Regulatory Approval Row (NEW — CMP-118)
+
+   Existing reused (unchanged CSS):
+     C-06   .hero.hero--compact  (inner-hero.css)
+     C-34   .cert-grid, .cert  (cards.css)
+     C-44   .contact-band  (contact.css)
+     C-51   .breadcrumb  (inner-hero.css)
+     C-60   .c60-meta-bar, .c60-meta-*  (careers-detail.css)
+     C-66   .plant-card, .plant-grid  (manufacturing.css)
+     .tag--pill  (products-archive.css)
+     .rich-text  (products-detail.css)
+     .section-subhead  (products-detail.css)
+
+   Source of visual truth: homepage-approved-v1.html + design tokens.
+============================================================================= */
+
+/* =============================================================================
+   PLANT DETAIL ARTICLE WRAPPER
+============================================================================= */
+
+.plant-detail-article {
+  background: var(--bg);
+}
+
+/* =============================================================================
+   C-60 EXTENDED — FACILITY META BAR
+   Reuses all .c60-meta-* classes from careers-detail.css.
+   No new CSS needed — same icon tile + label + value pattern.
+   Different: 5 plant facts (Established, Employees, Lines, Capacity, Area).
+   HTML uses .c60-meta-bar class — zero new styles required.
+============================================================================= */
+
+/* Plant-specific meta bar sits on white bg */
+.plant-meta-bar {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* =============================================================================
+   PLANT OVERVIEW SECTION
+   Two-column: editorial text left, facility image right.
+   Reuses .about-grid / .about-text / .about-media pattern from about.css.
+============================================================================= */
+
+.plant-overview-section {
+  background: var(--white);
+}
+
+.plant-overview-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.plant-overview-text .section-subhead {
+  font-size: 1.4rem;
+}
+
+.plant-overview-text p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.plant-overview-text p:last-child {
+  margin-bottom: 0;
+}
+
+.plant-overview-media .img-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4/3;
+  background: var(--grad-mfg-img-bg);
+}
+
+.plant-overview-media .img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================================================================
+   MANUFACTURING LINES SECTION
+   Cards presenting each production line with dosage form, capacity, status.
+============================================================================= */
+
+.mfg-lines-section {
+  background: var(--bg);
+}
+
+.mfg-lines-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.mfg-line-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 20px 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mfg-line-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad-marquee);
+}
+
+.mfg-line-num {
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+
+.mfg-line-name {
+  font-family: var(--font-heading);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.mfg-line-form {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.mfg-line-capacity {
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mfg-line-capacity svg {
+  width: 13px;
+  height: 13px;
+  color: var(--blue);
+}
+
+.mfg-line-status {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+/* =============================================================================
+   CAPACITY TABLE SECTION
+   Professional table for daily production capacity data.
+   Responsive: collapses gracefully on mobile.
+============================================================================= */
+
+.capacity-section {
+  background: var(--white);
+}
+
+.capacity-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.capacity-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+  min-width: 480px;
+}
+
+.capacity-table thead {
+  background: var(--grad-cat-ico);
+}
+
+.capacity-table th {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.capacity-table td {
+  padding: 14px 20px;
+  color: var(--text);
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+.capacity-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.capacity-table tbody tr:hover td {
+  background: var(--bg);
+}
+
+.capacity-table td:first-child {
+  font-weight: 600;
+}
+
+.capacity-table td:last-child {
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+/* =============================================================================
+   CERTIFICATIONS SECTION (Plant Detail)
+   Reuses .cert-grid and .cert (C-34) on light background.
+   Matches .mfg-certs-section pattern from manufacturing landing.
+============================================================================= */
+
+.plant-certs-section {
+  background: var(--bg);
+}
+
+.plant-certs-section .cert {
+  box-shadow: var(--shadow);
+  background: var(--white);
+}
+
+.plant-certs-section .cert:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* =============================================================================
+   C-68 — REGULATORY APPROVAL ROW (CMP-118)
+   Per-facility approval row with authority, number, country, dates, status, PDF.
+   Tabular pattern for structured regulatory data display.
+
+   <div class="c68-approvals-section">
+     <div class="c68-table-head">…column labels…</div>
+     <div class="c68-row">
+       <div class="c68-authority">WHO GMP</div>
+       <div class="c68-approval-num">GMP/2024/IN/01</div>
+       <div class="c68-country"><span class="tag--pill">India</span></div>
+       <div class="c68-date-pair">
+         <span class="c68-date-label">Issued</span>
+         <span class="c68-date-val">Jan 2022</span>
+       </div>
+       <div class="c68-date-pair">
+         <span class="c68-date-label">Expires</span>
+         <span class="c68-date-val">Jan 2027</span>
+       </div>
+       <div class="c68-status-cell">
+         <span class="approval-status approval-status--valid">Valid</span>
+       </div>
+       <div class="c68-pdf-cell">
+         <a href="#" class="c68-pdf-link">…PDF icon… Download</a>
+       </div>
+     </div>
+   </div>
+============================================================================= */
+
+.c68-approvals-section {
+  background: var(--white);
+}
+
+.c68-table {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.c68-table-head {
+  display: grid;
+  grid-template-columns: 1.4fr 1.4fr 0.8fr 1fr 1fr 0.7fr 0.8fr;
+  gap: 0;
+  background: var(--grad-cat-ico);
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.c68-table-head span {
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.c68-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.4fr 0.8fr 1fr 1fr 0.7fr 0.8fr;
+  gap: 0;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  transition: background var(--t-fast);
+}
+
+.c68-row:last-child {
+  border-bottom: none;
+}
+
+.c68-row:hover {
+  background: var(--bg);
+}
+
+.c68-authority {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.c68-approval-num {
+  font-size: .82rem;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+}
+
+.c68-date-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.c68-date-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.c68-date-val {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.approval-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.approval-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.approval-status--valid {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.approval-status--expiring {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.approval-status--expired {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.c68-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .76rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  transition: color var(--t-fast);
+  white-space: nowrap;
+}
+
+.c68-pdf-link:hover {
+  color: var(--blue-dark);
+  text-decoration: underline;
+}
+
+.c68-pdf-link svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   QUALITY LABS SECTION
+   Editorial section for lab description and equipment list.
+============================================================================= */
+
+.quality-labs-section {
+  background: var(--bg);
+}
+
+.quality-labs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.quality-labs-text p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.equipment-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.equipment-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .85rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.equipment-item::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.lab-type-cards {
+  display: grid;
+  gap: 12px;
+}
+
+.lab-type-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.lab-type-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cert-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.lab-type-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.lab-type-name {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.lab-type-accred {
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* =============================================================================
+   C-67 — FACILITY GALLERY (CMP-117)
+   Responsive image gallery with category filters and lightbox.
+
+   <section class="c67-gallery-section">
+     <div class="c67-gallery-filters">
+       <button class="c67-filter-btn c67-filter-btn--active" data-filter="all">All</button>
+       <button class="c67-filter-btn" data-filter="exterior">Exterior</button>
+       …
+     </div>
+     <div class="c67-gallery" id="facilityGallery">
+       <button class="c67-gallery-item" data-category="exterior" aria-label="…">
+         <img src="…" alt="…" loading="lazy">
+         <div class="c67-gallery-overlay" aria-hidden="true">
+           <svg>expand icon</svg>
+         </div>
+         <span class="c67-gallery-caption">Caption</span>
+       </button>
+     </div>
+   </section>
+
+   <!-- Lightbox rendered at body level -->
+   <div class="c67-lightbox" id="galleryLightbox" hidden …>
+     …
+   </div>
+============================================================================= */
+
+.c67-gallery-section {
+  background: var(--white);
+}
+
+.c67-gallery-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.c67-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--white);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.c67-filter-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.c67-filter-btn--active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.c67-filter-btn--active:hover {
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+  color: #fff;
+}
+
+.c67-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.c67-gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-mfg-img-bg);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+
+.c67-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s var(--ease-spring);
+  display: block;
+}
+
+.c67-gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+.c67-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 18, 40, 0);
+  display: grid;
+  place-items: center;
+  transition: background var(--t-medium);
+}
+
+.c67-gallery-overlay svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  opacity: 0;
+  transform: scale(.7);
+  transition: all var(--t-medium);
+}
+
+.c67-gallery-item:hover .c67-gallery-overlay {
+  background: rgba(8, 18, 40, .45);
+}
+
+.c67-gallery-item:hover .c67-gallery-overlay svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.c67-gallery-item:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.c67-gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px;
+  background: linear-gradient(to top, rgba(8,18,40,.7), transparent);
+  color: #fff;
+  font-size: .74rem;
+  font-weight: 500;
+  text-align: left;
+  opacity: 0;
+  transition: opacity var(--t-medium);
+}
+
+.c67-gallery-item:hover .c67-gallery-caption {
+  opacity: 1;
+}
+
+/* Lightbox */
+.c67-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(4, 9, 20, .95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.c67-lightbox[hidden] {
+  display: none;
+}
+
+.c67-lightbox-inner {
+  position: relative;
+  max-width: min(900px, 100%);
+  max-height: calc(100vh - 80px);
+  width: 100%;
+}
+
+.c67-lightbox-img {
+  width: 100%;
+  max-height: calc(100vh - 120px);
+  object-fit: contain;
+  border-radius: var(--radius);
+  display: block;
+}
+
+.c67-lightbox-caption {
+  text-align: center;
+  color: rgba(255,255,255,.7);
+  font-size: .82rem;
+  margin-top: 12px;
+}
+
+.c67-lb-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background var(--t-fast);
+  font-size: 1.1rem;
+}
+
+.c67-lb-close:hover {
+  background: rgba(255,255,255,.24);
+}
+
+.c67-lb-prev,
+.c67-lb-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background var(--t-fast);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.c67-lb-prev {
+  left: -60px;
+}
+
+.c67-lb-next {
+  right: -60px;
+}
+
+.c67-lb-prev:hover,
+.c67-lb-next:hover {
+  background: rgba(255,255,255,.24);
+}
+
+/* =============================================================================
+   PLANT CONTACT SECTION
+   Structured address, contact details, and map embed.
+============================================================================= */
+
+.plant-contact-section {
+  background: var(--bg);
+}
+
+.plant-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.plant-contact-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+}
+
+.plant-contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.plant-contact-row:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.plant-contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cert-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.plant-contact-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.plant-contact-label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.plant-contact-value {
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.plant-contact-value a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.plant-contact-value a:hover {
+  text-decoration: underline;
+}
+
+.plant-map-embed {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: var(--grad-map-panel);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: .84rem;
+  text-align: center;
+  position: relative;
+}
+
+.plant-map-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.plant-map-placeholder svg {
+  width: 36px;
+  height: 36px;
+  color: var(--blue);
+  opacity: .5;
+}
+
+/* =============================================================================
+   RELATED PLANTS SECTION
+   3 plant cards (C-66 reused).
+============================================================================= */
+
+.related-plants-section {
+  background: var(--white);
+}
+
+.related-plants-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* =============================================================================
+   RESPONSIVE — PLANT DETAIL
+============================================================================= */
+
+@media (max-width: 1080px) {
+  .c68-table-head,
+  .c68-row {
+    grid-template-columns: 1.2fr 1.2fr 0.7fr 0.9fr 0.9fr 0.7fr 0.8fr;
+  }
+
+  .c67-lb-prev { left: -50px; }
+  .c67-lb-next { right: -50px; }
+
+  .mfg-lines-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 880px) {
+  .plant-overview-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .plant-overview-media {
+    order: -1;
+  }
+
+  .quality-labs-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .c68-table-head {
+    display: none;
+  }
+
+  .c68-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+    padding: 16px;
+    border-radius: var(--radius-3xl);
+    border: 1px solid var(--line);
+    margin-bottom: 10px;
+    background: var(--white);
+  }
+
+  .c68-table {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .c68-row:last-child {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0;
+  }
+
+  .c67-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .c67-lb-prev { left: 10px; }
+  .c67-lb-next { right: 10px; }
+  .c67-lb-prev,
+  .c67-lb-next {
+    top: auto;
+    bottom: -56px;
+    transform: none;
+  }
+
+  .plant-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .related-plants-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mfg-lines-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .c67-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .c68-row {
+    grid-template-columns: 1fr;
+  }
+
+  .related-plants-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .c67-gallery-item img,
+  .c67-gallery-overlay,
+  .c67-gallery-overlay svg,
+  .c67-gallery-caption {
+    transition: none;
+  }
+}

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse all open positions at Laborate Pharmaceuticals India Ltd. Filter by department, location, or employment type. Manufacturing, QA, R&D, Regulatory, HR and more.">
+  <title>Open Positions — Careers at Laborate Pharmaceuticals India Ltd.</title>
+  <link rel="canonical" href="https://laborate.com/careers/jobs/">
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",            "item": "https://laborate.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Careers",         "item": "https://laborate.com/careers/" },
+      { "@type": "ListItem", "position": 3, "name": "Open Positions",  "item": "https://laborate.com/careers/jobs/" }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Sora (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Main stylesheet — tokens → reset → base → layout → utilities → animations → components -->
+  <link rel="stylesheet" href="../../../../theme/laborate/assets/css/main.css">
+</head>
+
+<body>
+
+  <!-- Skip navigation -->
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+
+  <!-- Scroll-progress bar -->
+  <div
+    id="progress"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Site header — no data-nav-transparent on inner pages; nav always solid -->
+  <header id="header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="logo" href="../index.html" aria-label="Laborate Pharmaceuticals — Home">
+        <img
+          src="https://laborate.com/images/logo.png"
+          alt="Laborate Pharmaceuticals India Ltd."
+          height="34"
+          width="auto"
+        >
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+
+        <li class="nav-meta">
+          <a class="logo" href="../index.html" aria-label="Laborate Pharmaceuticals — Home" tabindex="-1">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="28" width="auto">
+          </a>
+          <button class="nav-close" id="navClose" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </li>
+
+        <li class="has-children">
+          <a href="../about.html">About Us</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand About Us submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../about/why-laborate.html">Why Laborate</a></li>
+            <li><a href="../about/leadership.html">Leadership</a></li>
+            <li><a href="../about/awards.html">Awards &amp; Recognition</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../brands.html">Brands</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Brands submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../brands/elite.html">Elite</a></li>
+            <li><a href="../brands/aqualab.html">Aqualab</a></li>
+            <li><a href="../brands/labolia-beaute.html">Labolia Beauté</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../products.html">Products</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Products submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../products/catalogue.html">Product Catalogue</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../manufacturing.html">Manufacturing</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Manufacturing submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../manufacturing/facilities.html">Facilities</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../quality.html">Quality</a></li>
+
+        <li class="has-children">
+          <a href="../global.html">Global Presence</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Global Presence submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../global/map.html">Global Map</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../media.html">Media</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Media submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../media/press-releases.html">Press Releases</a></li>
+            <li><a href="../media/news.html">News</a></li>
+            <li><a href="../media/events.html">Events</a></li>
+            <li><a href="../media/social.html">Social</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../business.html">Business</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Business submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../business/contract-manufacturing.html">Contract Manufacturing</a></li>
+            <li><a href="../business/distributor.html">Distributor Partnerships</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children current-menu-ancestor">
+          <a href="../careers.html">Careers</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Careers submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li class="current-menu-item"><a href="../careers/jobs.html" aria-current="page">Open Positions</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../contact.html">Contact Us</a></li>
+
+      </ul>
+      <div class="nav-right">
+        <a href="../search.html" class="nav-search" aria-label="Search" data-nav-search>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true" tabindex="-1"></div>
+
+  <main id="main-content">
+
+    <!--
+    ============================================================
+    C-06 COMPACT HERO — Job search page
+    ============================================================
+    -->
+    <section class="hero hero--compact" aria-labelledby="page-heading">
+
+      <div class="hero-media" aria-hidden="true">
+        <img
+          class="hero-fallback"
+          src="https://img.magnific.com/free-photo/people-meeting-seminar-office-concept_53876-41665.jpg?auto=format&fit=crop&w=1600&q=80"
+          alt=""
+          role="presentation"
+          loading="eager"
+        >
+      </div>
+
+      <div class="wrap">
+
+        <!-- C-51 Breadcrumb -->
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../careers.html">Careers</a></li>
+            <li><span aria-current="page">Open Positions</span></li>
+          </ol>
+        </nav>
+
+        <span class="eyebrow hero-anim">Current Openings</span>
+        <h1 id="page-heading" class="hero-anim d1">Find Your Role at Laborate</h1>
+        <p class="sub hero-anim d2">22 open positions across manufacturing, quality, R&amp;D, regulatory, and support functions.</p>
+
+      </div><!-- /.wrap -->
+
+    </section><!-- /.hero.hero--compact -->
+
+    <!--
+    ============================================================
+    JOBS SEARCH SECTION
+    WP Config options (future PHP, documented for CAR-003):
+      careers_jobs_per_page      = 6 | 9 | 12 | 24
+      careers_grid_list_default  = "grid" | "list"
+      careers_visitor_toggle     = true | false
+      careers_show_job_codes     = true | false
+      careers_show_experience    = true | false
+      careers_show_closing_date  = true | false
+      careers_show_department    = true | false
+      careers_featured_jobs_enabled = true | false
+      careers_search_toolbar_enabled = true | false
+    ============================================================
+    -->
+    <section class="jobs-search-section" id="jobs-search" aria-label="Job listings">
+      <div class="wrap">
+
+        <!--
+          C-63 SEARCH TOOLBAR (CMP-114)
+          Desktop: single row | Tablet (880px): 2 rows | Mobile (640px): stacked
+          In production: form action → WordPress taxonomy/search archive.
+          Preview mode: controls are decorative (static page).
+
+          WP Config: careers_search_toolbar_enabled
+        -->
+        <form
+          class="search-toolbar"
+          id="jobsSearch"
+          role="search"
+          aria-label="Search job listings"
+          method="get"
+          action="jobs.html"
+        >
+
+          <div class="toolbar-field">
+            <label class="toolbar-field-label" for="filter-dept">Department</label>
+            <select class="select" id="filter-dept" name="department">
+              <option value="">All Departments</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="quality-assurance">Quality Assurance</option>
+              <option value="rd">Research &amp; Development</option>
+              <option value="regulatory">Regulatory Affairs</option>
+              <option value="medical-affairs">Medical Affairs</option>
+              <option value="hr">Human Resources</option>
+              <option value="finance">Finance</option>
+            </select>
+          </div>
+
+          <div class="toolbar-sep" aria-hidden="true"></div>
+
+          <div class="toolbar-field">
+            <label class="toolbar-field-label" for="filter-location">Location</label>
+            <select class="select" id="filter-location" name="location">
+              <option value="">All Locations</option>
+              <option value="gurugram">Gurugram</option>
+              <option value="paonta-sahib">Paonta Sahib</option>
+              <option value="panipat">Panipat</option>
+              <option value="karnal">Karnal</option>
+              <option value="remote">Remote</option>
+            </select>
+          </div>
+
+          <div class="toolbar-sep" aria-hidden="true"></div>
+
+          <div class="toolbar-field">
+            <label class="toolbar-field-label" for="filter-type">Employment Type</label>
+            <select class="select" id="filter-type" name="employment_type">
+              <option value="">All Types</option>
+              <option value="full-time">Full-time</option>
+              <option value="contract">Contract</option>
+              <option value="internship">Internship</option>
+            </select>
+          </div>
+
+          <div class="toolbar-sep" aria-hidden="true"></div>
+
+          <div class="toolbar-field toolbar-search-field">
+            <label class="toolbar-field-label" for="filter-keyword">Keyword</label>
+            <input
+              class="input"
+              type="search"
+              id="filter-keyword"
+              name="keyword"
+              placeholder="Job title, skill, or code&hellip;"
+              autocomplete="off"
+            >
+          </div>
+
+          <button class="btn btn-primary toolbar-btn" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="m21 21-4.3-4.3"/>
+            </svg>
+            Search
+          </button>
+
+        </form><!-- /.search-toolbar -->
+
+        <!--
+          RESULTS META BAR
+          Left: result count + view toggle (C-65) | Right: sort control
+          View toggle controlled by CareersJobsController.js.
+          WP Config: careers_visitor_toggle controls toggle visibility.
+        -->
+        <div class="jobs-archive-meta">
+
+          <div class="meta-bar-left">
+            <p class="result-count" aria-live="polite" aria-atomic="true">
+              Showing <strong>8</strong> open positions
+            </p>
+
+            <!--
+              C-65 VIEW TOGGLE — Grid / List
+              WP Config: careers_visitor_toggle = true | false
+              Hide this element when visitor toggle is disabled.
+            -->
+            <div class="jobs-view-toggle" role="group" aria-label="Change view layout">
+              <button
+                class="view-btn view-btn--active"
+                type="button"
+                data-view="grid"
+                aria-pressed="true"
+                aria-label="Grid view"
+                title="Grid view"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="7" height="7" rx="1"/>
+                  <rect x="14" y="3" width="7" height="7" rx="1"/>
+                  <rect x="3" y="14" width="7" height="7" rx="1"/>
+                  <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+              </button>
+              <button
+                class="view-btn"
+                type="button"
+                data-view="list"
+                aria-pressed="false"
+                aria-label="List view"
+                title="List view"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <line x1="8" y1="6" x2="21" y2="6"/>
+                  <line x1="8" y1="12" x2="21" y2="12"/>
+                  <line x1="8" y1="18" x2="21" y2="18"/>
+                  <circle cx="3.5" cy="6" r="1.5" fill="currentColor" stroke="none"/>
+                  <circle cx="3.5" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                  <circle cx="3.5" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="meta-bar-right">
+            <div class="results-sort">
+              <label for="sort-select">Sort by:</label>
+              <select class="sort-select" id="sort-select" name="sort">
+                <option value="newest" selected>Newest</option>
+                <option value="closing">Closing Soon</option>
+                <option value="dept">Department A–Z</option>
+              </select>
+            </div>
+          </div>
+
+        </div><!-- /.jobs-archive-meta -->
+
+        <!--
+          FEATURED JOBS — 2 featured positions
+          WP Config: careers_featured_jobs_enabled
+          Remove this block when disabled in WP settings.
+        -->
+        <div class="featured-jobs" aria-label="Featured opportunities">
+          <div class="featured-jobs-header">
+            <span class="featured-jobs-label">Featured Opportunities</span>
+          </div>
+
+          <div class="featured-grid" data-stagger="60">
+
+            <!-- Featured 1: Head of QA — LAB-QA-2026-001 -->
+            <article class="job-card job-card--featured reveal" data-job-code="LAB-QA-2026-001">
+              <div class="job-card-body">
+                <div class="job-card-header-row">
+                  <div style="display:flex;gap:6px;align-items:center;">
+                    <span class="tag--pill">Full-time</span>
+                    <span class="job-badge-featured" aria-label="Featured position">
+                      <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" aria-hidden="true" focusable="false">
+                        <path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8l-6.1 3.2L7 14.2 2 9.3l6.9-1z"/>
+                      </svg>
+                      Featured
+                    </span>
+                  </div>
+                  <span class="job-card-code">LAB-QA-2026-001</span>
+                </div>
+                <div class="job-card-main">
+                  <span class="job-card-dept">Quality Assurance</span>
+                  <h2 class="job-card-title">Head of Quality Assurance</h2>
+                  <div class="job-card-meta">
+                    <span class="job-meta-loc">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                      Paonta Sahib
+                    </span>
+                    <span class="job-meta-exp">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                      12–15 yrs
+                    </span>
+                    <span class="job-meta-date">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                      Closes 31 Aug 2026
+                    </span>
+                  </div>
+                </div>
+                <a class="learn" href="jobs/lab-qa-2026-018.html">
+                  View Job
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Featured 2: Director R&D — LAB-RD-2026-002 -->
+            <article class="job-card job-card--featured reveal" data-job-code="LAB-RD-2026-002">
+              <div class="job-card-body">
+                <div class="job-card-header-row">
+                  <div style="display:flex;gap:6px;align-items:center;">
+                    <span class="tag--pill">Full-time</span>
+                    <span class="job-badge-featured" aria-label="Featured position">
+                      <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" aria-hidden="true" focusable="false">
+                        <path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8l-6.1 3.2L7 14.2 2 9.3l6.9-1z"/>
+                      </svg>
+                      Featured
+                    </span>
+                  </div>
+                  <span class="job-card-code">LAB-RD-2026-002</span>
+                </div>
+                <div class="job-card-main">
+                  <span class="job-card-dept">Research &amp; Development</span>
+                  <h2 class="job-card-title">Director, Research &amp; Development</h2>
+                  <div class="job-card-meta">
+                    <span class="job-meta-loc">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                      Gurugram
+                    </span>
+                    <span class="job-meta-exp">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                      15+ yrs
+                    </span>
+                    <span class="job-meta-date">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                      Closes 15 Sep 2026
+                    </span>
+                  </div>
+                </div>
+                <a class="learn" href="jobs/lab-qa-2026-018.html">
+                  View Job
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </article>
+
+          </div><!-- /.featured-grid -->
+        </div><!-- /.featured-jobs -->
+
+        <!--
+          ALL POSITIONS — job cards with new header-row + job-card-main structure.
+          WP Config: careers_jobs_per_page controls how many cards render.
+        -->
+        <h2 class="jobs-section-head" id="all-positions">All Open Positions</h2>
+
+        <!--
+          JOBS VIEW — Grid/List container.
+          C-65 (CareersJobsController) toggles data-view attribute.
+
+          data-default-view: server default (future WP Config: careers_grid_list_default)
+          data-view:         current active view (set by JS or defaults to data-default-view)
+        -->
+        <div
+          class="jobs-view"
+          id="jobsGrid"
+          data-view="grid"
+          data-default-view="grid"
+          data-stagger="60"
+          aria-labelledby="all-positions"
+        >
+
+          <!-- Job 1: Senior QA Officer — LAB-QA-2026-018 -->
+          <article class="job-card reveal" data-job-code="LAB-QA-2026-018">
+            <div class="job-card-body">
+              <div class="job-card-header-row">
+                <span class="tag--pill">Full-time</span>
+                <span class="job-card-code">LAB-QA-2026-018</span>
+              </div>
+              <div class="job-card-main">
+                <span class="job-card-dept">Quality Assurance</span>
+                <h3 class="job-card-title">Senior Quality Assurance Officer</h3>
+                <div class="job-card-meta">
+                  <span class="job-meta-loc">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                    Paonta Sahib
+                  </span>
+                  <span class="job-meta-exp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    5–7 yrs
+                  </span>
+                  <span class="job-meta-date">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Closes 31 Aug 2026
+                  </span>
+                </div>
+              </div>
+              <a class="learn" href="jobs/lab-qa-2026-018.html">
+                View Job
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Job 2: Manufacturing Supervisor — LAB-MFG-2026-005 -->
+          <article class="job-card reveal" data-job-code="LAB-MFG-2026-005">
+            <div class="job-card-body">
+              <div class="job-card-header-row">
+                <span class="tag--pill">Full-time</span>
+                <span class="job-card-code">LAB-MFG-2026-005</span>
+              </div>
+              <div class="job-card-main">
+                <span class="job-card-dept">Manufacturing</span>
+                <h3 class="job-card-title">Manufacturing Supervisor</h3>
+                <div class="job-card-meta">
+                  <span class="job-meta-loc">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                    Panipat
+                  </span>
+                  <span class="job-meta-exp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    3–5 yrs
+                  </span>
+                  <span class="job-meta-date">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Closes 20 Aug 2026
+                  </span>
+                </div>
+              </div>
+              <a class="learn" href="jobs/lab-qa-2026-018.html">
+                View Job
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Job 3: Quality Control Analyst — LAB-QA-2026-019 -->
+          <article class="job-card reveal" data-job-code="LAB-QA-2026-019">
+            <div class="job-card-body">
+              <div class="job-card-header-row">
+                <span class="tag--pill">Full-time</span>
+                <span class="job-card-code">LAB-QA-2026-019</span>
+              </div>
+              <div class="job-card-main">
+                <span class="job-card-dept">Quality Assurance</span>
+                <h3 class="job-card-title">Quality Control Analyst</h3>
+                <div class="job-card-meta">
+                  <span class="job-meta-loc">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                    Paonta Sahib
+                  </span>
+                  <span class="job-meta-exp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    1–3 yrs
+                  </span>
+                  <span class="job-meta-date">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Closes 31 Aug 2026
+                  </span>
+                </div>
+              </div>
+              <a class="learn" href="jobs/lab-qa-2026-018.html">
+                View Job
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Job 4: Regulatory Affairs Manager — LAB-RA-2026-003 -->
+          <article class="job-card reveal" data-job-code="LAB-RA-2026-003">
+            <div class="job-card-body">
+              <div class="job-card-header-row">
+                <span class="tag--pill">Full-time</span>
+                <span class="job-card-code">LAB-RA-2026-003</span>
+              </div>
+              <div class="job-card-main">
+                <span class="job-card-dept">Regulatory Affairs</span>
+                <h3 class="job-card-title">Regulatory Affairs Manager</h3>
+                <div class="job-card-meta">
+                  <span class="job-meta-loc">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                    Gurugram
+                  </span>
+                  <span class="job-meta-exp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    7–10 yrs
+                  </span>
+                  <span class="job-meta-date">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Closes 10 Sep 2026
+                  </span>
+                </div>
+              </div>
+              <a class="learn" href="jobs/lab-qa-2026-018.html">
+                View Job
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Job 5: HR Business Partner — LAB-HR-2026-007 -->
+          <article class="job-card reveal" data-job-code="LAB-HR-2026-007">
+            <div class="job-card-body">
+              <div class="job-card-header-row">
+                <span class="tag--pill">Full-time</span>
+                <span class="job-card-code">LAB-HR-2026-007</span>
+              </div>
+              <div class="job-card-main">
+                <span class="job-card-dept">Human Resources</span>
+                <h3 class="job-card-title">HR Business Partner</h3>
+                <div class="job-card-meta">
+                  <span class="job-meta-loc">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                    Gurugram
+                  </span>
+                  <span class="job-meta-exp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    5–8 yrs
+                  </span>
+                  <span class="job-meta-date">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Closes 25 Aug 2026
+                  </span>
+                </div>
+              </div>
+              <a class="learn" href="jobs/lab-qa-2026-018.html">
+                View Job
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Job 6: Medical Affairs Associate — LAB-MA-2026-004 -->
+          <article class="job-card reveal" data-job-code="LAB-MA-2026-004">
+            <div class="job-card-body">
+              <div class="job-card-header-row">
+                <span class="tag--pill">Contract</span>
+                <span class="job-card-code">LAB-MA-2026-004</span>
+              </div>
+              <div class="job-card-main">
+                <span class="job-card-dept">Medical Affairs</span>
+                <h3 class="job-card-title">Medical Affairs Associate</h3>
+                <div class="job-card-meta">
+                  <span class="job-meta-loc">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                    Remote
+                  </span>
+                  <span class="job-meta-exp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    2–4 yrs
+                  </span>
+                  <span class="job-meta-date">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    Closes 5 Sep 2026
+                  </span>
+                </div>
+              </div>
+              <a class="learn" href="jobs/lab-qa-2026-018.html">
+                View Job
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div><!-- /.jobs-view -->
+
+        <!--
+          C-58 EMPTY STATE — shown when search returns 0 results.
+          In production: toggled by JS or server-side (WP_Query found_posts = 0).
+        -->
+        <div class="empty-state" id="noResults" hidden aria-live="polite">
+          <div class="empty-state-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="m21 21-4.3-4.3M8 11h6M11 8v6"/>
+            </svg>
+          </div>
+          <h2 class="empty-state-title">No roles match your search</h2>
+          <p class="empty-state-text">Try adjusting your department, location, or keyword filters. Or browse all open positions by clearing your search.</p>
+          <button class="btn btn-primary" type="button" onclick="document.getElementById('jobsSearch').reset()">
+            Clear Filters
+          </button>
+        </div>
+
+        <!-- C-54 Pagination — Page 1 of 3 -->
+        <nav class="pagination-wrap" aria-label="Pagination">
+          <ol class="pagination" role="list">
+
+            <li class="pagination__item pagination__item--prev pagination__item--disabled">
+              <span class="pagination__btn" aria-label="Previous page" aria-disabled="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+                Prev
+              </span>
+            </li>
+
+            <li class="pagination__item pagination__item--active">
+              <span class="pagination__num" aria-current="page" aria-label="Page 1, current">1</span>
+            </li>
+
+            <li class="pagination__item">
+              <a class="pagination__num" href="?page=2" aria-label="Page 2">2</a>
+            </li>
+
+            <li class="pagination__item">
+              <a class="pagination__num" href="?page=3" aria-label="Page 3">3</a>
+            </li>
+
+            <li class="pagination__item pagination__item--next">
+              <a class="pagination__btn" href="?page=2" aria-label="Next page">
+                Next
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </li>
+
+          </ol>
+        </nav><!-- /.pagination-wrap -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.jobs-search-section -->
+
+    <!--
+    ============================================================
+    C-44 — Contact Band
+    ============================================================
+    -->
+    <section class="contact-band" id="jobs-contact" aria-labelledby="jobs-contact-heading">
+      <div class="wrap contact-inner reveal">
+        <div class="contact-left">
+          <div class="c-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <h2 id="jobs-contact-heading">Don&rsquo;t see the right role?</h2>
+            <p>Send your CV to our HR team and we&rsquo;ll keep your profile on file for future opportunities that match your skills.</p>
+          </div>
+        </div>
+        <a href="../contact.html" class="btn btn-light">Contact HR Team <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+  </main><!-- /#main-content -->
+
+  <!--
+  ============================================================
+  C-46 — Footer
+  ============================================================
+  -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+
+        <div class="foot-brand">
+          <a href="../index.html" aria-label="Laborate Pharmaceuticals — Home">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="32" loading="lazy">
+          </a>
+          <p>A global pharmaceutical manufacturing and healthcare solutions company, delivering quality medicines from research to patients worldwide since 1985.</p>
+          <div class="foot-contact">
+            <span>E-11, Industrial Area, Panipat-132103, India</span>
+            <a href="mailto:info@laborate.com">info@laborate.com</a>
+            <a href="tel:+911803508200">+91-180-3508200</a>
+          </div>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/laborate-pharmaceuticals-india-limited/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4zM8 8h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.74 1.85-2.74 3.77V24H8z"/></svg></a>
+            <a href="https://www.facebook.com/laborate.india.ltd/" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.75-1.6 1.5V12h2.7l-.43 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+            <a href="https://www.instagram.com/laborate.india.ltd/?hl=en" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.3.07 1.69.07 4.9s0 3.6-.07 4.9c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.3.06-1.69.07-4.9.07s-3.6 0-4.9-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.8 2.2 12 2.2zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38zm6.97-11.4a1.58 1.58 0 1 0 0 3.15 1.58 1.58 0 0 0 0-3.15z"/></svg></a>
+          </div>
+        </div>
+
+        <div class="foot-col">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="../about.html">Company Overview</a></li>
+            <li><a href="../about/leadership.html">Leadership</a></li>
+            <li><a href="../about/awards.html">Awards &amp; Recognition</a></li>
+            <li><a href="../about/why-laborate.html">Why Laborate</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Brands</h4>
+          <ul>
+            <li><a href="../brands.html">Elite</a></li>
+            <li><a href="../brands.html">Aqualab</a></li>
+            <li><a href="../brands.html">OTC Health</a></li>
+            <li><a href="../business/contract-manufacturing.html">CDMO</a></li>
+            <li><a href="../global.html">Exports</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="../products/catalogue.html">Product Catalogue</a></li>
+            <li><a href="../products.html">Products Overview</a></li>
+            <li><a href="../products/catalogue.html">Search Products</a></li>
+            <li><a href="../contact.html?type=product#ctc-form">Product Enquiry</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../manufacturing.html">Manufacturing</a></li>
+            <li><a href="../quality.html">Quality</a></li>
+            <li><a href="../global.html">Global</a></li>
+            <li><a href="../careers.html">Careers</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /.foot-top -->
+
+      <div class="foot-bottom">
+        <p>&copy; 2026 Laborate Pharmaceuticals India Ltd. All rights reserved.</p>
+        <div class="legal">
+          <a href="../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../legal/terms-and-conditions.html">Terms &amp; Conditions</a>
+          <a href="../legal/cookie-policy.html">Cookie Policy</a>
+        </div>
+        <div class="vendor-credit">
+          Powered by
+          <a href="https://www.oktoberry.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 116 167" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oktoberry">
+              <g id="berry" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <g><path d="m531.21 275.21c25.098 14.923 256.99 142.47 322.2 181.67-26.355 13.024-121.46 67.697-170.76 93.167-30.819-48.883-158.28-256.83-170.65-275.59 13.023 0.15475 12.286 0.42988 19.208 0.75503z" fill="#0c4269"/><path d="m170.65 462.99c58.347 27.536 135.66 69.198 170.68 87.195-4.2644 6.11-165.82 243.55-170.67 249.83-0.0262-9.9814-0.0508-329.71-0.0119-337.03z" fill="#1988d7"/><path d="m853.39 456.88c0.52027 47.958 0.35951 305.13-0.0146 343.12-4.0215-5.8717-170.71-249.96-170.71-249.96 42.689-22.387 138.65-77.425 170.73-93.159z" fill="#062337"/><path d="m512.05 1016.9c0.0744-11.808-0.5955-115.5-0.0492-172.85 60.841-7.7268 329.53-42.472 341.38-44.039 0 0-336.25 213.97-341.33 216.88z"/><path d="m512.01 844.04c-0.14148 57.245 0.16143 163.77 0.0427 172.86-46.625-25.866-303.75-194.75-341.4-216.89 54.722 7.007 221.54 21.896 341.35 44.033z" fill="#0a3452"/><path d="m170.67 462.99c71.769-44.473 208.19-126.17 321.24-187.35 5.8745-1.1628 13.439-1.0717 20.092-1.1948-54.813 86.485-158.39 256.45-170.67 275.71" fill="#5bafec"/></g>
+                <g><path d="m512 274.45c6.4257 6.6504 167.58 270.74 170.66 275.58-3.6502-0.0455-339.39 0.14376-341.33 0.13047 1.0021-1.4787 164.27-267.37 170.66-275.71z" fill="#1365a0"/><path d="m341.33 550.17c3.0641 0.0176 323.33-0.41843 341.34-0.13493-6.3066 10.5-170.22 293.28-170.67 294.02-0.71653-1.1746-162.38-278.35-170.67-293.89z" fill="#0b3d60"/><path d="m341.33 550.17c6.1989 10.382 149.02 256.32 170.67 293.87-58.996-10.129-317.82-40.079-341.33-44.044 4.3815-5.9158 163.89-240.5 170.67-249.83z" fill="#115c92"/><path d="m512 844.05c2.2022-4.7744 167.81-289.45 170.67-294.02 4.815 7.0103 165.28 241.73 170.71 249.98-13.144 1.8281-315 41.036-341.38 44.042z" fill="#03111b"/></g>
+              </g>
+              <g id="leaves" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <path d="m542.13 274.88c-6.7035 0.68517-17.083 0.23972-24.825-0.32194 48.528-83.188 208.91-166.17 330.83-221.53-31.735 150.69-165.75 212.4-306 221.85z" fill="#224f38"/>
+                <path d="m517.3 274.55c-2.8104-0.0709-3.6594-0.094-6.5029-0.0649 23.129-168.51 180.79-245.37 338.08-221.15-13.701 6.8053-223.19 91.913-331.57 221.21z" fill="#83b149"/>
+                <path d="m512 274.45c-3.2163 0.0569-7.8881 0.19224-10.931 0.2638-27.372-115.65-76.282-179.9-191.71-265.8 45.036 7.9968 89.138 20.814 125.5 49.995 60.193 48.767 98.875 138.97 77.137 215.54z" fill="#264f3b"/>
+                <path d="m309.38 8.9225c14.552 10.351 28.399 20.55 42.064 30.989 63.487 48.502 125.69 124.46 149.64 234.81-1.735 0.0622-2.5166 0.11893-4.344 0.25622-25.293-59.867-56.832-96.438-80.395-111.1-27.886-17.346-55.033-28.8-76.595-54.481-34.588-41.195-35.595-94.03-30.364-100.48z" fill="#a3ca46"/>
+              </g>
+            </svg>
+            Oktoberry Systems
+          </a>
+        </div>
+      </div><!-- /.foot-bottom -->
+
+    </div><!-- /.wrap -->
+  </footer>
+
+  <!-- ES module entry point -->
+  <script type="module" src="../../../../theme/laborate/assets/js/app.js"></script>
+
+</body>
+</html>

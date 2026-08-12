@@ -1,0 +1,73 @@
+/* =============================================================================
+   SECTION: QUALITY & CERTIFICATIONS
+   Blue gradient section: centred quote block + cert card grid.
+   Cert card components (.cert-grid, .cert) live in cards.css.
+   Source: assets/html/source/homepage-approved-v1.html (lines 1315–1419)
+============================================================================= */
+
+/* =============================================================================
+   SECTION SHELL
+============================================================================= */
+
+.quality {
+  background: var(--grad-quality);
+  color: #fff;
+  overflow: hidden;
+  position: relative
+}
+
+.quality::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .1), transparent 30%),
+    radial-gradient(circle at 88% 80%, rgba(255, 255, 255, .08), transparent 35%)
+}
+
+.quality .wrap {
+  position: relative;
+  z-index: 2
+}
+
+/* =============================================================================
+   QUOTE BLOCK
+============================================================================= */
+
+.q-quote {
+  text-align: center;
+  max-width: var(--container-quality-quote);
+  margin: 0 auto 56px
+}
+
+.q-quote .eyebrow {
+  color: var(--light-blue);
+  justify-content: center
+}
+
+/* Eyebrow line overrides white for dark section */
+.q-quote .eyebrow::before {
+  background: #fff
+}
+
+.q-quote blockquote {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.8vw, 2.7rem);
+  line-height: 1.18;
+  letter-spacing: -.02em
+}
+
+.q-quote blockquote .accent {
+  color: var(--light-blue)
+}
+
+.q-quote cite {
+  display: block;
+  margin-top: 18px;
+  font-style: normal;
+  font-size: .84rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #bcd6f1
+}

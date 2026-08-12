@@ -1,0 +1,1875 @@
+/*
+ * brand-detail-page.css
+ * Brand Detail Page — Parent Brand & Sub-Brand Template
+ * CSS prefix: bde-* (brand detail)
+ *
+ * Loaded after main.css and brands-page.css.
+ * Reuses: .abt-stats-strip (about-page.css via main.css), .brd-cat-* + .brd-res-* (brands-page.css)
+ * New components: C-111 through C-119
+ *
+ * BRAND-002-P1 · BRAND-002-P1-R1 · BRAND-002-P1-R2 · BRAND-002-P1-R3
+ */
+
+/* =====================================================================
+   UTILITY — hide sections toggled off by CMS
+   ===================================================================== */
+
+[data-section-enabled="false"] {
+  display: none;
+}
+
+/* =====================================================================
+   C-111 — BRAND DETAIL HERO
+   Two-column split: content left (52fr) + marketing slider right (48fr)
+   Brand accent colour injected via style="--brd-accent:#HEX" on <main>
+   ===================================================================== */
+
+.hero--brand-detail {
+  min-height: 580px;
+  padding-top: 24px;
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.hero--brand-detail .wrap {
+  padding-top: 100px;
+  padding-bottom: 64px;
+}
+
+.bde-hero-grid {
+  display: grid;
+  grid-template-columns: 40fr 60fr;
+  gap: 52px;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Left column — brand identity + CTAs */
+.bde-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.bde-hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.bde-brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.bde-brand-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 10px;
+}
+
+.bde-brand-logo-initials {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--white);
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.bde-brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bde-brand-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brd-accent, var(--blue));
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(var(--brd-accent, var(--blue)), 0.3);
+  padding: 3px 10px 3px 8px;
+  border-radius: 100px;
+}
+
+.bde-brand-type-badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brd-accent, var(--blue));
+  flex-shrink: 0;
+}
+
+.bde-brand-since {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.bde-hero-content h1 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: -0.03em;
+}
+
+.bde-hero-tagline {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.bde-hero-content .sub {
+  font-size: 0.97rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+  margin-bottom: 28px;
+  max-width: 46ch;
+}
+
+.bde-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* =====================================================================
+   C-111b — MARKETING BANNER SLIDER
+   Positioned in the right column of bde-hero-grid
+   ===================================================================== */
+
+.bde-slider-wrap {
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--navy);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.36),
+    0 0 72px rgba(var(--brd-accent-rgb, 16, 98, 172), 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.bde-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bde-slider-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Accessible live region — visually hidden */
+.bde-slider-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.bde-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.bde-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bde-slide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.bde-slide-gradient {
+  position: absolute;
+  inset: 0;
+}
+
+/* Gradient-only slide fallback (for template rendering without images) */
+.bde-slide--campaign .bde-slide-gradient {
+  background: linear-gradient(135deg, #0c3b7c 0%, #1062AC 50%, #1a7fd4 100%);
+}
+
+.bde-slide--award .bde-slide-gradient {
+  background: linear-gradient(135deg, #78350f 0%, #c08a20 50%, #d4a832 100%);
+}
+
+.bde-slide--event .bde-slide-gradient {
+  background: linear-gradient(135deg, #0e3d2f 0%, #0d6b4f 50%, #10845f 100%);
+}
+
+.bde-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.12) 55%, transparent 100%);
+}
+
+.bde-slide-content {
+  position: relative;
+  z-index: 2;
+  padding: 22px 24px 20px;
+  color: var(--white);
+}
+
+.bde-slide-type {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 3px 9px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+}
+
+.bde-slide-headline {
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+  font-family: var(--font-heading);
+  line-height: 1.25;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
+.bde-slide-desc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.bde-slide-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 7px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background var(--t-fast), border-color var(--t-fast);
+  backdrop-filter: blur(6px);
+}
+
+.bde-slide-cta:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Slider controls — nav button row + dots */
+.bde-slider-ui {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 3;
+}
+
+.bde-slider-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.32);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background var(--t-fast), border-color var(--t-fast);
+  flex-shrink: 0;
+}
+
+.bde-slider-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.bde-slider-btn:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+.bde-slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bde-slider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--t-fast), width var(--t-fast);
+}
+
+.bde-slider-dot.is-active {
+  background: var(--white);
+  border-color: var(--white);
+  width: 18px;
+  border-radius: 3px;
+}
+
+.bde-slider-dot:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* =====================================================================
+   SECTION 2 — BRAND STATS STRIP (scoped overrides for abt-stats-strip)
+   ===================================================================== */
+
+[data-section="bde-stats"] {
+  margin-top: -52px;
+}
+
+[data-section="bde-stats"] .abt-stat-icon {
+  background: rgba(var(--brd-accent-rgb, 16, 98, 172), 0.12);
+  border: 1px solid rgba(var(--brd-accent-rgb, 16, 98, 172), 0.2);
+}
+
+/* =====================================================================
+   C-114 — BRAND STORY BLOCK
+   Extends about-grid (about-page.css). Scoped overrides only.
+   ===================================================================== */
+
+[data-section="bde-story"] .about-grid {
+  gap: 60px;
+}
+
+.bde-story-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bde-brand-promise {
+  margin: 24px 0;
+  padding: 20px 22px;
+  border-left: 3px solid var(--brd-accent, var(--blue));
+  background: rgba(16, 98, 172, 0.04);
+  border-radius: 0 12px 12px 0;
+}
+
+.bde-brand-promise p {
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.bde-brand-values {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+}
+
+.bde-brand-values li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.bde-brand-values li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brd-accent, var(--blue));
+  flex-shrink: 0;
+}
+
+.bde-story-image-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--bg);
+}
+
+.bde-story-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.bde-story-since-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: var(--shadow);
+}
+
+.bde-story-since-year {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  color: var(--brd-accent, var(--blue));
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.bde-story-since-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* =====================================================================
+   C-112 — BRAND HIERARCHY VISUALIZER
+   Visual tree: Group → Parent Brand (current) → Sub-brands
+   Or: Parent Brand → Sub-Brand (current)
+   ===================================================================== */
+
+.bde-hierarchy-section {
+  background: #F7FAFD;
+}
+
+.bde-hierarchy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-top: 52px;
+}
+
+.bde-hier-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Vertical connector line between rows */
+.bde-hier-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.06));
+  position: relative;
+}
+
+/* Rounded terminal dot — replaces flowchart-style arrow */
+.bde-hier-line::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* Base node card */
+.bde-hier-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  min-width: 140px;
+  text-align: center;
+}
+
+.bde-hier-node:hover {
+  border-color: var(--brd-accent, var(--blue));
+  box-shadow: var(--shadow-sm);
+}
+
+/* Group reference node (top) */
+.bde-hier-node--group {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  border-style: dashed;
+  border-color: var(--line);
+  padding: 10px 18px;
+  min-width: 120px;
+}
+
+.bde-hier-node--group:hover {
+  color: var(--blue);
+  border-style: solid;
+}
+
+/* Current brand node (highlighted — visually dominant) */
+.bde-hier-node--current {
+  border-color: var(--brd-accent, var(--blue));
+  border-width: 3px;
+  background: rgba(16, 98, 172, 0.06);
+  box-shadow: 0 0 0 8px rgba(16, 98, 172, 0.08), 0 8px 32px rgba(16, 98, 172, 0.14), var(--shadow-sm);
+  padding: 28px 38px;
+  min-width: 220px;
+  cursor: default;
+  gap: 10px;
+}
+
+.bde-hier-current-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  font-family: var(--font-heading);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bde-hier-current-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.bde-hier-node-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.bde-hier-node--current .bde-hier-node-name {
+  color: var(--brd-accent, var(--blue));
+}
+
+.bde-hier-node-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Sub-brand children row */
+.bde-hier-row--children {
+  position: relative;
+}
+
+/* Horizontal connector above children — softer, thinner */
+.bde-hier-row--children::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 80px);
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, transparent);
+}
+
+.bde-hier-node--sub {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 12px 16px;
+  min-width: 120px;
+  border-color: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--muted);
+}
+
+.bde-hier-node--sub .bde-hier-node-name {
+  color: var(--text);
+  font-size: 0.82rem;
+}
+
+.bde-hier-node--sub:hover {
+  border-color: var(--brd-accent, var(--blue));
+  background: var(--white);
+  color: var(--text);
+}
+
+/* Future brand node (dimmed, not a link) */
+.bde-hier-node--future {
+  opacity: 0.4;
+  cursor: not-allowed;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--muted);
+  border-style: dashed;
+}
+
+.bde-hier-node--future:hover {
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+/* =====================================================================
+   C-113 — DOSAGE FORM CARD
+   Grid of pharmaceutical dosage form tiles
+   ===================================================================== */
+
+.bde-dosage-section {
+  background: #FAFBFC;
+}
+
+.bde-dosage-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-top: 48px;
+}
+
+.bde-dosage-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 22px 12px 18px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+  text-align: center;
+}
+
+.bde-dosage-card:hover {
+  border-color: var(--brd-accent, var(--blue));
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.bde-dosage-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(16, 98, 172, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--t-fast);
+}
+
+.bde-dosage-card:hover .bde-dosage-icon {
+  background: rgba(16, 98, 172, 0.14);
+}
+
+.bde-dosage-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--brd-accent, var(--blue));
+}
+
+.bde-dosage-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.bde-dosage-count {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* =====================================================================
+   C-115 — FEATURED PRODUCT CARD (brand-detail context)
+   ===================================================================== */
+
+.bde-products-section {
+  background: #F8FBFE;
+}
+
+.bde-products-scroll {
+  margin-top: 48px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  padding-bottom: 8px;
+}
+
+.bde-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 16px;
+  min-width: max-content;
+  width: 100%;
+}
+
+.bde-product-card {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+
+.bde-product-card:hover {
+  border-color: var(--brd-accent, var(--blue));
+  box-shadow: var(--shadow-sm);
+}
+
+.bde-product-img {
+  height: 160px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bde-product-img img {
+  max-width: 100%;
+  max-height: 140px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  padding: 12px;
+}
+
+.bde-product-initials {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--brd-accent, var(--blue));
+  font-family: var(--font-heading);
+  opacity: 0.3;
+}
+
+.bde-product-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.bde-product-cat {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brd-accent, var(--blue));
+}
+
+.bde-product-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-heading);
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+.bde-product-form {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.bde-product-cta {
+  margin-top: auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--brd-accent, var(--blue));
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bde-product-cta:hover {
+  text-decoration: underline;
+}
+
+.bde-products-footer {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+}
+
+/* =====================================================================
+   C-116 — QUALITY BADGE CARD
+   Manufacturing & Quality compact cards
+   ===================================================================== */
+
+.bde-quality-section {
+  background: var(--white);
+}
+
+.bde-quality-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.bde-quality-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 22px;
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.bde-quality-card:hover {
+  border-color: var(--brd-accent, var(--blue));
+  box-shadow: var(--shadow-sm);
+}
+
+.bde-quality-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(16, 98, 172, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bde-quality-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--brd-accent, var(--blue));
+}
+
+.bde-quality-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.bde-quality-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.bde-quality-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--brd-accent, var(--blue));
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* =====================================================================
+   C-117 — OFFICIAL WEBSITE CARD (conditional — hidden when no website)
+   ===================================================================== */
+
+.bde-website-section {
+  background: var(--navy);
+}
+
+.bde-website-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+  padding: 52px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 32px;
+}
+
+.bde-website-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.bde-website-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  font-family: var(--font-heading);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bde-website-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.bde-website-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.bde-website-url {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bde-website-desc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.65;
+  max-width: 55ch;
+}
+
+.bde-website-ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.bde-website-ctas .btn {
+  white-space: nowrap;
+  min-width: 200px;
+  text-align: center;
+  justify-content: center;
+}
+
+/* =====================================================================
+   C-118 — RELATED BRAND CARD
+   Sibling brands / sub-brands from the same parent
+   ===================================================================== */
+
+.bde-related-section {
+  background: var(--white);
+}
+
+.bde-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.bde-related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.bde-related-card:hover {
+  border-color: var(--brd-accent, var(--blue));
+  box-shadow: var(--shadow);
+}
+
+.bde-related-card-accent {
+  height: 4px;
+  background: var(--card-accent, var(--brd-accent, var(--blue)));
+}
+
+.bde-related-card-body {
+  padding: 22px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.bde-related-logo {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 6px;
+}
+
+.bde-related-logo img {
+  max-width: 120px;
+  max-height: 36px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.bde-related-logo-initials {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--card-accent, var(--brd-accent, var(--blue)));
+  font-family: var(--font-heading);
+}
+
+.bde-related-type {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.bde-related-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.bde-related-tagline {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.bde-related-card-footer {
+  padding: 14px 22px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bde-related-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--card-accent, var(--brd-accent, var(--blue)));
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bde-related-products {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* =====================================================================
+   RESPONSIVE — Brand Detail Page
+   ===================================================================== */
+
+@media (max-width: 1024px) {
+  .bde-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero--brand-detail .wrap {
+    padding-top: 88px;
+  }
+
+  .bde-hero-content .sub {
+    max-width: 100%;
+  }
+
+  .bde-hierarchy {
+    overflow-x: auto;
+    align-items: flex-start;
+    padding-bottom: 8px;
+  }
+
+  .bde-dosage-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .bde-quality-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bde-website-card {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .bde-website-ctas {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero--brand-detail {
+    min-height: auto;
+  }
+
+  .bde-products-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+
+  .bde-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bde-hier-row--children {
+    gap: 12px;
+  }
+
+  .bde-dosage-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .bde-hero-grid {
+    gap: 24px;
+  }
+
+  .bde-hero-ctas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bde-brand-values {
+    grid-template-columns: 1fr;
+  }
+
+  .bde-dosage-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .bde-quality-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bde-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bde-website-card {
+    padding: 32px 24px;
+  }
+
+  .bde-products-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+/* =====================================================================
+   REDUCED MOTION
+   ===================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .bde-slide {
+    transition: none;
+  }
+
+  .bde-dosage-card,
+  .bde-related-card,
+  .bde-quality-card,
+  .bde-product-card,
+  .bde-hier-node {
+    transition: none;
+  }
+}
+
+/* =====================================================================
+   C-119 — PRODUCT BRAND CARD
+   Distinct from Featured Products (actual SKUs). These are brand
+   marketing identities — each links directly to the flagship product
+   detail page, NOT to a filtered catalogue.
+   BRAND-002-P1-R1
+   ===================================================================== */
+
+.bde-pbrand-section {
+  background: var(--white);
+}
+
+.bde-pbrand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.bde-pbrand-card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 240ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 240ms ease,
+              box-shadow 240ms ease;
+}
+
+.bde-pbrand-card:hover,
+.bde-pbrand-card:has(.bde-pbrand-cta:focus-visible) {
+  transform: translateY(-6px);
+  border-color: var(--card-accent, var(--brd-accent, var(--blue)));
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.11),
+              0 0 0 1.5px var(--card-accent, var(--brd-accent, var(--blue)));
+}
+
+/* Coloured accent stripe at top */
+.bde-pbrand-accent {
+  height: 3px;
+  background: var(--card-accent, var(--brd-accent, var(--blue)));
+  flex-shrink: 0;
+  transition: filter 240ms ease;
+}
+
+.bde-pbrand-card:hover .bde-pbrand-accent,
+.bde-pbrand-card:has(.bde-pbrand-cta:focus-visible) .bde-pbrand-accent {
+  filter: brightness(1.15);
+}
+
+.bde-pbrand-body {
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+/* Logo + optional badge row */
+.bde-pbrand-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+/*
+ * Universal logo wrapper — supports any logo aspect ratio.
+ * [CMS: product_brand_logo — when set, <img> renders inside; when empty, .bde-pbrand-initials shown]
+ * [CMS: logo_orientation = auto|square|portrait|landscape → adds modifier class]
+ */
+.bde-pbrand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 240ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.bde-pbrand-card:hover .bde-pbrand-logo,
+.bde-pbrand-card:has(.bde-pbrand-cta:focus-visible) .bde-pbrand-logo {
+  transform: scale(1.04);
+}
+
+.bde-pbrand-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  padding: 6px;
+}
+
+.bde-pbrand-logo--landscape {
+  width: 80px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.bde-pbrand-initials {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--card-accent, var(--brd-accent, var(--blue)));
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+}
+
+/* Optional marketing badge (Bestseller / New Range / Flagship / etc.) */
+.bde-pbrand-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--card-accent, var(--brd-accent, var(--blue)));
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.bde-pbrand-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.bde-pbrand-parent {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.bde-pbrand-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+  margin-top: 2px;
+}
+
+.bde-pbrand-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--card-accent, var(--brd-accent, var(--blue)));
+  text-decoration: none;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.bde-pbrand-cta:hover {
+  text-decoration: underline;
+}
+
+/* Arrow shifts right on card hover — keep inline-block for transform */
+.bde-pbrand-cta span[aria-hidden] {
+  display: inline-block;
+  transition: transform 240ms ease;
+}
+
+.bde-pbrand-card:hover .bde-pbrand-cta span[aria-hidden],
+.bde-pbrand-card:has(.bde-pbrand-cta:focus-visible) .bde-pbrand-cta span[aria-hidden] {
+  transform: translateX(3px);
+}
+
+/* Focus-visible on the CTA link itself */
+.bde-pbrand-cta:focus-visible {
+  outline: 2px solid var(--card-accent, var(--brd-accent, var(--blue)));
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* =====================================================================
+   C-120 — BRAND CTA BAND (replaces generic contact-band for brand pages)
+   Dark navy section with 2-col layout: story + bullets left, CTAs right.
+   BRAND-002-P1-R1
+   ===================================================================== */
+
+.bde-cta-band {
+  background: linear-gradient(135deg, #114E96 0%, #0A376A 100%);
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px 32px 0 0;
+  margin-top: 64px;
+  box-shadow: 0 -8px 48px rgba(0, 0, 0, 0.14);
+}
+
+/* Subtle dot-grid texture */
+.bde-cta-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.bde-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: start;
+  padding: 96px 0;
+}
+
+.bde-cta-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bde-cta-content .eyebrow {
+  color: var(--brd-accent, var(--blue));
+  margin-bottom: 12px;
+}
+
+.bde-cta-content h2 {
+  color: var(--white);
+  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.bde-cta-tagline {
+  font-size: 0.97rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.7;
+  max-width: 54ch;
+  margin-bottom: 32px;
+}
+
+.bde-cta-services {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 32px;
+}
+
+.bde-cta-services li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.bde-cta-services li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brd-accent, var(--blue));
+  flex-shrink: 0;
+}
+
+.bde-cta-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 230px;
+  padding-top: 76px;
+}
+
+.bde-cta-panel .btn {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+/* Universal logo wrapper — used across brand-detail page
+   [CMS: logo_orientation = auto|square|portrait|landscape]
+   auto: CSS uses object-fit:contain, adapts to actual image dimensions.
+   ===================================================================== */
+
+.bde-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+}
+
+.bde-logo-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.bde-logo-wrap--square { aspect-ratio: 1 / 1; }
+.bde-logo-wrap--landscape { object-position: left center; }
+.bde-logo-wrap--portrait { aspect-ratio: 2 / 3; }
+
+/* =====================================================================
+   RESPONSIVE — R1 additions
+   ===================================================================== */
+
+@media (max-width: 1024px) {
+  .bde-pbrand-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bde-cta-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 0;
+  }
+
+  .bde-cta-panel {
+    padding-top: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .bde-cta-panel .btn {
+    width: auto;
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .bde-pbrand-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bde-cta-services {
+    grid-template-columns: 1fr;
+  }
+
+  .bde-cta-panel {
+    flex-direction: column;
+  }
+
+  .bde-cta-panel .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bde-pbrand-card,
+  .bde-pbrand-accent,
+  .bde-pbrand-logo,
+  .bde-pbrand-cta span[aria-hidden] {
+    transition: none;
+  }
+
+  .bde-pbrand-card:hover,
+  .bde-pbrand-card:has(.bde-pbrand-cta:focus-visible) {
+    transform: none;
+  }
+
+  .bde-pbrand-card:hover .bde-pbrand-logo,
+  .bde-pbrand-card:has(.bde-pbrand-cta:focus-visible) .bde-pbrand-logo {
+    transform: none;
+  }
+}
+
+/* =====================================================================
+   C-120 CONTACT BLOCK — Brand contact integrated into CTA band
+   Lightweight contact channel. Only populated CMS fields are rendered.
+   [CMS: brand_email | medical_email | sales_email | phone | contact_person]
+   BRAND-002-P1-R2
+   ===================================================================== */
+
+.bde-cta-contact {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bde-cta-contact-heading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brd-accent, var(--blue));
+  margin-bottom: 6px;
+}
+
+.bde-cta-contact-sub {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.bde-cta-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bde-cta-contact-link {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-decoration: none;
+  transition: opacity var(--t-fast);
+}
+
+.bde-cta-contact-link:hover {
+  opacity: 0.85;
+}
+
+.bde-cta-contact-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.bde-cta-contact-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.bde-cta-contact-value {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =====================================================================
+   SECTION BACKGROUND RHYTHM — R2 additions
+   Downloads section (brd-res-section reused from brands-page.css)
+   scoped to brand-detail context via data-section attribute.
+   ===================================================================== */
+
+[data-section="bde-resources"].brd-res-section {
+  background: #FAFBFC;
+}
+
+/* =====================================================================
+   RESPONSIVE — R2 additions
+   ===================================================================== */
+
+@media (max-width: 1024px) {
+  .bde-cta-band {
+    border-radius: 24px 24px 0 0;
+    margin-top: 48px;
+  }
+
+  .bde-cta-inner {
+    padding: 72px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .bde-cta-band {
+    border-radius: 16px 16px 0 0;
+    margin-top: 32px;
+  }
+
+  .bde-cta-inner {
+    padding: 56px 0;
+  }
+
+  .bde-cta-contact {
+    margin-top: 28px;
+    padding-top: 24px;
+  }
+}
+
+/* =====================================================================
+   C-111 R3 — HERO COMPOSITION UNIFICATION (BRAND-002-P1-R3)
+   CSS-only. No HTML / JS / CMS changes.
+   Transforms the two-column hero into one cohesive premium surface.
+   All glow opacities ≤ 8%. No animations added.
+   WordPress: inject --brd-accent-rgb alongside --brd-accent on <main>
+   e.g. style="--brd-accent:#1062AC;--brd-accent-rgb:16,98,172"
+   ===================================================================== */
+
+/* Stacking context: atmospheric layers sit between .hero-media and .wrap */
+.hero--brand-detail {
+  position: relative;
+}
+
+/* Abstract pharmaceutical lighting: large, soft radial gradients perceived
+   as ambient light rather than graphics. Brand accent near slider (≤7%),
+   faint warm highlight above content column (≤3%), high-key studio source
+   at upper-right — a common visual convention in pharma photography (≤6%). */
+.hero--brand-detail::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 54% 68% at 76% 46%, rgba(var(--brd-accent-rgb, 16, 98, 172), 0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 42% 52% at 21% 56%, rgba(255, 255, 255, 0.02) 0%, transparent 62%),
+    radial-gradient(ellipse 28% 24% at 87% 10%, rgba(26, 127, 212, 0.055) 0%, transparent 56%);
+}
+
+/* Peripheral vignette: darkens outer edges, draws attention inward */
+.hero--brand-detail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 130% 110% at 56% 42%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+}
+
+/* .wrap floats above the atmosphere layers */
+.hero--brand-detail > .wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* Shared ambient surface: one light source from the slider bleeds softly
+   across the column gap — both columns share the same perceived illumination.
+   z-index: 0 ensures both grid children (z-index: 1) paint above this layer. */
+.bde-hero-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 68% 90% at 73% 50%, rgba(var(--brd-accent-rgb, 16, 98, 172), 0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 55% at 36% 50%, rgba(var(--brd-accent-rgb, 16, 98, 172), 0.025) 0%, transparent 65%);
+}
+
+/* Light bridge: accent energy in the column gap converts the hard boundary
+   into a soft gradient relationship. filter:blur spreads it naturally.    */
+.bde-hero-grid::after {
+  content: '';
+  position: absolute;
+  top: 6%;
+  bottom: 6%;
+  left: 48%;
+  width: 7%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(var(--brd-accent-rgb, 16, 98, 172), 0.05) 0%,
+    transparent 100%
+  );
+  filter: blur(20px);
+}
+
+/* Left column ambient light: balances visual weight against the slider card.
+   z-index: -1 within the .bde-hero-content stacking context — behind all
+   text elements but above the shared grid glow layers.                    */
+.bde-hero-content::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -24px;
+  right: 0;
+  bottom: -20px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 44% at 37% 22%, rgba(255, 255, 255, 0.025) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 32% at 22% 82%, rgba(var(--brd-accent-rgb, 16, 98, 172), 0.04) 0%, transparent 65%);
+}

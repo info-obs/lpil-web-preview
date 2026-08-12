@@ -1,0 +1,471 @@
+/* =============================================================================
+   CAREERS LANDING — CSS
+   Employer Branding page (/careers/).
+
+   Component Registry:
+     C-61  Career Feature Card (CMP-112)
+     C-62  Hiring Process Step (CMP-113)
+
+   Existing reused (unchanged):
+     C-12  .eyebrow
+     C-13  .section-head  (layout.css)
+     C-23  .btn .btn-primary .btn-ghost
+     C-44  .contact-band
+     C-51  .breadcrumb  (inner-hero.css)
+     C-54  .pagination  (products-archive.css)
+     C-59  .job-card / .featured-grid  (careers-archive.css)
+     .section  (layout.css)
+     .about-grid / .about-media / .about-text / .about-points  (about.css)
+
+   Source of visual truth: homepage-approved-v1.html + design tokens.
+============================================================================= */
+
+/* =============================================================================
+   EMPLOYER STATS STRIP
+   Horizontal row of headline statistics — 5,000+ team members, etc.
+   Background: var(--white) with bottom border.
+============================================================================= */
+
+.employer-stats-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 44px 0;
+}
+
+.employer-stats {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.employer-stat {
+  text-align: center;
+}
+
+.employer-stat-num {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+.employer-stat-label {
+  font-size: .79rem;
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+
+/* =============================================================================
+   C-61 — CAREER FEATURE CARD (CMP-112)
+   Icon + title + text card for employer branding sections.
+   Used in: Why Laborate, Our Values, Employee Benefits.
+
+   <div class="career-feature-grid">
+     <div class="career-feature-card reveal">
+       <div class="career-feature-icon" aria-hidden="true">…SVG…</div>
+       <h3 class="career-feature-title">Innovation Culture</h3>
+       <p class="career-feature-text">…</p>
+     </div>
+   </div>
+============================================================================= */
+
+.career-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.career-feature-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  padding: 26px 22px;
+  transition: transform var(--t-medium), box-shadow var(--t-medium);
+}
+
+.career-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+/* Variant: used on --bg backgrounds; card already white */
+.career-feature-card--on-bg {
+  background: var(--white);
+}
+
+.career-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cat-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.career-feature-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.career-feature-title {
+  font-family: var(--font-heading);
+  font-size: .96rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+
+.career-feature-text {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+/* =============================================================================
+   VALUES SECTION
+   Reuses career-feature-grid on a --bg background.
+============================================================================= */
+
+.values-section {
+  background: var(--bg);
+}
+
+/* =============================================================================
+   LIFE AT LABORATE — Image / Text Layout
+   Reuses .about-grid, .about-media, .about-text from about.css.
+   This section only adds section-level background.
+============================================================================= */
+
+.life-section {
+  background: var(--white);
+}
+
+/* =============================================================================
+   LEARNING & GROWTH SECTION
+============================================================================= */
+
+.learning-section {
+  background: var(--bg);
+}
+
+.learning-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.learning-text h2 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -.02em;
+}
+
+.learning-text p {
+  color: var(--muted);
+  font-size: .94rem;
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+
+.learning-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.learning-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.learning-list .tick {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 98, 172, .1);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.learning-list .tick svg {
+  width: 11px;
+  height: 11px;
+}
+
+.learning-image {
+  border-radius: var(--radius-6xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4/3;
+}
+
+.learning-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================================================================
+   EMPLOYEE BENEFITS SECTION
+   Uses career-feature-grid but with 4 columns (or 3-col wrapping to 2 rows).
+============================================================================= */
+
+.benefits-section {
+  background: var(--white);
+}
+
+/* 4 columns for benefits — grid auto-fills evenly */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.benefit-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 22px 18px;
+  text-align: center;
+  transition: transform var(--t-medium), box-shadow var(--t-medium);
+}
+
+.benefit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.benefit-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cat-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 12px;
+}
+
+.benefit-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.benefit-title {
+  font-family: var(--font-heading);
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.benefit-text {
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* =============================================================================
+   C-62 — HIRING PROCESS STEPS (CMP-113)
+   Numbered horizontal step sequence with connecting line.
+   Used on Careers Landing to illustrate the recruitment process.
+
+   <div class="process-steps" data-stagger="80">
+     <div class="process-step reveal">
+       <div class="process-step-num" aria-hidden="true">1</div>
+       <h3 class="process-step-title">Apply Online</h3>
+       <p class="process-step-desc">…</p>
+     </div>
+     <div class="process-connector" aria-hidden="true"></div>
+     <div class="process-step reveal">…</div>
+   </div>
+============================================================================= */
+
+.process-section {
+  background: var(--bg);
+}
+
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.process-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.process-connector {
+  flex-shrink: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--line);
+  align-self: center;
+  margin-top: -26px; /* align with center of the step number circle */
+}
+
+.process-step-num {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--blue);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-size: .88rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-btn-primary);
+}
+
+.process-step-title {
+  font-family: var(--font-heading);
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.process-step-desc {
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* =============================================================================
+   FEATURED OPPORTUNITIES SECTION (on landing page)
+   Reuses .featured-grid + C-59 from careers-archive.css.
+============================================================================= */
+
+.featured-opps-section {
+  background: var(--white);
+}
+
+.featured-opps-cta {
+  text-align: center;
+  margin-top: 44px;
+}
+
+/* =============================================================================
+   CAREERS CTA BAND
+   Dark gradient full-bleed CTA banner above Contact Band.
+   Similar to .contact-band but darker, centered text layout.
+============================================================================= */
+
+.careers-cta-band {
+  background: var(--grad-contact);
+  padding: 90px 0;
+  text-align: center;
+  color: var(--white);
+  overflow: hidden;
+  position: relative;
+}
+
+.careers-cta-band .eyebrow {
+  color: var(--light-blue);
+}
+
+.careers-cta-band h2 {
+  font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 14px;
+  letter-spacing: -.02em;
+}
+
+.careers-cta-band p {
+  color: rgba(255, 255, 255, .82);
+  font-size: 1.02rem;
+  max-width: 500px;
+  margin: 0 auto 34px;
+  line-height: 1.6;
+}
+
+.careers-cta-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+/* Tablet landscape (1080px) */
+@media (max-width: 1080px) {
+  .career-feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid        { grid-template-columns: repeat(2, 1fr); }
+  .employer-stats       { gap: 48px; }
+}
+
+/* Tablet portrait (880px) */
+@media (max-width: 880px) {
+  .learning-grid { grid-template-columns: 1fr; gap: 36px; }
+
+  .process-steps    { flex-direction: column; align-items: center; gap: 24px; }
+  .process-connector { width: 2px; height: 28px; margin-top: 0; }
+  .process-step     { max-width: 280px; }
+
+  .careers-cta-band { padding: 70px 0; }
+}
+
+/* Mobile (640px) */
+@media (max-width: 640px) {
+  .career-feature-grid { grid-template-columns: 1fr; gap: 16px; }
+  .benefits-grid        { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .employer-stats       { gap: 28px; }
+  .employer-stat-num    { font-size: 1.7rem; }
+  .process-steps        { gap: 18px; }
+  .careers-cta-band     { padding: 60px 0; }
+  .careers-cta-actions  { flex-direction: column; align-items: center; }
+}
+
+/* Small mobile (420px) */
+@media (max-width: 420px) {
+  .benefits-grid { grid-template-columns: 1fr; }
+}
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .career-feature-card,
+  .benefit-card {
+    transition: none;
+  }
+
+  .career-feature-card:hover,
+  .benefit-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+}

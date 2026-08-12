@@ -1,0 +1,21 @@
+{
+  "uid": "SALES",
+  "title": "Sales Coverage",
+  "type": "sales",
+  "description": "Active commercial sales presence with in-country teams and key account management.",
+  "locations": [
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "LKA", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "BGD", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "MYS", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "PHL", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "ARE", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "SAU", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "KAZ", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "UZB", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "KEN", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "NGA", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "ETH", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "ZAF", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "COL", "region": "019" }
+  ]
+}

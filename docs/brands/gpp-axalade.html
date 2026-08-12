@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script>(function(){if(sessionStorage.getItem("oktoberry_preview_authenticated")!=="1"){document.documentElement.style.visibility="hidden";try{sessionStorage.setItem("oktoberry_preview_redirect",location.href);}catch(e){}}})();</script>
+  <link rel="stylesheet" href="/assets/css/preview-gate.css">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+  ============================================================
+  TEMPLATE: Brand Detail Page — Parent Brand & Sub-Brand
+  URL patterns:
+    Parent brand : /brands/{brand}/        e.g. /brands/elite/
+    Sub-brand    : /brands/{brand}/{sub}/  e.g. /brands/elite/67/
+  WordPress template: single-brand.php
+  Both URL types render this template. WordPress injects the
+  correct data-brand, data-brand-type, and --brd-accent values
+  on <main> based on the current Brand CPT post.
+
+  EXAMPLE BRAND: Elite (Parent Brand, accent #1062AC)
+  To preview as a sub-brand, change:
+    data-brand-type="sub_brand"
+    data-parent-brand="elite"
+  and update breadcrumb, hierarchy, and related sections.
+  ============================================================
+  -->
+
+  <!-- [CMS: Rank Math SEO — meta description from brand_tagline + brand_business_focus] -->
+  <meta name="description" content="Elite is Laborate Pharmaceuticals' flagship prescription brand — delivering evidence-based antibiotics, cardiovascular medicines, and GI therapies to specialist physicians across India and 25+ countries.">
+  <!-- [CMS: page title: {brand_name} — Brand Portfolio — Laborate Pharmaceuticals India Ltd.] -->
+  <title>Elite — Brand Portfolio — Laborate Pharmaceuticals India Ltd.</title>
+
+  <!-- [CMS: canonical: https://laborate.com/brands/{brand_slug}/] -->
+  <link rel="canonical" href="https://laborate.com/brands/gpp-axalade/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://laborate.com/brands/elite/">
+  <meta property="og:title"       content="Elite — Prescription Medicines — Laborate Pharmaceuticals">
+  <meta property="og:description" content="Elite is Laborate's flagship prescription brand for specialist physicians — antibiotics, cardiovascular, GI and more. WHO GMP certified. Present in 25+ countries.">
+  <!-- [CMS: og:image from brand_og_image ACF field] -->
+  <meta property="og:image"       content="https://laborate.com/images/brands/elite/og-elite.jpg">
+
+  <!-- JSON-LD: BreadcrumbList — Parent Brand -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",   "item": "https://laborate.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Brands", "item": "https://laborate.com/brands/" },
+      { "@type": "ListItem", "position": 3, "name": "Elite",  "item": "https://laborate.com/brands/elite/" }
+    ]
+  }
+  </script>
+  <!--
+  [CMS: Sub-Brand BreadcrumbList — use this schema when data-brand-type="sub_brand"]
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",       "item": "https://laborate.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Brands",     "item": "https://laborate.com/brands/" },
+      { "@type": "ListItem", "position": 3, "name": "Elite",      "item": "https://laborate.com/brands/elite/" },
+      { "@type": "ListItem", "position": 4, "name": "Elite 67",   "item": "https://laborate.com/brands/elite/67/" }
+    ]
+  }
+  -->
+
+  <!-- JSON-LD: Brand -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Brand",
+    "name": "Elite",
+    "description": "Laborate Pharmaceuticals' flagship prescription brand for specialist physicians and secondary care hospitals.",
+    "url": "https://laborate.com/brands/elite/",
+    "logo": "https://laborate.com/images/brands/elite/logo.png",
+    "brand": {
+      "@type": "Organization",
+      "name": "Laborate Pharmaceuticals India Ltd.",
+      "url": "https://laborate.com"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: Sora (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Main stylesheet — tokens → reset → base → layout → utilities → animations → components -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- brands-page.css: provides brd-cat-* and brd-res-* component styles reused here -->
+  <link rel="stylesheet" href="/assets/css/components/brands-page.css">
+  <!-- brand-detail-page.css: C-111 through C-118 (bde-*) -->
+  <link rel="stylesheet" href="/assets/css/components/brand-detail-page.css">
+</head>
+
+<body>
+
+  <!-- Skip navigation -->
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+
+  <!-- Scroll-progress bar -->
+  <div id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-hidden="true"></div>
+
+  <!-- Site header — solid on inner pages (no data-nav-transparent) -->
+  <header id="header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="logo" href="../index.html" aria-label="Laborate Pharmaceuticals — Home">
+        <img
+          src="https://laborate.com/images/logo.png"
+          alt="Laborate Pharmaceuticals India Ltd."
+          height="34"
+          width="auto"
+        >
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+
+        <li class="nav-meta">
+          <a class="logo" href="../index.html" aria-label="Laborate Pharmaceuticals — Home" tabindex="-1">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="28" width="auto">
+          </a>
+          <button class="nav-close" id="navClose" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </li>
+
+        <li class="has-children">
+          <a href="../about.html">About Us</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand About Us submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../about/why-laborate.html">Why Laborate</a></li>
+            <li><a href="../about/leadership.html">Leadership</a></li>
+            <li><a href="../about/awards.html">Awards &amp; Recognition</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children current-menu-ancestor">
+          <a href="../brands.html">Brands</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Brands submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../brands/elite.html">Elite</a></li>
+            <li><a href="../brands/aqualab.html">Aqualab</a></li>
+            <li><a href="../brands/labolia-beaute.html">Labolia Beauté</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../products.html">Products</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Products submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../products/catalogue.html">Product Catalogue</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../manufacturing.html">Manufacturing</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Manufacturing submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../manufacturing/facilities.html">Facilities</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../quality.html">Quality</a></li>
+
+        <li class="has-children">
+          <a href="../global.html">Global Presence</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Global Presence submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../global/map.html">Global Map</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../media.html">Media</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Media submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../media/press-releases.html">Press Releases</a></li>
+            <li><a href="../media/news.html">News</a></li>
+            <li><a href="../media/events.html">Events</a></li>
+            <li><a href="../media/social.html">Social</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../business.html">Business</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Business submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../business/contract-manufacturing.html">Contract Manufacturing</a></li>
+            <li><a href="../business/distributor.html">Distributor Partnerships</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../careers.html">Careers</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Careers submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../careers/jobs.html">Open Positions</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../contact.html">Contact Us</a></li>
+
+      </ul>
+      <div class="nav-right">
+        <a href="../search.html" class="nav-search" aria-label="Search" data-nav-search>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </a>
+        <a href="../contact.html" class="btn btn-primary nav-cta">Partner With Us</a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true" tabindex="-1"></div>
+
+  <!--
+  ============================================================
+  MAIN — WordPress injects:
+    data-brand="{brand_slug}"
+    data-brand-type="{parent_brand|sub_brand}"
+    style="--brd-accent:{brand_accent_color}"
+  These propagate to all bde-* components via CSS custom property inheritance.
+  ============================================================
+  -->
+  <!-- [CMS: data-brand from brand_slug | data-brand-type from brand_type | style from brand_accent_color] -->
+  <main id="main-content" data-brand="elite" data-brand-type="parent_brand" style="--brd-accent: #1062AC">
+
+
+    <!--
+    ============================================================
+    SECTION 1: Brand Detail Hero — C-111
+    Split layout: brand identity + CTAs (left) | marketing slider (right)
+    data-section: bde-hero
+    ============================================================
+    -->
+    <section
+      class="hero hero--brand-detail"
+      data-section="bde-hero"
+      data-section-enabled="true"
+      aria-labelledby="bde-page-heading"
+    >
+
+      <div class="hero-media" aria-hidden="true">
+        <!-- [CMS: brand_hero_image from ACF field — full-bleed background, dark overlay applied via hero.css] -->
+        <img
+          class="hero-fallback"
+          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80"
+          alt=""
+          role="presentation"
+          loading="eager"
+        >
+      </div>
+
+      <div class="wrap">
+        <div class="bde-hero-grid">
+
+          <!-- ── Left column: Brand identity & CTAs ──────────────── -->
+          <div class="bde-hero-content">
+
+            <!-- C-51 Breadcrumb -->
+            <!-- [CMS: breadcrumb — WordPress generates via get_the_breadcrumb() or Rank Math breadcrumb] -->
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../brands.html">Our Brands</a></li>
+                <li><span aria-current="page"><!-- [CMS: brand_name] -->Elite</span></li>
+              </ol>
+            </nav>
+            <!--
+            [CMS: Sub-brand breadcrumb example]
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="../brands.html">Our Brands</a></li>
+              <li><a href="brands/elite/">Elite</a></li>
+              <li><span aria-current="page">Elite 67</span></li>
+            </ol>
+            -->
+
+            <!-- Brand logo + type badge -->
+            <div class="bde-hero-brand hero-anim">
+              <!--
+              UNIVERSAL LOGO SYSTEM — Brand Logo (Hero)
+              ──────────────────────────────────────────
+              [CMS: brand_logo (ACF Image field)]
+              [CMS: logo_orientation = auto|square|portrait|landscape]
+
+              WordPress behaviour by orientation:
+                square    → Logo centred in square container; title + Since below
+                            <div class="bde-brand-logo-wrap bde-logo-wrap bde-logo-wrap--square">
+                portrait  → Logo left-aligned in portrait container; title + Since to the right
+                            <div class="bde-brand-logo-wrap bde-logo-wrap bde-logo-wrap--portrait">
+                landscape → Logo spans full width; title + Since below
+                            <div class="bde-brand-logo-wrap bde-logo-wrap bde-logo-wrap--landscape">
+
+              When brand_logo is set, WordPress outputs:
+                <img src="{logo_url}" alt="{brand_name} logo" loading="lazy">
+              When brand_logo is empty, WordPress outputs initials fallback:
+                <span class="bde-brand-logo-initials">{initials}</span>
+
+              DO NOT hardcode image sizes. The .bde-logo-wrap container uses
+              object-fit: contain so all logo aspect ratios display correctly.
+              -->
+              <div class="bde-brand-logo-wrap bde-logo-wrap bde-logo-wrap--square" aria-hidden="true">
+                <!-- [CMS: when brand_logo is set]: <img src="{logo_url}" alt="" loading="lazy"> -->
+                <span class="bde-brand-logo-initials">EL</span>
+              </div>
+              <div class="bde-brand-meta">
+                <!-- [CMS: brand_type → "Parent Brand" or "Sub-Brand"] -->
+                <span class="bde-brand-type-badge">Parent Brand</span>
+                <!-- [CMS: brand_since → "Est. {year}"] -->
+                <span class="bde-brand-since">Est. 1992</span>
+              </div>
+            </div>
+
+            <!-- Brand name heading -->
+            <!-- [CMS: brand_name] -->
+            <h1 id="bde-page-heading" class="hero-anim d1">Elite</h1>
+
+            <!-- Tagline -->
+            <!-- [CMS: brand_tagline] -->
+            <p class="bde-hero-tagline hero-anim d1">Science-led medicines for specialist physicians.</p>
+
+            <!-- Short description -->
+            <!-- [CMS: brand_description (short version, ~25 words)] -->
+            <p class="sub hero-anim d2">Elite is Laborate's flagship prescription brand — a portfolio of 400+ evidence-based medicines trusted by specialist physicians and secondary care hospitals across India and 25+ countries.</p>
+
+            <!-- CTAs -->
+            <div class="bde-hero-ctas hero-anim d2">
+              <!-- Primary: always shown — links to product catalogue filtered by brand -->
+              <!-- [CMS: href="products/?brand={brand_slug}"] -->
+              <a href="../products.html?brand=elite" class="btn btn-primary">
+                Explore Products <span class="arrow" aria-hidden="true">&rarr;</span>
+              </a>
+              <!-- Secondary: shown when brand_catalogue_url is set -->
+              <!-- [CMS: brand_catalogue_url] -->
+              <a href="../resources.html?brand=elite&type=brochure" class="btn btn-outline-light">
+                Brand Brochure
+              </a>
+              <!--
+              [CMS: Optional third CTA — rendered only when brand_website_url is set]
+              <a href="{brand_website_url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
+                Visit Website <span class="arrow" aria-hidden="true">↗</span>
+              </a>
+              -->
+            </div>
+
+          </div><!-- /.bde-hero-content -->
+
+
+          <!-- ── Right column: Marketing Banner Slider ─────────────── -->
+          <!--
+          [CMS: marketing_slides ACF repeater — max 6 slides]
+          [CMS: each slide: slide_type (campaign|award|event|launch|conference|awareness)]
+          [CMS: each slide: slide_image, slide_headline, slide_description, slide_cta_label, slide_cta_url]
+          [CMS: WordPress outputs data-slider-type="{slide_type}" on each .bde-slide for CSS gradient fallback]
+          [CMS: If no slides configured, this column collapses via CSS (brand-detail-page.css)]
+          -->
+          <div
+            class="bde-slider-wrap hero-anim d2"
+            data-brand-slider
+            role="region"
+            aria-label="Elite brand marketing"
+            aria-roledescription="carousel"
+            tabindex="0"
+          >
+            <!-- Accessible live announcer -->
+            <div class="bde-slider-live" aria-live="polite" aria-atomic="true"></div>
+
+            <div class="bde-slider">
+              <div class="bde-slider-track">
+
+                <!-- Slide 1: Product Launch Campaign -->
+                <div class="bde-slide bde-slide--campaign is-active"
+                     role="group"
+                     aria-roledescription="slide"
+                     aria-label="Slide 1 of 3">
+                  <!-- [CMS: slide_image] -->
+                  <div class="bde-slide-gradient" aria-hidden="true"></div>
+                  <div class="bde-slide-overlay" aria-hidden="true"></div>
+                  <div class="bde-slide-content">
+                    <!-- [CMS: slide_type → badge label] -->
+                    <span class="bde-slide-type">New Launch</span>
+                    <!-- [CMS: slide_headline] -->
+                    <p class="bde-slide-headline">Elite-CF Extended Release — Now Available</p>
+                    <!-- [CMS: slide_description] -->
+                    <p class="bde-slide-desc">Once-daily amoxicillin-clavulanate formulation. Improved compliance for specialist prescriptions.</p>
+                    <!-- [CMS: slide_cta_label + slide_cta_url] -->
+                    <a href="../products.html?product=elite-cf-er" class="bde-slide-cta">
+                      View Product <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Slide 2: Award Recognition -->
+                <div class="bde-slide bde-slide--award"
+                     role="group"
+                     aria-roledescription="slide"
+                     aria-label="Slide 2 of 3"
+                     aria-hidden="true">
+                  <div class="bde-slide-gradient" aria-hidden="true"></div>
+                  <div class="bde-slide-overlay" aria-hidden="true"></div>
+                  <div class="bde-slide-content">
+                    <span class="bde-slide-type">Recognition</span>
+                    <p class="bde-slide-headline">Best Pharma Brand of the Year 2024</p>
+                    <p class="bde-slide-desc">Elite recognised by the Indian Pharmaceutical Congress for consistent quality and innovation in antibiotic therapy.</p>
+                    <a href="../media.html?category=awards" class="bde-slide-cta">
+                      Read More <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Slide 3: Healthcare Event -->
+                <div class="bde-slide bde-slide--event"
+                     role="group"
+                     aria-roledescription="slide"
+                     aria-label="Slide 3 of 3"
+                     aria-hidden="true">
+                  <div class="bde-slide-gradient" aria-hidden="true"></div>
+                  <div class="bde-slide-overlay" aria-hidden="true"></div>
+                  <div class="bde-slide-content">
+                    <span class="bde-slide-type">Event</span>
+                    <p class="bde-slide-headline">Elite Healthcare Summit 2025 — Panipat</p>
+                    <p class="bde-slide-desc">Continuing Medical Education programme for specialist physicians. Covering resistance management and evidence-based prescribing.</p>
+                    <a href="../media.html?category=events" class="bde-slide-cta">
+                      Event Details <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+              </div><!-- /.bde-slider-track -->
+
+              <!-- Slider UI: dots + prev/next -->
+              <div class="bde-slider-ui" aria-label="Slideshow controls">
+                <button
+                  class="bde-slider-btn"
+                  data-slider-prev
+                  aria-label="Previous slide"
+                  type="button"
+                >
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" aria-hidden="true" focusable="false">
+                    <path d="M10 12 6 8l4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <div class="bde-slider-dots" role="list">
+                  <button class="bde-slider-dot is-active" role="listitem" aria-label="Go to slide 1" aria-current="true" type="button"></button>
+                  <button class="bde-slider-dot" role="listitem" aria-label="Go to slide 2" type="button"></button>
+                  <button class="bde-slider-dot" role="listitem" aria-label="Go to slide 3" type="button"></button>
+                </div>
+                <button
+                  class="bde-slider-btn"
+                  data-slider-next
+                  aria-label="Next slide"
+                  type="button"
+                >
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" aria-hidden="true" focusable="false">
+                    <path d="M6 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+
+            </div><!-- /.bde-slider -->
+          </div><!-- /.bde-slider-wrap -->
+
+        </div><!-- /.bde-hero-grid -->
+      </div><!-- /.wrap -->
+    </section><!-- /.hero--brand-detail -->
+
+
+    <!--
+    ============================================================
+    SECTION 2: Brand Stats Strip (reuses abt-stats-strip, C-38)
+    data-section: bde-stats
+    Six brand-specific statistics.
+    [CMS: brand_stats ACF repeater | fields: icon_svg, stat_value, stat_suffix, stat_label]
+    ============================================================
+    -->
+    <div
+      class="abt-stats-strip"
+      data-section="bde-stats"
+      data-section-enabled="true"
+    >
+      <div class="wrap">
+        <div class="abt-stats">
+
+          <div class="abt-stat reveal">
+            <div class="abt-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+              </svg>
+            </div>
+            <!-- [CMS: brand_since] -->
+            <div class="abt-stat-num">1992</div>
+            <div class="abt-stat-label">Established</div>
+          </div>
+
+          <div class="abt-stat reveal">
+            <div class="abt-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <path d="M9 3h6M9 3v7l-4 7a3 3 0 0 0 2.7 4.3h8.6A3 3 0 0 0 19 17L15 10V3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <!-- [CMS: brand_product_count — count of Products CPT posts with this brand] -->
+            <div class="abt-stat-num"><span data-count="400" data-suffix="+">0</span></div>
+            <div class="abt-stat-label">Products</div>
+          </div>
+
+          <div class="abt-stat reveal">
+            <div class="abt-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10"/><path d="M13 2.05A10 10 0 0 1 11 12" stroke-linecap="round"/><path d="M22 16h-4l2 4 2-4z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <!-- [CMS: brand_export_countries] -->
+            <div class="abt-stat-num"><span data-count="25" data-suffix="+">0</span></div>
+            <div class="abt-stat-label">Countries</div>
+          </div>
+
+          <div class="abt-stat reveal">
+            <div class="abt-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <path d="M2 20h20M5 20V10l7-7 7 7v10" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 20v-5h6v5"/>
+              </svg>
+            </div>
+            <!-- [CMS: brand_distribution_points] -->
+            <div class="abt-stat-num"><span data-count="3500" data-suffix="+">0</span></div>
+            <div class="abt-stat-label">Distribution Points</div>
+          </div>
+
+          <div class="abt-stat reveal">
+            <div class="abt-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <path d="M9 12l2 2 4-4"/><path d="M3 12a9 9 0 1 0 18 0A9 9 0 0 0 3 12z"/>
+              </svg>
+            </div>
+            <!-- [CMS: brand_therapeutic_area_count] -->
+            <div class="abt-stat-num"><span data-count="12" data-suffix="+">0</span></div>
+            <div class="abt-stat-label">Therapeutic Areas</div>
+          </div>
+
+          <div class="abt-stat reveal">
+            <div class="abt-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <!-- [CMS: computed from brand_since: current_year - brand_since] -->
+            <div class="abt-stat-num"><span data-count="30" data-suffix="+">0</span></div>
+            <div class="abt-stat-label">Years of Heritage</div>
+          </div>
+
+        </div><!-- /.abt-stats -->
+      </div><!-- /.wrap -->
+    </div><!-- /.abt-stats-strip -->
+
+
+    <!--
+    ============================================================
+    SECTION 3: Brand Story — C-114 (extends about-grid, C-50)
+    data-section: bde-story
+    Left: brand narrative + brand promise blockquote + values
+    Right: brand image + year badge
+    ============================================================
+    -->
+    <section
+      class="section"
+      data-section="bde-story"
+      data-section-enabled="true"
+      aria-labelledby="bde-story-heading"
+    >
+      <div class="wrap">
+
+        <div class="about-grid">
+
+          <!-- Left: Brand Story text column -->
+          <div class="about-col bde-story-text">
+
+            <div class="section-head reveal">
+              <!-- [CMS: brand_story_eyebrow — default "Our Story"] -->
+              <span class="eyebrow">Our Story</span>
+              <!-- [CMS: brand_story_heading] -->
+              <h2 id="bde-story-heading">The Elite Story</h2>
+            </div>
+
+            <!-- [CMS: brand_story (WYSIWYG, ~3 paragraphs)] -->
+            <p class="reveal">Founded in 1992 as Laborate Pharmaceuticals' first branded prescription division, Elite was built to serve the clinical needs of specialist physicians across India's secondary care hospitals. At a time when quality antibiotic formulations were largely imported or inconsistently available, Elite changed the landscape — bringing hospital-grade medicines to tier-2 and tier-3 markets.</p>
+            <p class="reveal">Three decades later, Elite has grown into a 400+ product portfolio spanning antibiotics, cardiovascular, gastrointestinal, pain management, and vitamins. Every product in the Elite range is manufactured at WHO GMP-certified facilities with ISO 9001:2015 quality systems and exported to 25+ countries.</p>
+            <p class="reveal">Elite remains the cornerstone of Laborate's prescription business — a brand that specialist physicians trust not just for efficacy, but for the consistency of every tablet, every capsule, every batch.</p>
+
+            <!-- Brand Promise -->
+            <div class="bde-brand-promise reveal">
+              <!-- [CMS: brand_promise] -->
+              <p>"Every Elite product is a promise — to the physician who prescribes it, and to the patient who depends on it."</p>
+            </div>
+
+            <!-- Brand Values -->
+            <!-- [CMS: brand_values ACF repeater | field: value_label] -->
+            <ul class="bde-brand-values reveal">
+              <li>Scientific Excellence</li>
+              <li>Healthcare Access</li>
+              <li>Quality Commitment</li>
+              <li>Clinical Innovation</li>
+              <li>Specialist Partnership</li>
+              <li>Global Standards</li>
+            </ul>
+
+          </div><!-- /.about-col -->
+
+          <!-- Right: Brand image + since badge -->
+          <div class="about-col reveal">
+            <div class="bde-story-image-wrap">
+              <!-- [CMS: brand_story_image (ACF Image)] -->
+              <img
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
+                alt="Elite pharmaceutical manufacturing — precision-grade tablet production"
+                loading="lazy"
+              >
+              <div class="bde-story-since-badge" aria-hidden="true">
+                <!-- [CMS: brand_since] -->
+                <span class="bde-story-since-year">1992</span>
+                <span class="bde-story-since-label">Est. Year</span>
+              </div>
+            </div>
+          </div><!-- /.about-col -->
+
+        </div><!-- /.about-grid -->
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 4: Brand Hierarchy Visualizer — C-112
+    data-section: bde-hierarchy
+    Visual tree showing brand relationships.
+    Parent brand view: Laborate Group → [Elite] → Elite Exotic, Elite 67, Future
+    Sub-brand view: Elite → [Elite 67] (no children shown)
+
+    [CMS: WordPress renders the correct hierarchy tree based on:
+      - data-brand-type on <main>: "parent_brand" → show children
+      - brand_parent ACF field: if set → show parent node above current
+      - brand_sub_brands relationship field: list of child brands
+    ]
+    ============================================================
+    -->
+    <section
+      class="section bde-hierarchy-section"
+      data-section="bde-hierarchy"
+      data-section-enabled="true"
+      aria-labelledby="bde-hierarchy-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Brand Family</span>
+          <h2 id="bde-hierarchy-heading">Where Elite Fits</h2>
+          <p class="section-sub">Elite is a parent brand within the Laborate group, with dedicated sub-brands targeting specialist dermatology and novel drug delivery markets.</p>
+        </div>
+
+        <div class="bde-hierarchy reveal">
+
+          <!-- Level 0: Laborate Group reference (always shown for parent brands) -->
+          <!-- [CMS: omit for sub-brands; show parent brand instead] -->
+          <div class="bde-hier-row">
+            <a href="../brands.html" class="bde-hier-node bde-hier-node--group" aria-label="Back to Brands — Laborate Group">
+              <span class="bde-hier-node-name">Laborate Group</span>
+            </a>
+          </div>
+
+          <!-- Connector -->
+          <div class="bde-hier-line" aria-hidden="true"></div>
+
+          <!-- Level 1: Current brand (highlighted) -->
+          <div class="bde-hier-row">
+            <div class="bde-hier-node bde-hier-node--current" aria-current="page" aria-label="You are here: Elite">
+              <!--
+              [CMS: logo_orientation → bde-logo-wrap--{orientation} modifier class]
+              [CMS: when brand_logo set → <img src="{url}" alt="" loading="lazy">]
+              [CMS: when brand_logo empty → initials span]
+              -->
+              <div class="bde-hier-current-logo bde-logo-wrap bde-logo-wrap--square" aria-hidden="true">
+                <!-- [CMS: when brand_logo is set]: <img src="{logo_url}" alt="" loading="lazy"> -->
+                <span>EL</span>
+              </div>
+              <!-- [CMS: brand_name] -->
+              <span class="bde-hier-node-name">Elite</span>
+              <!-- [CMS: brand_type → "Parent Brand" or "Sub-Brand"] -->
+              <span class="bde-hier-node-badge">Parent Brand</span>
+            </div>
+          </div>
+
+          <!-- Connector to sub-brands row -->
+          <!-- [CMS: render only when brand_sub_brands is not empty] -->
+          <div class="bde-hier-line" aria-hidden="true"></div>
+
+          <!-- Level 2: Sub-brands (children) -->
+          <!-- [CMS: brand_sub_brands ACF relationship field → loop each sub-brand] -->
+          <div class="bde-hier-row bde-hier-row--children">
+
+            <a href="brands/elite/exotic/" class="bde-hier-node bde-hier-node--sub reveal">
+              <!-- [CMS: sub-brand: brand_logo thumbnail or initials] -->
+              <span class="bde-hier-node-name">Elite Exotic</span>
+              <span class="bde-hier-node-badge">Sub-Brand</span>
+            </a>
+
+            <a href="brands/elite/67/" class="bde-hier-node bde-hier-node--sub reveal">
+              <span class="bde-hier-node-name">Elite 67</span>
+              <span class="bde-hier-node-badge">Sub-Brand</span>
+            </a>
+
+            <!-- Future brand placeholder — CMS field: brand_is_active = false -->
+            <div class="bde-hier-node bde-hier-node--future" aria-label="Future sub-brand — not yet active" aria-disabled="true">
+              <span class="bde-hier-node-name">Coming Soon</span>
+              <span class="bde-hier-node-badge">Future Brand</span>
+            </div>
+
+          </div><!-- /.bde-hier-row--children -->
+
+        </div><!-- /.bde-hierarchy -->
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 5: Therapeutic Focus (reuses brd-cat-grid + brd-cat-card, C-107)
+    data-section: bde-therapeutic
+    Brand-filtered therapeutic categories. Each card links to filtered
+    product catalogue: /products/?brand=elite&category={slug}
+    [CMS: brand_therapeutic_areas ACF relationship → Therapeutic Taxonomy terms]
+    ============================================================
+    -->
+    <section
+      class="section brd-cat-section"
+      data-section="bde-therapeutic"
+      data-section-enabled="true"
+      aria-labelledby="bde-therapeutic-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Therapeutic Reach</span>
+          <h2 id="bde-therapeutic-heading">Elite Therapeutic Focus</h2>
+          <p class="section-sub">Elite medicines address the most prevalent therapeutic needs seen by specialist physicians — from infectious disease management to metabolic and cardiovascular care.</p>
+        </div>
+
+        <!-- [CMS: brand_therapeutic_areas repeater | fields: icon_svg, category_name, product_count, category_slug] -->
+        <div class="brd-cat-grid">
+
+          <a href="../products.html?brand=elite&category=antibiotics" class="brd-cat-card reveal">
+            <div class="brd-cat-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="16"/><path d="M12 20c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8" stroke-linecap="round"/><path d="M20 16v8m-4-4h8" stroke-linecap="round"/></svg>
+            </div>
+            <div class="brd-cat-name">Antibiotics &amp; Anti-infectives</div>
+            <!-- [CMS: product_count computed] -->
+            <div class="brd-cat-count">180+ Products</div>
+          </a>
+
+          <a href="../products.html?brand=elite&category=cardiovascular" class="brd-cat-card reveal">
+            <div class="brd-cat-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M6 16.5C6 10.7 10.7 6 16.5 6c3.1 0 5.9 1.3 7.9 3.4" stroke-linecap="round"/><path d="M34 16.5C34 22.3 29.3 27 23.5 27h-7L20 34"/><path d="M20 6v6m0 0-4-4m4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="brd-cat-name">Cardiovascular</div>
+            <div class="brd-cat-count">60+ Products</div>
+          </a>
+
+          <a href="../products.html?brand=elite&category=gastrointestinal" class="brd-cat-card reveal">
+            <div class="brd-cat-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><ellipse cx="20" cy="14" rx="7" ry="5"/><path d="M13 14c0 6 2 10 7 12s7-4 7-12" stroke-linecap="round"/></svg>
+            </div>
+            <div class="brd-cat-name">Gastrointestinal</div>
+            <div class="brd-cat-count">55+ Products</div>
+          </a>
+
+          <a href="../products.html?brand=elite&category=pain" class="brd-cat-card reveal">
+            <div class="brd-cat-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M20 8v4M12 12l3 3M28 12l-3 3M8 20h4M28 20h4M12 28l3-3M28 28l-3-3M20 28v4"/><circle cx="20" cy="20" r="5"/></svg>
+            </div>
+            <div class="brd-cat-name">Pain &amp; Inflammation</div>
+            <div class="brd-cat-count">45+ Products</div>
+          </a>
+
+          <a href="../products.html?brand=elite&category=vitamins" class="brd-cat-card reveal">
+            <div class="brd-cat-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><polygon points="20 6 24 16 35 16 26 23 29 34 20 27 11 34 14 23 5 16 16 16"/></svg>
+            </div>
+            <div class="brd-cat-name">Vitamins &amp; Supplements</div>
+            <div class="brd-cat-count">40+ Products</div>
+          </a>
+
+          <a href="../products.html?brand=elite&category=respiratory" class="brd-cat-card reveal">
+            <div class="brd-cat-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M20 10v6" stroke-linecap="round"/><path d="M14 16c-4 1-6 5-6 9s2 7 6 7" stroke-linecap="round"/><path d="M26 16c4 1 6 5 6 9s-2 7-6 7" stroke-linecap="round"/><path d="M14 16h12" stroke-linecap="round"/></svg>
+            </div>
+            <div class="brd-cat-name">Respiratory</div>
+            <div class="brd-cat-count">30+ Products</div>
+          </a>
+
+        </div><!-- /.brd-cat-grid -->
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 6: Dosage Portfolio — C-113
+    data-section: bde-dosage
+    Grid of pharmaceutical dosage form tiles, each linking to filtered catalogue.
+    [CMS: brand_dosage_forms ACF repeater | fields: icon_svg, form_name, product_count, form_slug]
+    ============================================================
+    -->
+    <section
+      class="section bde-dosage-section"
+      data-section="bde-dosage"
+      data-section-enabled="true"
+      aria-labelledby="bde-dosage-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Dosage Portfolio</span>
+          <h2 id="bde-dosage-heading">Available Formulations</h2>
+          <p class="section-sub">Elite manufactures across 9 pharmaceutical dosage forms — from conventional tablets and capsules to novel drug delivery systems.</p>
+        </div>
+
+        <div class="bde-dosage-grid">
+
+          <a href="../products.html?brand=elite&form=tablets" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><rect x="4" y="8" width="16" height="8" rx="4"/><line x1="12" y1="8" x2="12" y2="16" stroke-dasharray="2 2"/></svg>
+            </div>
+            <span class="bde-dosage-name">Tablets</span>
+            <!-- [CMS: product_count] -->
+            <span class="bde-dosage-count">180+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=capsules" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M12 3a5 5 0 0 0-5 5v8a5 5 0 0 0 10 0V8a5 5 0 0 0-5-5z"/><line x1="7" y1="12" x2="17" y2="12"/></svg>
+            </div>
+            <span class="bde-dosage-name">Capsules</span>
+            <span class="bde-dosage-count">95+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=dry-syrups" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M8 4h8v4H8z"/><path d="M6 8h12l-2 13H8L6 8z"/><path d="M12 11v5"/></svg>
+            </div>
+            <span class="bde-dosage-name">Dry Syrups</span>
+            <span class="bde-dosage-count">40+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=creams" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 3v4h6V3"/></svg>
+            </div>
+            <span class="bde-dosage-name">Creams &amp; Ointments</span>
+            <span class="bde-dosage-count">35+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=drops" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M12 2 C6 9 4 13 4 16a8 8 0 0 0 16 0c0-3-2-7-8-14z" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="bde-dosage-name">Drops</span>
+            <span class="bde-dosage-count">20+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=soft-gels" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><ellipse cx="12" cy="12" rx="7" ry="4.5" transform="rotate(30 12 12)"/></svg>
+            </div>
+            <span class="bde-dosage-name">Soft Gels</span>
+            <span class="bde-dosage-count">25+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=injectables" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="m14 10-2-2-8 8 2 2 8-8z"/><path d="m20 4-4 4"/><path d="m10 14 2 2"/><path d="M6 20l-2 2"/></svg>
+            </div>
+            <span class="bde-dosage-name">Injectables</span>
+            <span class="bde-dosage-count">15+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=nasal-sprays" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M9 3h6v12a3 3 0 0 1-6 0V3z"/><path d="M7 20h10M12 15v2"/><path d="M9 7 6 5M15 7l3-5" stroke-linecap="round"/></svg>
+            </div>
+            <span class="bde-dosage-name">Nasal Sprays</span>
+            <span class="bde-dosage-count">8+ SKUs</span>
+          </a>
+
+          <a href="../products.html?brand=elite&form=powders" class="bde-dosage-card reveal">
+            <div class="bde-dosage-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M4 18h16M4 18V8l2-4h12l2 4v10M4 18l2-4h12l2 4"/></svg>
+            </div>
+            <span class="bde-dosage-name">Powders &amp; Sachets</span>
+            <span class="bde-dosage-count">12+ SKUs</span>
+          </a>
+
+        </div><!-- /.bde-dosage-grid -->
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 7: Product Brands — C-119
+    data-section: bde-product-brands
+    Product Brand cards. These are marketing identity entities distinct
+    from Sub-Brands (which get their own /brands/{brand}/{sub}/ pages)
+    and from individual product SKUs.
+    Hierarchy: Parent Brand → Sub-Brand → Product Brand → Products
+    Example (AquaLab): AquaLab → Candy Condoms → Candy Strawberry, Chocolate…
+    Example (Elite): Elite → Elite-CF → Elite-CF 625, Elite-CF 375…
+
+    Clicking a Product Brand card goes DIRECTLY to the flagship product
+    detail page (product_detail_url) — NOT to a filtered catalogue.
+    When a product brand later expands, the CTA label/URL can be updated
+    via WordPress without changing the template.
+
+    CMS CONFIGURATION — SIGNATURE PRODUCT BRANDS
+    ─────────────────────────────────────────────
+    Each Product Brand card references an EXISTING Brand entity in the Brand CPT.
+    DO NOT duplicate brand metadata. All card data must flow from the source record.
+
+    [CMS: product_brands ACF repeater | fields per item:]
+      product_brand_ref       → Post Object (Brand CPT) — all metadata inherited from here
+      product_brand_logo      → Override logo (optional — defaults to brand entity logo)
+      logo_orientation        → auto|square|portrait|landscape
+      product_detail_url      → URL to flagship product detail page (flagship_product Post Object)
+      brand_color             → CSS custom property --card-accent for accent stripe + elements
+      marketing_badge         → Optional label: Bestseller / Flagship / New Range / etc.
+
+    ⚠️  Do not upload brand logos separately on this page.
+        Reference the Brand CPT post — logos are managed centrally on each Brand record.
+    ============================================================
+    -->
+    <section
+      class="section bde-pbrand-section"
+      data-section="bde-product-brands"
+      data-section-enabled="true"
+      aria-labelledby="bde-pbrand-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Product Brands</span>
+          <!-- [CMS: brand_product_brands_heading — default "Signature Product Brands"] -->
+          <h2 id="bde-pbrand-heading">Signature Product Brands</h2>
+          <p class="section-sub">Each Elite product brand represents a distinct clinical franchise — a marketing identity built around a core molecule or therapeutic focus, with its own prescriber recognition and product family.</p>
+        </div>
+
+        <!-- [CMS: product_brands repeater — max 6 shown (paginate/expand via JS if more)] -->
+        <div class="bde-pbrand-grid">
+
+          <!-- Product Brand 1: Elite-CF -->
+          <!-- [CMS: style="--card-accent: {brand_color}"] -->
+          <article class="bde-pbrand-card reveal" style="--card-accent: #1062AC">
+            <div class="bde-pbrand-accent" aria-hidden="true"></div>
+            <div class="bde-pbrand-body">
+              <div class="bde-pbrand-top">
+                <!--
+                [CMS: Universal logo wrapper]
+                [CMS: logo_orientation = auto|square|portrait|landscape]
+                [CMS: product_brand_logo — when set, WordPress outputs <img>]
+                [CMS: when empty, WordPress outputs .bde-pbrand-initials with first 2 chars of brand name]
+                -->
+                <div class="bde-pbrand-logo" aria-hidden="true">
+                  <!-- [CMS: product_brand_logo img here when available] -->
+                  <span class="bde-pbrand-initials">CF</span>
+                </div>
+                <!-- [CMS: marketing_badge — optional: "Bestseller", "New Range", "Flagship", etc.] -->
+                <span class="bde-pbrand-badge">Bestseller</span>
+              </div>
+              <!-- [CMS: product_brand_name] -->
+              <h3 class="bde-pbrand-name">Elite-CF</h3>
+              <!-- [CMS: parent_brand label + therapeutic_category] -->
+              <span class="bde-pbrand-parent">Elite &bull; Anti-infective</span>
+              <!-- [CMS: product_brand_description (~15 words)] -->
+              <p class="bde-pbrand-desc">Amoxicillin-Clavulanate formulations for resistant bacterial infections — the cornerstone of Elite's antibiotic portfolio.</p>
+              <!--
+              [CMS: product_detail_url from featured_product Post Object → permalink]
+              CTA goes directly to flagship product detail, NOT a filtered catalogue.
+              When brand expands beyond one product, URL becomes products/?brand=elite-cf
+              -->
+              <a href="../products/amoxicillin-500mg.html" class="bde-pbrand-cta">
+                View Products <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product Brand 2: Elite-Pan -->
+          <article class="bde-pbrand-card reveal" style="--card-accent: #0d7c4d">
+            <div class="bde-pbrand-accent" aria-hidden="true"></div>
+            <div class="bde-pbrand-body">
+              <div class="bde-pbrand-top">
+                <div class="bde-pbrand-logo" aria-hidden="true">
+                  <span class="bde-pbrand-initials">EP</span>
+                </div>
+                <span class="bde-pbrand-badge">Flagship</span>
+              </div>
+              <h3 class="bde-pbrand-name">Elite-Pan</h3>
+              <span class="bde-pbrand-parent">Elite &bull; Gastrointestinal</span>
+              <p class="bde-pbrand-desc">Pantoprazole gastro-resistant formulations for acid-related disorders — trusted by gastroenterologists across secondary care.</p>
+              <a href="../products/amoxicillin-500mg.html" class="bde-pbrand-cta">
+                View Products <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product Brand 3: Elite-Z -->
+          <article class="bde-pbrand-card reveal" style="--card-accent: #7c3aed">
+            <div class="bde-pbrand-accent" aria-hidden="true"></div>
+            <div class="bde-pbrand-body">
+              <div class="bde-pbrand-top">
+                <div class="bde-pbrand-logo" aria-hidden="true">
+                  <span class="bde-pbrand-initials">EZ</span>
+                </div>
+                <!-- [CMS: no marketing_badge — omit when empty] -->
+              </div>
+              <h3 class="bde-pbrand-name">Elite-Z</h3>
+              <span class="bde-pbrand-parent">Elite &bull; Anti-infective</span>
+              <p class="bde-pbrand-desc">Azithromycin macrolide antibiotic range — single-dose and 3-day treatment options for upper and lower respiratory tract infections.</p>
+              <a href="../products/amoxicillin-500mg.html" class="bde-pbrand-cta">
+                View Products <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product Brand 4: Elite-Nex -->
+          <article class="bde-pbrand-card reveal" style="--card-accent: #c02042">
+            <div class="bde-pbrand-accent" aria-hidden="true"></div>
+            <div class="bde-pbrand-body">
+              <div class="bde-pbrand-top">
+                <div class="bde-pbrand-logo" aria-hidden="true">
+                  <span class="bde-pbrand-initials">EN</span>
+                </div>
+              </div>
+              <h3 class="bde-pbrand-name">Elite-Nex</h3>
+              <span class="bde-pbrand-parent">Elite &bull; Cardiovascular</span>
+              <p class="bde-pbrand-desc">Nebivolol beta-blocker range for hypertension and heart failure — preferred by cardiologists for metabolic neutrality.</p>
+              <a href="../products/amoxicillin-500mg.html" class="bde-pbrand-cta">
+                View Products <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product Brand 5: Elite-XT -->
+          <article class="bde-pbrand-card reveal" style="--card-accent: #c08a20">
+            <div class="bde-pbrand-accent" aria-hidden="true"></div>
+            <div class="bde-pbrand-body">
+              <div class="bde-pbrand-top">
+                <div class="bde-pbrand-logo" aria-hidden="true">
+                  <span class="bde-pbrand-initials">XT</span>
+                </div>
+                <span class="bde-pbrand-badge">New Range</span>
+              </div>
+              <h3 class="bde-pbrand-name">Elite-XT</h3>
+              <span class="bde-pbrand-parent">Elite &bull; Vitamins &amp; Supplements</span>
+              <p class="bde-pbrand-desc">Micronutrient and multivitamin softgel range for nutritional support in post-operative and immunocompromised patients.</p>
+              <a href="../products/amoxicillin-500mg.html" class="bde-pbrand-cta">
+                View Products <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product Brand 6: KT5 Derm -->
+          <article class="bde-pbrand-card reveal" style="--card-accent: #0891b2">
+            <div class="bde-pbrand-accent" aria-hidden="true"></div>
+            <div class="bde-pbrand-body">
+              <div class="bde-pbrand-top">
+                <div class="bde-pbrand-logo" aria-hidden="true">
+                  <span class="bde-pbrand-initials">KD</span>
+                </div>
+              </div>
+              <h3 class="bde-pbrand-name">KT5 Derm</h3>
+              <span class="bde-pbrand-parent">Elite &bull; Dermatology</span>
+              <p class="bde-pbrand-desc">Ketoconazole antifungal topical range — creams, shampoos and combinations prescribed by dermatologists for fungal skin infections.</p>
+              <a href="../products/amoxicillin-500mg.html" class="bde-pbrand-cta">
+                View Products <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+        </div><!-- /.bde-pbrand-grid -->
+
+      </div><!-- /.wrap -->
+    </section><!-- /.bde-pbrand-section -->
+
+
+    <!--
+    ============================================================
+    SECTION 8: Representative Products — C-115
+    data-section: bde-products
+    Actual medicine SKUs (distinct from Section 7 Product Brand entities).
+    Horizontally scrollable product card grid (8 cards).
+
+    CMS CONFIGURATION — PRODUCT MASTER INTEGRATION
+    ────────────────────────────────────────────────
+    The CMS editor configures ONLY the following per-brand field:
+      [ACF: representative_product_ids] — Ordered list of Product IDs
+        Example: P12345, P22341, P55672, P99118
+
+    ALL other card content is AUTOMATICALLY INHERITED from the Product Master:
+      Product Name      → post_title (Product CPT)
+      Brand             → brand_slug taxonomy
+      Product Image     → product_image ACF field (Product CPT)
+      Product URL       → post permalink (Product CPT)
+      Dosage Form       → product_form ACF field
+      Strength          → product_strength ACF field
+      Therapeutic Cat.  → therapeutic_category taxonomy
+      Pack Size         → product_pack_size ACF field
+      Primary Image     → product_image (Product CPT master asset)
+      Status            → product_status ACF field
+
+    ⚠️  DO NOT upload duplicate product images on this brand page.
+        All product images must reference Product Master assets only.
+        Uploading brand-specific copies creates asset divergence and
+        maintenance debt.
+
+    [CMS: WP_Query — product CPT, filtered by brand_slug meta, ordered by menu_order]
+    [CMS: WordPress shows "No products" state if brand has no products yet]
+    ============================================================
+    -->
+    <section
+      class="section bde-products-section"
+      data-section="bde-products"
+      data-section-enabled="true"
+      aria-labelledby="bde-products-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Representative Products</span>
+          <h2 id="bde-products-heading">From the Elite Range</h2>
+          <p class="section-sub">A curated selection of Elite's most prescribed individual formulations — each backed by clinical evidence and manufactured to WHO GMP standards. Product images support all packshot formats (portrait, landscape, square).</p>
+        </div>
+
+        <div class="bde-products-scroll" role="region" aria-label="Representative products — scroll horizontally on mobile">
+          <!--
+          [CMS: WP_Query loop — products filtered by representative_product_ids field,
+          max 8 cards, ordered by the configured ID sequence]
+          All card content below is auto-populated from Product Master — no manual entry.
+          -->
+          <div class="bde-products-grid">
+
+            <!--
+            PRODUCT CARD PATTERN — ALL FIELDS AUTO-POPULATED FROM PRODUCT MASTER
+            CMS editor configures only: representative_product_ids = [P12345, ...]
+            ────────────────────────────────────────────────────────────────────
+            [CMS: product_image → auto from Product CPT — DO NOT upload separately]
+            [CMS: therapeutic_category → auto from Product CPT taxonomy]
+            [CMS: post_title → auto from Product CPT]
+            [CMS: product_strength + product_form → auto from Product CPT fields]
+            [CMS: product permalink → auto from Product CPT]
+            -->
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <!-- [CMS: product_image — auto from Product Master (ID: P12345)] -->
+                <!-- [CMS: initials shown only when product_image is not set] -->
+                <span class="bde-product-initials">EC</span>
+              </div>
+              <div class="bde-product-body">
+                <!-- [CMS: therapeutic_category — auto from Product CPT taxonomy] -->
+                <span class="bde-product-cat">Anti-infective</span>
+                <!-- [CMS: post_title — auto from Product CPT] -->
+                <h3 class="bde-product-name">Elite-CF 625</h3>
+                <!-- [CMS: product_strength + product_form — auto from Product CPT] -->
+                <span class="bde-product-form">Amoxicillin + Clavulanate · Tablet</span>
+                <!-- [CMS: permalink — auto from Product CPT] -->
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <span class="bde-product-initials">EZ</span>
+              </div>
+              <div class="bde-product-body">
+                <span class="bde-product-cat">Anti-infective</span>
+                <h3 class="bde-product-name">Elite-Z 500</h3>
+                <span class="bde-product-form">Azithromycin · Tablet</span>
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <span class="bde-product-initials">EP</span>
+              </div>
+              <div class="bde-product-body">
+                <span class="bde-product-cat">Gastrointestinal</span>
+                <h3 class="bde-product-name">Elite-Pan 40</h3>
+                <span class="bde-product-form">Pantoprazole · Tablet</span>
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <span class="bde-product-initials">EN</span>
+              </div>
+              <div class="bde-product-body">
+                <span class="bde-product-cat">Cardiovascular</span>
+                <h3 class="bde-product-name">Elite-Nex 5</h3>
+                <span class="bde-product-form">Nebivolol · Tablet</span>
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <span class="bde-product-initials">EX</span>
+              </div>
+              <div class="bde-product-body">
+                <span class="bde-product-cat">Vitamins &amp; Supplements</span>
+                <h3 class="bde-product-name">Elite-XT</h3>
+                <span class="bde-product-form">Multivitamin · Softgel</span>
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <span class="bde-product-initials">EA</span>
+              </div>
+              <div class="bde-product-body">
+                <span class="bde-product-cat">Anti-infective</span>
+                <h3 class="bde-product-name">Elite-Amox 500</h3>
+                <span class="bde-product-form">Amoxicillin · Capsule</span>
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <span class="bde-product-initials">EC</span>
+              </div>
+              <div class="bde-product-body">
+                <span class="bde-product-cat">Anti-infective</span>
+                <h3 class="bde-product-name">Elite-Clox 500</h3>
+                <span class="bde-product-form">Cloxacillin · Capsule</span>
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="bde-product-card reveal">
+              <div class="bde-product-img" aria-hidden="true">
+                <span class="bde-product-initials">ED</span>
+              </div>
+              <div class="bde-product-body">
+                <span class="bde-product-cat">Pain &amp; Inflammation</span>
+                <h3 class="bde-product-name">Elite-Diclox</h3>
+                <span class="bde-product-form">Diclofenac + Paracetamol · Tablet</span>
+                <a href="../products/amoxicillin-500mg.html" class="bde-product-cta">
+                  View Details <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+
+          </div><!-- /.bde-products-grid -->
+        </div><!-- /.bde-products-scroll -->
+
+        <div class="bde-products-footer reveal">
+          <!-- [CMS: href="/products/?brand={brand_slug}"] -->
+          <a href="../products.html?brand=elite" class="btn btn-outline">
+            View All 400+ Elite Products <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 9: Manufacturing & Quality — C-116
+    data-section: bde-quality
+    Four quality badge cards linking to Manufacturing and Quality modules.
+    [CMS: brand_quality_certs ACF repeater | fields: icon_svg, cert_name, cert_desc, link_url]
+    ============================================================
+    -->
+    <section
+      class="section bde-quality-section"
+      data-section="bde-quality"
+      data-section-enabled="true"
+      aria-labelledby="bde-quality-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Manufacturing &amp; Quality</span>
+          <h2 id="bde-quality-heading">Built on Uncompromising Standards</h2>
+          <p class="section-sub">Every Elite product is manufactured at WHO GMP-certified facilities with rigorous quality management systems — ensuring batch-to-batch consistency across every market.</p>
+        </div>
+
+        <div class="bde-quality-grid">
+
+          <a href="../quality.html" class="bde-quality-card reveal">
+            <div class="bde-quality-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <span class="bde-quality-name">WHO GMP Certified</span>
+            <p class="bde-quality-desc">All five manufacturing facilities comply with WHO Good Manufacturing Practice standards — the global benchmark for pharmaceutical quality.</p>
+            <span class="bde-quality-link">Quality Overview <span aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a href="../quality.html#certifications" class="bde-quality-card reveal">
+            <div class="bde-quality-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="8" r="5"/>
+                <path d="M12 13v9M9 19l3 3 3-3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="bde-quality-name">ISO 9001:2015</span>
+            <p class="bde-quality-desc">Quality management systems across manufacturing and distribution certified to ISO 9001:2015 — ensuring systematic process control and continuous improvement.</p>
+            <span class="bde-quality-link">Certifications <span aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a href="../manufacturing.html" class="bde-quality-card reveal">
+            <div class="bde-quality-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <span class="bde-quality-name">Export Approved</span>
+            <p class="bde-quality-desc">Elite products are cleared for export to 25+ countries across South Asia, Southeast Asia, Africa, and CIS markets by respective regulatory authorities.</p>
+            <span class="bde-quality-link">Global Reach <span aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a href="../manufacturing.html#facilities" class="bde-quality-card reveal">
+            <div class="bde-quality-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <rect x="2" y="7" width="20" height="15" rx="2"/>
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                <line x1="12" y1="12" x2="12" y2="16"/>
+                <line x1="10" y1="14" x2="14" y2="14"/>
+              </svg>
+            </div>
+            <span class="bde-quality-name">Modern Facilities</span>
+            <p class="bde-quality-desc">Five dedicated manufacturing plants equipped with automated dispensing, in-process quality control labs, and validated clean-room environments.</p>
+            <span class="bde-quality-link">Our Facilities <span aria-hidden="true">&rarr;</span></span>
+          </a>
+
+        </div><!-- /.bde-quality-grid -->
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 10: Brand Resources (reuses brd-res-grid + brd-res-card, C-110)
+    data-section: bde-resources
+    Brand-filtered resource cards.
+    [CMS: WP_Query — Resources CPT filtered by brand_slug meta]
+    ============================================================
+    -->
+    <section
+      class="section brd-res-section"
+      data-section="bde-resources"
+      data-section-enabled="true"
+      aria-labelledby="bde-resources-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Elite Resources</span>
+          <h2 id="bde-resources-heading">Downloads &amp; Reference Materials</h2>
+          <p class="section-sub">Clinical support materials, prescriber information, and brand documentation for Elite's product range.</p>
+        </div>
+
+        <!-- [CMS: brand_resources WP_Query | Resources CPT | meta_query: brand_slug = elite | max: 3 shown, "View All" links to Resources filtered] -->
+        <div class="brd-res-grid" style="--res-cols: 3">
+
+          <div class="brd-res-card reveal">
+            <div class="brd-res-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <h3 class="brd-res-card-title"><!-- [CMS: post_title] -->Elite Brand Brochure 2024–25</h3>
+            <p class="brd-res-card-desc"><!-- [CMS: resource_description] -->Comprehensive brand overview, product portfolio summary, therapeutic focus, and manufacturing capabilities for Elite.</p>
+            <a href="../resources.html?resource=elite-brand-brochure" class="btn btn-outline">
+              Download PDF <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="brd-res-card reveal">
+            <div class="brd-res-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+              </svg>
+            </div>
+            <h3 class="brd-res-card-title">Elite Product Catalogue</h3>
+            <p class="brd-res-card-desc">Complete listing of all 400+ Elite products with composition, pack sizes, storage conditions, and regulatory status by market.</p>
+            <a href="../resources.html?resource=elite-product-catalogue" class="btn btn-outline">
+              Download PDF <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="brd-res-card reveal">
+            <div class="brd-res-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4l3 3"/>
+              </svg>
+            </div>
+            <h3 class="brd-res-card-title">Prescriber Information Pack</h3>
+            <p class="brd-res-card-desc">Evidence summaries, clinical data references, and prescribing guidelines for key Elite molecules — curated for specialist physicians.</p>
+            <a href="../resources.html?resource=elite-prescriber-pack" class="btn btn-outline">
+              Download PDF <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+        </div><!-- /.brd-res-grid -->
+
+        <div class="brd-tile-footer reveal" style="margin-top:32px">
+          <a href="../resources.html?brand=elite" class="btn btn-outline">
+            View All Elite Resources <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 11: Latest News (optional — CMS-toggled off when no news exists)
+    data-section: bde-news
+    data-section-enabled: WordPress sets "true" when WP_Query returns ≥1 post for this brand
+    [CMS: WP_Query — media_post CPT | meta_query: brand_association = elite | orderby: date | posts_per_page: 3]
+    ============================================================
+    -->
+    <section
+      class="section"
+      data-section="bde-news"
+      data-section-enabled="false"
+      aria-labelledby="bde-news-heading"
+    >
+      <!-- [CMS: This section is hidden by default via CSS [data-section-enabled="false"] { display:none }]
+           WordPress sets data-section-enabled="true" when the above WP_Query returns ≥1 result.
+           No code change needed — just a single ACF or PHP conditional on the attribute. -->
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Latest from Elite</span>
+          <h2 id="bde-news-heading">News &amp; Updates</h2>
+        </div>
+        <!-- [CMS: WordPress loop here — 3 media_post cards, brand-filtered] -->
+      </div>
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 12: Official Website Card — C-117 (conditional)
+    data-section: bde-website
+    Rendered ONLY when brand_website_url ACF field is set and non-empty.
+    Elite has no live website → data-section-enabled="false" for this template.
+    AquaLab: https://aqualabindia.com/ → data-section-enabled="true"
+    Labolia Beaute: https://www.laboliabeaute.com/ → data-section-enabled="true"
+    ============================================================
+    -->
+    <section
+      class="section bde-website-section"
+      data-section="bde-website"
+      data-section-enabled="false"
+      aria-labelledby="bde-website-heading"
+    >
+      <!--
+      [CMS: WordPress conditional:
+        if ( get_field('brand_website_url') ) {
+          the_section(); // renders this section with data-section-enabled="true"
+        }
+      ]
+
+      Example output for AquaLab (brand_website_url = https://aqualabindia.com/):
+      -->
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Digital Presence</span>
+          <h2 id="bde-website-heading">Visit the Official Website</h2>
+        </div>
+        <div class="bde-website-card reveal">
+          <div>
+            <div class="bde-website-brand">
+              <div class="bde-website-logo bde-logo-wrap bde-logo-wrap--landscape" aria-hidden="true">
+                <!--
+                [CMS: logo_orientation → bde-logo-wrap--square / --portrait / --landscape]
+                [CMS: when brand_logo is set]: <img src="{logo_url}" alt="" loading="lazy">
+                [CMS: when brand_logo empty → initials fallback]
+                -->
+                <span>AL</span>
+              </div>
+              <div>
+                <!-- [CMS: brand_name] -->
+                <div class="bde-website-name">AquaLab</div>
+                <!-- [CMS: brand_website_url — display only] -->
+                <div class="bde-website-url">aqualabindia.com</div>
+              </div>
+            </div>
+            <!-- [CMS: brand_website_description] -->
+            <p class="bde-website-desc">AquaLab India is Laborate's dedicated aquatics and aquaculture brand — a complete range of evidence-based health solutions for aquatic species including shrimp, fish, and prawn. Explore the full product range and technical resources directly on the AquaLab India website.</p>
+          </div>
+          <div class="bde-website-ctas">
+            <!-- [CMS: brand_website_url] -->
+            <a href="https://aqualabindia.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Visit Website <span aria-hidden="true">↗</span>
+            </a>
+            <a href="../products.html?brand=aqualab" class="btn btn-outline-light">
+              Products on Laborate.com <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 13: Related Brands — C-118
+    data-section: bde-related
+    Hierarchy-aware related brands:
+      - Parent brand view → sub-brands (Elite Exotic, Elite 67)
+      - Sub-brand view → sibling sub-brands + parent brand
+    [CMS: brand_related_brands ACF relationship field]
+    ============================================================
+    -->
+    <section
+      class="section bde-related-section"
+      data-section="bde-related"
+      data-section-enabled="true"
+      aria-labelledby="bde-related-heading"
+    >
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Elite Family</span>
+          <h2 id="bde-related-heading">Explore the Sub-Brands</h2>
+          <p class="section-sub">Elite's sub-brands extend the flagship prescription range into specialist therapeutic niches — each with its own focus, identity, and clinical rationale.</p>
+        </div>
+
+        <!-- [CMS: brand_related_brands ACF relationship | loop each related brand] -->
+        <div class="bde-related-grid">
+
+          <!-- Elite Exotic — Novel Drug Delivery Systems -->
+          <!-- [CMS: card accent color from related brand's brand_accent_color] -->
+          <a href="brands/elite/exotic/" class="bde-related-card reveal" style="--card-accent: #647593">
+            <div class="bde-related-card-accent" aria-hidden="true"></div>
+            <div class="bde-related-card-body">
+              <div class="bde-related-logo bde-logo-wrap bde-logo-wrap--square" aria-hidden="true">
+                <!-- [CMS: logo_orientation → modifier class; when brand_logo set → <img>; else → initials] -->
+                <!-- [CMS: when brand_logo is set]: <img src="{logo_url}" alt="" loading="lazy"> -->
+                <span class="bde-related-logo-initials">EE</span>
+              </div>
+              <!-- [CMS: brand_type] -->
+              <span class="bde-related-type">Sub-Brand</span>
+              <!-- [CMS: brand_name] -->
+              <h3 class="bde-related-name">Elite Exotic</h3>
+              <!-- [CMS: brand_tagline] -->
+              <p class="bde-related-tagline">Novel drug delivery systems and specialty pharmaceutical formulations for complex clinical needs.</p>
+            </div>
+            <div class="bde-related-card-footer">
+              <span class="bde-related-link">View Brand <span aria-hidden="true">&rarr;</span></span>
+              <!-- [CMS: brand_product_count] -->
+              <span class="bde-related-products">80+ Products</span>
+            </div>
+          </a>
+
+          <!-- Elite 67 — Specialty Dermatology -->
+          <a href="brands/elite/67/" class="bde-related-card reveal" style="--card-accent: #2563eb">
+            <div class="bde-related-card-accent" aria-hidden="true"></div>
+            <div class="bde-related-card-body">
+              <div class="bde-related-logo bde-logo-wrap bde-logo-wrap--square" aria-hidden="true">
+                <!-- [CMS: when brand_logo is set]: <img src="{logo_url}" alt="" loading="lazy"> -->
+                <span class="bde-related-logo-initials">E67</span>
+              </div>
+              <span class="bde-related-type">Sub-Brand</span>
+              <h3 class="bde-related-name">Elite 67</h3>
+              <p class="bde-related-tagline">Specialty dermatology range — topicals, retinoids, and systemic therapies for skin and hair conditions.</p>
+            </div>
+            <div class="bde-related-card-footer">
+              <span class="bde-related-link">View Brand <span aria-hidden="true">&rarr;</span></span>
+              <span class="bde-related-products">60+ Products</span>
+            </div>
+          </a>
+
+          <!-- Placeholder: future sub-brand slot / "See All Brands" card -->
+          <a href="../brands.html" class="bde-related-card reveal" style="--card-accent: var(--muted)">
+            <div class="bde-related-card-accent" aria-hidden="true"></div>
+            <div class="bde-related-card-body" style="justify-content:center; align-items:center; text-align:center; min-height:180px">
+              <div aria-hidden="true" style="font-size:2rem; opacity:0.25; font-weight:800; font-family:var(--font-heading)">+</div>
+              <h3 class="bde-related-name" style="color:var(--muted)">All Laborate Brands</h3>
+              <p class="bde-related-tagline">Explore the complete Laborate brand ecosystem — parent brands, sub-brands, and product brands.</p>
+            </div>
+            <div class="bde-related-card-footer">
+              <span class="bde-related-link">View All Brands <span aria-hidden="true">&rarr;</span></span>
+            </div>
+          </a>
+
+        </div><!-- /.bde-related-grid -->
+
+      </div><!-- /.wrap -->
+    </section>
+
+
+    <!--
+    ============================================================
+    SECTION 14: Brand CTA Band — C-120 (redesigned)
+    data-section: bde-cta
+    Premium conversion section. Replaces generic contact-band for brand pages.
+    2-col layout: headline + supporting text + service bullets (left)
+    CTAs (right, stacked).
+    [CMS: brand_name injected into headline]
+    [CMS: brand_website_url — third CTA rendered conditionally]
+    ============================================================
+    -->
+    <section
+      class="bde-cta-band"
+      data-section="bde-cta"
+      data-section-enabled="true"
+      aria-labelledby="bde-cta-heading"
+    >
+      <div class="wrap">
+        <div class="bde-cta-inner">
+
+          <div class="bde-cta-content">
+            <span class="eyebrow">Get in Touch</span>
+            <!-- [CMS: "Partner with {brand_name}"] -->
+            <h2 id="bde-cta-heading">Partner with Elite</h2>
+            <!-- [CMS: brand_cta_tagline — default text below] -->
+            <p class="bde-cta-tagline">Whether you are a healthcare professional, distribution partner, institution, or international buyer — our team is ready to support your business and clinical needs.</p>
+
+            <!-- [CMS: brand_cta_services repeater — default list below when not configured] -->
+            <ul class="bde-cta-services" role="list">
+              <li>Product Enquiries</li>
+              <li>Distribution Partnerships</li>
+              <li>Marketing Support</li>
+              <li>Clinical Information</li>
+              <li>Export Business</li>
+              <li>Resource Downloads</li>
+            </ul>
+
+            <!--
+            BRAND CONTACT BLOCK
+            [CMS: Only render populated fields. Empty fields are hidden automatically.]
+            [CMS: If brand-specific emails do not exist, fall back to brands@laborate.com / medical@laborate.com]
+            [CMS: Fields: brand_email, medical_email, sales_email, phone, contact_person]
+            -->
+            <div class="bde-cta-contact">
+              <!-- [CMS: brand_contact_label — default "Brand Support"] -->
+              <h3 class="bde-cta-contact-heading">Brand Support</h3>
+              <!-- [CMS: brand_contact_intro — default "Questions about {brand_name}?"] -->
+              <p class="bde-cta-contact-sub">Questions about Elite?</p>
+              <div class="bde-cta-contact-items">
+                <!-- [CMS: brand_email — hide this item when empty] -->
+                <a href="mailto:elite@laborate.com" class="bde-cta-contact-link">
+                  <span class="bde-cta-contact-label">Email</span>
+                  <span class="bde-cta-contact-value">elite@laborate.com</span>
+                </a>
+                <!-- [CMS: medical_email — hide this item when empty] -->
+                <a href="mailto:medical@laborate.com" class="bde-cta-contact-link">
+                  <span class="bde-cta-contact-label">Medical Information</span>
+                  <span class="bde-cta-contact-value">medical@laborate.com</span>
+                </a>
+                <!--
+                [CMS: Optional fields — render only when populated]
+                <a href="tel:{phone}" class="bde-cta-contact-link">
+                  <span class="bde-cta-contact-label">Phone</span>
+                  <span class="bde-cta-contact-value">{phone}</span>
+                </a>
+                <div class="bde-cta-contact-link">
+                  <span class="bde-cta-contact-label">Contact</span>
+                  <span class="bde-cta-contact-value">{contact_person}</span>
+                </div>
+                -->
+              </div>
+            </div>
+          </div>
+
+          <div class="bde-cta-panel">
+            <!-- Primary: always shown -->
+            <!-- [CMS: href="/contact/?subject={brand_name}+Brand+Enquiry"] -->
+            <a href="../contact.html?subject=Elite+Brand+Enquiry" class="btn btn-primary">
+              Contact Brand Team <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <!-- Secondary: links to brand catalogue PDF -->
+            <!-- [CMS: brand_catalogue_url from Resources CPT] -->
+            <a href="../resources.html?brand=elite&type=catalogue" class="btn btn-outline-light">
+              Download Catalogue
+            </a>
+            <!--
+            [CMS: Conditional third CTA — rendered only when brand_website_url is set]
+            <a href="{brand_website_url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
+              Visit Website <span aria-hidden="true">↗</span>
+            </a>
+            -->
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!--
+  ============================================================
+  SITE FOOTER — global, unchanged
+  ============================================================
+  -->
+  <footer>
+    <div class="wrap">
+
+      <div class="foot-top">
+
+        <div class="foot-brand">
+          <a href="../index.html" aria-label="Laborate Pharmaceuticals — Home">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="32" loading="lazy">
+          </a>
+          <p>A global pharmaceutical manufacturing and healthcare solutions company, delivering quality medicines from research to patients worldwide since 1985.</p>
+          <div class="foot-contact">
+            <span>E-11, Industrial Area, Panipat-132103, India</span>
+            <a href="mailto:info@laborate.com">info@laborate.com</a>
+            <a href="tel:+911803508200">+91-180-3508200</a>
+          </div>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/laborate-pharmaceuticals-india-limited/" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4zM8 8h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.74 1.85-2.74 3.77V24H8z" /></svg>
+            </a>
+            <a href="https://www.facebook.com/laborate.india.ltd/" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.75-1.6 1.5V12h2.7l-.43 2.9h-2.3v7A10 10 0 0 0 22 12z" /></svg>
+            </a>
+            <a href="https://www.instagram.com/laborate.india.ltd/?hl=en" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.3.07 1.69.07 4.9s0 3.6-.07 4.9c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.3.06-1.69.07-4.9.07s-3.6 0-4.9-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.8 2.2 12 2.2zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38zm6.97-11.4a1.58 1.58 0 1 0 0 3.15 1.58 1.58 0 0 0 0-3.15z" /></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="foot-col">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="../about.html">Company Overview</a></li>
+            <li><a href="../about/leadership.html">Leadership</a></li>
+            <li><a href="../about/awards.html">Awards &amp; Recognition</a></li>
+            <li><a href="../about/why-laborate.html">Why Laborate</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Our Brands</h4>
+          <ul>
+            <li><a href="../brands.html">Brand Ecosystem</a></li>
+            <li><a href="brands/elite/">Elite</a></li>
+            <li><a href="brands/aqualab/">AquaLab</a></li>
+            <li><a href="brands/labolia-beaute/">Labolia Beaute</a></li>
+            <li><a href="brands/gpp-axalade/">GPP Axalade</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="../products/catalogue.html">Product Catalogue</a></li>
+            <li><a href="../products.html">Products Overview</a></li>
+            <li><a href="../products/catalogue.html">Search Products</a></li>
+            <li><a href="../contact.html">Product Enquiry</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../manufacturing.html">Manufacturing</a></li>
+            <li><a href="../quality.html">Quality</a></li>
+            <li><a href="../global.html">Global</a></li>
+            <li><a href="../careers.html">Careers</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /.foot-top -->
+
+      <div class="foot-bottom">
+        <p>&copy; 2026 Laborate Pharmaceuticals India Ltd. All rights reserved.</p>
+        <div class="legal">
+          <a href="../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../legal/terms-and-conditions.html">Terms &amp; Conditions</a>
+          <a href="../legal/cookie-policy.html">Cookie Policy</a>
+        </div>
+        <div class="vendor-credit">
+          Powered by
+          <a href="https://www.oktoberry.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 116 167" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oktoberry">
+              <g id="berry" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <g><path d="m531.21 275.21c25.098 14.923 256.99 142.47 322.2 181.67-26.355 13.024-121.46 67.697-170.76 93.167-30.819-48.883-158.28-256.83-170.65-275.59 13.023 0.15475 12.286 0.42988 19.208 0.75503z" fill="#0c4269" /><path d="m170.65 462.99c58.347 27.536 135.66 69.198 170.68 87.195-4.2644 6.11-165.82 243.55-170.67 249.83-0.0262-9.9814-0.0508-329.71-0.0119-337.03z" fill="#1988d7" /><path d="m853.39 456.88c0.52027 47.958 0.35951 305.13-0.0146 343.12-4.0215-5.8717-170.71-249.96-170.71-249.96 42.689-22.387 138.65-77.425 170.73-93.159z" fill="#062337" /><path d="m512.05 1016.9c0.0744-11.808-0.5955-115.5-0.0492-172.85 60.841-7.7268 329.53-42.472 341.38-44.039 0 0-336.25 213.97-341.33 216.88z" /><path d="m512.01 844.04c-0.14148 57.245 0.16143 163.77 0.0427 172.86-46.625-25.866-303.75-194.75-341.4-216.89 54.722 7.007 221.54 21.896 341.35 44.033z" fill="#0a3452" /><path d="m170.67 462.99c71.769-44.473 208.19-126.17 321.24-187.35 5.8745-1.1628 13.439-1.0717 20.092-1.1948-54.813 86.485-158.39 256.45-170.67 275.71" fill="#5bafec" /></g>
+                <path d="m852.5 53.3c-0.45794-0.7872-0.15035-1.3261 0.68472-2.0475 0.24038 0.56464 0.0914 1.3908-0.68472 2.0475z" fill="#224f38" />
+                <g><path d="m512 274.45c6.4257 6.6504 167.58 270.74 170.66 275.58-3.6502-0.0455-339.39 0.14376-341.33 0.13047 1.0021-1.4787 164.27-267.37 170.66-275.71z" fill="#1365a0" /><path d="m341.33 550.17c3.0641 0.0176 323.33-0.41843 341.34-0.13493-6.3066 10.5-170.22 293.28-170.67 294.02-0.71653-1.1746-162.38-278.35-170.67-293.89z" fill="#0b3d60" /><path d="m341.33 550.17c6.1989 10.382 149.02 256.32 170.67 293.87-58.996-10.129-317.82-40.079-341.33-44.044 4.3815-5.9158 163.89-240.5 170.67-249.83z" fill="#115c92" /><path d="m512 844.05c2.2022-4.7744 167.81-289.45 170.67-294.02 4.815 7.0103 165.28 241.73 170.71 249.98-13.144 1.8281-315 41.036-341.38 44.042z" fill="#03111b" /></g>
+                <path d="m374.39 387.55c-0.917-0.23787-1.4729-0.82087-2.0288-1.4039 0.24138-0.23002 0.4828-0.46009 0.72416-0.6901 0.55524 0.58294 1.1106 1.1659 1.3047 2.094z" fill="#cda9d7" />
+              </g>
+              <g id="leaves" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <path d="m542.13 274.88c-6.7035 0.68517-17.083 0.23972-24.825-0.32194 48.528-83.188 208.91-166.17 330.83-221.53-31.735 150.69-165.75 212.4-306 221.85z" fill="#224f38" />
+                <path d="m481.87 274.88c6.7035 0.68517 17.083 0.23972 24.825-0.32194-48.528-83.188-208.91-166.17-330.83-221.53 31.735 150.69 165.75 212.4 306 221.85z" fill="#2d7a47" />
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div><!-- /.foot-bottom -->
+
+    </div><!-- /.wrap -->
+  </footer>
+
+  <script type="module" src="/assets/js/app.js"></script>
+
+<script src="/assets/js/preview-gate.js"></script>
+</body>
+</html>

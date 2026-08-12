@@ -1,0 +1,14 @@
+{
+  "id": "manufacturing",
+  "land":          "#E8F4E8",
+  "landHover":     "#C8E6C9",
+  "water":         "#B3D9F7",
+  "border":        "#FFFFFF",
+  "borderWidth":   0.8,
+  "markerFill":    "#1B5E20",
+  "markerStroke":  "#FFFFFF",
+  "markerPulse":   "#43A047",
+  "clusterFill":   "#2E7D32",
+  "clusterStroke": "#FFFFFF",
+  "clusterText":   "#FFFFFF"
+}

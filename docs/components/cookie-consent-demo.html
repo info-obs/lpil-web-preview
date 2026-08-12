@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script>(function(){if(sessionStorage.getItem("oktoberry_preview_authenticated")!=="1"){document.documentElement.style.visibility="hidden";try{sessionStorage.setItem("oktoberry_preview_redirect",location.href);}catch(e){}}})();</script>
+  <link rel="stylesheet" href="/assets/css/preview-gate.css">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+  ============================================================
+  COOKIE CONSENT SYSTEM — Component Demo & Documentation
+  COOKIE-001-P1
+
+  Components:
+    C-127  Enterprise Cookie Banner        (.cc-banner)
+    C-128  Cookie Preference Centre        (.cc-modal)
+    C-129  Consent Management Engine       (CookieConsentController.js)
+    C-130  Floating Preferences Button     (.cc-fab)
+
+  This file serves as:
+    1. A working demonstration of the full cookie consent system
+    2. The canonical HTML pattern reference for WordPress integration
+    3. A testing environment for CookieConsentController.js
+
+  WordPress integration:
+    The banner, modal, and FAB HTML are output via a global template part:
+      get_template_part('template-parts/global/cookie-consent');
+    Called inside footer.php, before <script src="/assets/js/preview-gate.js"></script>
+</body>.
+
+  localStorage key: laborate_cookie_preferences
+  window.CookieConsent API: acceptAll() rejectOptional() save() reset()
+                             preferences() hasConsent(category) showPreferences()
+  ============================================================
+  -->
+
+  <title>Cookie Consent System — Component Demo — Laborate</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+
+  <!-- Main design system -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <!-- Cookie Consent component styles -->
+  <link rel="stylesheet" href="/assets/css/components/cookie-consent.css">
+
+  <style>
+    /* Demo page-only styles */
+    .demo-page {
+      min-height: 100vh;
+      background: #f3f6fb;
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 60px 24px 160px;
+    }
+    .demo-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .demo-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #1062AC;
+      margin: 0 0 8px;
+    }
+    .demo-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      color: #1E2B4A;
+      margin: 0 0 8px;
+    }
+    .demo-subtitle {
+      font-size: 15px;
+      color: #5a6b8c;
+      margin: 0 0 40px;
+      line-height: 1.6;
+    }
+    .demo-section {
+      background: white;
+      border: 1px solid #e3eaf2;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .demo-section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1E2B4A;
+      margin: 0 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e3eaf2;
+    }
+    .demo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 1px solid #e3eaf2;
+      background: white;
+      color: #1E2B4A;
+      cursor: pointer;
+      transition: background .15s, box-shadow .15s;
+    }
+    .demo-btn:hover {
+      background: #f7faf9;
+      box-shadow: 0 2px 8px rgba(15,27,56,.08);
+    }
+    .demo-btn--primary {
+      background: #1062AC;
+      border-color: #1062AC;
+      color: white;
+    }
+    .demo-btn--primary:hover {
+      background: #0c4f8c;
+      box-shadow: 0 4px 14px rgba(16,98,172,.25);
+    }
+    .demo-code {
+      background: #0c1730;
+      color: #a8c4e0;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 12px 0 0;
+    }
+    .demo-code .kw  { color: #7dd3fc; }
+    .demo-code .str { color: #86efac; }
+    .demo-code .cmt { color: #475569; }
+    .demo-output {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #f7faf9;
+      border: 1px solid #e3eaf2;
+      border-radius: 8px;
+      font-family: ui-monospace, monospace;
+      font-size: 13px;
+      color: #1E2B4A;
+      min-height: 40px;
+      word-break: break-all;
+    }
+    .demo-notice {
+      background: #edf7f0;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #166534;
+      margin-top: 12px;
+    }
+    .demo-notice--info {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       DEMO PAGE BODY
+  ════════════════════════════════════════════════════════════════════════ -->
+
+  <main class="demo-page">
+    <div class="demo-wrap">
+
+      <p class="demo-eyebrow">C-127 · C-128 · C-129 · C-130</p>
+      <h1 class="demo-title">Cookie Consent System</h1>
+      <p class="demo-subtitle">COOKIE-001-P1 — Enterprise Cookie Consent &amp; Preference Management. This page demonstrates all four components in a working environment. Open the browser console to inspect <code>window.CookieConsent</code>.</p>
+
+      <!-- Controls -->
+      <div class="demo-section">
+        <p class="demo-section-title">Demo Controls</p>
+        <div class="demo-grid">
+          <button class="demo-btn demo-btn--primary" onclick="CookieConsent?.reset()">
+            ↺ Reset (clear consent &amp; show banner)
+          </button>
+          <button class="demo-btn" onclick="CookieConsent?.showPreferences()">
+            ⚙ Open Preference Centre
+          </button>
+          <button class="demo-btn" onclick="
+            const el = document.getElementById('demo-output');
+            el.textContent = JSON.stringify(CookieConsent?.preferences(), null, 2) ?? 'null (no consent stored)';
+          ">
+            📋 Log preferences
+          </button>
+          <button class="demo-btn" onclick="
+            const cats = ['necessary','analytics','functional','marketing','embedded','social','personalization'];
+            const results = Object.fromEntries(cats.map(c => [c, CookieConsent?.hasConsent(c)]));
+            document.getElementById('demo-output').textContent = JSON.stringify(results, null, 2);
+          ">
+            ✓ hasConsent() for each category
+          </button>
+        </div>
+        <div class="demo-output" id="demo-output">Output will appear here&hellip;</div>
+      </div>
+
+      <!-- API reference -->
+      <div class="demo-section">
+        <p class="demo-section-title">window.CookieConsent API (C-129)</p>
+        <div class="demo-code">
+<span class="cmt">// Available after page load — set by CookieConsentController.js</span>
+window.CookieConsent.<span class="kw">acceptAll</span>()       <span class="cmt">// Accept all categories, save, close UI</span>
+window.CookieConsent.<span class="kw">rejectOptional</span>()  <span class="cmt">// Accept necessary only, reject optional</span>
+window.CookieConsent.<span class="kw">save</span>()           <span class="cmt">// Save current modal toggles</span>
+window.CookieConsent.<span class="kw">reset</span>()          <span class="cmt">// Clear localStorage, re-show banner</span>
+window.CookieConsent.<span class="kw">preferences</span>()    <span class="cmt">// Returns stored prefs object or null</span>
+window.CookieConsent.<span class="kw">hasConsent</span>(<span class="str">'analytics'</span>)  <span class="cmt">// Returns boolean</span>
+window.CookieConsent.<span class="kw">showPreferences</span>() <span class="cmt">// Opens preference centre modal</span>
+        </div>
+        <div class="demo-notice demo-notice--info">
+          The <code>laborate:consent:applied</code> CustomEvent is dispatched on <code>document</code> whenever preferences are applied. Listen with <code>document.addEventListener('laborate:consent:applied', e => console.log(e.detail))</code>.
+        </div>
+      </div>
+
+      <!-- Storage reference -->
+      <div class="demo-section">
+        <p class="demo-section-title">localStorage Schema (laborate_cookie_preferences)</p>
+        <div class="demo-code">{
+  <span class="str">"version"</span>:         <span class="kw">1</span>,
+  <span class="str">"necessary"</span>:       <span class="kw">true</span>,   <span class="cmt">// always true — cannot be disabled</span>
+  <span class="str">"analytics"</span>:       <span class="kw">false</span>,  <span class="cmt">// Google Analytics 4</span>
+  <span class="str">"functional"</span>:      <span class="kw">false</span>,  <span class="cmt">// Future</span>
+  <span class="str">"marketing"</span>:       <span class="kw">false</span>,  <span class="cmt">// Future</span>
+  <span class="str">"embedded"</span>:        <span class="kw">false</span>,  <span class="cmt">// Future: YouTube, Maps</span>
+  <span class="str">"social"</span>:          <span class="kw">false</span>,  <span class="cmt">// Future: LinkedIn, Meta</span>
+  <span class="str">"personalization"</span>: <span class="kw">false</span>,  <span class="cmt">// Future</span>
+  <span class="str">"timestamp"</span>:       <span class="str">"2026-07-16T10:00:00.000Z"</span>
+}</div>
+      </div>
+
+      <!-- WordPress integration reference -->
+      <div class="demo-section">
+        <p class="demo-section-title">WordPress Integration Pattern</p>
+        <div class="demo-notice">
+          In WordPress, the banner + modal + FAB HTML is included via <code>get_template_part('template-parts/global/cookie-consent')</code> called from <code>footer.php</code>. The controller is registered in <code>functions.php</code> via <code>wp_enqueue_script</code> with <code>defer</code>. Script loading is unconditional for now; conditional loading based on <code>CookieConsent.hasConsent()</code> will be added in a future CMP integration prompt.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       C-127 — ENTERPRISE COOKIE BANNER
+
+       WordPress: output via template-parts/global/cookie-consent.php
+       Hook: called from footer.php before <script src="/assets/js/preview-gate.js"></script>
+</body>
+       CMS fields (ACF):
+         - cc_banner_heading   : "We Respect Your Privacy"
+         - cc_banner_desc      : short description
+         - cc_privacy_url      : URL to Privacy Policy
+         - cc_cookie_policy_url: URL to Cookie Policy
+  ════════════════════════════════════════════════════════════════════════ -->
+  <div
+    class="cc-banner"
+    id="cc-banner"
+    role="region"
+    aria-label="Cookie consent"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <div class="cc-banner-inner">
+
+      <!-- Heading -->
+      <!-- [CMS: cc_banner_heading] -->
+      <h2 class="cc-banner-heading" tabindex="-1">
+        <span class="cc-banner-icon" aria-hidden="true">
+          <!-- Cookie SVG icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+            <path d="M8.5 8.5v.01"/>
+            <path d="M16 15.5v.01"/>
+            <path d="M12 12v.01"/>
+          </svg>
+        </span>
+        We Respect Your Privacy
+      </h2>
+
+      <!-- Description -->
+      <!-- [CMS: cc_banner_desc] -->
+      <p class="cc-banner-desc">
+        Laborate uses strictly necessary cookies to keep our website working and optional analytics cookies (Google Analytics 4) to help us understand how visitors use our site. We do not use advertising, marketing, or tracking cookies. You can accept all cookies, reject optional ones, or customise your preferences at any time.
+      </p>
+
+      <!-- Footer: policy links + action buttons -->
+      <div class="cc-banner-footer">
+
+        <!-- Policy links -->
+        <ul class="cc-banner-links" role="list">
+          <!-- [CMS: cc_privacy_url] -->
+          <li><a class="cc-banner-link" href="../legal/privacy-policy.html">Privacy Policy</a></li>
+          <!-- [CMS: cc_cookie_policy_url] -->
+          <li><a class="cc-banner-link" href="../legal/cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+
+        <!-- Action buttons (3 options — no dark patterns) -->
+        <div class="cc-banner-actions" role="group" aria-label="Cookie consent options">
+
+          <!-- Ghost: customize -->
+          <button
+            class="cc-btn cc-btn-ghost cc-btn-sm"
+            type="button"
+            data-cc-action="customize"
+            aria-haspopup="dialog"
+          >
+            Customise
+          </button>
+
+          <!-- Secondary: reject optional -->
+          <button
+            class="cc-btn cc-btn-secondary cc-btn-sm"
+            type="button"
+            data-cc-action="reject-optional"
+          >
+            Reject Optional
+          </button>
+
+          <!-- Primary: accept all -->
+          <button
+            class="cc-btn cc-btn-primary cc-btn-sm"
+            type="button"
+            data-cc-action="accept-all"
+          >
+            Accept All
+          </button>
+
+        </div><!-- /.cc-banner-actions -->
+
+      </div><!-- /.cc-banner-footer -->
+
+    </div><!-- /.cc-banner-inner -->
+  </div><!-- /.cc-banner -->
+
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       C-128 — COOKIE PREFERENCE CENTRE (MODAL)
+
+       WordPress: same template part as banner
+       ARIA: role="dialog" aria-modal="true" aria-labelledby="cc-modal-title"
+       Focus trap: managed by CookieConsentController.js #handleModalKey()
+  ════════════════════════════════════════════════════════════════════════ -->
+  <div
+    class="cc-modal"
+    id="cc-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cc-modal-title"
+    aria-hidden="true"
+  >
+
+    <!-- Overlay — click closes modal -->
+    <div class="cc-modal-overlay" aria-hidden="true"></div>
+
+    <!-- Dialog card -->
+    <div class="cc-modal-dialog" role="document">
+
+      <!-- Sticky header -->
+      <div class="cc-modal-header">
+        <h2 class="cc-modal-title" id="cc-modal-title">Cookie Preferences</h2>
+        <button
+          class="cc-modal-close"
+          type="button"
+          aria-label="Close Cookie Preferences"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable body -->
+      <div class="cc-modal-body">
+
+        <!-- Intro -->
+        <!-- [CMS: cc_modal_intro] -->
+        <p class="cc-modal-intro">
+          Manage your cookie preferences below. Strictly necessary cookies are always active as they are required for the website to function. You can enable or disable optional cookie categories at any time. Your choices are saved in your browser and can be changed by returning to this panel.
+          <a href="../legal/cookie-policy.html">Read our full Cookie Policy</a> for more information.
+        </p>
+
+        <!-- ── Cookie Categories ── -->
+        <p class="cc-section-label">Cookie Categories</p>
+
+        <div class="cc-categories" role="list">
+
+          <!-- ─ Category 1: Strictly Necessary (always on, toggle locked) ─ -->
+          <!-- [CMS: cc_category_necessary — ACF group] -->
+          <div class="cc-category" role="listitem">
+            <div class="cc-category-header">
+              <div class="cc-category-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div class="cc-category-info">
+                <h3 class="cc-category-name">Strictly Necessary</h3>
+                <p class="cc-category-desc">
+                  Essential for the website to function. These cookies enable core services including security, session management, and accessibility. They cannot be disabled.
+                  Includes: <strong>laborate_cookie_preferences</strong> (your consent record).
+                </p>
+              </div>
+              <div class="cc-category-control">
+                <!-- Always-enabled badge + locked toggle -->
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span class="cc-badge cc-badge--always" role="status">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
+                    Always&nbsp;Enabled
+                  </span>
+                  <label class="cc-toggle" aria-label="Strictly necessary cookies — always enabled">
+                    <input
+                      type="checkbox"
+                      data-cc-category="necessary"
+                      checked
+                      disabled
+                      aria-disabled="true"
+                      aria-label="Strictly necessary cookies — always enabled and cannot be disabled"
+                    >
+                    <span class="cc-toggle-track"><span class="cc-toggle-thumb"></span></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─ Category 2: Analytics (GA4) ─ -->
+          <!-- [CMS: cc_category_analytics — ACF group] -->
+          <div class="cc-category" role="listitem">
+            <div class="cc-category-header">
+              <div class="cc-category-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6"  y1="20" x2="6"  y2="14"/>
+                </svg>
+              </div>
+              <div class="cc-category-info">
+                <h3 class="cc-category-name">Analytics</h3>
+                <p class="cc-category-desc">
+                  We use <strong>Google Analytics 4</strong> to understand how visitors navigate our website — which pages are visited, how long users stay, and where visitors come from. All data is anonymised. No personal identifiers are shared with Google. Consent here applies to GA4 cookies: <strong>_ga</strong>, <strong>_ga_[ID]</strong>, <strong>_gid</strong>.
+                </p>
+              </div>
+              <div class="cc-category-control">
+                <label class="cc-toggle" aria-label="Analytics cookies">
+                  <input
+                    type="checkbox"
+                    data-cc-category="analytics"
+                    aria-label="Enable analytics cookies (Google Analytics 4)"
+                  >
+                  <span class="cc-toggle-track"><span class="cc-toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─ Category 3: Functional (future) ─ -->
+          <!-- [CMS: cc_category_functional — ACF group; toggle disabled until functional cookies deployed] -->
+          <div class="cc-category cc-category--future" role="listitem">
+            <div class="cc-category-header">
+              <div class="cc-category-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2z"/>
+                  <path d="M7 7h.01"/>
+                </svg>
+              </div>
+              <div class="cc-category-info">
+                <h3 class="cc-category-name">Functional</h3>
+                <p class="cc-category-desc">
+                  Enhance your experience with personalised features such as saved preferences, language selection, or chat support. Currently not deployed on laborate.com.
+                  <!-- [CMS: cc_functional_candidates] Future candidates: live chat (Crisp/Intercom), language preference -->
+                </p>
+              </div>
+              <div class="cc-category-control">
+                <span class="cc-badge cc-badge--future">Not in use</span>
+                <label class="cc-toggle" aria-label="Functional cookies — not currently in use" style="margin-left:10px;">
+                  <input
+                    type="checkbox"
+                    data-cc-category="functional"
+                    disabled
+                    aria-label="Functional cookies — not currently used by Laborate"
+                    aria-disabled="true"
+                  >
+                  <span class="cc-toggle-track"><span class="cc-toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─ Category 4: Marketing (future) ─ -->
+          <!-- [CMS: cc_category_marketing] Future: Meta Pixel, LinkedIn Insight, Google Ads -->
+          <div class="cc-category cc-category--future" role="listitem">
+            <div class="cc-category-header">
+              <div class="cc-category-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
+              <div class="cc-category-info">
+                <h3 class="cc-category-name">Marketing</h3>
+                <p class="cc-category-desc">
+                  Used to measure campaign effectiveness and show relevant advertisements on third-party platforms. Not currently deployed. Future candidates include Meta Pixel, LinkedIn Insight Tag, and Google Ads conversion tracking.
+                </p>
+              </div>
+              <div class="cc-category-control">
+                <span class="cc-badge cc-badge--future">Not in use</span>
+                <label class="cc-toggle" aria-label="Marketing cookies — not currently in use" style="margin-left:10px;">
+                  <input
+                    type="checkbox"
+                    data-cc-category="marketing"
+                    disabled
+                    aria-label="Marketing cookies — not currently used by Laborate"
+                    aria-disabled="true"
+                  >
+                  <span class="cc-toggle-track"><span class="cc-toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─ Category 5: Embedded Media (future) ─ -->
+          <!-- [CMS: cc_category_embedded] Future: YouTube embeds, Google Maps, Vimeo -->
+          <div class="cc-category cc-category--future" role="listitem">
+            <div class="cc-category-header">
+              <div class="cc-category-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <div class="cc-category-info">
+                <h3 class="cc-category-name">Embedded Media</h3>
+                <p class="cc-category-desc">
+                  Allows content from third-party platforms to display inline — such as YouTube videos, Google Maps, and Vimeo. Without this consent, placeholder content is shown instead. Not currently deployed at scale.
+                </p>
+              </div>
+              <div class="cc-category-control">
+                <span class="cc-badge cc-badge--future">Not in use</span>
+                <label class="cc-toggle" aria-label="Embedded media cookies — not currently in use" style="margin-left:10px;">
+                  <input
+                    type="checkbox"
+                    data-cc-category="embedded"
+                    disabled
+                    aria-label="Embedded media cookies — not currently used by Laborate"
+                    aria-disabled="true"
+                  >
+                  <span class="cc-toggle-track"><span class="cc-toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─ Category 6: Social Media (future) ─ -->
+          <!-- [CMS: cc_category_social] Future: LinkedIn, Meta, Twitter share buttons -->
+          <div class="cc-category cc-category--future" role="listitem">
+            <div class="cc-category-header">
+              <div class="cc-category-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <circle cx="18" cy="5"  r="3"/>
+                  <circle cx="6"  cy="12" r="3"/>
+                  <circle cx="18" cy="19" r="3"/>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+              </div>
+              <div class="cc-category-info">
+                <h3 class="cc-category-name">Social Media</h3>
+                <p class="cc-category-desc">
+                  Enables social sharing buttons and social media platform features embedded in the website. Future candidates include LinkedIn, Meta, and X share widgets.
+                </p>
+              </div>
+              <div class="cc-category-control">
+                <span class="cc-badge cc-badge--future">Not in use</span>
+                <label class="cc-toggle" aria-label="Social media cookies — not currently in use" style="margin-left:10px;">
+                  <input
+                    type="checkbox"
+                    data-cc-category="social"
+                    disabled
+                    aria-label="Social media cookies — not currently used by Laborate"
+                    aria-disabled="true"
+                  >
+                  <span class="cc-toggle-track"><span class="cc-toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─ Category 7: Personalisation (future) ─ -->
+          <!-- [CMS: cc_category_personalization] Future: content recommendations, saved search -->
+          <div class="cc-category cc-category--future" role="listitem">
+            <div class="cc-category-header">
+              <div class="cc-category-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <div class="cc-category-info">
+                <h3 class="cc-category-name">Personalisation</h3>
+                <p class="cc-category-desc">
+                  Remembers your preferences and browsing history to tailor content and recommendations. Not currently deployed on laborate.com.
+                </p>
+              </div>
+              <div class="cc-category-control">
+                <span class="cc-badge cc-badge--future">Not in use</span>
+                <label class="cc-toggle" aria-label="Personalisation cookies — not currently in use" style="margin-left:10px;">
+                  <input
+                    type="checkbox"
+                    data-cc-category="personalization"
+                    disabled
+                    aria-label="Personalisation cookies — not currently used by Laborate"
+                    aria-disabled="true"
+                  >
+                  <span class="cc-toggle-track"><span class="cc-toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.cc-categories -->
+
+
+        <!-- ── Cookie Registry ── -->
+        <!-- [CMS: cc_registry — ACF repeater with sub-fields: name, provider, purpose, duration, category, status] -->
+
+        <div class="cc-registry-section">
+          <p class="cc-section-label">Cookie Registry</p>
+
+          <div class="cc-registry-wrap" role="region" aria-label="Cookie registry" tabindex="0">
+            <table class="cc-registry">
+              <thead>
+                <tr>
+                  <th scope="col">Cookie</th>
+                  <th scope="col">Provider</th>
+                  <th scope="col">Purpose</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <!-- ─ Necessary ─ -->
+                <tr>
+                  <td><code class="cc-registry-code">laborate_cookie_preferences</code></td>
+                  <td>Laborate</td>
+                  <td>Stores your cookie consent preferences</td>
+                  <td>1 year</td>
+                  <td>Necessary</td>
+                  <td><span class="cc-status cc-status--active">Active</span></td>
+                </tr>
+
+                <!-- ─ Analytics (GA4) ─ -->
+                <tr>
+                  <td><code class="cc-registry-code">_ga</code></td>
+                  <td>Google Analytics</td>
+                  <td>Distinguishes unique website visitors</td>
+                  <td>2 years</td>
+                  <td>Analytics</td>
+                  <td><span class="cc-status cc-status--active">Active</span></td>
+                </tr>
+                <tr>
+                  <td><code class="cc-registry-code">_ga_[ID]</code></td>
+                  <td>Google Analytics</td>
+                  <td>Maintains session state for GA4 measurement</td>
+                  <td>2 years</td>
+                  <td>Analytics</td>
+                  <td><span class="cc-status cc-status--active">Active</span></td>
+                </tr>
+                <tr>
+                  <td><code class="cc-registry-code">_gid</code></td>
+                  <td>Google Analytics</td>
+                  <td>Distinguishes users, expires after 24 hours</td>
+                  <td>24 hours</td>
+                  <td>Analytics</td>
+                  <td><span class="cc-status cc-status--active">Active</span></td>
+                </tr>
+                <tr>
+                  <td><code class="cc-registry-code">_gat</code></td>
+                  <td>Google Analytics</td>
+                  <td>Throttles GA4 request rate</td>
+                  <td>1 minute</td>
+                  <td>Analytics</td>
+                  <td><span class="cc-status cc-status--active">Active</span></td>
+                </tr>
+
+                <!-- ─ Future cookies (greyed) ─ -->
+                <tr class="cc-registry-row--future">
+                  <td><code class="cc-registry-code">_fbp</code></td>
+                  <td>Meta</td>
+                  <td>Facebook/Meta advertising pixel tracking</td>
+                  <td>90 days</td>
+                  <td>Marketing</td>
+                  <td><span class="cc-status cc-status--future">Future</span></td>
+                </tr>
+                <tr class="cc-registry-row--future">
+                  <td><code class="cc-registry-code">li_sugr</code></td>
+                  <td>LinkedIn</td>
+                  <td>LinkedIn Insight Tag — campaign conversion</td>
+                  <td>90 days</td>
+                  <td>Marketing</td>
+                  <td><span class="cc-status cc-status--future">Future</span></td>
+                </tr>
+                <tr class="cc-registry-row--future">
+                  <td><code class="cc-registry-code">CONSENT</code></td>
+                  <td>Google (YouTube)</td>
+                  <td>Tracks consent for embedded YouTube videos</td>
+                  <td>2 years</td>
+                  <td>Embedded</td>
+                  <td><span class="cc-status cc-status--future">Future</span></td>
+                </tr>
+                <tr class="cc-registry-row--future">
+                  <td><code class="cc-registry-code">[Additional]</code></td>
+                  <td>[CMS]</td>
+                  <td>[CMS: Registry populated from ACF repeater in WordPress]</td>
+                  <td>[CMS]</td>
+                  <td>[CMS]</td>
+                  <td><span class="cc-status cc-status--future">Future</span></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div><!-- /.cc-registry-wrap -->
+        </div><!-- /.cc-registry-section -->
+
+      </div><!-- /.cc-modal-body -->
+
+      <!-- Sticky footer: reset | cancel + save -->
+      <div class="cc-modal-footer">
+
+        <!-- Reset to defaults (resets toggles in UI, does not save) -->
+        <button
+          class="cc-btn cc-btn-ghost cc-btn-sm"
+          type="button"
+          data-cc-action="reset-prefs"
+          aria-label="Reset all cookie preferences to default (off)"
+        >
+          Reset Defaults
+        </button>
+
+        <div class="cc-modal-footer-actions">
+          <!-- Cancel — close without saving -->
+          <button
+            class="cc-btn cc-btn-secondary cc-btn-sm"
+            type="button"
+            data-cc-action="cancel-prefs"
+          >
+            Cancel
+          </button>
+
+          <!-- Save — persist toggle states -->
+          <button
+            class="cc-btn cc-btn-primary cc-btn-sm"
+            type="button"
+            data-cc-action="save-prefs"
+          >
+            Save Preferences
+          </button>
+        </div>
+
+      </div><!-- /.cc-modal-footer -->
+
+    </div><!-- /.cc-modal-dialog -->
+  </div><!-- /.cc-modal -->
+
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       C-130 — FLOATING PREFERENCES BUTTON
+
+       Visible only after consent has been stored.
+       Position: fixed bottom-left.
+       Opens C-128 Cookie Preference Centre.
+  ════════════════════════════════════════════════════════════════════════ -->
+  <button
+    class="cc-fab"
+    id="cc-fab"
+    type="button"
+    aria-label="Open Cookie Preferences"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <span class="cc-fab-icon" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+        <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+        <path d="M8.5 8.5v.01"/>
+        <path d="M16 15.5v.01"/>
+        <path d="M12 12v.01"/>
+      </svg>
+    </span>
+    Cookie Preferences
+  </button>
+
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       SCRIPTS
+
+       In WordPress, app.js is enqueued via wp_enqueue_script with:
+         - type="module"
+         - defer
+       CookieConsentController is imported and initialised inside app.js.
+  ════════════════════════════════════════════════════════════════════════ -->
+  <script type="module" src="/assets/js/app.js"></script>
+
+<script src="/assets/js/preview-gate.js"></script>
+</body>
+</html>

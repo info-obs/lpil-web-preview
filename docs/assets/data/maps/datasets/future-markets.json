@@ -1,0 +1,11 @@
+{
+  "uid": "FUTURE_MARKETS",
+  "title": "Future Markets",
+  "type": "future",
+  "description": "Pipeline markets — regulatory dossiers filed and EU-GMP alignment in progress.",
+  "locations": [
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "POL", "region": "150" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "ROU", "region": "150" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "CZE", "region": "150" }
+  ]
+}

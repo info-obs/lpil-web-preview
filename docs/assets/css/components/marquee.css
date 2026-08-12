@@ -1,0 +1,111 @@
+/* =============================================================================
+   COMPONENT: STATISTICS BAND (MARQUEE)
+   Source: assets/html/source/homepage-approved-v1.html (lines 584–660)
+   Components: C-10 Marquee Band, C-11 Marquee Stat Item
+   Docs: docs/05_Component_Library.md  C-10, C-11
+
+   NOTE: The @keyframes slide and .anim-slide utility class live in
+   animations.css. This file adds only the marquee-specific rules.
+============================================================================= */
+
+/* =============================================================================
+   BAND SHELL (C-10)
+   Source: lines 584–612
+============================================================================= */
+
+.marquee {
+  background: var(--grad-marquee);
+  color: #fff;
+  overflow: hidden;
+  padding: 24px 0;
+  position: relative;
+}
+
+/* Fade edges — left and right gradient curtains */
+.marquee::before,
+.marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--blue), transparent);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--indigo), transparent);
+}
+
+/* =============================================================================
+   SCROLLING TRACK
+   Infinite horizontal scroll — keyframe `slide` is defined in animations.css.
+   Pauses on hover.
+============================================================================= */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: slide 34s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* =============================================================================
+   STAT ITEM (C-11)
+   Source: lines 630–659
+============================================================================= */
+
+.m-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 38px;
+}
+
+/* Number — large Sora weight */
+.m-item .mn {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Label — muted on-dark text */
+.m-item .ml {
+  font-size: .82rem;
+  color: var(--on-dark-marquee-label);
+  max-width: 120px;
+  line-height: 1.25;
+}
+
+/* Diamond separator between stat items */
+.m-sep {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--red);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   Pause the scroll; keep the content readable.
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}

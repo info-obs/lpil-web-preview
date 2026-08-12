@@ -1,0 +1,516 @@
+/* =============================================================================
+   GLOBAL MAP PAGE — Page-level styles for /global/map/
+   Component: C-97.1 — World Presence Map
+   CSS prefix: glo-  (page-level), mdc-  (shared stats strip), bus-  (shared cards)
+   Hierarchy: main.css → global-map-page.css → enterprise-map.css
+
+   This file owns all page-layout styles for global/map.html only.
+   Shared components (buttons, nav, footer, contact-band) live in main.css.
+   The Enterprise Mapping Platform component styles live in enterprise-map.css.
+
+   Sections:
+     1. Section Backgrounds
+     2. Section Description
+     3. Region Directory (glo-dir-*)
+     4. Global Statistics Strip (mdc-stats-*)
+     5. India Manufacturing Map (glo-india-*)
+     6. Export & Certification Cards (bus-partner-*)
+     7. International Business CTA (glo-cta-*)
+     8. Responsive
+============================================================================= */
+
+
+/* =============================================================================
+   1. SECTION BACKGROUNDS
+   Sections on white; alt sections on the default page background (var(--bg)).
+   The body background is var(--bg) so regular .section must explicitly set white.
+============================================================================= */
+
+.section            { background: var(--white); }
+.section--alt       { background: var(--bg); }
+.bus-section-alt    { background: var(--bg); }
+
+
+/* =============================================================================
+   2. SECTION DESCRIPTION
+   Used inside .section-head (inherits centring from layout.css .section-head p)
+   and as a standalone footnote directly inside .wrap.
+============================================================================= */
+
+.section-desc {
+  font-size: .93rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-top: 14px;
+}
+
+.section-desc a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Standalone footnote — centred below section content */
+.wrap > .section-desc {
+  text-align: center;
+  max-width: 720px;
+  margin: 28px auto 0;
+}
+
+
+/* =============================================================================
+   3. REGION DIRECTORY — CSS-only <details> accordion
+   Each region is a <details class="glo-dir-item"> with a <summary> header
+   and a .glo-dir-body that expands on click. The chevron SVG rotates 180deg
+   when details[open] to indicate expanded state.
+============================================================================= */
+
+.glo-dir-list {
+  border-top: 1px solid var(--line);
+  margin-top: 8px;
+}
+
+.glo-dir-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.glo-dir-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+/* Remove browser-native disclosure triangle */
+.glo-dir-summary::-webkit-details-marker { display: none; }
+.glo-dir-summary::marker                 { content: ''; }
+
+.glo-dir-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.glo-dir-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(16, 98, 172, .07);
+  border: 1px solid rgba(16, 98, 172, .12);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--blue);
+  transition: background var(--t-fast);
+}
+
+.glo-dir-item[open] .glo-dir-icon,
+.glo-dir-summary:hover .glo-dir-icon {
+  background: rgba(16, 98, 172, .13);
+}
+
+.glo-dir-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 3px;
+  transition: color var(--t-fast);
+}
+
+.glo-dir-summary:hover .glo-dir-name,
+.glo-dir-item[open] .glo-dir-name {
+  color: var(--blue);
+}
+
+.glo-dir-meta {
+  font-size: .78rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.glo-dir-chevron {
+  flex-shrink: 0;
+  color: var(--muted);
+  transition: transform .25s ease, color var(--t-fast);
+}
+
+.glo-dir-item[open] .glo-dir-chevron {
+  transform: rotate(180deg);
+  color: var(--blue);
+}
+
+.glo-dir-body {
+  padding: 0 0 32px;
+}
+
+.glo-dir-cols {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 1fr;
+  gap: 28px 40px;
+}
+
+.glo-dir-col-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.glo-dir-country-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.glo-dir-country-tag {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  line-height: 1.6;
+}
+
+.glo-dir-text {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+
+.glo-dir-model-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.glo-dir-model-tag {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--blue);
+  background: rgba(16, 98, 172, .08);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+}
+
+
+/* =============================================================================
+   4. GLOBAL STATISTICS STRIP — mdc-stats-strip
+   Navy background, 6-column stat grid. Pattern sourced from C-78 / business.html.
+   Defined here because business-page.css is not loaded on this page.
+============================================================================= */
+
+.mdc-stats-strip {
+  background: var(--navy);
+  padding: 64px 0;
+}
+
+.mdc-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+}
+
+.mdc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.mdc-stat:last-child { border-right: none; }
+
+.mdc-stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -.03em;
+}
+
+.mdc-stat-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .55);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  line-height: 1.4;
+  max-width: 120px;
+}
+
+
+/* =============================================================================
+   5. INDIA MANUFACTURING MAP — glo-india-*
+   Two-column layout: Enterprise Map instance on the left, facility cards on the right.
+   The Enterprise Map is configured as a non-interactive INDIA country view
+   (C-96.20 instance #emap-india-manufacturing / MAP-PLATFORM-004).
+   enterprise-map.css provides all .emap-* styles; only the height is overridden here.
+============================================================================= */
+
+.glo-india-inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.glo-india-map-wrap {
+  position: relative;
+}
+
+/* Height for the India country-level map within its 280px left column.
+   Specificity (0-2-0) wins over enterprise-map.css .emap (0-1-0) at all sizes. */
+.glo-india-map-wrap .emap {
+  height: 380px;
+}
+
+/* Right column — heading and facility list */
+.glo-india-heading {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin: 14px 0 16px;
+}
+
+.glo-india-desc {
+  font-size: .93rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.glo-india-facilities {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.glo-india-facility {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.glo-india-fac-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 98, 172, .07);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--blue);
+  margin-top: 2px;
+}
+
+.glo-india-fac-name {
+  font-family: var(--font-heading);
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 4px;
+}
+
+.glo-india-fac-sub {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+
+/* =============================================================================
+   6. EXPORT & CERTIFICATION CARDS — bus-partner-*
+   Three-column card grid reused from C-95 (business.html).
+   Defined here because business-page.css is not loaded on this page.
+============================================================================= */
+
+.bus-partner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.bus-partner-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.bus-partner-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, .07);
+  transform: translateY(-2px);
+}
+
+.bus-partner-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(16, 98, 172, .09);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.bus-partner-title {
+  font-family: var(--font-heading);
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 5px;
+  line-height: 1.3;
+}
+
+.bus-partner-desc {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0 0 16px;
+  flex: 1;
+}
+
+.bus-partner-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.bus-partner-tag {
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: rgba(12, 23, 48, .07);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+
+/* =============================================================================
+   7. INTERNATIONAL BUSINESS CTA — glo-cta-*
+   Navy full-width CTA section with heading left and buttons right.
+   Sourced from global-page.css (C-97) — defined here since that file is
+   not loaded on this page.
+============================================================================= */
+
+.glo-cta-section {
+  background: var(--navy);
+  padding: 84px 0;
+}
+
+.glo-cta-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+
+.glo-cta-eyebrow {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .6);
+  margin: 0 0 12px;
+}
+
+.glo-cta-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+
+.glo-cta-desc {
+  font-size: .9rem;
+  color: rgba(255, 255, 255, .72);
+  line-height: 1.75;
+  margin: 0;
+  max-width: 540px;
+}
+
+.glo-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  white-space: nowrap;
+}
+
+
+/* =============================================================================
+   8. RESPONSIVE
+============================================================================= */
+
+@media (max-width: 1100px) {
+  .glo-india-inner        { grid-template-columns: 240px 1fr; gap: 48px; }
+  .bus-partner-grid       { grid-template-columns: repeat(2, 1fr); }
+  .glo-cta-inner          { grid-template-columns: 1fr; gap: 32px; }
+  .glo-cta-actions        { flex-direction: row; }
+
+  /* Region directory: 3-col collapses to 2-col; Certifications spans full width */
+  .glo-dir-cols           { grid-template-columns: 1fr 1fr; }
+  .glo-dir-cols > div:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+  /* India map: stacks above facility list */
+  .glo-india-inner        { grid-template-columns: 1fr; gap: 40px; }
+  .glo-india-map-wrap     { max-width: 340px; margin: 0 auto; }
+}
+
+@media (max-width: 768px) {
+  /* Region directory: single column */
+  .glo-dir-cols           { grid-template-columns: 1fr; }
+  .glo-dir-cols > div:last-child { grid-column: auto; }
+
+  /* Stats: 3 per row */
+  .mdc-stats              { grid-template-columns: repeat(3, 1fr); }
+
+  /* India map: reduce height (overrides the 0-2-0 base rule above) */
+  .glo-india-map-wrap .emap { height: 320px; }
+}
+
+@media (max-width: 640px) {
+  .glo-dir-summary        { padding: 16px 0; }
+  .bus-partner-grid       { grid-template-columns: 1fr; }
+  .glo-cta-actions        { flex-direction: column; }
+
+  /* Stats: 2 per row */
+  .mdc-stats-strip        { padding: 40px 0; }
+  .mdc-stats              { grid-template-columns: repeat(2, 1fr); }
+
+  /* India map: further height reduction at mobile */
+  .glo-india-map-wrap .emap { height: 260px; }
+}

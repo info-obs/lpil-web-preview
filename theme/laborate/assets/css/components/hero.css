@@ -1,0 +1,344 @@
+/* =============================================================================
+   COMPONENT: HERO (C-06 through C-09)
+   Source: assets/html/source/homepage-approved-v1.html
+           lines 2108–2141 (HTML), 349–555 (CSS), 1970–1985 (responsive)
+   Docs:   docs/05_Component_Library.md  C-06, C-07, C-08, C-09
+
+   Z-INDEX NOTE
+   ─────────────────────────────────────────────────────────────────────────────
+   .hero creates a position:relative stacking context. All z-index values inside
+   this file (3) are component-internal raw integers per the token system spec —
+   not named layer tokens. They operate only within the hero's local context.
+
+   This file contains all hero-specific styles and animations.
+   The kenburns, rise, and wheel keyframes are scoped here — not shared.
+============================================================================= */
+
+/* =============================================================================
+   HERO SECTION SHELL
+============================================================================= */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--white);
+}
+
+/* =============================================================================
+   HERO MEDIA LAYER (C-06)
+   Source: lines 349–381
+   Contains video (primary) and fallback image.
+   aria-hidden="true" in HTML — entirely decorative.
+============================================================================= */
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--navy);
+}
+
+/* Primary background video */
+.hero-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Fallback image — shown when autoplay is blocked (HeroController) or
+   when prefers-reduced-motion is active (CSS override below).
+   position:absolute keeps it out of flow so it doesn't resize .hero-media. */
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  display: none;
+}
+
+/* Shown when HeroController removes the [hidden] attribute (autoplay blocked).
+   display:block overrides the default display:none above.
+   Specificity (0,1,1) beats (0,1,0) so this reliably overrides the default.
+   Kenburns plays only here — not in the prefers-reduced-motion path, where
+   the [hidden] attribute is never removed so this selector never matches. */
+.hero-fallback:not([hidden]) {
+  display: block;
+  animation: kenburns 22s ease-out forwards;
+}
+
+/* Dual gradient overlay — vertical darkening + diagonal left panel */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8, 18, 40, .55) 0%, rgba(8, 18, 40, .12) 30%, rgba(8, 18, 40, .3) 60%, rgba(8, 18, 40, .93) 100%),
+    linear-gradient(95deg, rgba(8, 18, 40, .8) 0%, rgba(8, 18, 40, .3) 46%, transparent 76%);
+}
+
+/* =============================================================================
+   HERO CONTENT LAYER (C-07)
+   z-index: 3 — component-internal integer (see Z-INDEX NOTE above)
+============================================================================= */
+
+.hero .wrap {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding-top: 160px;
+  padding-bottom: 66px;
+}
+
+/* Max-width constraint on hero copy block */
+.hero-inner {
+  max-width: var(--container-hero-copy);
+}
+
+/* =============================================================================
+   HERO KICKER (eyebrow variant for dark backgrounds)
+   Source: lines 428–454
+============================================================================= */
+
+.hero .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--on-dark-hero-kicker);
+  margin-bottom: 22px;
+}
+
+.hero .kicker::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background: var(--red);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   HERO HEADLINE
+   Source: lines 456–488
+============================================================================= */
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.6rem);
+  font-weight: 800;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, .25);
+}
+
+/* Sub-line above main headline */
+.hero h1 .l1 {
+  display: block;
+  font-weight: 500;
+  font-size: .5em;
+  letter-spacing: 0;
+  color: var(--on-dark-hero-line1);
+  margin-bottom: 8px;
+}
+
+/* Accent word inside headline */
+.hero h1 em {
+  font-style: normal;
+  color: var(--light-blue);
+}
+
+/* =============================================================================
+   HERO SUBTITLE
+   Source: lines 490–497
+============================================================================= */
+
+.hero p.sub {
+  font-size: 1.14rem;
+  color: var(--on-dark-hero-subtitle);
+  max-width: 560px;
+  margin-bottom: 34px;
+}
+
+/* =============================================================================
+   HERO CTA BUTTONS
+   Source: lines 499–503
+   Button base styles (btn, btn-primary, btn-ghost) are in buttons.css.
+============================================================================= */
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* =============================================================================
+   HERITAGE TEXT (C-08)
+   Decorative vertical label — left edge of hero.
+   z-index: 3 — component-internal integer (see Z-INDEX NOTE above)
+   Source: lines 428–454 (heritage section)
+============================================================================= */
+
+.heritage {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  z-index: 3;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .72);
+}
+
+.heritage span {
+  display: inline-block;
+  padding: 14px 0;
+  border-top: 2px solid var(--red);
+  border-bottom: 2px solid var(--red);
+}
+
+/* =============================================================================
+   SCROLL CUE (C-09)
+   Animated mouse icon centred at the bottom of the hero.
+   z-index: 3 — component-internal integer (see Z-INDEX NOTE above)
+   Source: lines 530–555
+============================================================================= */
+
+.scrollcue {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, .7);
+  font-size: .66rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.scrollcue .mouse {
+  width: 22px;
+  height: 34px;
+  border: 2px solid rgba(255, 255, 255, .6);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scrollcue .mouse::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--white);
+  animation: wheel 1.6s ease-in-out infinite;
+}
+
+/* =============================================================================
+   KEYFRAMES
+   Scoped to the hero component — not shared with other components.
+============================================================================= */
+
+/* Ken Burns — slow zoom-out on the fallback image */
+@keyframes kenburns {
+  from { transform: scale(1.12); }
+  to   { transform: scale(1); }
+}
+
+/* Rise — staggered entrance for hero copy elements */
+@keyframes rise {
+  to { opacity: 1; transform: none; }
+}
+
+/* Wheel — scroll dot animation inside the mouse outline */
+@keyframes wheel {
+  0%   { opacity: 0; transform: translate(-50%, 0); }
+  40%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
+}
+
+/* =============================================================================
+   HERO ENTRY ANIMATIONS
+   Source: lines 505–527
+   .hero-anim elements start invisible and rise into view on page load.
+   Delay classes (.d1–.d3) stagger the headline, subtitle, and CTAs.
+============================================================================= */
+
+.hero-anim {
+  opacity: 0;
+  transform: translateY(26px);
+  animation: rise var(--t-hero) forwards;
+}
+
+.hero-anim.d1 { animation-delay: .15s; }
+.hero-anim.d2 { animation-delay: .32s; }
+.hero-anim.d3 { animation-delay: .5s; }
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+/* Heritage label disappears at tablet landscape — not enough horizontal room.
+   Source responsive block: @media(max-width:1080px) */
+@media (max-width: 1080px) {
+  .heritage { display: none; }
+}
+
+/* Reduce top padding on small mobile so content clears the fixed header */
+@media (max-width: 640px) {
+  .hero .wrap {
+    padding-top: 130px;
+  }
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   Video is hidden; static fallback image is shown instead.
+   Rise animations are resolved immediately; wheel dot is frozen.
+   CSS handles this independently of HeroController so it works even if
+   JS is absent or deferred.
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  /* Hide video; override [hidden] attribute to force fallback visible */
+  .hero-media video {
+    display: none;
+  }
+
+  .hero-fallback {
+    display: block !important;
+    animation: none;
+  }
+
+  /* Resolve entrance animations immediately */
+  .hero-anim {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Freeze scroll-dot animation */
+  .scrollcue .mouse::after {
+    animation: none;
+    opacity: .6;
+    transform: translate(-50%, 0);
+  }
+
+}

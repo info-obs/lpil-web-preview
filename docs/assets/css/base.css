@@ -1,0 +1,63 @@
+/* =============================================================================
+   BASE
+   Global element defaults. Consumes design tokens from tokens.css.
+   Matches behaviour of the approved homepage source exactly.
+============================================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+
+  /* Matching source: text selection disabled site-wide */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Heading / display elements share Sora and tight tracking */
+h1,
+h2,
+h3,
+h4,
+.display {
+  font-family: var(--font-heading);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+
+/* All sections are positioned so overlays / absolute children work */
+section {
+  position: relative;
+}
+
+/* SVG icons inherit color via currentColor; never stretch */
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Images never exceed their container */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Anchor baseline */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Button baseline */
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+}

@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script>(function(){if(sessionStorage.getItem("oktoberry_preview_authenticated")!=="1"){document.documentElement.style.visibility="hidden";try{sessionStorage.setItem("oktoberry_preview_redirect",location.href);}catch(e){}}})();</script>
+  <link rel="stylesheet" href="/assets/css/preview-gate.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+  ============================================================
+  PAGE: Cookie Policy
+  URL pattern : /legal/cookie-policy/
+  WordPress template: page-legal.php
+  Framework: Enterprise Legal Documentation Framework (LEGAL-001-P1)
+  Components: C-121 through C-126 — see legal-page.css
+
+  ================================================================
+  FUTURE COOKIE CONSENT SYSTEM — COOKIE EPIC (NOT YET IMPLEMENTED)
+  ================================================================
+  The following components will be implemented in a dedicated COOKIE epic
+  after the HTML presentation layer is complete. They are documented here
+  for implementation reference. NONE of the following exists in the current
+  codebase and nothing below should be added to this page.
+
+  COMPONENT 1: Cookie Banner (Fixed Overlay)
+  - Triggered on first visit or when no valid consent record exists
+  - Three actions: "Accept All", "Reject Non-Essential", "Manage Preferences"
+  - Position: fixed bottom of viewport
+  - Persists until user makes a choice
+  - Design: will use the Laborate design system tokens (--blue, --navy, etc.)
+
+  COMPONENT 2: Cookie Preferences Modal / Preference Centre
+  - Accessible modal with per-category toggle switches
+  - Categories: Strictly Necessary (locked on, always enabled),
+    Functional, Analytics, Performance, Marketing, Advertising,
+    Personalization, Social Media, Embedded Media
+  - "Save My Preferences" stores granular per-category consent
+  - Accessible via Cookie Preferences link in footer on all pages
+
+  COMPONENT 3: JavaScript Consent Engine
+  - Reads consent state from localStorage (consent object: categories,
+    version, timestamp, expiry)
+  - Loads / blocks scripts based on granted consent categories
+  - Fires custom events on consent changes for downstream integrations
+  - Integrates with WordPress wp_enqueue_scripts hook via inline script gate
+  - Consent version field tied to Cookie Policy version string (e.g. "1.0")
+  - On Cookie Policy version change: re-prompts users for fresh consent
+
+  COMPONENT 4: Google Analytics 4 — Consent-Gated Loading
+  - GA4 measurement script (gtag.js) loaded ONLY when analytics consent = true
+  - Uses gtag('consent', 'default', { analytics_storage: 'denied' }) as baseline
+  - Updates to gtag('consent', 'update', { analytics_storage: 'granted' }) on accept
+  - anonymize_ip: true on all GA4 hits
+  - Data retention in GA4 property: set to 14 months
+  - Measurement ID: [CMS: ga4_measurement_id] (ACF theme option)
+
+  COMPONENT 5: Consent Storage Schema
+  {
+    version: "1.0",              // matches Cookie Policy version
+    timestamp: 1753142400,       // Unix timestamp of consent action
+    expiry: 1784678400,          // Unix timestamp 12 months hence
+    categories: {
+      strictly_necessary: true,  // always true, cannot be toggled
+      functional:         false,
+      analytics:          true,  // user granted
+      performance:        false,
+      marketing:          false,
+      advertising:        false,
+      personalization:    false,
+      social_media:       false,
+      embedded_media:     false
+    }
+  }
+  Stored in localStorage key: "lpi_cookie_consent"
+
+  COMPONENT 6: WordPress Integration
+  - Consent JS: enqueued via wp_enqueue_script('lpi-consent') in functions.php
+  - Cookie Banner PHP: output via do_action('lpi_cookie_banner') in footer.php
+  - Preferences Modal PHP: rendered via do_action('lpi_cookie_preferences') in footer.php
+  - GA4 conditional loading: controlled by wp_localize_script() passing consent state
+  - Cookie Registry: managed via ACF repeater field group 'cookie_registry'
+    bound to WordPress Options Page → Privacy → Cookie Registry
+  - Approved plugin options: CookieYes Pro, Complianz Privacy Suite, or custom module
+  - All cookie data CMS-editable via ACF or plugin dashboard — no hardcoded lists
+
+  COMPONENT 7: Future Script Loading Candidates (Require Consent)
+  - [analytics]      Google Analytics 4 (active)
+  - [analytics]      Google Tag Manager (future)
+  - [functional]     Freshdesk / Zendesk Chat (future)
+  - [marketing]      Google Ads / Tag (future)
+  - [advertising]    Meta Pixel (future — only with consent)
+  - [advertising]    LinkedIn Insight Tag (future — only with consent)
+  - [personalization] HubSpot / Salesforce CRM (future)
+  - [embedded_media] YouTube Privacy-Enhanced embed (future, iframe)
+  - [social_media]   LinkedIn Share Button (future)
+  ================================================================
+  ============================================================
+  -->
+
+  <!-- [CMS: Rank Math SEO — meta description from legal_description ACF field] -->
+  <meta name="description" content="Laborate Pharmaceuticals India Ltd. Cookie Policy — what cookies we use, why we use them, and how to manage your cookie preferences on our corporate website.">
+  <!-- [CMS: page title: Cookie Policy — Legal — Laborate Pharmaceuticals India Ltd.] -->
+  <title>Cookie Policy — Laborate Pharmaceuticals India Ltd.</title>
+
+  <!-- [CMS: canonical: https://laborate.com/legal/cookie-policy/] -->
+  <link rel="canonical" href="https://laborate.com/legal/cookie-policy/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:url"         content="https://laborate.com/legal/cookie-policy/">
+  <meta property="og:title"       content="Cookie Policy — Laborate Pharmaceuticals India Ltd.">
+  <meta property="og:description" content="What cookies Laborate uses, why we use them, and how to manage your preferences.">
+  <meta property="og:image"       content="https://laborate.com/images/og-legal.jpg">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Cookie Policy — Laborate Pharmaceuticals India Ltd.">
+  <meta name="twitter:description" content="What cookies Laborate uses, why we use them, and how to manage your preferences.">
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",          "item": "https://laborate.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Legal",         "item": "https://laborate.com/legal/" },
+      { "@type": "ListItem", "position": 3, "name": "Cookie Policy", "item": "https://laborate.com/legal/cookie-policy/" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Cookie Policy",
+    "description": "Laborate Pharmaceuticals India Ltd. Cookie Policy — what cookies we use and how to manage your preferences.",
+    "url": "https://laborate.com/legal/cookie-policy/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Laborate Pharmaceuticals India Ltd.",
+      "url": "https://laborate.com"
+    },
+    "dateModified": "2026-07-16",
+    "datePublished": "2026-01-01",
+    "inLanguage": "en",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",          "item": "https://laborate.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Legal",         "item": "https://laborate.com/legal/" },
+        { "@type": "ListItem", "position": 3, "name": "Cookie Policy", "item": "https://laborate.com/legal/cookie-policy/" }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <!-- Legal Documentation Framework — C-121 through C-126 -->
+  <link rel="stylesheet" href="/assets/css/components/legal-page.css">
+
+</head>
+
+<body>
+
+  <!-- Skip navigation -->
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+
+  <!-- Scroll-progress bar -->
+  <div id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-hidden="true"></div>
+
+  <!-- Site header — solid on inner pages -->
+  <header id="header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="logo" href="../index.html" aria-label="Laborate Pharmaceuticals — Home">
+        <img
+          src="https://laborate.com/images/logo.png"
+          alt="Laborate Pharmaceuticals India Ltd."
+          height="34"
+          width="auto"
+        >
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+
+        <li class="nav-meta">
+          <a class="logo" href="../index.html" aria-label="Laborate Pharmaceuticals — Home" tabindex="-1">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="28" width="auto">
+          </a>
+          <button class="nav-close" id="navClose" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </li>
+
+        <li class="has-children">
+          <a href="../about.html">About Us</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand About Us submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../about/why-laborate.html">Why Laborate</a></li>
+            <li><a href="../about/leadership.html">Leadership</a></li>
+            <li><a href="../about/awards.html">Awards &amp; Recognition</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../brands.html">Brands</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Brands submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../brands/elite.html">Elite</a></li>
+            <li><a href="../brands/aqualab.html">Aqualab</a></li>
+            <li><a href="../brands/labolia-beaute.html">Labolia Beauté</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../products.html">Products</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Products submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../products/catalogue.html">Product Catalogue</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../manufacturing.html">Manufacturing</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Manufacturing submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../manufacturing/facilities.html">Facilities</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../quality.html">Quality</a></li>
+
+        <li class="has-children">
+          <a href="../global.html">Global Presence</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Global Presence submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../global/map.html">Global Map</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../media.html">Media</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Media submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../media/press-releases.html">Press Releases</a></li>
+            <li><a href="../media/news.html">News</a></li>
+            <li><a href="../media/events.html">Events</a></li>
+            <li><a href="../media/social.html">Social</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../business.html">Business</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Business submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../business/contract-manufacturing.html">Contract Manufacturing</a></li>
+            <li><a href="../business/distributor.html">Distributor Partnerships</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="../careers.html">Careers</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Careers submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="../careers/jobs.html">Open Positions</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../contact.html">Contact Us</a></li>
+
+      </ul>
+      <div class="nav-right">
+        <a href="../search.html" class="nav-search" aria-label="Search" data-nav-search>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true" tabindex="-1"></div>
+
+  <main id="main-content">
+
+    <!--
+    ============================================================
+    SECTION 1: Compact Documentation Hero (C-06 compact-sm + C-51 Breadcrumb)
+    data-section: lgf-hero
+    [CMS: HERO | fields: legal_hero_image, legal_document_type, legal_title, legal_description]
+    ============================================================
+    -->
+    <section class="hero hero--compact hero--compact-sm lgf-hero" data-section="lgf-hero" aria-labelledby="lgf-page-heading">
+
+      <div class="hero-media" aria-hidden="true">
+        <img
+          class="hero-fallback"
+          src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=1920&q=80"
+          alt=""
+          role="presentation"
+          loading="eager"
+        >
+      </div>
+
+      <div class="wrap">
+
+        <!-- C-51 Breadcrumb -->
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../legal.html">Legal</a></li>
+            <li><span aria-current="page">Cookie Policy</span></li><!-- [CMS: legal_title] -->
+          </ol>
+        </nav>
+
+        <!-- [CMS: legal_document_type] -->
+        <span class="eyebrow hero-anim">Cookie Policy</span>
+
+        <!-- [CMS: legal_title] -->
+        <h1 id="lgf-page-heading" class="hero-anim d1">Cookie Policy</h1>
+
+        <!-- [CMS: legal_description] -->
+        <p class="sub hero-anim d2">This policy explains what cookies are, which ones Laborate Pharmaceuticals uses on this website, why we use them, and how you can manage your preferences.</p>
+
+      </div><!-- /.wrap -->
+
+    </section><!-- /.hero -->
+
+
+    <!--
+    ============================================================
+    SECTION 2: Legal Metadata Panel (C-121)
+    data-section: lgf-meta
+    [CMS: C-121 | fields: legal_version, legal_effective_date, legal_last_updated,
+     legal_next_review, legal_owner, legal_region, legal_language, legal_pdf_url]
+    ============================================================
+    -->
+    <div class="lgf-meta-band" data-section="lgf-meta" role="complementary" aria-label="Document information">
+      <div class="wrap lgf-meta-inner">
+
+        <dl class="lgf-meta-grid">
+
+          <div class="lgf-meta-item">
+            <dt class="lgf-meta-label">Version</dt>
+            <!-- [CMS: legal_version] -->
+            <dd class="lgf-meta-value">1.0</dd>
+          </div>
+
+          <div class="lgf-meta-item">
+            <dt class="lgf-meta-label">Effective Date</dt>
+            <!-- [CMS: legal_effective_date] -->
+            <dd class="lgf-meta-value">
+              <time datetime="2026-01-01">1 January 2026</time>
+            </dd>
+          </div>
+
+          <div class="lgf-meta-item">
+            <dt class="lgf-meta-label">Last Updated</dt>
+            <!-- [CMS: legal_last_updated] -->
+            <dd class="lgf-meta-value">
+              <time datetime="2026-07-16">16 July 2026</time>
+            </dd>
+          </div>
+
+          <div class="lgf-meta-item">
+            <dt class="lgf-meta-label">Next Review</dt>
+            <!-- [CMS: legal_next_review] -->
+            <dd class="lgf-meta-value">
+              <time datetime="2027-01-01">1 January 2027</time>
+            </dd>
+          </div>
+
+          <div class="lgf-meta-item">
+            <dt class="lgf-meta-label">Document Owner</dt>
+            <!-- [CMS: legal_owner] -->
+            <dd class="lgf-meta-value">Legal &amp; Compliance Team</dd>
+          </div>
+
+          <div class="lgf-meta-item">
+            <dt class="lgf-meta-label">Region</dt>
+            <!-- [CMS: legal_region] -->
+            <dd class="lgf-meta-value">Global</dd>
+          </div>
+
+          <div class="lgf-meta-item">
+            <dt class="lgf-meta-label">Language</dt>
+            <!-- [CMS: legal_language] -->
+            <dd class="lgf-meta-value">English</dd>
+          </div>
+
+        </dl>
+
+        <!-- [CMS: legal_pdf_url — hide this button when empty] -->
+        <a href="#" class="lgf-meta-download" aria-label="Download Cookie Policy as PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true" focusable="false">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Download PDF</span>
+        </a>
+
+      </div><!-- /.lgf-meta-inner -->
+    </div><!-- /.lgf-meta-band -->
+
+
+    <!--
+    ============================================================
+    SECTIONS 3–6: Document Body (C-122 TOC + C-123 Rich Content + C-124 Callouts + C-125 Revisions)
+    data-section: lgf-document
+    ============================================================
+    -->
+    <div class="lgf-document-band" data-section="lgf-document">
+      <div class="wrap lgf-document-layout">
+
+        <!--
+        ============================================================
+        C-122 — STICKY LEGAL NAVIGATION
+        JS: LegalPageController.js tracks .lgf-section elements via IntersectionObserver.
+        [CMS: Auto-generated from H2 headings — no manual CMS entry needed]
+        ============================================================
+        -->
+        <aside class="lgf-toc" id="lgf-toc" aria-label="Document table of contents">
+
+          <button
+            class="lgf-toc-toggle"
+            id="lgf-toc-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="lgf-toc-nav"
+          >
+            <span class="lgf-toc-toggle-label">Contents</span>
+            <svg class="lgf-toc-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          <nav id="lgf-toc-nav" class="lgf-toc-nav" aria-label="Table of contents">
+            <p class="lgf-toc-label">On this page</p>
+            <ol class="lgf-toc-list" role="list">
+              <li>
+                <a href="#lgf-s-intro" class="lgf-toc-link is-active" aria-current="location">
+                  Introduction
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-what" class="lgf-toc-link">
+                  What Are Cookies?
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-why" class="lgf-toc-link">
+                  Why We Use Cookies
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-categories" class="lgf-toc-link">
+                  Cookie Categories
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-current" class="lgf-toc-link">
+                  Cookies Currently in Use
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-notused" class="lgf-toc-link">
+                  Cookies We Do Not Use
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-future" class="lgf-toc-link">
+                  Future Cookie Expansion
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-managing" class="lgf-toc-link">
+                  Managing Your Preferences
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-third-party" class="lgf-toc-link">
+                  Third-Party Services
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-consent" class="lgf-toc-link">
+                  Cookie Consent
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-withdraw" class="lgf-toc-link">
+                  Withdrawing Consent
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-registry" class="lgf-toc-link">
+                  Cookie Registry
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-matrix" class="lgf-toc-link">
+                  Cookie Preference Matrix
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-changes" class="lgf-toc-link">
+                  Changes to This Policy
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-contact" class="lgf-toc-link">
+                  Contact Information
+                </a>
+              </li>
+              <li>
+                <a href="#lgf-s-revisions" class="lgf-toc-link">
+                  Revision History
+                </a>
+              </li>
+            </ol>
+          </nav>
+
+        </aside><!-- /.lgf-toc -->
+
+
+        <!--
+        ============================================================
+        C-123 — LEGAL RICH CONTENT
+        [CMS: legal_content — WordPress WYSIWYG / ACF flexible content blocks]
+        ============================================================
+        -->
+        <div class="lgf-content" id="lgf-main-content">
+
+
+          <!-- ── SECTION 1: Introduction ─────────────────────────────── -->
+          <section class="lgf-section" id="lgf-s-intro" aria-labelledby="lgf-h2-intro">
+            <h2 class="lgf-h2" id="lgf-h2-intro">Introduction</h2>
+
+            <p>This Cookie Policy ("Policy") explains how Laborate Pharmaceuticals India Ltd. ("Laborate", "we", "our", or "us") uses cookies and similar browser technologies when you visit our corporate website at <a href="https://laborate.com">laborate.com</a>.</p>
+
+            <p>We believe in transparency. This Policy tells you clearly what cookies we currently use, what we do not use, why each cookie exists, and how you can control your preferences — both now and through the consent management system we will deploy as part of our WordPress implementation.</p>
+
+            <p>This Policy should be read alongside our <a href="privacy-policy.html">Privacy Policy</a>, which explains how we handle personal information more broadly, and our <a href="terms-and-conditions.html">Terms &amp; Conditions</a>, which govern your use of the website.</p>
+
+            <!-- C-124 Info Callout -->
+            <div class="lgf-callout lgf-callout--info" role="note" aria-label="Current cookie status">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">Our Current Cookie Footprint Is Minimal</p>
+                <p>Laborate currently uses only Google Analytics 4 for website analytics, plus strictly necessary cookies for basic website operation. We do not use advertising cookies, remarketing pixels, social media trackers, behavioural profiling, or personalisation technologies. A full cookie consent management system will be deployed in a future phase — see Section 10.</p>
+              </div>
+            </div>
+
+          </section><!-- /#lgf-s-intro -->
+
+
+          <!-- ── SECTION 2: What Are Cookies? ───────────────────────── -->
+          <section class="lgf-section" id="lgf-s-what" aria-labelledby="lgf-h2-what">
+            <h2 class="lgf-h2" id="lgf-h2-what">What Are Cookies?</h2>
+
+            <p>Cookies are small text files that a website places in your web browser or on your device when you visit a page. They are universally used across the web to make websites work efficiently, to remember your preferences, and to provide website operators with information about how their sites are used.</p>
+
+            <p>Not all data stored by a website is a "cookie" in the traditional sense. Modern browsers support several storage mechanisms, each with different properties:</p>
+
+            <div class="lgf-def-block" role="list" aria-label="Cookie and browser storage definitions">
+
+              <div class="lgf-def-item" role="listitem">
+                <dt class="lgf-def-term">Session Cookie</dt>
+                <dd class="lgf-def-desc">A temporary cookie that exists only for the duration of your browser session. It is deleted automatically when you close your browser tab or window. Session cookies are typically used for strictly necessary purposes such as maintaining a form state or security token.</dd>
+              </div>
+
+              <div class="lgf-def-item" role="listitem">
+                <dt class="lgf-def-term">Persistent Cookie</dt>
+                <dd class="lgf-def-desc">A cookie that remains on your device for a specified period (defined by an expiry date set by the website) or until you manually delete it. Analytics cookies such as Google Analytics' <code>_ga</code> are persistent, typically lasting 1–2 years.</dd>
+              </div>
+
+              <div class="lgf-def-item" role="listitem">
+                <dt class="lgf-def-term">First-Party Cookie</dt>
+                <dd class="lgf-def-desc">A cookie set directly by the website domain you are visiting (laborate.com). First-party cookies are generally more privacy-preserving because they are scoped to the single site you are browsing.</dd>
+              </div>
+
+              <div class="lgf-def-item" role="listitem">
+                <dt class="lgf-def-term">Third-Party Cookie</dt>
+                <dd class="lgf-def-desc">A cookie set by a domain other than the website you are visiting — typically by an embedded analytics, advertising, or social media service. Google Analytics sets first-party cookies in the laborate.com domain, but the data is transmitted to Google's servers for processing.</dd>
+              </div>
+
+              <div class="lgf-def-item" role="listitem">
+                <dt class="lgf-def-term">localStorage / sessionStorage</dt>
+                <dd class="lgf-def-desc">Browser-native key-value storage APIs that function similarly to cookies but are stored locally in the browser and are not automatically transmitted to the server. Used by some analytics frameworks and modern web applications. Our future consent management system will use localStorage to store your consent preferences.</dd>
+              </div>
+
+            </div>
+
+          </section><!-- /#lgf-s-what -->
+
+
+          <!-- ── SECTION 3: Why We Use Cookies ──────────────────────── -->
+          <section class="lgf-section" id="lgf-s-why" aria-labelledby="lgf-h2-why">
+            <h2 class="lgf-h2" id="lgf-h2-why">Why We Use Cookies</h2>
+
+            <p>Laborate uses a deliberately minimal set of cookies to achieve specific, justified purposes. We do not use cookies as a tool for surveillance, tracking across other websites, building behavioural profiles, or serving targeted advertising.</p>
+
+            <p>Our current and future cookie use is limited to the following purposes:</p>
+
+            <ul class="lgf-ul">
+              <li><strong>Website operation</strong> — Strictly necessary session management and security tokens that enable the website to function correctly. These cannot be disabled without breaking core website functionality.</li>
+              <li><strong>Analytics</strong> — Understanding how visitors navigate our website in aggregate, which pages are most visited, and where we can improve content and usability. We currently use Google Analytics 4 for this purpose, with consent gating where required by applicable law.</li>
+              <li><strong>Consent management (future)</strong> — Storing your cookie preferences between visits so that you are not re-prompted on every page. This will be implemented when the full consent management system is deployed.</li>
+              <li><strong>Functional preferences (future)</strong> — Remembering optional preferences such as language or region to improve your experience. Currently not deployed.</li>
+              <li><strong>Security and load balancing</strong> — Server-set session tokens used for infrastructure purposes (e.g., load balancer affinity) that are strictly necessary and carry no personal data.</li>
+            </ul>
+
+            <p>We do not use cookies for advertising, remarketing, cross-site tracking, behavioural profiling, or any other purpose beyond those listed above. See Section 6 for an explicit list of what we do not do.</p>
+
+          </section><!-- /#lgf-s-why -->
+
+
+          <!-- ── SECTION 4: Cookie Categories ───────────────────────── -->
+          <section class="lgf-section" id="lgf-s-categories" aria-labelledby="lgf-h2-categories">
+            <h2 class="lgf-h2" id="lgf-h2-categories">Cookie Categories</h2>
+
+            <p>The following table describes all standard cookie categories, their purposes, consent requirements, and their current deployment status on laborate.com. Categories marked "Future" are not currently deployed but are architecturally anticipated as the website expands.</p>
+
+            <!-- [CMS: cookie_categories — ACF repeater: category, purpose, required, consent_needed, status, examples] -->
+            <div class="lgf-table-wrap" role="region" aria-label="Cookie categories overview" tabindex="0">
+              <table class="lgf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Required</th>
+                    <th scope="col">Consent Needed</th>
+                    <th scope="col">Current Status</th>
+                    <th scope="col">Examples</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Strictly Necessary</strong></td>
+                    <td>Essential for the website to function. Cannot be disabled without breaking core functionality.</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                    <td>Active</td>
+                    <td>Session tokens, security cookies, load balancer affinity, CSRF protection</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Analytics</strong></td>
+                    <td>Collect anonymised data about how visitors use the website to improve performance and content.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Active — GA4 only</td>
+                    <td>Google Analytics 4 (_ga, _ga_*)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Functional</strong></td>
+                    <td>Remember optional user preferences to enhance experience without tracking behaviour.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Not Deployed</td>
+                    <td>Language preference, region, form auto-fill settings</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Performance</strong></td>
+                    <td>Monitor technical website performance, load times, and error rates.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Not Deployed</td>
+                    <td>Core Web Vitals monitoring, CDN performance</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Marketing</strong></td>
+                    <td>Track interactions with marketing campaigns and measure campaign effectiveness.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Not Deployed</td>
+                    <td>UTM campaign tracking, email link tracking (no personal profiling)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Advertising</strong></td>
+                    <td>Display personalised advertisements based on user interests across websites.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Not Used</td>
+                    <td>Meta Pixel, Google Ads, LinkedIn Ads (not deployed)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Personalization</strong></td>
+                    <td>Adapt content, recommendations, or user journeys based on inferred preferences.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Future</td>
+                    <td>CRM-driven content personalisation, HubSpot, Salesforce</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Social Media</strong></td>
+                    <td>Enable social sharing features and track social media referrals.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Future</td>
+                    <td>LinkedIn Share, Twitter Widget, Facebook Like (future embeds)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Embedded Media</strong></td>
+                    <td>Enable playback of embedded video or audio content from third-party platforms.</td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Future</td>
+                    <td>YouTube Privacy-Enhanced embeds, Vimeo players</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- C-124 Neutral Callout -->
+            <div class="lgf-callout lgf-callout--neutral" role="note" aria-label="Category status note">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">Status Key</p>
+                <p><strong>Active</strong> — currently deployed on laborate.com. <strong>Not Deployed</strong> — category is defined and architecturally ready but no cookies in this category are currently set. <strong>Not Used</strong> — Laborate has made a deliberate decision not to use this category. <strong>Future</strong> — anticipated when planned website features are implemented.</p>
+              </div>
+            </div>
+
+          </section><!-- /#lgf-s-categories -->
+
+
+          <!-- ── SECTION 5: Cookies Currently in Use ────────────────── -->
+          <section class="lgf-section" id="lgf-s-current" aria-labelledby="lgf-h2-current">
+            <h2 class="lgf-h2" id="lgf-h2-current">Cookies Currently in Use</h2>
+
+            <p>The following cookies are currently set on laborate.com. This list reflects our current technical implementation and will be updated as the website evolves. The Cookie Registry in Section 12 provides a more complete technical record.</p>
+
+            <h3 class="lgf-h3">5.1 Strictly Necessary Cookies</h3>
+            <p>These cookies are set automatically by our hosting infrastructure and WordPress platform to support basic website operation. They do not track you or store any personally identifying information.</p>
+
+            <!-- [CMS: strictly_necessary_cookies — ACF repeater: name, provider, purpose, duration, type] -->
+            <div class="lgf-table-wrap" role="region" aria-label="Strictly necessary cookies" tabindex="0">
+              <table class="lgf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Cookie Name</th>
+                    <th scope="col">Provider</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>wordpress_test_cookie</code></td>
+                    <td>Laborate / WordPress</td>
+                    <td>Tests whether the browser supports cookies. Set and immediately deleted. Does not persist.</td>
+                    <td>Session</td>
+                    <td>First-party</td>
+                  </tr>
+                  <tr>
+                    <td><!-- [CMS: load_balancer_cookie_name] --><em>[load balancer session]</em></td>
+                    <td>Hosting infrastructure</td>
+                    <td>Ensures a visitor's requests during a session are routed to the same server (session affinity). No personal data stored.</td>
+                    <td>Session</td>
+                    <td>First-party</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>Note: WordPress does not set persistent tracking cookies for general (non-logged-in) visitors. Admin-area authentication cookies (e.g. <code>wordpress_*</code>, <code>wp-settings-*</code>) are set only for authenticated admin users and are not relevant to general website visitors.</p>
+
+            <h3 class="lgf-h3">5.2 Analytics Cookies (Google Analytics 4)</h3>
+            <p>Google Analytics 4 sets the following cookies to help us understand how visitors use laborate.com. These cookies are loaded only with your consent where required by applicable law. All data is collected in anonymised, aggregated form — individual visitor identities are not shared with Laborate.</p>
+
+            <p>The exact cookie name for the <code>_ga_[ID]</code> cookie contains the GA4 Measurement ID assigned to the laborate.com property. This ID is a configuration value managed in the CMS and is not published here to avoid unnecessary exposure.</p>
+
+            <!-- [CMS: analytics_cookies — ACF repeater: name, provider, purpose, duration, type] -->
+            <div class="lgf-table-wrap" role="region" aria-label="Analytics cookies (GA4)" tabindex="0">
+              <table class="lgf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Cookie Name</th>
+                    <th scope="col">Provider</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>_ga</code></td>
+                    <td>Google Analytics</td>
+                    <td>Assigns a unique anonymous ID to distinguish individual users. Used to calculate user, session, and campaign data for analytics reports.</td>
+                    <td>2 years</td>
+                    <td>First-party (laborate.com domain)</td>
+                  </tr>
+                  <tr>
+                    <td><code>_ga_[MEASUREMENT_ID]</code></td>
+                    <td>Google Analytics</td>
+                    <td>Stores and updates a unique value for each visit. Used to maintain session state within Google Analytics 4.</td>
+                    <td>2 years</td>
+                    <td>First-party (laborate.com domain)</td>
+                  </tr>
+                  <tr>
+                    <td><code>_gid</code></td>
+                    <td>Google Analytics</td>
+                    <td>Assigns an anonymous session identifier to distinguish users within a 24-hour window. Used in some GA4 configurations alongside the _ga cookie.</td>
+                    <td>24 hours</td>
+                    <td>First-party (laborate.com domain)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- C-124 Info Callout -->
+            <div class="lgf-callout lgf-callout--info" role="note" aria-label="GA4 configuration note">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">How We Configure Google Analytics 4</p>
+                <p>Our GA4 implementation anonymises IP addresses before transmission to Google's servers. Data retention in the GA4 property is set to 14 months. We do not enable Google Signals, advertising features, or cross-device tracking in GA4. GA4 data is not shared with Google for advertising purposes. Cookie names and identifiers may change as Google updates the GA4 platform — this table reflects current known names.</p>
+              </div>
+            </div>
+
+          </section><!-- /#lgf-s-current -->
+
+
+          <!-- ── SECTION 6: Cookies We Do Not Use ───────────────────── -->
+          <section class="lgf-section" id="lgf-s-notused" aria-labelledby="lgf-h2-notused">
+            <h2 class="lgf-h2" id="lgf-h2-notused">Cookies We Do Not Use</h2>
+
+            <p>We want to be equally transparent about what we do not do. The following technologies and cookie types are explicitly not in use on laborate.com:</p>
+
+            <ul class="lgf-ul">
+              <li><strong>Advertising cookies</strong> — We do not use cookies to serve targeted, contextual, or programmatic advertisements on this or any other website.</li>
+              <li><strong>Behavioural profiling</strong> — We do not build profiles of individual users based on browsing history, content consumption, or behavioural patterns.</li>
+              <li><strong>Remarketing pixels</strong> — We do not use Meta Pixel, Google Ads conversion tags, LinkedIn Insight Tag, or any similar remarketing technology to track visitors after they leave our website.</li>
+              <li><strong>Affiliate tracking</strong> — We do not participate in affiliate marketing programmes and do not use cookies to track referrals or commissions.</li>
+              <li><strong>Cross-site tracking</strong> — We do not use technologies designed to track individuals across multiple websites or applications.</li>
+              <li><strong>Heatmapping and session recording</strong> — We do not use Hotjar, Microsoft Clarity, FullStory, or any session recording or heatmapping service.</li>
+              <li><strong>A/B testing platforms</strong> — No split-testing or multivariate testing tools are currently deployed.</li>
+              <li><strong>CRM tracking pixels</strong> — No HubSpot, Salesforce, or similar CRM tracking scripts are currently embedded in the website.</li>
+              <li><strong>Chat widget trackers</strong> — No live chat platform (Intercom, Zendesk, Drift, etc.) is currently deployed on the website.</li>
+              <li><strong>Sale of data</strong> — We do not sell, rent, or share cookie data or browsing data with third parties for their commercial purposes.</li>
+            </ul>
+
+            <!-- C-124 Success Callout -->
+            <div class="lgf-callout lgf-callout--success" role="note" aria-label="Privacy commitment">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">Our Privacy Commitment</p>
+                <p>Laborate is a pharmaceutical manufacturer — not an advertising business. Our website exists to serve healthcare professionals, business partners, and the public with accurate corporate and product information. We will never use visitor data for advertising, profiling, or purposes beyond those described in this Policy and our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+              </div>
+            </div>
+
+          </section><!-- /#lgf-s-notused -->
+
+
+          <!-- ── SECTION 7: Future Cookie Expansion ─────────────────── -->
+          <section class="lgf-section" id="lgf-s-future" aria-labelledby="lgf-h2-future">
+            <h2 class="lgf-h2" id="lgf-h2-future">Future Cookie Expansion</h2>
+
+            <p>As the Laborate website grows and new services are introduced, we may deploy additional technologies that set cookies or use browser storage. This section documents the categories of expansion we anticipate, so you can understand the direction of our implementation.</p>
+
+            <p>We will update this Cookie Policy and our Cookie Registry (Section 12) whenever new cookies are deployed. Where consent is required under applicable law, we will request it through our Cookie Preference Centre before activating any new technology.</p>
+
+            <h3 class="lgf-h3">Anticipated Future Deployments</h3>
+            <ul class="lgf-ul">
+              <li><strong>Google Tag Manager</strong> — May be deployed to centralise script management. GTM itself does not set tracking cookies, but it can load scripts that do. All scripts loaded via GTM will remain subject to the consent logic described in Section 10.</li>
+              <li><strong>Embedded video (YouTube / Vimeo)</strong> — If video content is embedded on product or brand pages, embedded media cookies may be set when users interact with players. YouTube's privacy-enhanced mode will be used where possible.</li>
+              <li><strong>Live chat (future)</strong> — If a support or business enquiry chat widget is deployed, it may set functional cookies to maintain chat state and session history.</li>
+              <li><strong>CRM integration (future)</strong> — If a CRM platform (e.g. HubSpot, Salesforce) is integrated for lead management, it may set cookies to associate web sessions with CRM contact records. This will always require explicit user consent.</li>
+              <li><strong>LinkedIn Insight Tag (future)</strong> — May be deployed to measure the effectiveness of LinkedIn-sponsored content campaigns. Would require explicit advertising consent before activation.</li>
+              <li><strong>Performance monitoring (future)</strong> — A Real User Monitoring (RUM) tool may be deployed to track Web Vitals and page performance metrics in aggregate.</li>
+              <li><strong>Language and region preferences (future)</strong> — If the website is localised for additional markets, functional cookies may be used to remember language or regional format preferences.</li>
+            </ul>
+
+            <!-- C-124 Neutral Callout -->
+            <div class="lgf-callout lgf-callout--neutral" role="note" aria-label="Future expansion note">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">Consent Before Activation</p>
+                <p>Before any new non-essential technology is activated on laborate.com, this Cookie Policy and the Cookie Registry will be updated, and — where legally required — fresh consent will be requested through the Cookie Preference Centre. You will not be opted into new cookie categories without the opportunity to review and accept them.</p>
+              </div>
+            </div>
+
+          </section><!-- /#lgf-s-future -->
+
+
+          <!-- ── SECTION 8: Managing Your Preferences ────────────────── -->
+          <section class="lgf-section" id="lgf-s-managing" aria-labelledby="lgf-h2-managing">
+            <h2 class="lgf-h2" id="lgf-h2-managing">Managing Your Cookie Preferences</h2>
+
+            <p>You have several options for managing cookies on laborate.com. Your choices can be made at different levels — through our website's own consent tools (when deployed), or through your browser settings.</p>
+
+            <h3 class="lgf-h3">8.1 Cookie Preference Centre (Coming Soon)</h3>
+            <p>When our full consent management system is deployed, you will be able to manage your cookie preferences at any time through our Cookie Preference Centre. This will allow you to:</p>
+            <ul class="lgf-ul">
+              <li>View all cookie categories in use on laborate.com</li>
+              <li>Toggle individual categories on or off (except Strictly Necessary, which cannot be disabled)</li>
+              <li>Save and update your preferences at any time</li>
+              <li>Review the specific cookies and third-party services within each category</li>
+            </ul>
+            <p>A "Cookie Preferences" link will be permanently available in the website footer on all pages.</p>
+
+            <h3 class="lgf-h3">8.2 Browser Settings</h3>
+            <p>All major web browsers provide controls for managing cookies. You can use your browser to:</p>
+            <ul class="lgf-ul">
+              <li>Block all cookies (note: this may break the functionality of many websites, including some features of laborate.com)</li>
+              <li>Block third-party cookies only (less disruptive, still reduces some tracking)</li>
+              <li>Delete all existing cookies stored on your device</li>
+              <li>Delete cookies from a specific website</li>
+              <li>Set up notifications when a website attempts to set a cookie</li>
+            </ul>
+
+            <!-- C-124 Neutral Callout — Browser tip -->
+            <div class="lgf-callout lgf-callout--neutral" role="note" aria-label="Browser cookie settings links">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">Managing Cookies in Your Browser</p>
+                <p>Browser cookie settings can be found in: <strong>Chrome</strong> — Settings → Privacy and Security → Cookies. <strong>Firefox</strong> — Settings → Privacy &amp; Security → Cookies and Site Data. <strong>Safari</strong> — Preferences → Privacy. <strong>Edge</strong> — Settings → Cookies and Site Permissions. <strong>Opera</strong> — Settings → Advanced → Privacy &amp; Security → Cookies. These menus allow you to block, allow, or delete cookies per site or globally. Settings may vary by browser version.</p>
+              </div>
+            </div>
+
+            <h3 class="lgf-h3">8.3 Opt-Out of Google Analytics</h3>
+            <p>If you wish to opt out of Google Analytics tracking across all websites you visit, Google provides a browser add-on for this purpose. The <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a> prevents the Google Analytics JavaScript from sharing information about your visit with Google Analytics. This is separate from our own consent mechanism and applies globally across all GA-enabled websites.</p>
+
+          </section><!-- /#lgf-s-managing -->
+
+
+          <!-- ── SECTION 9: Third-Party Services ────────────────────── -->
+          <section class="lgf-section" id="lgf-s-third-party" aria-labelledby="lgf-h2-third-party">
+            <h2 class="lgf-h2" id="lgf-h2-third-party">Third-Party Services</h2>
+
+            <p>The following table lists all third-party services currently integrated or anticipated on laborate.com, along with their cookie implications and current status. Only services marked "Active" are currently operating.</p>
+
+            <!-- [CMS: third_party_services — ACF repeater: service, provider, purpose, type, status] -->
+            <div class="lgf-table-wrap" role="region" aria-label="Third-party services and their cookie status" tabindex="0">
+              <table class="lgf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Service</th>
+                    <th scope="col">Provider</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Cookie / Storage</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Google Analytics 4</td>
+                    <td>Google LLC (USA)</td>
+                    <td>Website traffic and behaviour analytics (anonymised)</td>
+                    <td>Cookies: _ga, _ga_*, _gid (first-party domain)</td>
+                    <td><strong>Active</strong> — consent-gated</td>
+                  </tr>
+                  <tr>
+                    <td>Google Fonts</td>
+                    <td>Google LLC (USA)</td>
+                    <td>Web font delivery (Sora, Inter) via Google CDN</td>
+                    <td>No cookies set; Google may log the font request IP (CDN log). Consider self-hosting for stricter privacy.</td>
+                    <td><strong>Active</strong> — no consent required (no cookie set)</td>
+                  </tr>
+                  <tr>
+                    <td>Google Maps (Contact Page)</td>
+                    <td>Google LLC (USA)</td>
+                    <td>Interactive map embedded on Contact Us page</td>
+                    <td>Google may set cookies when users interact with the embedded map (scroll, zoom, click Directions)</td>
+                    <td><strong>Active</strong> — embedded via iframe; cookies set on user interaction</td>
+                  </tr>
+                  <tr>
+                    <td>YouTube</td>
+                    <td>Google LLC (USA)</td>
+                    <td>Embedded product / corporate video content</td>
+                    <td>Cookies set on video play; YouTube Privacy-Enhanced mode reduces tracking</td>
+                    <td>Future — not yet deployed</td>
+                  </tr>
+                  <tr>
+                    <td>LinkedIn</td>
+                    <td>LinkedIn Ireland (EU) / Microsoft</td>
+                    <td>Professional social sharing or Insight Tag for campaign analytics</td>
+                    <td>Cookies if Insight Tag or share widget embedded</td>
+                    <td>Future — not yet deployed</td>
+                  </tr>
+                  <tr>
+                    <td>Meta (Facebook / Instagram)</td>
+                    <td>Meta Platforms Ireland (EU)</td>
+                    <td>Social media embeds or advertising measurement</td>
+                    <td>Cookies if Meta Pixel or Instagram embed deployed</td>
+                    <td>Future — not yet deployed</td>
+                  </tr>
+                  <tr>
+                    <td>Google Tag Manager</td>
+                    <td>Google LLC (USA)</td>
+                    <td>Centralised script deployment and tag management</td>
+                    <td>GTM itself sets no tracking cookies; controls loading of other scripts</td>
+                    <td>Future — not yet deployed</td>
+                  </tr>
+                  <tr>
+                    <td>Live Chat / Support Platform</td>
+                    <td>TBD</td>
+                    <td>Visitor support, enquiry routing, business chat</td>
+                    <td>Typically sets functional session and chat history cookies</td>
+                    <td>Future — provider not yet selected</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>For information about how Google processes data collected via Google Analytics and Google Maps, please refer to Google's Privacy Policy and Google's Cookies Policy. Laborate does not control Google's data processing practices or Google's cookie lifespans beyond the configuration options available in the GA4 property settings.</p>
+
+          </section><!-- /#lgf-s-third-party -->
+
+
+          <!-- ── SECTION 10: Cookie Consent ─────────────────────────── -->
+          <section class="lgf-section" id="lgf-s-consent" aria-labelledby="lgf-h2-consent">
+            <h2 class="lgf-h2" id="lgf-h2-consent">Cookie Consent</h2>
+
+            <!-- FUTURE IMPLEMENTATION NOTE:
+                 The cookie consent banner described in this section is NOT yet implemented.
+                 It will be deployed as part of the COOKIE epic (WordPress implementation phase).
+                 The HTML and JavaScript for the banner will be added to the WordPress theme
+                 (header.php / footer.php) and will not affect this page's structure.
+            -->
+
+            <p>Where required by applicable law — including the Digital Personal Data Protection Act 2023 (India), the EU General Data Protection Regulation (GDPR), and the EU ePrivacy Directive — we obtain your consent before activating non-essential cookies.</p>
+
+            <h3 class="lgf-h3">10.1 Current State</h3>
+            <p>Our full cookie consent management system is not yet deployed. Our current implementation loads Google Analytics 4 in accordance with our legal assessment of applicable requirements. Where GA4 requires consent (for example, for visitors from EU member states), we will implement appropriate consent gating as part of our full CMP deployment.</p>
+
+            <h3 class="lgf-h3">10.2 Future Consent System</h3>
+            <p>When our Cookie Preference Centre is deployed, the consent experience on laborate.com will work as follows:</p>
+
+            <ol class="lgf-ol">
+              <li><strong>First visit</strong> — A cookie consent banner will be displayed, asking you to make a choice. No non-essential cookies will be activated until you have made a choice or the banner is displayed.</li>
+              <li><strong>Your choices</strong> — The banner will offer three options: <em>Accept All</em> (activates all enabled cookie categories), <em>Reject Non-Essential</em> (only strictly necessary cookies remain active), and <em>Manage Preferences</em> (opens the Cookie Preference Centre for granular per-category control).</li>
+              <li><strong>Saving preferences</strong> — Your consent choice is stored in your browser's localStorage under a Laborate-specific key. This record includes the consent version (tied to this Cookie Policy's version number) and the timestamp of your choice.</li>
+              <li><strong>Consent validity</strong> — Consent records will be valid for 12 months. After this period, you will be asked to confirm your preferences again.</li>
+              <li><strong>Policy updates</strong> — If we make material changes to this Cookie Policy or add new cookie categories, the consent version number will change and you will be prompted to review and re-confirm your preferences.</li>
+              <li><strong>No retroactive consent</strong> — If you select "Reject Non-Essential", non-essential cookies will not be activated, regardless of any previously accepted version.</li>
+            </ol>
+
+            <!-- C-124 Warning Callout -->
+            <div class="lgf-callout lgf-callout--warning" role="alert" aria-label="Consent system deployment notice">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">Cookie Consent System: Not Yet Active</p>
+                <p>The cookie consent banner and Preference Centre described in this section are planned for deployment in a future phase of the laborate.com development programme. Until that system is live, you can manage your cookie preferences using your browser settings (see Section 8.2) or by opting out of Google Analytics using Google's opt-out tool (see Section 8.3).</p>
+              </div>
+            </div>
+
+          </section><!-- /#lgf-s-consent -->
+
+
+          <!-- ── SECTION 11: Withdrawing Consent ────────────────────── -->
+          <section class="lgf-section" id="lgf-s-withdraw" aria-labelledby="lgf-h2-withdraw">
+            <h2 class="lgf-h2" id="lgf-h2-withdraw">Withdrawing Consent</h2>
+
+            <p>You may withdraw or modify your cookie consent at any time. Withdrawing consent does not affect the lawfulness of any processing that occurred before the withdrawal.</p>
+
+            <h3 class="lgf-h3">Current Options</h3>
+            <ul class="lgf-ul">
+              <li><strong>Browser cookie settings</strong> — Use your browser's cookie management controls to block or delete cookies from laborate.com at any time (see Section 8.2). This immediately prevents further cookie-based tracking but does not retroactively delete data already collected.</li>
+              <li><strong>Google Analytics opt-out</strong> — Install the Google Analytics Opt-out Browser Add-on to prevent your browser from sending data to Google Analytics across all websites. This is effective immediately upon installation.</li>
+              <li><strong>Incognito / Private browsing mode</strong> — Using your browser's private browsing mode means cookies are not stored after you close the browser window. Note that this does not prevent cookies from being set during the session itself.</li>
+              <li><strong>Contact us</strong> — If you have questions about your data or wish to request deletion of analytics data attributable to your device, please contact us at <a href="mailto:legal@laborate.com">legal@laborate.com</a>. Note that because GA4 stores only anonymous identifiers, we may not be able to identify and delete data linked to a specific individual without additional context.</li>
+            </ul>
+
+            <h3 class="lgf-h3">Future Options (When Consent System Is Deployed)</h3>
+            <ul class="lgf-ul">
+              <li><strong>Cookie Preference Centre</strong> — Accessible via the "Cookie Preferences" link in the website footer. Allows you to toggle individual categories and save updated preferences instantly.</li>
+              <li><strong>Re-prompt on version change</strong> — If we update this Cookie Policy in a material way, you will be automatically re-prompted to review and update your preferences.</li>
+              <li><strong>Revoke all</strong> — Selecting "Reject Non-Essential" in the Cookie Preference Centre immediately stops all non-essential scripts and cookies from operating in your browser session.</li>
+            </ul>
+
+          </section><!-- /#lgf-s-withdraw -->
+
+
+          <!-- ── SECTION 12: Cookie Registry ─────────────────────────── -->
+          <section class="lgf-section" id="lgf-s-registry" aria-labelledby="lgf-h2-registry">
+            <h2 class="lgf-h2" id="lgf-h2-registry">Cookie Registry</h2>
+
+            <p>The Cookie Registry is the authoritative record of every cookie currently set on laborate.com. It is maintained in the WordPress CMS and updated whenever a cookie is added, modified, or removed. Entries marked "Future" are pre-registered for planned technologies but are not currently active.</p>
+
+            <!-- [CMS: cookie_registry — ACF repeater: cookie_name, provider, purpose, category, duration, required, status, cms_managed] -->
+            <div class="lgf-table-wrap" role="region" aria-label="Full cookie registry" tabindex="0">
+              <table class="lgf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Cookie Name</th>
+                    <th scope="col">Provider</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Required</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>wordpress_test_cookie</code></td>
+                    <td>Laborate / WordPress</td>
+                    <td>Browser cookie support test</td>
+                    <td>Strictly Necessary</td>
+                    <td>Session (deleted immediately)</td>
+                    <td>Yes</td>
+                    <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td><em>[load balancer]</em><!-- [CMS: lb_cookie_name] --></td>
+                    <td>Hosting provider</td>
+                    <td>Server affinity / session routing</td>
+                    <td>Strictly Necessary</td>
+                    <td>Session</td>
+                    <td>Yes</td>
+                    <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td><code>_ga</code></td>
+                    <td>Google Analytics</td>
+                    <td>Unique user identifier for analytics</td>
+                    <td>Analytics</td>
+                    <td>2 years</td>
+                    <td>No</td>
+                    <td>Active — consent-gated</td>
+                  </tr>
+                  <tr>
+                    <td><code>_ga_[MEASUREMENT_ID]</code><!-- [CMS: ga4_measurement_id] --></td>
+                    <td>Google Analytics</td>
+                    <td>GA4 session state management</td>
+                    <td>Analytics</td>
+                    <td>2 years</td>
+                    <td>No</td>
+                    <td>Active — consent-gated</td>
+                  </tr>
+                  <tr>
+                    <td><code>_gid</code></td>
+                    <td>Google Analytics</td>
+                    <td>Short-term user session identifier</td>
+                    <td>Analytics</td>
+                    <td>24 hours</td>
+                    <td>No</td>
+                    <td>Active — consent-gated</td>
+                  </tr>
+                  <tr>
+                    <td><code>lpi_cookie_consent</code></td>
+                    <td>Laborate (localStorage)</td>
+                    <td>Stores user cookie consent preferences and version</td>
+                    <td>Strictly Necessary (Functional)</td>
+                    <td>12 months</td>
+                    <td>Yes (once CMP is live)</td>
+                    <td>Future — CMP not yet deployed</td>
+                  </tr>
+                  <tr>
+                    <td><em>[YouTube cookies]</em></td>
+                    <td>YouTube / Google</td>
+                    <td>Video playback and session state</td>
+                    <td>Embedded Media</td>
+                    <td>Varies (up to 2 years)</td>
+                    <td>No</td>
+                    <td>Future — embeds not yet deployed</td>
+                  </tr>
+                  <tr>
+                    <td><em>[GTM cookies]</em></td>
+                    <td>Google Tag Manager</td>
+                    <td>Script container management (GTM itself sets no tracking cookies)</td>
+                    <td>Strictly Necessary</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>Future — GTM not yet deployed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>This registry will be updated in the CMS whenever a new cookie is introduced. The "Last Updated" date in the metadata panel at the top of this page reflects the most recent registry change. If you notice a cookie set by laborate.com that does not appear in this registry, please report it to <a href="mailto:legal@laborate.com">legal@laborate.com</a>.</p>
+
+          </section><!-- /#lgf-s-registry -->
+
+
+          <!-- ── SECTION 13: Cookie Preference Matrix ────────────────── -->
+          <section class="lgf-section" id="lgf-s-matrix" aria-labelledby="lgf-h2-matrix">
+            <h2 class="lgf-h2" id="lgf-h2-matrix">Cookie Preference Matrix</h2>
+
+            <p>The Preference Matrix provides a clear reference for how each cookie category is controlled, whether users can toggle it, and whether consent is required before activation. This matrix will be reflected in the Cookie Preference Centre UI when it is deployed.</p>
+
+            <!-- [CMS: cookie_preference_matrix — ACF: per-category controls] -->
+            <div class="lgf-table-wrap" role="region" aria-label="Cookie preference matrix" tabindex="0">
+              <table class="lgf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Always On</th>
+                    <th scope="col">User Controlled</th>
+                    <th scope="col">Requires Consent</th>
+                    <th scope="col">Current Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Strictly Necessary</strong></td>
+                    <td>Yes — cannot be disabled</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Analytics</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes — where legally required</td>
+                    <td>Active — GA4 (consent-gated)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Functional</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes</td>
+                    <td>Not Deployed</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Performance</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes</td>
+                    <td>Not Deployed</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Marketing</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes</td>
+                    <td>Not Deployed</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Advertising</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes</td>
+                    <td>Not Used</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Personalization</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes</td>
+                    <td>Future</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Social Media</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes</td>
+                    <td>Future</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Embedded Media</strong></td>
+                    <td>No</td>
+                    <td>Yes (opt-in)</td>
+                    <td>Yes</td>
+                    <td>Future</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>All non-essential categories default to <em>off</em>. A user must actively opt in to each category. "Always On" applies exclusively to Strictly Necessary cookies, which cannot be disabled without impairing website functionality. The Advertising category is listed for completeness; Laborate does not currently intend to deploy advertising cookies.</p>
+
+          </section><!-- /#lgf-s-matrix -->
+
+
+          <!-- ── SECTION 14: Changes to This Policy ─────────────────── -->
+          <section class="lgf-section" id="lgf-s-changes" aria-labelledby="lgf-h2-changes">
+            <h2 class="lgf-h2" id="lgf-h2-changes">Changes to This Policy</h2>
+
+            <p>We may update this Cookie Policy from time to time to reflect changes in the technologies we use, new services we introduce, or changes in applicable law. When we make changes, we update the "Last Updated" date in the metadata panel at the top of this page and update the Cookie Registry accordingly.</p>
+
+            <p>For material changes — particularly the introduction of new cookie categories or new third-party services — we will update the consent version number. When our consent management system is deployed, this will trigger a re-prompt for affected users, ensuring you are always aware of and in control of any changes to our cookie usage.</p>
+
+            <!-- C-124 Neutral Callout -->
+            <div class="lgf-callout lgf-callout--neutral" role="note" aria-label="Policy review reminder">
+              <div class="lgf-callout-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="lgf-callout-body">
+                <p class="lgf-callout-title">Review This Policy Periodically</p>
+                <p>We recommend checking this Cookie Policy periodically — particularly before or after any major Laborate website update. The current version is always available at <a href="https://laborate.com/legal/cookie-policy/">laborate.com/legal/cookie-policy/</a>. The Cookie Registry in Section 12 is the definitive list of cookies currently active on laborate.com.</p>
+              </div>
+            </div>
+
+          </section><!-- /#lgf-s-changes -->
+
+
+          <!-- ── SECTION 15: Contact Information ────────────────────── -->
+          <section class="lgf-section" id="lgf-s-contact" aria-labelledby="lgf-h2-contact">
+            <h2 class="lgf-h2" id="lgf-h2-contact">Contact Information</h2>
+
+            <p>If you have questions about this Cookie Policy, want to report a cookie you believe should be listed in the registry, or have a concern about our use of tracking technologies, please contact our Legal &amp; Compliance team:</p>
+
+            <blockquote class="lgf-blockquote lgf-blockquote--contact">
+              <p><strong>Legal &amp; Compliance Team</strong><br>
+              Laborate Pharmaceuticals India Ltd.</p>
+              <p>
+                E-11, Industrial Area<br>
+                Panipat – 132103<br>
+                Haryana, India
+              </p>
+              <p>
+                Email: <a href="mailto:legal@laborate.com">legal@laborate.com</a><br>
+                Phone: <a href="tel:+911803508200">+91-180-3508200</a>
+              </p>
+              <p>For general website enquiries, please use our <a href="../contact.html">Contact Us</a> page.</p>
+            </blockquote>
+
+          </section><!-- /#lgf-s-contact -->
+
+
+          <!-- ── SECTION 16: Revision History ────────────────────────── -->
+          <section class="lgf-section" id="lgf-s-revisions" aria-labelledby="lgf-h2-revisions">
+            <h2 class="lgf-h2" id="lgf-h2-revisions">Revision History</h2>
+
+            <p>A record of material changes to this Cookie Policy and Cookie Registry is maintained below. The consent version is tied to this version number — when the version changes materially, users will be re-prompted for consent.</p>
+
+            <!-- C-125 Document Revision History -->
+            <!-- [CMS: lgf_revisions — ACF repeater: version, date, summary. Newest first.] -->
+            <ol class="lgf-revisions" aria-label="Cookie Policy revision history">
+
+              <li class="lgf-revision" data-version="1.0">
+                <div class="lgf-revision-header">
+                  <span class="lgf-revision-version">Version 1.0</span>
+                  <time class="lgf-revision-date" datetime="2026-01-01">1 January 2026</time>
+                </div>
+                <p class="lgf-revision-summary">Initial publication of the Laborate Pharmaceuticals Cookie Policy. Current implementation: Google Analytics 4 (analytics, consent-gated) and strictly necessary cookies only. Full cookie consent management system (banner, preference centre, consent engine) documented as a planned future deployment. Cookie Registry: 5 active entries (_ga, _ga_*, _gid, wordpress_test_cookie, load balancer session). Cookie Categories table: 9 categories documented with status. Third-party services table: 8 services including GA4 (active), Google Fonts (active), Google Maps (active via iframe). Future architecture: consent storage schema (lpi_cookie_consent), consent version mechanism, and WordPress CMP integration path documented in developer comments. Published concurrent with the launch of the new laborate.com corporate website.</p>
+              </li>
+
+            </ol>
+
+          </section><!-- /#lgf-s-revisions -->
+
+
+        </div><!-- /.lgf-content -->
+
+      </div><!-- /.lgf-document-layout -->
+    </div><!-- /.lgf-document-band -->
+
+
+    <!--
+    ============================================================
+    SECTION 7: Related Legal Documents (C-126)
+    data-section: lgf-related
+    [CMS: C-126 | lgf_related_documents — ACF repeater: title, summary, icon_slug, url]
+    ============================================================
+    -->
+    <section class="lgf-related-section" data-section="lgf-related" aria-labelledby="lgf-related-heading">
+      <div class="wrap lgf-related-inner">
+
+        <div class="lgf-related-header">
+          <!-- [CMS: lgf_related_title] -->
+          <h2 id="lgf-related-heading" class="lgf-related-title">Related Legal Documents</h2>
+          <!-- [CMS: lgf_related_subtitle] -->
+          <p class="lgf-related-subtitle">Additional policies and governance documents applicable to your use of our website.</p>
+        </div>
+
+        <ul class="lgf-related-grid" role="list">
+
+          <li>
+            <a href="privacy-policy.html" class="lgf-related-card reveal">
+              <div class="lgf-related-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="22" height="22" aria-hidden="true" focusable="false">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <h3 class="lgf-related-card-title">Privacy Policy</h3><!-- [CMS: document_title] -->
+              <p class="lgf-related-card-desc">How we collect, use, share, and protect personal information submitted through our website.</p><!-- [CMS: document_summary] -->
+              <span class="lgf-related-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="terms-and-conditions.html" class="lgf-related-card reveal">
+              <div class="lgf-related-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="22" height="22" aria-hidden="true" focusable="false">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/>
+                </svg>
+              </div>
+              <h3 class="lgf-related-card-title">Terms &amp; Conditions</h3><!-- [CMS: document_title] -->
+              <p class="lgf-related-card-desc">Rules governing your use of the Laborate website, intellectual property, disclaimers, and limitation of liability.</p><!-- [CMS: document_summary] -->
+              <span class="lgf-related-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="disclaimer.html" class="lgf-related-card reveal">
+              <div class="lgf-related-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="22" height="22" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 8v4"/>
+                  <path d="M12 16h.01"/>
+                </svg>
+              </div>
+              <h3 class="lgf-related-card-title">Disclaimer</h3><!-- [CMS: document_title] -->
+              <p class="lgf-related-card-desc">Medical, regulatory, and general information disclaimers applicable to all Laborate content.</p><!-- [CMS: document_summary] -->
+              <span class="lgf-related-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="accessibility-statement.html" class="lgf-related-card reveal">
+              <div class="lgf-related-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="22" height="22" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                </svg>
+              </div>
+              <h3 class="lgf-related-card-title">Accessibility Statement</h3><!-- [CMS: document_title] -->
+              <p class="lgf-related-card-desc">Our commitment to WCAG 2.1 AA accessibility standards and how to report accessibility barriers.</p><!-- [CMS: document_summary] -->
+              <span class="lgf-related-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="../legal.html" class="lgf-related-card reveal">
+              <div class="lgf-related-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="22" height="22" aria-hidden="true" focusable="false">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3 class="lgf-related-card-title">Corporate Governance</h3><!-- [CMS: document_title] -->
+              <p class="lgf-related-card-desc">Governance policies, codes of conduct, and the regulatory compliance framework for Laborate Pharmaceuticals.</p><!-- [CMS: document_summary] -->
+              <span class="lgf-related-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+
+        </ul><!-- /.lgf-related-grid -->
+
+        <div class="lgf-related-back">
+          <a href="../legal.html" class="btn btn-outline">&larr; Back to Legal Centre</a>
+        </div>
+
+      </div><!-- /.lgf-related-inner -->
+
+    </section><!-- /.lgf-related-section -->
+
+
+    <!--
+    ============================================================
+    SECTION 8: Legal Assistance — compact Contact Band reuse (C-44)
+    [CMS: legal_assist_heading, legal_assist_body, legal_assist_email, legal_assist_cta_label, legal_assist_cta_url]
+    ============================================================
+    -->
+    <section class="contact-band lgf-assist" aria-labelledby="lgf-assist-heading">
+      <div class="wrap contact-inner lgf-assist-inner reveal">
+        <div class="contact-left">
+          <div class="c-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <!-- [CMS: legal_assist_heading] -->
+            <h3 id="lgf-assist-heading">Questions About Cookies?</h3>
+            <!-- [CMS: legal_assist_body] -->
+            <p>Our Legal &amp; Compliance team is available to answer cookie and privacy questions. Contact us at <a href="mailto:legal@laborate.com">legal@laborate.com</a> or use our contact form to report an unlisted cookie or raise a concern.</p>
+          </div>
+        </div>
+        <!-- [CMS: legal_assist_cta_label, legal_assist_cta_url] -->
+        <a href="../contact.html?subject=Cookie+Enquiry" class="btn btn-light">Contact Us <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+
+  </main><!-- /#main-content -->
+
+
+  <!--
+  ============================================================
+  COMPONENT: Footer (C-46)
+  ============================================================
+  -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+
+        <div class="foot-brand">
+          <a href="../index.html" aria-label="Laborate Pharmaceuticals — Home">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="32" loading="lazy">
+          </a>
+          <p>A global pharmaceutical manufacturing and healthcare solutions company, delivering quality medicines from research to patients worldwide since 1985.</p>
+          <div class="foot-contact">
+            <span>E-11, Industrial Area, Panipat-132103, India</span>
+            <a href="mailto:info@laborate.com">info@laborate.com</a>
+            <a href="tel:+911803508200">+91-180-3508200</a>
+          </div>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/laborate-pharmaceuticals-india-limited/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4zM8 8h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.74 1.85-2.74 3.77V24H8z" /></svg></a>
+            <a href="https://www.facebook.com/laborate.india.ltd/" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.75-1.6 1.5V12h2.7l-.43 2.9h-2.3v7A10 10 0 0 0 22 12z" /></svg></a>
+            <a href="https://www.instagram.com/laborate.india.ltd/?hl=en" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.3.07 1.69.07 4.9s0 3.6-.07 4.9c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.3.06-1.69.07-4.9.07s-3.6 0-4.9-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.8 2.2 12 2.2zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38zm6.97-11.4a1.58 1.58 0 1 0 0 3.15 1.58 1.58 0 0 0 0-3.15z" /></svg></a>
+          </div>
+        </div>
+
+        <div class="foot-col">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="../about.html">Company Overview</a></li>
+            <li><a href="../about/leadership.html">Leadership</a></li>
+            <li><a href="../about/awards.html">Awards &amp; Recognition</a></li>
+            <li><a href="../about/why-laborate.html">Why Laborate</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Brands</h4>
+          <ul>
+            <li><a href="../brands.html">Elite</a></li>
+            <li><a href="../brands.html">Aqualab</a></li>
+            <li><a href="../brands.html">OTC Health</a></li>
+            <li><a href="../business/contract-manufacturing.html">CDMO</a></li>
+            <li><a href="../global.html">Exports</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="../products/catalogue.html">Product Catalogue</a></li>
+            <li><a href="../products.html">Products Overview</a></li>
+            <li><a href="../products/catalogue.html">Search Products</a></li>
+            <li><a href="../contact.html?type=product#ctc-form">Product Enquiry</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../manufacturing.html">Manufacturing</a></li>
+            <li><a href="../quality.html">Quality</a></li>
+            <li><a href="../global.html">Global</a></li>
+            <li><a href="../careers.html">Careers</a></li>
+            <li><a href="../resources.html">Resources</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /.foot-top -->
+
+      <div class="foot-bottom">
+        <p>&copy; 2026 Laborate Pharmaceuticals India Ltd. All rights reserved.</p>
+        <div class="legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+          <a href="cookie-policy.html" aria-current="page">Cookie Policy</a>
+        </div>
+        <div class="vendor-credit">
+          Powered by
+          <a href="https://www.oktoberry.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 116 167" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oktoberry">
+              <g id="berry" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <g><path d="m531.21 275.21c25.098 14.923 256.99 142.47 322.2 181.67-26.355 13.024-121.46 67.697-170.76 93.167-30.819-48.883-158.28-256.83-170.65-275.59 13.023 0.15475 12.286 0.42988 19.208 0.75503z" fill="#0c4269" /><path d="m170.65 462.99c58.347 27.536 135.66 69.198 170.68 87.195-4.2644 6.11-165.82 243.55-170.67 249.83-0.0262-9.9814-0.0508-329.71-0.0119-337.03z" fill="#1988d7" /><path d="m853.39 456.88c0.52027 47.958 0.35951 305.13-0.0146 343.12-4.0215-5.8717-170.71-249.96-170.71-249.96 42.689-22.387 138.65-77.425 170.73-93.159z" fill="#062337" /><path d="m512.05 1016.9c0.0744-11.808-0.5955-115.5-0.0492-172.85 60.841-7.7268 329.53-42.472 341.38-44.039 0 0-336.25 213.97-341.33 216.88z" /><path d="m512.01 844.04c-0.14148 57.245 0.16143 163.77 0.0427 172.86-46.625-25.866-303.75-194.75-341.4-216.89 54.722 7.007 221.54 21.896 341.35 44.033z" fill="#0a3452" /><path d="m170.67 462.99c71.769-44.473 208.19-126.17 321.24-187.35 5.8745-1.1628 13.439-1.0717 20.092-1.1948-54.813 86.485-158.39 256.45-170.67 275.71" fill="#5bafec" /></g>
+                <path d="m852.5 53.3c-0.45794-0.7872-0.15035-1.3261 0.68472-2.0475 0.24038 0.56464 0.0914 1.3908-0.68472 2.0475z" fill="#224f38" />
+                <g><path d="m512 274.45c6.4257 6.6504 167.58 270.74 170.66 275.58-3.6502-0.0455-339.39 0.14376-341.33 0.13047 1.0021-1.4787 164.27-267.37 170.66-275.71z" fill="#1365a0" /><path d="m341.33 550.17c3.0641 0.0176 323.33-0.41843 341.34-0.13493-6.3066 10.5-170.22 293.28-170.67 294.02-0.71653-1.1746-162.38-278.35-170.67-293.89z" fill="#0b3d60" /><path d="m341.33 550.17c6.1989 10.382 149.02 256.32 170.67 293.87-58.996-10.129-317.82-40.079-341.33-44.044 4.3815-5.9158 163.89-240.5 170.67-249.83z" fill="#115c92" /><path d="m512 844.05c2.2022-4.7744 167.81-289.45 170.67-294.02 4.815 7.0103 165.28 241.73 170.71 249.98-13.144 1.8281-315 41.036-341.38 44.042z" fill="#03111b" /></g>
+                <path d="m374.39 387.55c-0.917-0.23787-1.4729-0.82087-2.0288-1.4039 0.24138-0.23002 0.4828-0.46009 0.72416-0.6901 0.55524 0.58294 1.1106 1.1659 1.3047 2.094z" fill="#cda9d7" />
+              </g>
+              <g id="leaves" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <path d="m542.13 274.88c-6.7035 0.68517-17.083 0.23972-24.825-0.32194 48.528-83.188 208.91-166.17 330.83-221.53-31.735 150.69-165.75 212.4-306 221.85z" fill="#224f38" />
+                <path d="m517.3 274.55c-2.8104-0.0709-3.6594-0.094-6.5029-0.0649 23.129-168.51 180.79-245.37 338.08-221.15-13.701 6.8053-223.19 91.913-331.57 221.21z" fill="#83b149" />
+                <path d="m512 274.45c-3.2163 0.0569-7.8881 0.19224-10.931 0.2638-27.372-115.65-76.282-179.9-191.71-265.8 45.036 7.9968 89.138 20.814 125.5 49.995 60.193 48.767 98.875 138.97 77.137 215.54z" fill="#264f3b" />
+                <path d="m309.38 8.9225c14.552 10.351 28.399 20.55 42.064 30.989 63.487 48.502 125.69 124.46 149.64 234.81-1.735 0.0622-2.5166 0.11893-4.344 0.25622-25.293-59.867-56.832-96.438-80.395-111.1-27.886-17.346-55.033-28.8-76.595-54.481-34.588-41.195-35.595-94.03-30.364-100.48z" fill="#a3ca46" />
+              </g>
+            </svg>
+            Oktoberry Systems
+          </a>
+        </div>
+      </div><!-- /.foot-bottom -->
+
+    </div><!-- /.wrap -->
+  </footer>
+
+  <!-- ES module entry point -->
+  <script type="module" src="/assets/js/app.js"></script>
+
+  <!-- Legal Page Controller — TOC active states, mobile accordion -->
+  <script type="module" src="/assets/js/controllers/LegalPageController.js"></script>
+
+<script src="/assets/js/preview-gate.js"></script>
+</body>
+</html>

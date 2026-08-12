@@ -1,0 +1,133 @@
+/* =============================================================================
+   TYPOGRAPHY
+   Font loading and type-scale classes.
+   Source: docs/07_Visual_Design_System.md §2–4
+   Values: docs/16_Design_Token_Catalogue.md — Typography Tokens
+============================================================================= */
+
+/* Google Fonts — Sora (headings) + Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* -----------------------------------------------------------------------------
+   FONT WEIGHT UTILITIES
+----------------------------------------------------------------------------- */
+.fw-regular   { font-weight: 400; }
+.fw-medium    { font-weight: 500; }
+.fw-semibold  { font-weight: 600; }
+.fw-bold      { font-weight: 700; }
+.fw-extrabold { font-weight: 800; }
+
+/* -----------------------------------------------------------------------------
+   FONT FAMILY UTILITIES
+----------------------------------------------------------------------------- */
+.font-heading { font-family: var(--font-heading); }
+.font-body    { font-family: var(--font-body); }
+
+/* -----------------------------------------------------------------------------
+   TYPE SCALE
+   Named by context, not by abstract step.
+   All values extracted from the approved homepage — nothing invented.
+----------------------------------------------------------------------------- */
+
+/* Display / Hero */
+.fs-hero    { font-size: clamp(2.5rem, 6vw, 4.6rem); }
+.fs-careers { font-size: clamp(2rem, 4vw, 2.9rem); }
+
+/* Section headings */
+.fs-quote   { font-size: clamp(1.8rem, 3.8vw, 2.7rem); }  /* quality blockquote / reel h2 */
+.fs-h2      { font-size: clamp(1.9rem, 3.8vw, 2.6rem); }  /* standard section h2 */
+.fs-h2-alt  { font-size: clamp(1.8rem, 3.4vw, 2.5rem); }  /* about / global h2 */
+.fs-h2-mfg  { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }  /* manufacturing h2 */
+.fs-h3      { font-size: clamp(1.3rem, 2.6vw, 1.8rem); }  /* contact band h3 */
+
+/* Display numbers */
+.fs-stat    { font-size: 2rem; }     /* marquee / stat counters */
+.fs-badge   { font-size: 1.7rem; }  /* about badge number */
+
+/* Body scale */
+.fs-body-lg { font-size: 1.14rem; }  /* hero subtitle */
+.fs-body-md { font-size: 1.04rem; }  /* section intro p / media h3 */
+.fs-body    { font-size: 1rem; }
+.fs-body-sm { font-size: .95rem; }   /* buttons / contact sub */
+
+/* UI scale */
+.fs-nav     { font-size: .90rem; }   /* navigation links */
+.fs-card-h  { font-size: 1.02rem; }  /* division / cert headings */
+.fs-footer  { font-size: .88rem; }   /* footer links */
+.fs-caption { font-size: .85rem; }   /* media body p / footer contact */
+.fs-label   { font-size: .82rem; }   /* marquee label / learn link */
+.fs-label-sm{ font-size: .80rem; }   /* category label / footer col h4 */
+.fs-label-xs{ font-size: .78rem; }   /* video tag / stat label */
+.fs-meta    { font-size: .76rem; }   /* cert span */
+.fs-meta-sm { font-size: .74rem; }   /* hero kicker */
+.fs-eyebrow { font-size: .72rem; }   /* eyebrow label */
+.fs-tag     { font-size: .68rem; }   /* media card type tag */
+.fs-scrollcue { font-size: .66rem; } /* scroll cue label */
+.fs-heritage  { font-size: .70rem; } /* vertical heritage text */
+
+/* -----------------------------------------------------------------------------
+   LINE HEIGHT UTILITIES
+----------------------------------------------------------------------------- */
+.lh-heading { line-height: 1.1; }
+.lh-tight   { line-height: 1.08; }  /* manufacturing h2 */
+.lh-quote   { line-height: 1.18; }  /* quality blockquote */
+.lh-stat    { line-height: 1; }     /* stat numbers */
+.lh-label   { line-height: 1.25; }  /* marquee label */
+.lh-body    { line-height: 1.6; }   /* body text */
+
+/* -----------------------------------------------------------------------------
+   LETTER SPACING UTILITIES
+----------------------------------------------------------------------------- */
+.tracking-heading  { letter-spacing: -.02em; }  /* all Sora headings */
+.tracking-eyebrow  { letter-spacing: .2em; }    /* eyebrow / kicker */
+.tracking-heritage { letter-spacing: .42em; }   /* heritage vertical text */
+.tracking-footer   { letter-spacing: .08em; }   /* footer col headings */
+.tracking-cite     { letter-spacing: .12em; }   /* quality cite */
+.tracking-stat     { letter-spacing: .03em; }   /* stat label */
+.tracking-badge    { letter-spacing: .04em; }   /* about badge label */
+
+/* -----------------------------------------------------------------------------
+   TEXT COLOR UTILITIES
+----------------------------------------------------------------------------- */
+.text-blue        { color: var(--blue); }
+.text-red         { color: var(--red); }
+.text-muted       { color: var(--muted); }
+.text-white       { color: var(--white); }
+.text-navy        { color: var(--navy); }
+.text-light-blue  { color: var(--light-blue); }
+.text-on-dark     { color: var(--white); }
+
+/* On-dark specific */
+.text-hero-kicker { color: var(--on-dark-hero-kicker); }
+.text-hero-sub    { color: var(--on-dark-hero-subtitle); }
+.text-reel-body   { color: var(--on-dark-reel-body); }
+
+/* -----------------------------------------------------------------------------
+   TEXT TRANSFORM
+----------------------------------------------------------------------------- */
+.uppercase   { text-transform: uppercase; }
+.capitalize  { text-transform: capitalize; }
+
+/* -----------------------------------------------------------------------------
+   TEXT ALIGNMENT
+----------------------------------------------------------------------------- */
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* -----------------------------------------------------------------------------
+   TEXT OVERFLOW
+----------------------------------------------------------------------------- */
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* -----------------------------------------------------------------------------
+   MOBILE TYPOGRAPHY ADJUSTMENTS
+----------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* Marquee numbers reduce at mobile — matches source exactly */
+  .fs-stat { font-size: 1.55rem; }
+}

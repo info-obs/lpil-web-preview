@@ -1,0 +1,566 @@
+/* =============================================================================
+   COMPONENT: NAVBAR  (C-01 through C-05)
+   Source: assets/html/source/homepage-approved-v1.html
+           lines 189–347 (header/nav CSS), 1917–1955 (responsive CSS),
+           lines 2065–2091 (HTML reference)
+   Docs:   docs/05_Component_Library.md  C-01 – C-05
+           docs/11_Component_Behavior_Specification.md  §11.5
+
+   HEADER STATES
+   ─────────────────────────────────────────────────────────────────────────────
+   header[data-nav-transparent]           → transparent over hero (default)
+   header[data-nav-transparent].scrolled  → frosted glass after 50px scroll
+   header (no data-nav-transparent)       → always solid (internal pages)
+   .nav-links.open                        → mobile drawer open
+
+   Z-INDEX LAYERS USED (see tokens.css — Z-INDEX LAYER SYSTEM)
+   ─────────────────────────────────────────────────────────────────────────────
+   .skip-to-content:focus   601               above all named layers
+   header                   --z-header  300   stacking context for nav bar
+   .hamburger               --z-nav-btn 330   above open drawer
+   .nav-links (drawer)      --z-nav-drawer 320  below header + btn
+   .nav-backdrop            --z-nav-backdrop 310  below drawer
+============================================================================= */
+
+/* =============================================================================
+   SKIP NAVIGATION LINK
+   Visually hidden at rest; revealed on keyboard focus.
+   Must be the first focusable element on the page.
+   z-index 601: one above --z-tooltip (600), the topmost named layer.
+============================================================================= */
+
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap
+}
+
+.skip-to-content:focus {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: auto;
+  padding: 12px 24px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+  font-size: .9rem;
+  border-radius: var(--radius-md);
+  z-index: 601;
+  outline: 3px solid var(--light-blue);
+  outline-offset: 2px;
+  text-decoration: none
+}
+
+/* =============================================================================
+   HEADER SHELL (C-02)
+   Source: lines 189–202
+============================================================================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  transition:
+    background var(--t-emphasis),
+    box-shadow var(--t-emphasis),
+    padding var(--t-emphasis)
+}
+
+/* Scrolled state — frosted glass.
+   Applied by NavigationController when window.scrollY > 50
+   on transparent-nav pages. */
+header.scrolled {
+  background: rgba(255, 255, 255, .85);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  box-shadow: var(--shadow-header)
+}
+
+/* Internal pages — always solid. No data-nav-transparent attribute
+   means no transparency transition; CSS handles state entirely. */
+header:not([data-nav-transparent]) {
+  background: rgba(255, 255, 255, .85);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  box-shadow: var(--shadow-header)
+}
+
+/* =============================================================================
+   NAV ROW
+   Source: lines 204–216
+============================================================================= */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  transition: padding var(--t-emphasis)
+}
+
+/* Compact padding after scroll on transparent-nav pages */
+header.scrolled .nav {
+  padding: 12px 24px
+}
+
+/* Internal pages always use compact padding */
+header:not([data-nav-transparent]) .nav {
+  padding: 12px 24px
+}
+
+/* =============================================================================
+   LOGO (C-03)
+   Source: lines 218–249
+============================================================================= */
+
+.logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center
+}
+
+.logo img {
+  height: 34px;
+  width: auto;
+  display: block;
+  transition: filter var(--t-emphasis)
+}
+
+/* Logo inverts to white over transparent hero — source line 247–249 */
+header[data-nav-transparent]:not(.scrolled) .logo img {
+  filter: brightness(0) invert(1)
+}
+
+/* Logo colorises with higher brightness and contrast on mouse hover over transparent hero — source line 247–249 */
+header[data-nav-transparent]:not(.scrolled) .logo:hover img {
+  filter: brightness(1.2) contrast(1.2);
+}
+
+/* =============================================================================
+   NAV LINKS — DESKTOP (C-04)
+   Source: lines 267–305
+============================================================================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none
+}
+
+.nav-links a {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--text);
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  position: relative;
+  white-space: nowrap;
+  transition: color var(--t-fast), background var(--t-fast)
+}
+
+/* Light link colour over transparent hero — source lines 284–287 */
+header[data-nav-transparent]:not(.scrolled) .nav-links a,
+header[data-nav-transparent]:not(.scrolled) .nav-search {
+  color: #eaf2fb
+}
+
+/* Animated red underline on hover — source lines 289–305 */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-normal)
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(1)
+}
+
+/* Current page indicator.
+   WordPress wp_nav_menu() adds .current-menu-item to the active <li>
+   and .current-menu-ancestor to parent items. */
+.nav-links .current-menu-item > a::after,
+.nav-links .current-menu-ancestor > a::after {
+  transform: scaleX(1)
+}
+
+/* =============================================================================
+   NAV RIGHT
+   Source: lines 321–325
+============================================================================= */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px
+}
+
+/* =============================================================================
+   SEARCH ICON
+   Source: lines 307–319
+   Routing: href="search.html" on every page (RC-002A-R1).
+============================================================================= */
+
+.nav-search {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  flex-shrink: 0;
+  transition: background var(--t-fast), transform .15s
+}
+
+/* Change color of icon to red-dark on mouse hover */
+.nav-search:hover {
+  color: var(--red-dark)
+}
+
+/* Change color of icon to red-dark on mouse hover for transparent hero — source line 247–249*/
+header[data-nav-transparent]:not(.scrolled) .nav-search:hover {
+  color: var(--red)
+}
+
+/* Suppress browser default outline on mouse click */
+.nav-search:focus:not(:focus-visible) {
+  outline: none
+}
+
+/* Keyboard focus — accessible ring */
+.nav-search:focus-visible {
+  outline: 2px solid var(--light-blue, #4a90d9);
+  outline-offset: 2px
+}
+
+/* Subtle press feedback — replaces blue-square browser default */
+.nav-search:active {
+  background: rgba(16, 98, 172, .18);
+  transform: scale(.92)
+}
+
+.nav-search svg {
+  display: block;
+  transition: color var(--t-fast)
+}
+
+/* =============================================================================
+   HAMBURGER BUTTON (C-05)
+   Source: lines 327–347
+   Hidden on desktop; revealed at ≤880px by the mobile media query.
+============================================================================= */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-shrink: 0
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+  transition: transform .3s, opacity .3s, background var(--t-fast)
+}
+
+/* Pill background behind hamburger over transparent hero — source lines 257–261 */
+header[data-nav-transparent]:not(.scrolled) .hamburger {
+  background: rgba(0, 0, 0, .3);
+  padding: 6px 8px;
+  border-radius: 6px
+}
+
+/* Dark spans when scrolled or on solid (internal) pages */
+header.scrolled .hamburger span,
+header:not([data-nav-transparent]) .hamburger span {
+  background: var(--text)
+}
+
+/* Hamburger → X morph when drawer is open.
+   Geometry: gap 5px, span height 2px → total span area 16px, centre at 8px.
+   Span 1 sits at ~1px from top → translateY(7px) reaches centre.
+   Span 3 sits at ~15px from top → translateY(-7px) reaches centre. */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg)
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0)
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg)
+}
+
+/* =============================================================================
+   MOBILE NAV BACKDROP
+   Separate DOM element — receives click events independently.
+   Placed after <header> in the DOM; sits at --z-nav-backdrop (310),
+   below the drawer (320) and header (300 + stacking context).
+============================================================================= */
+
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 23, 48, .45);
+  z-index: var(--z-nav-backdrop);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-slow)
+}
+
+.nav-backdrop.open {
+  opacity: 1;
+  pointer-events: auto
+}
+
+/* =============================================================================
+   MOBILE NAV HIERARCHY — hidden on desktop
+   Toggle buttons, sub-lists and the drawer-header row are exclusive to the
+   mobile drawer. CSS keeps them invisible on desktop so zero layout or
+   interaction changes are visible above 880px.
+============================================================================= */
+
+.nav-meta       { display: none }
+.nav-sub-toggle { display: none }
+.nav-sub        { display: none }
+
+/* =============================================================================
+   MOBILE NAV DRAWER  ≤880px
+============================================================================= */
+
+@media (max-width: 880px) {
+
+  /* Full-height slide-in panel from the right edge */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;           /* dvh for correct sizing on mobile browsers */
+    width: 82%;
+    max-width: 380px;
+    background: var(--white);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;               /* replaced by sticky .nav-meta header inside */
+    transform: translateX(100%);
+    transition: transform var(--t-slow);
+    box-shadow: var(--shadow-nav-mobile);
+    z-index: var(--z-nav-drawer);
+    overflow-y: auto;
+    overflow-x: hidden
+  }
+
+  .nav-links.open {
+    transform: translateX(0)
+  }
+
+  /* ── Drawer header row (logo + close button) ─────────────────────────── */
+
+  .nav-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 14px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    flex-shrink: 0
+  }
+
+  .nav-meta .logo img {
+    height: 28px;
+    /* always render in colour inside the white drawer */
+    filter: none !important
+  }
+
+  /* Close button (X) */
+  .nav-close {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+    transition: background var(--t-fast), color var(--t-fast)
+  }
+
+  .nav-close:hover {
+    background: rgba(16, 98, 172, .08);
+    color: var(--blue)
+  }
+
+  .nav-close:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px
+  }
+
+  /* ── Primary nav items ───────────────────────────────────────────────── */
+
+  .nav-links > li:not(.nav-meta) {
+    border-bottom: 1px solid var(--line)
+  }
+
+  /* All links inside the drawer — base reset */
+  .nav-links a {
+    color: var(--text) !important;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0;
+    display: block;
+    width: 100%
+  }
+
+  .nav-links a::after {
+    display: none
+  }
+
+  /* Simple items (no children) */
+  .nav-links > li:not(.nav-meta):not(.has-children) > a {
+    padding: 15px 20px
+  }
+
+  /* ── Items with sub-navigation ───────────────────────────────────────── */
+
+  /* Flex row: link text fills available width, toggle sits at right edge */
+  .has-children {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch
+  }
+
+  .has-children > a {
+    flex: 1 1 0;
+    padding: 15px 12px 15px 20px;
+    min-height: 44px          /* WCAG 2.5.8 minimum touch target */
+  }
+
+  /* Sub-nav chevron toggle button */
+  .nav-sub-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    min-height: 50px;
+    border: none;
+    border-left: 1px solid var(--line);
+    background: none;
+    cursor: pointer;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: background var(--t-fast), color var(--t-fast)
+  }
+
+  .nav-sub-toggle:hover {
+    background: rgba(16, 98, 172, .06);
+    color: var(--blue)
+  }
+
+  .nav-sub-toggle:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: -2px
+  }
+
+  /* Chevron icon animation */
+  .nav-chevron {
+    transition: transform var(--t-normal)
+  }
+
+  .has-children.expanded > .nav-sub-toggle .nav-chevron {
+    transform: rotate(180deg)
+  }
+
+  /* ── Sub-navigation accordion ────────────────────────────────────────── */
+
+  .nav-sub {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    background: #f9fbfe;
+    transition: max-height var(--t-slow)
+  }
+
+  .has-children.expanded > .nav-sub {
+    max-height: 480px
+  }
+
+  /* Sub-nav links */
+  .nav-sub a {
+    display: block !important;
+    padding: 12px 20px 12px 36px !important;
+    font-size: .875rem !important;
+    font-weight: 400 !important;
+    color: var(--muted) !important;
+    border-bottom: 1px solid rgba(227, 234, 242, .6) !important;
+    width: auto !important
+  }
+
+  .nav-sub li:last-child > a {
+    border-bottom: none !important
+  }
+
+  .nav-sub a:hover {
+    color: var(--blue) !important;
+    background: rgba(16, 98, 172, .04)
+  }
+
+  /* Hamburger visible; position: relative activates z-index */
+  .hamburger {
+    display: flex;
+    position: relative;
+    z-index: var(--z-nav-btn)
+  }
+
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   Collapses all navbar transitions to imperceptible durations.
+   Transitions still fire so JS class-toggle logic remains unaffected.
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  header,
+  .nav,
+  .nav-links,
+  .nav-sub,
+  .nav-chevron,
+  .hamburger span,
+  .nav-backdrop {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important
+  }
+}

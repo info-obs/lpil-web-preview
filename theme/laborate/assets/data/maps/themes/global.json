@@ -1,0 +1,22 @@
+{
+  "id": "global",
+  "land":            "#ECF1F8",
+  "landHover":       "#D5E7F7",
+  "water":           "#D5E7F7",
+  "border":          "#FFFFFF",
+  "borderWidth":     0.6,
+  "markerFill":      "#001844",
+  "markerStroke":    "#FFFFFF",
+  "markerPulse":     "#0D57A2",
+  "clusterFill":     "#0D57A2",
+  "clusterStroke":   "#FFFFFF",
+  "clusterText":     "#FFFFFF",
+  "datasetColors": {
+    "EXPORTS":        { "fill": "#001844", "pulse": "#0D57A2" },
+    "DISTRIBUTION":   { "fill": "#0D57A2", "pulse": "#42A5F5" },
+    "CDMO":           { "fill": "#1B5E20", "pulse": "#43A047" },
+    "MANUFACTURING":  { "fill": "#1B5E20", "pulse": "#43A047" },
+    "SALES":          { "fill": "#5C35A0", "pulse": "#9575CD" },
+    "FUTURE_MARKETS": { "fill": "#795548", "pulse": "#A1887F" }
+  }
+}

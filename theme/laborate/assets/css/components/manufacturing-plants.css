@@ -1,0 +1,303 @@
+/* =============================================================================
+   MANUFACTURING PLANTS EXPLORER — CSS
+   /manufacturing/plants/ — facility listing and filtering page.
+
+   Component Registry:
+     C-66  Plant Card (defined in manufacturing.css — reused here)
+     C-54  Pagination (products-archive.css — reused)
+     C-58  Empty State (products-archive.css — reused)
+
+   New classes in this file:
+     .plants-explorer        section shell
+     .plants-filter-bar      filter toolbar
+     .plants-filter-field    individual filter field wrapper
+     .plants-results-meta    result count + sort row
+     .plants-grid            responsive plant card grid
+============================================================================= */
+
+/* =============================================================================
+   PLANTS EXPLORER SECTION
+============================================================================= */
+
+.plants-explorer {
+  background: var(--bg);
+  padding-bottom: 80px;
+}
+
+/* =============================================================================
+   FILTER BAR
+   One horizontal row: State | Certification | Dosage Form | Keyword | Search
+   Visual language: mirrors .search-toolbar from careers-jobs.css.
+   Compact, premium, enterprise.
+============================================================================= */
+
+.plants-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.plants-filter-field {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px;
+  border-right: 1px solid var(--line);
+  min-width: 0;
+  flex: 1;
+}
+
+.plants-filter-field:last-of-type {
+  border-right: none;
+}
+
+.plants-filter-label {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2px;
+  display: block;
+}
+
+.plants-filter-field .select,
+.plants-filter-field .input {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--text);
+  box-shadow: none;
+  height: auto;
+  line-height: 1.5;
+}
+
+.plants-filter-field .select:focus,
+.plants-filter-field .input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.plants-filter-search {
+  flex: 1.5;
+}
+
+.plants-filter-submit {
+  flex-shrink: 0;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue);
+  color: #fff;
+  font-size: .84rem;
+  font-weight: 600;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  transition: background var(--t-fast);
+  gap: 7px;
+  min-height: 68px;
+}
+
+.plants-filter-submit:hover {
+  background: var(--blue-dark);
+}
+
+.plants-filter-submit:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -3px;
+}
+
+.plants-filter-submit svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* =============================================================================
+   RESULTS META BAR
+   Shows count of results and a sort select.
+============================================================================= */
+
+.plants-results-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.plants-result-count {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.plants-result-count strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* =============================================================================
+   PLANTS GRID
+   Reuses .plant-card from manufacturing.css.
+   3 columns desktop → 2 tablet → 1 mobile.
+============================================================================= */
+
+.plants-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* Full-width plant card in plants-grid (same visual but may differ in list view) */
+.plants-grid .plant-card {
+  height: 100%;
+}
+
+/* =============================================================================
+   EMPTY STATE — ENHANCED
+   Extends C-58 empty state. Higher visual quality for manufacturing context.
+============================================================================= */
+
+.plants-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 40px;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.plants-empty-state__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border-radius: var(--radius-6xl);
+  background: var(--grad-cat-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+}
+
+.plants-empty-state__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.plants-empty-state__title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.plants-empty-state__body {
+  font-size: .88rem;
+  color: var(--muted);
+  max-width: 380px;
+  margin: 0 auto 24px;
+  line-height: 1.65;
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+@media (max-width: 1080px) {
+  .plants-filter-bar {
+    flex-wrap: wrap;
+  }
+
+  .plants-filter-field {
+    flex: 1 1 calc(50% - 1px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .plants-filter-field:nth-last-child(2) {
+    border-bottom: none;
+  }
+
+  .plants-filter-submit {
+    flex: 1;
+    min-height: 52px;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 880px) {
+  .plants-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .plants-filter-bar {
+    border-radius: var(--radius-3xl);
+    overflow: visible;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .plants-filter-field {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-3xl);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    flex: unset;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .plants-filter-submit {
+    width: 100%;
+    border-radius: var(--radius-3xl);
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .plants-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================================
+   TOOLBAR VISIBILITY ARCHITECTURE — MR-003
+   data-show-toolbar="false" hides the filter bar.
+   WordPress exposes this as a theme option.
+   Same pattern applied in products-archive.css and careers-jobs.css.
+============================================================================= */
+
+.plants-explorer[data-show-toolbar="false"] .plants-filter-bar {
+  display: none;
+}
+
+.plants-explorer[data-show-toolbar="false"] .plants-results-meta {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .plant-card {
+    transition: none;
+  }
+
+  .plant-card::before {
+    transition: none;
+  }
+}

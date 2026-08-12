@@ -1,0 +1,14 @@
+{
+  "id": "products",
+  "land":          "#1A3560",
+  "landHover":     "#2A4F80",
+  "water":         "#0D2240",
+  "border":        "#2A4F80",
+  "borderWidth":   0.5,
+  "markerFill":    "#FFFFFF",
+  "markerStroke":  "#0D57A2",
+  "markerPulse":   "#64B5F6",
+  "clusterFill":   "#0D57A2",
+  "clusterStroke": "#FFFFFF",
+  "clusterText":   "#FFFFFF"
+}

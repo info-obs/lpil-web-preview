@@ -1,0 +1,72 @@
+/* =============================================================================
+   SECTION: PRODUCTS
+   Product category search bar + category card grid.
+   Category card components (.cat-grid, .cat) live in cards.css.
+   Source: assets/html/source/homepage-approved-v1.html (lines 889–995)
+============================================================================= */
+
+/* =============================================================================
+   SEARCH BAR
+============================================================================= */
+
+.prod-search {
+  max-width: 640px;
+  margin: 0 auto 30px;
+  display: flex;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 7px 7px 7px 20px;
+  box-shadow: var(--shadow);
+  align-items: center;
+  transition: box-shadow .3s, border-color .3s
+}
+
+.prod-search:focus-within {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-search-focus)
+}
+
+.prod-search svg.glass {
+  width: 20px;
+  height: 20px;
+  color: var(--soft-blue);
+  flex-shrink: 0
+}
+
+.prod-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 10px 14px;
+  font-family: inherit;
+  color: var(--text);
+  background: transparent
+}
+
+.prod-search button {
+  border: none;
+  background: var(--blue);
+  color: #fff;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background var(--t-fast), transform var(--t-fast)
+}
+
+.prod-search button:hover {
+  background: var(--blue-dark);
+  transform: scale(1.05)
+}
+
+/* =============================================================================
+   VIEW-ALL CTA
+============================================================================= */
+
+.prod-cta {
+  text-align: center
+}

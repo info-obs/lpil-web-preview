@@ -1,0 +1,305 @@
+/* =============================================================================
+   SITEMAP PAGE
+   C-131  Sitemap Navigation Group Card
+
+   Namespace : smp-*
+   Reuses    : lgf-document-layout (C-122/C-123), callouts (C-124), hero, footer
+   File      : sitemap-page.css
+   Prompt    : LEGAL-007-P1
+============================================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   C-131 — NAVIGATION GROUP CARD
+   Reusable card: icon + heading + description + link list.
+   Used in a 3/2/1-col responsive grid in .smp-grid.
+   Future: populated from WordPress Navigation Menu (wp_nav_menu — sitemap-nav location).
+──────────────────────────────────────────────────────────────────────────────*/
+
+.smp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0;
+}
+
+.smp-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 20px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.smp-card:hover {
+  border-color: rgba(16, 98, 172, .28);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.smp-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #e8f1fb, #d6e6f7);
+  border-radius: var(--radius-sm);
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.smp-card-name {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.smp-card-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.smp-card-links {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: auto;
+}
+
+.smp-card-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--blue);
+  padding: 4px 0;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color var(--t-fast), padding-left var(--t-fast);
+  border-radius: var(--radius-xs);
+}
+.smp-card-link:hover {
+  color: var(--blue-dark);
+  padding-left: 3px;
+}
+.smp-card-link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+.smp-card-link svg {
+  flex-shrink: 0;
+  opacity: 0.45;
+  transition: opacity var(--t-fast);
+}
+.smp-card-link:hover svg {
+  opacity: 0.9;
+}
+
+/* CMS placeholder links — greyed, non-interactive, pending pages */
+.smp-card-link--cms {
+  color: var(--muted);
+  cursor: default;
+  pointer-events: none;
+  font-style: italic;
+}
+.smp-card-link--cms:hover {
+  color: var(--muted);
+  padding-left: 0;
+}
+
+/* Badge appended inline to link text for pending/CMS-driven items */
+.smp-pending-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+  margin-left: 4px;
+  vertical-align: middle;
+  font-style: normal;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   QUICK ACCESS STRIP
+   Row of pill-shaped shortcut buttons to the six most-visited sections.
+   Future: links managed via ACF Options Page (sitemap_quick_links repeater).
+──────────────────────────────────────────────────────────────────────────────*/
+
+.smp-quick-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.smp-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background var(--t-fast), border-color var(--t-fast),
+              box-shadow var(--t-fast), color var(--t-fast);
+}
+.smp-quick-btn:hover {
+  background: rgba(16, 98, 172, .04);
+  border-color: var(--blue);
+  color: var(--blue);
+  box-shadow: var(--shadow-sm);
+}
+.smp-quick-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.smp-quick-btn svg {
+  color: var(--blue);
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+.smp-quick-btn--primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+.smp-quick-btn--primary svg {
+  color: var(--white);
+  opacity: 1;
+}
+.smp-quick-btn--primary:hover {
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+  color: var(--white);
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   POPULAR DESTINATIONS
+   5 featured destination cards — CMS-selectable via ACF relationship field.
+   Future: rendered from popular_destinations ACF repeater on sitemap page.
+──────────────────────────────────────────────────────────────────────────────*/
+
+.smp-popular-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.smp-popular-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-decoration: none;
+  transition: background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.smp-popular-card:hover {
+  background: var(--white);
+  border-color: rgba(16, 98, 172, .25);
+  box-shadow: var(--shadow-sm);
+}
+.smp-popular-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+.smp-popular-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #e8f1fb, #d6e6f7);
+  border-radius: var(--radius-sm);
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.smp-popular-name {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 3px;
+  line-height: 1.3;
+}
+
+.smp-popular-desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+──────────────────────────────────────────────────────────────────────────────*/
+
+@media (max-width: 960px) {
+  .smp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .smp-grid {
+    grid-template-columns: 1fr;
+  }
+  .smp-popular-grid {
+    grid-template-columns: 1fr;
+  }
+  .smp-quick-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .smp-quick-grid {
+    flex-direction: column;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   REDUCED MOTION
+──────────────────────────────────────────────────────────────────────────────*/
+
+@media (prefers-reduced-motion: reduce) {
+  .smp-card,
+  .smp-card-link,
+  .smp-quick-btn,
+  .smp-popular-card {
+    transition: none;
+  }
+}

@@ -1,0 +1,81 @@
+/* =============================================================================
+   MAIN CSS ENTRY POINT
+   Import order = dependency order: tokens → reset → base → typography →
+   layout → utilities → animations → components
+
+   Do NOT write styles here. This file is an orchestration manifest only.
+============================================================================= */
+
+/* 1. Design tokens (custom properties) — must load first */
+@import "./tokens.css";
+
+/* 2. Reset — normalizes UA stylesheets before anything else */
+@import "./reset.css";
+
+/* 3. Base — global element defaults that depend on tokens */
+@import "./base.css";
+
+/* 4. Typography — font imports + type-scale utilities */
+@import "./typography.css";
+
+/* 5. Layout — containers, grids, section spacing */
+@import "./layout.css";
+
+/* 6. Utilities — composable single-purpose helpers */
+@import "./utilities.css";
+
+/* 7. Animations — keyframes, reveal system, microinteractions */
+@import "./animations.css";
+
+/* 8. Components — self-contained UI blocks (alphabetical) */
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "./components/footer.css";
+@import "./components/forms.css";
+@import "./components/hero.css";
+@import "./components/navbar.css";
+
+/* 9. Section modules — one file per reusable section (alphabetical) */
+@import "./components/about.css";
+@import "./components/careers.css";
+@import "./components/contact.css";
+@import "./components/divisions.css";
+@import "./components/global.css";
+@import "./components/manufacturing.css";
+@import "./components/marquee.css";
+@import "./components/media.css";
+@import "./components/products.css";
+@import "./components/quality.css";
+@import "./components/showreel.css";
+
+/* 10. Inner-page shared components */
+@import "./components/inner-hero.css";
+
+/* 11. About domain — page-specific modules */
+@import "./components/about-page.css";
+@import "./components/awards-page.css";
+@import "./components/search-console.css";        /* C-63 Enterprise Search Console — shared base */
+@import "./components/careers-page.css";         /* must precede careers-detail.css */
+@import "./components/careers-detail.css";        /* must follow careers-page.css — overrides C-60 meta bar */
+@import "./components/leadership-page.css";
+@import "./components/products-page.css";         /* depends on careers-page.css for shared utility classes */
+@import "./components/quality-page.css";
+@import "./components/why-laborate-page.css";
+
+/* 12. Manufacturing domain — archive + detail page components */
+@import "./components/products-archive.css";      /* tag--pill, pagination (manufacturing-plants.html) */
+@import "./components/products-detail.css";       /* section-subhead, rich-text, inquiry panels */
+/* careers-archive.css removed — file does not exist; RC-002A */
+@import "./components/careers-landing.css";       /* C-61 canonical — capabilities grid + 20px icon sizing */
+@import "./components/careers-jobs.css";
+@import "./components/manufacturing-plants.css";
+@import "./components/manufacturing-detail.css";
+
+/* 13. Enterprise Timeline — C-69 canonical implementation */
+@import "./components/timeline.css";
+
+/* 14. Cookie Consent System — C-127 through C-130 (global — present on all pages) */
+@import "./components/cookie-consent.css";
+
+/* 15. Media domain — media-page.css moved to per-page <link> on media.html (RC-002A) */
+/* @import "./components/media-page.css"; — loaded per-page only */

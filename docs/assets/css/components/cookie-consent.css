@@ -1,0 +1,729 @@
+/* =============================================================================
+   COOKIE CONSENT SYSTEM
+   C-127  Enterprise Cookie Banner
+   C-128  Cookie Preference Centre
+   C-129  Consent Management Engine (JS styles only)
+   C-130  Cookie Preferences Floating Action Button
+
+   Namespace: cc-*
+   z-index layers: banner 395 · modal 400 (var(--z-modal)) · fab 200 (var(--z-sticky))
+
+   WordPress integration: see CookieConsentController.js and cookie-consent-demo.html
+============================================================================= */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SHARED: BUTTONS
+   Scoped to .cc-* to avoid leaking into global button styles
+──────────────────────────────────────────────────────────────────────────────*/
+
+.cc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
+  white-space: nowrap;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cc-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.cc-btn-primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+.cc-btn-primary:hover {
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+  box-shadow: 0 4px 14px rgba(16, 98, 172, .25);
+}
+
+.cc-btn-secondary {
+  background: transparent;
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.cc-btn-secondary:hover {
+  background: rgba(16, 98, 172, .06);
+}
+
+.cc-btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.cc-btn-ghost:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, .04);
+}
+
+.cc-btn-sm {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SHARED: BADGES
+──────────────────────────────────────────────────────────────────────────────*/
+
+.cc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.cc-badge svg {
+  flex-shrink: 0;
+}
+
+/* Always Enabled — green */
+.cc-badge--always {
+  color: #1a7a4a;
+  background: #edf7f0;
+}
+
+/* Not in use — grey */
+.cc-badge--future {
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SHARED: TOGGLE SWITCH
+   Used in C-128 for each opt-in cookie category
+──────────────────────────────────────────────────────────────────────────────*/
+
+.cc-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.cc-toggle input[type="checkbox"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.cc-toggle input[type="checkbox"]:disabled {
+  cursor: default;
+}
+
+.cc-toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  transition: background var(--t-fast);
+}
+
+/* Checked state — blue track */
+.cc-toggle input[type="checkbox"]:checked + .cc-toggle-track {
+  background: var(--blue);
+}
+
+/* Disabled + checked (Necessary — always on) */
+.cc-toggle input[type="checkbox"]:disabled + .cc-toggle-track {
+  background: var(--blue);
+  opacity: 0.75;
+}
+
+/* Focus ring on track */
+.cc-toggle input[type="checkbox"]:focus-visible + .cc-toggle-track {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.cc-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background: var(--white);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .18);
+  transition: transform var(--t-fast);
+  pointer-events: none;
+}
+
+/* Move thumb when checked */
+.cc-toggle input[type="checkbox"]:checked + .cc-toggle-track .cc-toggle-thumb,
+.cc-toggle input[type="checkbox"]:disabled + .cc-toggle-track .cc-toggle-thumb {
+  transform: translateX(20px);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   C-127 — ENTERPRISE COOKIE BANNER
+──────────────────────────────────────────────────────────────────────────────*/
+
+.cc-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  width: calc(100% - 32px);
+  max-width: 760px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(15, 27, 56, .14), 0 4px 12px rgba(15, 27, 56, .06);
+  padding: 24px;
+  z-index: 395;           /* below modal (400), above most content */
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity var(--t-normal), transform var(--t-normal), visibility var(--t-normal);
+  will-change: opacity, transform;
+}
+
+.cc-banner.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Focus outline on banner container (receives programmatic focus for a11y) */
+.cc-banner:focus {
+  outline: none;
+}
+
+/* Banner body */
+.cc-banner-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Icon + heading row */
+.cc-banner-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cc-banner-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #e8f1fb, #dceaf8);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+.cc-banner-icon svg {
+  color: var(--blue);
+}
+
+.cc-banner-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Footer row: links left, actions right */
+.cc-banner-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cc-banner-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cc-banner-links li:not(:first-child)::before {
+  content: '·';
+  margin-right: 12px;
+  color: var(--line);
+}
+.cc-banner-link {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--line);
+  transition: color var(--t-fast), text-decoration-color var(--t-fast);
+}
+.cc-banner-link:hover {
+  color: var(--blue);
+  text-decoration-color: var(--blue);
+}
+
+.cc-banner-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Desktop: links left, actions row right */
+@media (min-width: 600px) {
+  .cc-banner-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .cc-banner-actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    gap: 8px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   C-128 — COOKIE PREFERENCE CENTRE (MODAL)
+──────────────────────────────────────────────────────────────────────────────*/
+
+/* Overlay + scroll container */
+.cc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: end center;    /* dialog anchored to bottom-center on desktop */
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity var(--t-normal), visibility var(--t-normal);
+  overflow: hidden;
+}
+
+.cc-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Dark overlay */
+.cc-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 23, 48, .55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Dialog card */
+.cc-modal-dialog {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+  border-radius: var(--radius) var(--radius) 0 0;
+  box-shadow: 0 -8px 40px rgba(15, 27, 56, .14);
+  width: 100%;
+  max-width: 760px;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(24px);
+  transition: transform var(--t-normal);
+  overflow: hidden;
+}
+
+.cc-modal.is-open .cc-modal-dialog {
+  transform: translateY(0);
+}
+
+/* Sticky header */
+.cc-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.cc-modal-title {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.cc-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.cc-modal-close:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+.cc-modal-close:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Scrollable body */
+.cc-modal-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 20px 24px;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Intro paragraph */
+.cc-modal-intro {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0 0 20px;
+}
+.cc-modal-intro a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Section label within body */
+.cc-section-label {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+/* ── Category list ── */
+
+.cc-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cc-category {
+  background: var(--white);
+}
+
+.cc-category + .cc-category {
+  border-top: 1px solid var(--line);
+}
+
+.cc-category-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+}
+
+.cc-category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #e8f1fb, #dceaf8);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  color: var(--blue);
+  margin-top: 1px;
+}
+
+.cc-category-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cc-category-name {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.cc-category-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cc-category-desc a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cc-category-control {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+/* Future/disabled category — visually dimmed */
+.cc-category--future .cc-category-icon {
+  background: var(--bg);
+  opacity: 0.7;
+}
+.cc-category--future .cc-category-name {
+  color: var(--muted);
+}
+
+/* ── Cookie Registry Table ── */
+
+.cc-registry-section {
+  margin-bottom: 4px;
+}
+
+.cc-registry-section .cc-section-label {
+  margin-top: 4px;
+}
+
+.cc-registry-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  -webkit-overflow-scrolling: touch;
+}
+
+.cc-registry {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.cc-registry th {
+  padding: 10px 14px;
+  background: var(--bg);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.cc-registry td {
+  padding: 10px 14px;
+  color: var(--text);
+  vertical-align: middle;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.5;
+}
+
+.cc-registry tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cc-registry .cc-registry-code {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--line);
+}
+
+/* Future/greyed registry rows */
+.cc-registry .cc-registry-row--future td {
+  color: var(--muted);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Status indicators */
+.cc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.cc-status::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+.cc-status--active  { color: #1a7a4a; }
+.cc-status--active::before  { background: #22c55e; }
+.cc-status--future  { color: var(--muted); }
+.cc-status--future::before  { background: var(--line); }
+
+/* Sticky modal footer */
+.cc-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+  background: var(--white);
+}
+
+.cc-modal-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Larger modal dialog on desktop — centered in viewport */
+@media (min-width: 780px) {
+  .cc-modal {
+    place-items: center;
+    padding: 24px;
+  }
+  .cc-modal-dialog {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(16px) scale(.98);
+  }
+  .cc-modal.is-open .cc-modal-dialog {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Body scroll lock when modal is open */
+.cc-body-lock {
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   C-130 — FLOATING ACTION BUTTON (Cookie Preferences)
+──────────────────────────────────────────────────────────────────────────────*/
+
+.cc-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: var(--z-sticky);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(15, 27, 56, .10);
+  padding: 9px 16px 9px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity var(--t-normal), transform var(--t-normal), visibility var(--t-normal), box-shadow var(--t-fast), background var(--t-fast);
+  will-change: opacity, transform;
+  /* Ensure FAB stays below modal when modal is open */
+}
+
+.cc-fab.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.cc-fab:hover {
+  box-shadow: 0 6px 22px rgba(15, 27, 56, .14);
+  background: var(--bg);
+}
+
+.cc-fab:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.cc-fab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #e8f1fb, #dceaf8);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  color: var(--blue);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   REDUCED MOTION OVERRIDES
+──────────────────────────────────────────────────────────────────────────────*/
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-banner,
+  .cc-modal,
+  .cc-modal-dialog,
+  .cc-fab,
+  .cc-toggle-track,
+  .cc-toggle-thumb {
+    transition: none;
+  }
+}

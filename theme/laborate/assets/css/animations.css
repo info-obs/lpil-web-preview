@@ -1,0 +1,192 @@
+/* =============================================================================
+   ANIMATIONS
+   Reusable keyframes and animation utility classes.
+   Source: docs/04_Homepage_Design_Reference.md §12
+   Tokens: docs/16_Design_Token_Catalogue.md — Animation Tokens
+
+   Rules:
+   - Only generic / reusable animations live here.
+   - Component-specific animations (kenburns, hero rise) live in component files.
+   - Never add page-specific animation sequences here.
+============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   KEYFRAMES — REUSABLE
+----------------------------------------------------------------------------- */
+
+/* Expanding ring — used by play button and map pins */
+@keyframes ping {
+  0%        { transform: scale(1); opacity: .9; }
+  80%, 100% { transform: scale(3.2); opacity: 0; }
+}
+
+/* Pulse ripple — used by "live" status dot */
+@keyframes beat {
+  0%   { box-shadow: 0 0 0 0 rgba(235, 50, 54, .5); }
+  70%  { box-shadow: 0 0 0 10px rgba(235, 50, 54, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(235, 50, 54, 0); }
+}
+
+/* Horizontal slide — used by marquee track */
+@keyframes slide {
+  to { transform: translateX(-50%); }
+}
+
+/* -----------------------------------------------------------------------------
+   SCROLL PROGRESS BAR
+   Fixed to top of viewport, scroll-linked via JS.
+----------------------------------------------------------------------------- */
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--red), var(--blue));
+  z-index: 301;   /* one above --z-header (300); no named token per ADR-015 */
+  transition: width var(--t-instant);
+  pointer-events: none;
+}
+
+/* -----------------------------------------------------------------------------
+   SCROLL REVEAL SYSTEM
+   Classes toggled by AnimationController via IntersectionObserver.
+   threshold: 0.14 / rootMargin: '0px 0px -40px 0px'
+----------------------------------------------------------------------------- */
+
+/* Translate-up reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity var(--t-reveal),
+    transform var(--t-reveal);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scale-in reveal */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(.94);
+  transition:
+    opacity var(--t-reveal-sm),
+    transform var(--t-reveal-sm);
+}
+
+.reveal-scale.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* -----------------------------------------------------------------------------
+   ANIMATION UTILITY CLASSES
+   Apply standalone to any element.
+----------------------------------------------------------------------------- */
+
+/* Ping ring — attach to an absolutely-positioned sibling */
+.anim-ping {
+  animation: ping 2.4s var(--ease-ping) infinite;
+}
+
+/* Beat pulse */
+.anim-beat {
+  animation: beat 1.8s infinite;
+  border-radius: var(--radius-full);
+}
+
+/* Marquee track */
+.anim-slide {
+  animation: slide 34s linear infinite;
+}
+
+/* Pauses marquee on hover */
+.marquee:hover .anim-slide {
+  animation-play-state: paused;
+}
+
+/* -----------------------------------------------------------------------------
+   HOVER MICROINTERACTION UTILITIES
+   Composable lift / shift effects. Apply to interactive cards and CTAs.
+----------------------------------------------------------------------------- */
+
+/* Lift — primary card hover */
+.hover-lift {
+  transition: transform var(--t-slow), box-shadow var(--t-slow);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Lift deep — division card (larger travel) */
+.hover-lift-deep {
+  transition: transform var(--t-slow), box-shadow var(--t-slow);
+}
+
+.hover-lift-deep:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Slide right — manufacturing list items */
+.hover-slide-right {
+  transition: transform var(--t-medium), box-shadow var(--t-medium);
+}
+
+.hover-slide-right:hover {
+  transform: translateX(6px);
+  box-shadow: var(--shadow);
+}
+
+/* Scale grow — certification card */
+.hover-scale {
+  transition: transform var(--t-emphasis), box-shadow var(--t-emphasis);
+}
+
+.hover-scale:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Arrow shift — used inside buttons and learn-more links */
+.arrow {
+  display: inline-block;
+  transition: transform var(--t-normal);
+}
+
+.hover-arrow:hover .arrow,
+a:hover .arrow,
+button:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* Image zoom inside overflow-hidden card */
+.hover-zoom {
+  transition: transform .6s ease;
+}
+
+.hover-zoom:hover {
+  transform: scale(1.08);
+}
+
+/* Faster zoom variant — video card */
+.hover-zoom-slow {
+  transition: transform .8s ease;
+}
+
+.hover-zoom-slow:hover {
+  transform: scale(1.05);
+}
+
+/* Social icon — lift + color (colour set per context) */
+.hover-social {
+  transition: background var(--t-normal), color var(--t-normal), transform var(--t-normal);
+}
+
+.hover-social:hover {
+  transform: translateY(-3px);
+}

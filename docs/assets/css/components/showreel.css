@@ -1,0 +1,104 @@
+/* =============================================================================
+   SECTION: SHOWREEL / COMPANY STORY
+   Dark navy section: stats left, video card right.
+   Video card component (.video-card, .play-btn) lives in cards.css.
+   Source: assets/html/source/homepage-approved-v1.html (lines 997–1230)
+============================================================================= */
+
+/* =============================================================================
+   SECTION SHELL
+============================================================================= */
+
+.showreel {
+  background: var(--grad-showreel);
+  color: #fff;
+  overflow: hidden;
+  position: relative
+}
+
+.showreel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 85% 15%, rgba(62, 65, 148, .5), transparent 40%),
+    radial-gradient(circle at 10% 90%, rgba(16, 98, 172, .4), transparent 45%)
+}
+
+.showreel .wrap {
+  position: relative;
+  z-index: 2
+}
+
+/* =============================================================================
+   GRID
+============================================================================= */
+
+.reel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 56px;
+  align-items: center
+}
+
+/* =============================================================================
+   TEXT PANEL
+============================================================================= */
+
+.reel-text .eyebrow {
+  color: var(--light-blue)
+}
+
+.reel-text h2 {
+  font-size: clamp(1.9rem, 3.8vw, 2.7rem);
+  font-weight: 700;
+  margin-bottom: 18px
+}
+
+.reel-text p {
+  color: var(--on-dark-reel-body);
+  margin-bottom: 26px;
+  max-width: 420px
+}
+
+/* =============================================================================
+   STATS ROW
+============================================================================= */
+
+.reel-stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap
+}
+
+.rs .rn {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1
+}
+
+.rs .rl {
+  font-size: .78rem;
+  color: var(--on-dark-reel-label);
+  letter-spacing: .03em;
+  margin-top: 4px
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+@media (max-width: 1080px) {
+  .reel-grid {
+    grid-template-columns: 1fr;
+    gap: 36px
+  }
+}
+
+@media (max-width: 640px) {
+  .reel-stats {
+    gap: 20px
+  }
+}

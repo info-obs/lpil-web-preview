@@ -1,0 +1,23 @@
+{
+  "uid": "DISTRIBUTION",
+  "title": "Distribution Network",
+  "type": "distribution",
+  "description": "Active distribution partnerships with licensed pharmaceutical distributors across key markets.",
+  "locations": [
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "LKA", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "VNM", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "PHL", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "MYS", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "BGD", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "ARE", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "SAU", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "JOR", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "KAZ", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "UZB", "region": "142" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "KEN", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "NGA", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "GHA", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "ZAF", "region": "002" },
+    { "lat": "", "lng": "", "city": "", "province": "", "country": "COL", "region": "019" }
+  ]
+}

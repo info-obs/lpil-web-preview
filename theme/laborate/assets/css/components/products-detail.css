@@ -1,0 +1,706 @@
+/* =============================================================================
+   PRODUCTS DETAIL — CSS
+   New components for the Product Detail (/products/{slug}/) page.
+
+   Component Registry:
+     C-55  Product Specification (CMP-103)
+     C-56  Product Downloads (CMP-104)
+     C-57  Product Inquiry Form (CMP-105)
+     LAY-001/LAY-002 — Product overview two-column layout
+
+   Existing reused (unchanged):
+     C-20  .learn
+     C-23  .btn .btn-primary .btn-light
+     C-44  .contact-band
+     C-50  .img-wrap (product main image)
+     C-52  .prod-card / .prod-grid (related products)
+     .form-grid, .field, .input, .textarea, .select  (forms.css)
+     .tag--pill  (products-archive.css)
+
+   Sections on the Product Detail page:
+   1. Compact Hero + Breadcrumb (inner-hero.css)
+   2. Product Overview (.product-overview) — two column
+   3. Product Specification (.product-spec) — spec table
+   4. Product Description (.product-desc-section) — rich text
+   5. Product Downloads (.product-downloads) — brochure download card
+   6. Related Products (.related-products) — 4 product cards
+   7. Product Inquiry Form (.product-inquiry)
+
+   Source of visual truth: homepage-approved-v1.html + design tokens.
+============================================================================= */
+
+/* =============================================================================
+   SECTION SUB-HEADING
+   Smaller h2 style for content sections within a detail page.
+   Does not conflict with .section-head h2 (which is the primary large heading).
+============================================================================= */
+
+.section-subhead {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: 28px;
+}
+
+.section-subhead + p {
+  color: var(--muted);
+  font-size: .92rem;
+  margin-top: -16px;
+  margin-bottom: 28px;
+}
+
+/* =============================================================================
+   PRODUCT OVERVIEW — TWO-COLUMN LAYOUT (LAY-001/LAY-002)
+   Left: image gallery — Right: product info + CTAs
+   Desktop: 1fr 1.1fr | Tablet: 1fr | Mobile: 1fr
+============================================================================= */
+
+.product-overview {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.prod-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* =============================================================================
+   PRODUCT IMAGE GALLERY (part of LAY-004)
+   Main image + thumbnail strip below.
+   Managed by GalleryController (ProductController handles thumbnail switching).
+============================================================================= */
+
+.prod-gallery {
+  position: sticky;
+  top: 90px; /* clear the fixed header */
+}
+
+/* Main product image container — reuses C-50 .img-wrap pattern */
+.prod-img-main {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  background: var(--grad-mfg-img-bg);
+  margin-bottom: 16px;
+}
+
+.prod-img-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .3s;
+}
+
+/* Thumbnail strip */
+.prod-thumbs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.prod-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-3xl);
+  overflow: hidden;
+  border: 2px solid var(--line);
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  transition: border-color var(--t-fast);
+  flex-shrink: 0;
+}
+
+.prod-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prod-thumb.active,
+.prod-thumb:hover {
+  border-color: var(--blue);
+}
+
+.prod-thumb:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   PRODUCT INFO COLUMN
+   Right column: tags, name, meta, description, CTAs.
+============================================================================= */
+
+.prod-info {
+  padding-top: 8px;
+}
+
+/* Taxonomy tag row */
+.prod-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+/* Product status badge — Active (green) / Discontinued (red) */
+.prod-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.prod-status--active {
+  background: rgba(42, 157, 92, .1);
+  color: #1e6e3e;
+}
+
+.prod-status--discontinued {
+  background: rgba(235, 50, 54, .1);
+  color: var(--red-dark);
+}
+
+/* Dot indicator inside status badge */
+.prod-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.prod-status--active::before   { background: #2a9d5c; }
+.prod-status--discontinued::before { background: var(--red); }
+
+/* Product name (heading inside detail content — not h1 which is in hero) */
+.prod-name {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+/* Generic name row */
+.prod-generic {
+  font-size: .88rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.prod-generic strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Strength + Pack row */
+.prod-meta-row {
+  font-size: .88rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.prod-meta-row strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Divider between meta and description */
+.prod-divider {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 20px 0;
+}
+
+/* Short product description in detail overview */
+.prod-overview-desc {
+  font-size: .92rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* CTA row: Enquiry + Download */
+.prod-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* =============================================================================
+   C-55 — PRODUCT SPECIFICATION (CMP-103)
+   Definition list two-column grid on desktop; single column on mobile.
+   Spec table collapses to dl→dt+dd on mobile — no horizontal scroll.
+
+   Behavior: Tables collapse gracefully (doc 11 — BHV-RSP-001).
+============================================================================= */
+
+.product-spec {
+  background: var(--bg);
+}
+
+.spec-table {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* Each dt+dd pair forms one row */
+.spec-table dt,
+.spec-table dd {
+  padding: 14px 20px;
+  font-size: .88rem;
+}
+
+/* Row border */
+.spec-table dt:not(:last-of-type),
+.spec-table dd:not(:last-of-type) {
+  border-bottom: 1px solid var(--line);
+}
+
+.spec-table dt {
+  font-weight: 600;
+  color: var(--text);
+  background: #f7f9fc;
+}
+
+.spec-table dd {
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Status pill inside spec table */
+.spec-table dd .prod-status {
+  font-size: .68rem;
+}
+
+/* =============================================================================
+   C-56 — PRODUCT DOWNLOADS (CMP-104)
+   White card: PDF icon + title + file size + download button.
+   Hidden when no brochure exists (via [hidden] attr or .product-downloads--empty).
+   Behavior: BHV-CLK-001 (direct download link).
+============================================================================= */
+
+.product-downloads {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+/* Individual download card */
+.download-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-medium), transform var(--t-medium);
+}
+
+.download-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+
+/* PDF icon container */
+.download-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-3xl);
+  background: rgba(235, 50, 54, .08);
+  color: var(--red);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.download-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.download-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.download-title {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.download-meta {
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+/* =============================================================================
+   RELATED PRODUCTS SECTION
+   4-column product card row. Uses existing .prod-grid and .prod-card (C-52, C-53).
+   Hidden when 0 related products (doc 11 §11.27 CMS Integration).
+============================================================================= */
+
+.related-products {
+  background: var(--bg);
+}
+
+.related-products .section-subhead {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.related-products .prod-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* =============================================================================
+   C-57 — PRODUCT INQUIRY FORM (CMP-105)
+   Full-width section with centered form panel.
+   Product name pre-populated from data attribute.
+   Uses existing form primitives: .field, .input, .textarea, .select, .form-grid.
+   States: FORM-001 (Default) → FORM-002 (Typing) → FORM-005 (Submitting)
+         → FORM-006 (Success) or FORM-007 (Error)
+   Behaviors: BHV-FRM-001, BHV-FRM-002, BHV-FRM-003, BHV-FRM-004, BHV-FRM-005
+============================================================================= */
+
+.product-inquiry {
+  background: var(--grad-manufacturing);
+}
+
+.inquiry-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Left: heading + intro */
+.inquiry-head {
+  position: sticky;
+  top: 100px;
+}
+
+.inquiry-head h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: 14px;
+}
+
+.inquiry-head p {
+  font-size: .92rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* Contact detail lines in inquiry head */
+.inquiry-contact-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .85rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.inquiry-contact-line svg {
+  width: 16px;
+  height: 16px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.inquiry-contact-line a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.inquiry-contact-line a:hover {
+  text-decoration: underline;
+}
+
+/* Right: form panel */
+.inquiry-form-panel {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 36px;
+}
+
+/* Product name field is read-only — style difference */
+.field .input[readonly] {
+  background: #f7f9fc;
+  color: var(--muted);
+  cursor: default;
+}
+
+/* Honeypot — hidden from users but visible to bots (BHV-FRM-005) */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Form submit row */
+.form-submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.form-privacy-note {
+  font-size: .76rem;
+  color: var(--muted);
+}
+
+/* =============================================================================
+   PRODUCT DESCRIPTION — RICH TEXT SECTION (LAY-003)
+============================================================================= */
+
+.product-desc-section {
+  background: var(--white);
+}
+
+.rich-text {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: .96rem;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.rich-text h2,
+.rich-text h3,
+.rich-text h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text);
+  margin: 28px 0 12px;
+}
+
+.rich-text h2 { font-size: 1.4rem; }
+.rich-text h3 { font-size: 1.15rem; }
+.rich-text h4 { font-size: 1rem; }
+
+.rich-text p {
+  margin-bottom: 18px;
+}
+
+.rich-text ul,
+.rich-text ol {
+  padding-left: 22px;
+  margin-bottom: 18px;
+}
+
+.rich-text li {
+  margin-bottom: 6px;
+}
+
+.rich-text strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rich-text a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.rich-text a:hover {
+  color: var(--blue-dark);
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+/* Tablet portrait (880px) */
+@media (max-width: 880px) {
+  .prod-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .prod-gallery {
+    position: static;
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .inquiry-head {
+    position: static;
+  }
+
+  .related-products .prod-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile (640px) */
+@media (max-width: 640px) {
+  .spec-table {
+    grid-template-columns: 1fr;
+  }
+
+  .spec-table dt {
+    padding-bottom: 4px;
+    border-bottom: none;
+  }
+
+  .spec-table dd {
+    padding-top: 4px;
+  }
+
+  .spec-table dt:not(:last-of-type),
+  .spec-table dd:not(:last-of-type) {
+    border-bottom: none;
+  }
+
+  .spec-table dt {
+    border-bottom: none;
+  }
+
+  /* Pair dt+dd with a shared row border — simulated via JS-added wrapper or CSS */
+  .spec-row {
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+  }
+
+  .prod-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prod-actions .btn {
+    justify-content: center;
+  }
+
+  .inquiry-form-panel {
+    padding: 24px 20px;
+  }
+
+  .related-products .prod-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .prod-thumbs {
+    gap: 8px;
+  }
+
+  .prod-thumb {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Small mobile (420px) */
+@media (max-width: 420px) {
+  .related-products .prod-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .prod-img-main img,
+  .prod-thumb,
+  .download-card {
+    transition: none;
+  }
+
+  .download-card:hover {
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   PRODUCT BACK NAVIGATION — "← Back to Product Catalogue"
+   Rendered inside .hero--compact above the breadcrumb.
+============================================================================= */
+
+.prod-back-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, .75);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .03em;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  transition: color .15s;
+}
+
+.prod-back-nav:hover,
+.prod-back-nav:focus-visible {
+  color: #fff;
+}
+
+/* =============================================================================
+   RELATED PRODUCTS — "Browse all [Therapy]" text link below section heading
+============================================================================= */
+
+.related-browse-link {
+  margin-top: -20px;
+  margin-bottom: 28px;
+  font-size: .875rem;
+}
+
+.related-browse-link a {
+  color: var(--blue);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.related-browse-link a:hover,
+.related-browse-link a:focus-visible {
+  text-decoration: underline;
+}

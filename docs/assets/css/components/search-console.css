@@ -1,0 +1,504 @@
+/* =============================================================================
+   C-63 — Enterprise Search Console (Shared Base)
+   Variants:
+     C-63.1 Careers   — .search-toolbar in careers-page.css (existing)
+     C-63.2 Resources — .esc-console--resources, this file + resources-page.css
+
+   Visual language: white card / border / soft layered elevation / borderless fields
+   Mobile pattern: funnel-toggle collapses the filter body on ≤768px
+   Chips + meta bar live inside the console card (one unified floating surface)
+============================================================================= */
+
+/* ── Console shell ──────────────────────────────────────────────────────────── */
+
+.esc-console {
+  background: var(--white);
+  border: 1px solid rgba(16, 98, 172, .12);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(16, 98, 172, .06), 0 8px 32px rgba(16, 98, 172, .05);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* ── Mobile bar (funnel toggle) — hidden ≥769px ─────────────────────────────── */
+
+.esc-mobile-bar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.esc-mobile-summary {
+  font-size: .82rem;
+  color: var(--muted);
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.esc-filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  line-height: 1;
+}
+
+.esc-filter-toggle svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.esc-filter-toggle:hover,
+.esc-filter-toggle[aria-expanded="true"] {
+  color: var(--navy);
+  border-color: rgba(12, 23, 48, .3);
+  background: var(--white);
+}
+
+.esc-filter-toggle:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.esc-filter-toggle-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: .65rem;
+  font-weight: 700;
+  background: var(--blue);
+  color: var(--white);
+  border-radius: 10px;
+  line-height: 1;
+}
+
+/* ── Filter body (collapsible form) ─────────────────────────────────────────── */
+
+/* desktop: always shown — no style override needed */
+.esc-filter-body { /* intentionally empty */ }
+
+/* Mobile: class-based animation (~250ms ease; JS adds/removes .esc-filter-body--collapsed) */
+@media (max-width: 768px) {
+  .esc-filter-body {
+    overflow: hidden;
+    transition: max-height 250ms ease, opacity 250ms ease;
+  }
+
+  .esc-filter-body--collapsed {
+    max-height: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .esc-filter-body:not(.esc-filter-body--collapsed) {
+    max-height: 900px;
+    opacity: 1;
+    border-top: 1px solid var(--line);
+  }
+}
+
+/* ── Filter row (CSS Grid) ──────────────────────────────────────────────────── */
+
+.esc-row {
+  display: grid;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── Individual field ───────────────────────────────────────────────────────── */
+
+.esc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 20px;
+}
+
+.esc-field-label {
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1;
+}
+
+/* Borderless inputs inside the console */
+.esc-console .input,
+.esc-console .select {
+  border: none;
+  border-radius: 0;
+  padding: 6px 0;
+  font-size: .88rem;
+  box-shadow: none;
+  background: transparent;
+}
+
+.esc-console .input:focus-visible,
+.esc-console .select:focus-visible {
+  box-shadow: none;
+  border-color: transparent;
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ── Column separator ───────────────────────────────────────────────────────── */
+
+.esc-sep {
+  background: var(--line);
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* ── Field action column (Search button — C-63.2 Row 1 final column) ─────────── */
+
+.esc-field-action {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px 14px 14px;
+  flex-shrink: 0;
+}
+
+.esc-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: .85rem;
+  padding: 10px 22px;
+  height: auto;
+}
+
+.esc-search-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.esc-search-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* ── Active filter chips bar (inside console) ───────────────────────────────── */
+
+.esc-chips-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  border-top: 1px solid rgba(16, 98, 172, .1);
+  background: rgba(16, 98, 172, .025);
+}
+
+.esc-chips-label {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.esc-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+}
+
+.esc-chip-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 12px;
+  background: var(--white);
+  border: 1px solid rgba(16, 98, 172, .2);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+  font-family: var(--font-body);
+}
+
+.esc-chip-item:hover {
+  background: rgba(220, 38, 38, .05);
+  border-color: rgba(220, 38, 38, .3);
+  transform: translateY(-1px);
+}
+
+.esc-chip-item:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.esc-chip-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.esc-chip-x {
+  font-size: .8rem;
+  line-height: 1;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.esc-chips-clear {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: color var(--t-fast);
+  flex-shrink: 0;
+  margin-left: auto;
+  font-family: var(--font-body);
+}
+
+.esc-chips-clear:hover { color: var(--navy); }
+
+.esc-chips-clear:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Meta bar (inside console) ──────────────────────────────────────────────── */
+
+.esc-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 20px;
+  border-top: 1px solid var(--line);
+  background: rgba(247, 250, 249, .6);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.esc-meta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.esc-result-count {
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.esc-result-count strong {
+  color: var(--blue);
+}
+
+.esc-filter-summary {
+  font-size: .75rem;
+  color: var(--muted);
+  margin: 0;
+  font-style: italic;
+}
+
+.esc-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* View toggle — GitHub-style rounded segmented control */
+.esc-view-toggle {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.esc-view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background var(--t-fast), color var(--t-fast);
+  position: relative;
+}
+
+.esc-view-btn + .esc-view-btn {
+  border-left: 1px solid var(--line);
+}
+
+.esc-view-btn:hover {
+  background: rgba(16, 98, 172, .06);
+  color: var(--blue);
+}
+
+.esc-view-btn--active {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.esc-view-btn--active:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.esc-view-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.esc-view-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  z-index: 1;
+}
+
+/* Sort control */
+.esc-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.esc-sort-label {
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.esc-sort .select {
+  padding: 6px 12px;
+  font-size: .8rem;
+  width: auto;
+}
+
+.esc-sort .select:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── C-63.2 Resources variant — grid column templates ────────────────────────── */
+
+/* Row 1: keyword(2fr) | sep | category(1fr) | sep | division(1fr) | sep | search(auto) */
+.esc-console--resources .esc-row--primary {
+  grid-template-columns: 2fr 1px 1fr 1px 1fr 1px auto;
+}
+
+/* Row 2: country | sep | facility | sep | language | sep | type | sep | year */
+.esc-console--resources .esc-row--secondary {
+  grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 1fr;
+  border-bottom: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .esc-field { padding: 14px 16px; }
+  .esc-field-action { padding: 14px 16px; }
+  .esc-meta-bar { padding: 12px 16px; }
+  .esc-chips-bar { padding: 10px 16px; }
+  .esc-mobile-bar { padding: 14px 16px; }
+
+  /* keyword loses 2fr advantage; all fields equal width */
+  .esc-console--resources .esc-row--primary {
+    grid-template-columns: 1fr 1px 1fr 1px 1fr 1px auto;
+  }
+}
+
+@media (max-width: 960px) {
+  /* Rows switch to flex-wrap; seps hidden */
+  .esc-console--resources .esc-row--primary,
+  .esc-console--resources .esc-row--secondary {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: none;
+  }
+
+  .esc-sep { display: none; }
+
+  .esc-field {
+    flex: 1 1 calc(33% - 8px);
+    min-width: 140px;
+    border-bottom: 1px solid var(--line);
+    padding: 14px 16px;
+  }
+
+  .esc-field--keyword { flex: 1 1 100%; }
+
+  /* Search button spans full width below the fields */
+  .esc-field-action {
+    flex: 1 1 100%;
+    border-bottom: 1px solid var(--line);
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile bar visible; filter body starts collapsed (JS adds class) */
+  .esc-mobile-bar { display: flex; }
+
+  .esc-field {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 130px;
+  }
+
+  .esc-meta-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  .esc-meta-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .esc-chips-bar { gap: 6px; }
+}
+
+@media (max-width: 640px) {
+  .esc-field { flex: 1 1 100%; }
+}

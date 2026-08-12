@@ -1,0 +1,14 @@
+{
+  "id": "homepage",
+  "land":          "#ECF1F8",
+  "landHover":     "#D5E7F7",
+  "water":         "#D5E7F7",
+  "border":        "#FFFFFF",
+  "borderWidth":   0.5,
+  "markerFill":    "#001844",
+  "markerStroke":  "#FFFFFF",
+  "markerPulse":   "#0D57A2",
+  "clusterFill":   "#0D57A2",
+  "clusterStroke": "#FFFFFF",
+  "clusterText":   "#FFFFFF"
+}

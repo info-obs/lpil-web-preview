@@ -1,0 +1,10 @@
+/* =============================================================================
+   SECTION: MEDIA / NEWSROOM
+   Section shell for the media & updates grid.
+   Card components (.media-grid, .media-card) live in cards.css.
+   Source: assets/html/source/homepage-approved-v1.html
+============================================================================= */
+
+.media {
+  background: var(--grad-media)
+}

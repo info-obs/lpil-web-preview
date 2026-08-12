@@ -1,0 +1,506 @@
+/* =============================================================================
+   CAREERS DETAIL — CSS
+   Components for the Job Detail page (/careers/{slug}/).
+
+   Component Registry:
+     C-60  Job Meta Bar (key-facts horizontal strip)
+
+   Existing reused (unchanged):
+     C-23  .btn .btn-primary
+     C-44  .contact-band
+     .rich-text          (products-detail.css — reused for job content)
+     .section-subhead    (products-detail.css — reused for section headings)
+     .inquiry-inner      (products-detail.css — reused for apply form layout)
+     .inquiry-head       (products-detail.css — reused)
+     .inquiry-form-panel (products-detail.css — reused)
+     .inquiry-contact-line (products-detail.css — reused)
+     .form-grid, .field, .input, .textarea, .select (forms.css)
+     .hp-field, .form-submit-row, .form-privacy-note (products-detail.css)
+     .tag--pill          (products-archive.css)
+
+   Source of visual truth: homepage-approved-v1.html + design tokens.
+============================================================================= */
+
+/* =============================================================================
+   JOB DETAIL ARTICLE WRAPPER
+============================================================================= */
+
+.job-detail-article {
+  background: var(--bg);
+}
+
+/* =============================================================================
+   C-60 — JOB META BAR (Key-facts strip)
+   Horizontal strip of key job details below the compact hero.
+   Visual language: derived from .spec-table (C-55) but horizontal flex layout.
+
+   Desktop: 5 items in a row
+   Tablet:  wrap to 2–3 per row
+   Mobile:  2 per row
+
+   <div class="c60-meta-bar">
+     <div class="c60-meta-item">
+       <div class="c60-meta-icon" aria-hidden="true">…SVG…</div>
+       <div>
+         <span class="c60-meta-label">Location</span>
+         <span class="c60-meta-value">Gurugram</span>
+       </div>
+     </div>
+     …
+   </div>
+============================================================================= */
+
+.c60-meta-bar {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 32px 0;  /* increased from 28px */
+}
+
+.c60-meta-inner {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.c60-meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;           /* increased from 12px */
+  padding: 0% 2%; /* increased from 12px/32px */
+  flex: 1;
+  min-width: 150px;
+  border-right: 1px solid var(--line);
+}
+
+.c60-meta-item:first-child {
+  padding-left: 0;
+}
+
+.c60-meta-item:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.c60-meta-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cat-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.c60-meta-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.c60-meta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.c60-meta-label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.c60-meta-value {
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+/* =============================================================================
+   JOB CONTENT SECTIONS
+   Reuses .rich-text from products-detail.css for body text.
+   Adds section wrappers with appropriate backgrounds.
+============================================================================= */
+
+/* =============================================================================
+   JOB DETAIL BODY — 2-COLUMN LAYOUT WITH SIDEBAR
+   Main content (description, responsibilities, skills) + sticky sidebar.
+   Apply form stays full-width below this layout.
+============================================================================= */
+
+.job-detail-body {
+  background: var(--white);
+}
+
+.job-content-layout {
+  display: grid;
+  grid-template-columns: 1fr 288px;
+  gap: 56px;
+  align-items: start;
+  padding: 52px 0 56px;
+}
+
+.job-content-section {
+  padding-bottom: 36px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+}
+
+.job-content-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* =============================================================================
+   C-64 — JOB SIDEBAR (CMP-115)
+   Sticky sidebar on job detail page: hiring info, timeline, quick apply CTA.
+
+   <aside class="job-sidebar" aria-label="Vacancy details">
+     <div class="job-sidebar-card">
+       <p class="job-sidebar-head">Hiring Information</p>
+       <div class="sidebar-detail-item">
+         <div class="sidebar-detail-icon" aria-hidden="true">…SVG…</div>
+         <div class="sidebar-detail-text">
+           <span class="sidebar-detail-label">Hiring Manager</span>
+           <span class="sidebar-detail-value">Rahul Verma</span>
+         </div>
+       </div>
+     </div>
+     <div class="job-sidebar-apply">
+       <a href="#apply" class="btn btn-primary">Apply Now …</a>
+     </div>
+   </aside>
+============================================================================= */
+
+.job-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.job-sidebar-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 22px;
+  margin-bottom: 16px;
+}
+
+.job-sidebar-card:last-of-type {
+  margin-bottom: 0;
+}
+
+.job-sidebar-head {
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sidebar-detail-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sidebar-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-detail-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cat-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.sidebar-detail-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+.sidebar-detail-text {
+  min-width: 0;
+}
+
+.sidebar-detail-label {
+  font-size: .66rem;
+  color: var(--muted);
+  display: block;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.sidebar-detail-value {
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+  line-height: 1.35;
+}
+
+/* Timeline list inside sidebar */
+.sidebar-timeline {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.sidebar-timeline li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .8rem;
+}
+
+.sidebar-timeline-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--blue);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.sidebar-timeline-step {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  font-size: .82rem;
+}
+
+.sidebar-timeline-date {
+  display: block;
+  font-size: .74rem;
+  color: var(--muted);
+}
+
+/* Sidebar quick-apply block */
+.job-sidebar-apply {
+  background: var(--grad-cat-ico);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  text-align: center;
+}
+
+.job-sidebar-apply h4 {
+  font-family: var(--font-heading);
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.job-sidebar-apply p {
+  font-size: .79rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.job-sidebar-apply .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* =============================================================================
+   JOB CONTENT SECTIONS
+   Now rendered inside .job-content-main (part of .job-content-layout).
+   Removed alternating backgrounds — sections separated by border-bottom instead.
+   Padding reduced vs previous standalone sections (100px → via .job-content-section).
+============================================================================= */
+
+/* Job description — white bg */
+.job-description {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Responsibilities + Skills — alternating bg */
+.job-responsibilities {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.job-skills {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Section heading inside job content reuses .section-subhead */
+
+/* =============================================================================
+   JOB APPLY FORM SECTION
+   Extends C-57 layout pattern (products-detail.css):
+   .inquiry-inner, .inquiry-head, .inquiry-form-panel already defined.
+
+   New elements specific to careers apply form:
+   - File upload field
+   - Different form heading / intro copy
+============================================================================= */
+
+.job-apply {
+  background: var(--grad-manufacturing);
+  padding-top: 80px;    /* increased: improved separation from content above */
+  padding-bottom: 80px; /* increased: breathing room at bottom */
+}
+
+/* Prevent submit button from wrapping — matches proportions of other .btn instances */
+.job-apply .btn[type="submit"] {
+  white-space: nowrap;
+}
+
+/* Field hint — muted helper text below a field (e.g. file format note) */
+.field-hint {
+  font-size: .76rem;
+  color: var(--muted);
+  margin-top: -3px;
+}
+
+/* File input styling — consistent with other .field inputs */
+.field .input--file {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: .85rem;
+}
+
+.field .input--file::file-selector-button {
+  border: none;
+  background: var(--grad-marquee);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: opacity var(--t-fast);
+}
+
+.field .input--file::file-selector-button:hover {
+  opacity: .85;
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+/* Tablet landscape (1080px) */
+@media (max-width: 1080px) {
+  .c60-meta-item {
+    min-width: 140px;
+    padding-right: 28px;
+  }
+
+  .job-content-layout {
+    grid-template-columns: 1fr 260px;
+    gap: 40px;
+  }
+}
+
+/* Tablet portrait (880px) */
+@media (max-width: 880px) {
+  .c60-meta-inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .c60-meta-item {
+    border-right: none;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: var(--radius-3xl);
+  }
+
+  .c60-meta-item:first-child { padding-left: 16px; }
+  .c60-meta-item:last-child  { padding-right: 16px; }
+
+  .job-content-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  /* Sidebar moves below content on tablet/mobile */
+  .job-sidebar {
+    position: static;
+    padding: 32px 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .job-sidebar-apply {
+    align-self: start;
+  }
+
+  /* Restore section padding when stacked */
+  .job-detail-body .wrap > .job-content-layout .job-content-main {
+    padding-top: 40px;
+  }
+}
+
+/* Mobile (640px) */
+@media (max-width: 640px) {
+  .c60-meta-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .c60-meta-bar {
+    padding: 20px 0;
+  }
+
+  .c60-meta-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .c60-meta-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .job-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .job-apply {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+/* Small mobile (420px) */
+@media (max-width: 420px) {
+  .c60-meta-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .field .input--file::file-selector-button {
+    transition: none;
+  }
+}

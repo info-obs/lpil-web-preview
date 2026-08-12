@@ -1,0 +1,243 @@
+/* =============================================================================
+   LAYOUT
+   Container, section patterns, and all named grids.
+   Source: docs/04_Homepage_Design_Reference.md §3–4
+   Containers: docs/07_Visual_Design_System.md §5
+   Grids: docs/16_Design_Token_Catalogue.md — Grid Tokens
+
+   All column counts, gaps, and breakpoints extracted directly.
+============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   PRIMARY CONTAINER
+----------------------------------------------------------------------------- */
+.wrap {
+  max-width: var(--maxw);   /* 1220px */
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* -----------------------------------------------------------------------------
+   SECTION BASELINE
+   All .section elements share this vertical rhythm.
+   Careers overrides with a larger wrap padding — see components/hero.css.
+----------------------------------------------------------------------------- */
+.section {
+  padding: 100px 0;
+}
+
+/* -----------------------------------------------------------------------------
+   SECTION HEADER BLOCK
+   Centered intro block used to open each section.
+----------------------------------------------------------------------------- */
+.section-head {
+  text-align: center;
+  max-width: var(--container-section-head);   /* 680px */
+  margin: 0 auto 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+  font-weight: 700;
+}
+
+.section-head p {
+  color: var(--muted);
+  margin-top: 14px;
+  font-size: 1.04rem;
+}
+
+/* -----------------------------------------------------------------------------
+   NAMED GRIDS
+   Every grid is derived from the approved homepage.
+   Column ratios, gaps, and responsive rules match the source exactly.
+----------------------------------------------------------------------------- */
+
+/* About: image left / text right */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* About — 2-column bullet list */
+.about-points {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0 30px;
+}
+
+/* Divisions — 5 equal cards */
+.div-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+}
+
+/* Products — 8 category chips */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+/* Showreel — text / video */
+.reel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* Manufacturing — text / image */
+.mfg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Quality certifications */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+/* Global presence — text / map */
+.global-grid {
+  display: grid;
+  grid-template-columns: .9fr 1.3fr;
+  gap: 54px;
+  align-items: center;
+}
+
+/* Media / press cards */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* Footer top row */
+.foot-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1.1fr;
+  gap: 34px;
+  padding-bottom: 46px;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+/* -----------------------------------------------------------------------------
+   INLINE LAYOUT PATTERNS
+----------------------------------------------------------------------------- */
+
+/* Contact band — icon+text left, button right */
+.contact-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 48px 0;
+  flex-wrap: wrap;
+}
+
+/* Stat counter row */
+.reel-stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Region tag strip */
+.region-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+/* Hero CTA row */
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* MFG capability list */
+.mfg-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+/* Footer bottom bar */
+.foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Footer contact details */
+.foot-contact {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Social icon row (shared by media cards and footer) */
+.socials,
+.foot-social {
+  display: flex;
+  gap: 8px;
+}
+
+.foot-social {
+  gap: 10px;
+}
+
+/* Footer nav column links */
+.foot-col ul {
+  display: grid;
+  gap: 11px;
+}
+
+/* -----------------------------------------------------------------------------
+   BREAKPOINTS
+   Exact values from docs/16_Design_Token_Catalogue.md — Breakpoint Tokens
+----------------------------------------------------------------------------- */
+
+/* 1080px — tablet landscape */
+@media (max-width: 1080px) {
+  .div-grid    { grid-template-columns: repeat(3, 1fr); }
+  .cat-grid    { grid-template-columns: repeat(4, 1fr); }
+  .media-grid  { grid-template-columns: repeat(2, 1fr); }
+  .cert-grid   { grid-template-columns: repeat(3, 1fr); }
+  .reel-grid   { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* 880px — tablet portrait / mobile nav breakpoint */
+@media (max-width: 880px) {
+  .about-grid,
+  .mfg-grid,
+  .global-grid { grid-template-columns: 1fr; gap: 42px; }
+  .contact-inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* 640px — mobile */
+@media (max-width: 640px) {
+  .wrap     { padding: 0 18px; }
+  .section  { padding: 70px 0; }
+
+  .div-grid    { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cat-grid    { grid-template-columns: repeat(2, 1fr); }
+  .media-grid,
+  .cert-grid   { grid-template-columns: 1fr 1fr; }
+}

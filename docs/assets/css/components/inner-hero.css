@@ -1,0 +1,141 @@
+/* =============================================================================
+   INNER PAGE HERO (C-06 compact variant) + BREADCRUMB (C-51)
+   Shared across all inner pages: About, Careers, Manufacturing,
+   Quality, Products, Media, Contact, Global Presence.
+
+   hero--compact overrides the full-viewport hero for interior landing pages.
+   breadcrumb (C-51) sits inside the hero wrap on inner pages.
+
+   Component IDs: C-06 (variant), C-51
+   CMS: hero image, heading, eyebrow, sub, CTA all editable via ACF page fields.
+============================================================================= */
+
+/* =============================================================================
+   HERO — COMPACT VARIANT
+   Overrides min-height and top padding from the base .hero class.
+   Image is always a static <img> (no video) — displayed without [hidden] attr
+   so the :not([hidden]) selector in hero.css fires automatically.
+============================================================================= */
+
+.hero--compact {
+  min-height: 480px;
+  align-items: flex-end;
+}
+
+.hero--compact .wrap {
+  padding-top: 140px;
+  padding-bottom: 56px;
+}
+
+/* Stop kenburns animation — not desired on compact hero */
+.hero--compact .hero-fallback:not([hidden]) {
+  animation: none;
+}
+
+.hero--compact h1 {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+}
+
+.hero--compact .sub {
+  max-width: 580px;
+}
+
+/* =============================================================================
+   BREADCRUMB (C-51)
+   Ordered list. Sits above the eyebrow inside .hero--compact .wrap.
+   Separators via CSS content — no extra HTML element needed.
+============================================================================= */
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 6px;
+  margin-bottom: 22px;
+  padding: 0;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .7);
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  margin-right: 6px;
+  color: rgba(255, 255, 255, .4);
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, .75);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.breadcrumb li:last-child {
+  color: rgba(255, 255, 255, .55);
+}
+
+/* =============================================================================
+   HERO — COMPACT SMALL VARIANT (hero--compact-sm)
+   Smaller height than hero--compact (~220-240px). Designed for Contact, Legal,
+   and utility pages where the hero should introduce the page without dominating.
+
+   Usage: class="hero hero--compact hero--compact-sm"
+   Apply alongside hero--compact — compact-sm only overrides size properties.
+   Typography rules (h1, .sub) and animation stop inherit from hero--compact.
+
+   WordPress: configurable via additional_class ACF field on page template.
+============================================================================= */
+
+.hero--compact-sm {
+  min-height: 0;
+  align-items: center;
+}
+
+.hero--compact-sm .wrap {
+  padding-top: 82px;
+  padding-bottom: 26px;
+}
+
+.hero--compact-sm h1 {
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+}
+
+.hero--compact-sm .hero-fallback:not([hidden]) {
+  object-position: center center;
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+@media (max-width: 640px) {
+  .hero--compact {
+    min-height: 380px;
+  }
+
+  .hero--compact .wrap {
+    padding-top: 110px;
+    padding-bottom: 44px;
+  }
+
+  .hero--compact-sm {
+    min-height: 0;
+  }
+
+  .hero--compact-sm .wrap {
+    padding-top: 72px;
+    padding-bottom: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--compact .hero-fallback:not([hidden]) {
+    animation: none;
+  }
+}

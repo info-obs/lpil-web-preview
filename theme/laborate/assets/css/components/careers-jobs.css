@@ -1,0 +1,557 @@
+/* =============================================================================
+   CAREERS JOBS — CSS
+   Job Search page (/careers/jobs/).
+
+   Component Registry:
+     C-63  Job Search Toolbar (CMP-114)
+     C-65  Jobs View Toggle (CMP-116)  — Grid/List layout switcher
+
+   Existing reused (unchanged):
+     C-54   .pagination / .pagination-wrap  (products-archive.css)
+     C-58   .empty-state  (products-archive.css)
+     C-59   .job-card / .featured-grid  (careers-archive.css)
+     .tag--pill  (products-archive.css)
+     .select / .input  (forms.css)
+     .section  (layout.css)
+     .jobs-archive-meta / .result-count  (careers-archive.css)
+     .featured-jobs / .featured-jobs-header  (careers-archive.css)
+     .jobs-section-head  (careers-archive.css)
+
+   C-59 extensions (job-card-code, job-meta-exp, job-card-header-row,
+   job-card-main) defined in this file.
+
+   Source of visual truth: homepage-approved-v1.html + design tokens.
+============================================================================= */
+
+/* =============================================================================
+   JOB SEARCH PAGE SPACING
+   Override .section baseline (100px) — search results page needs tighter rhythm.
+============================================================================= */
+
+.jobs-search-section {
+  background: var(--bg);
+  padding-top: 44px;    /* tighter than .section (100px) */
+  padding-bottom: 60px;
+}
+
+/* =============================================================================
+   C-63 — JOB SEARCH TOOLBAR (CMP-114)
+   Single responsive bar containing department, location, employment type,
+   keyword search, and submit button.
+
+   Desktop: single flex row — all controls equal height (40px)
+   Tablet (880px): two rows — 3 selects on row 1, keyword+button on row 2
+   Mobile (640px): stacked column
+
+   <!--
+     WP Config future option: search_toolbar_enabled (bool, default: true)
+     Controls whether the toolbar renders on the archive page.
+   -->
+
+   <div class="search-toolbar" role="search" aria-label="Search job listings">
+     <div class="toolbar-field">
+       <label class="toolbar-field-label" for="dept">Department</label>
+       <select class="select" id="dept">…</select>
+     </div>
+     <div class="toolbar-sep" aria-hidden="true"></div>
+     <div class="toolbar-field toolbar-search-field">
+       <label class="toolbar-field-label" for="keyword">Keyword</label>
+       <input class="input" type="search" id="keyword" …>
+     </div>
+     <button class="btn btn-primary toolbar-btn" type="submit">Search …</button>
+   </div>
+============================================================================= */
+
+.search-toolbar {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 14px 18px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.toolbar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.toolbar-search-field {
+  flex: 1.6;
+  min-width: 170px;
+}
+
+.toolbar-field-label {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1;
+}
+
+/* Normalise control heights — ensures all inputs/selects align visually */
+.search-toolbar .select,
+.search-toolbar .input {
+  height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.toolbar-sep {
+  width: 1px;
+  height: 40px;  /* matches control height */
+  background: var(--line);
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.toolbar-btn {
+  flex-shrink: 0;
+  height: 40px;  /* matches control height */
+  white-space: nowrap;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* =============================================================================
+   RESULTS META BAR
+   Left: result count | Centre: view toggle | Right: sort control
+   .jobs-archive-meta already sets display:flex; justify-content:space-between
+   from careers-archive.css.
+============================================================================= */
+
+.meta-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meta-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.results-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .82rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.sort-select {
+  font-size: .82rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--t-fast);
+}
+
+.sort-select:hover,
+.sort-select:focus-visible {
+  border-color: var(--blue);
+  outline: none;
+}
+
+/* =============================================================================
+   C-65 — JOBS VIEW TOGGLE (CMP-116)
+   Grid / List layout switcher. Defaults to Grid.
+   Toggle handled by CareersJobsController.js.
+
+   <!--
+     WP Config options (future PHP, no implementation here):
+       grid_list_default       = "grid" | "list"   — server default
+       allow_visitor_toggle    = true | false       — show/hide this toggle
+   -->
+
+   <div class="jobs-view-toggle" role="group" aria-label="Change view layout">
+     <button class="view-btn view-btn--active" data-view="grid"
+       aria-pressed="true" aria-label="Grid view" title="Grid view">
+       <svg>…</svg>
+     </button>
+     <button class="view-btn" data-view="list"
+       aria-pressed="false" aria-label="List view" title="List view">
+       <svg>…</svg>
+     </button>
+   </div>
+============================================================================= */
+
+.jobs-view-toggle {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.view-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--white);
+  border: none;
+  border-right: 1px solid var(--line);
+  cursor: pointer;
+  color: var(--muted);
+  transition: background var(--t-fast), color var(--t-fast);
+  line-height: 1;
+  padding: 0;
+}
+
+.view-btn:last-child {
+  border-right: none;
+}
+
+.view-btn:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.view-btn--active,
+.view-btn[aria-pressed="true"] {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.view-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+
+.view-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   FEATURED JOBS — tighter spacing
+============================================================================= */
+
+.featured-jobs {
+  margin-bottom: 28px; /* reduced from 48px */
+}
+
+/* =============================================================================
+   C-59 EXTENSIONS — Enhanced Information Density
+   New element classes added to existing job cards.
+   Classes here extend C-59 without modifying careers-archive.css.
+
+   New elements:
+   - .job-card-header-row  — top row: employment type pill (left) + job code (right)
+   - .job-card-main        — content wrapper enabling list-view layout
+   - .job-card-code        — reference code (e.g., LAB-QA-2026-018)
+   - .job-meta-exp         — experience requirement meta item
+
+   Card structure on search page:
+   <div class="job-card-body">
+     <div class="job-card-header-row">
+       <span class="tag--pill">Full-time</span>
+       <span class="job-card-code">LAB-QA-2026-018</span>
+     </div>
+     <div class="job-card-main">
+       <span class="job-card-dept">Quality Assurance</span>
+       <h3 class="job-card-title">…</h3>
+       <div class="job-card-meta">…</div>
+     </div>
+     <a class="learn" href="…">View Job →</a>
+   </div>
+
+   WP Config options (future PHP):
+     show_job_codes     — bool — show/hide .job-card-code
+     show_experience    — bool — show/hide .job-meta-exp
+     show_closing_date  — bool — show/hide .job-meta-date
+     show_department    — bool — show/hide .job-card-dept
+============================================================================= */
+
+/* Top row: employment type pill (left) + job code (right) */
+.job-card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
+  margin-bottom: 8px;
+}
+
+/* Job code — right side of header row */
+.job-card-code {
+  font-size: .66rem;
+  font-weight: 600;
+  color: var(--soft-blue);
+  letter-spacing: .04em;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Main content wrapper — enables horizontal list-view layout */
+.job-card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Experience meta item — same icon pattern as .job-meta-loc / .job-meta-date */
+.job-meta-exp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.job-meta-exp svg {
+  width: 13px;
+  height: 13px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+/* Compact padding for search-page cards */
+.jobs-search-section .job-card-body {
+  padding: 16px 18px 18px;
+}
+
+.jobs-search-section .job-card-dept {
+  margin-bottom: 4px;
+}
+
+.jobs-search-section .job-card-title {
+  font-size: .98rem;
+  margin-bottom: 10px;
+}
+
+.jobs-search-section .job-card-meta {
+  margin-bottom: 14px;
+  gap: 10px;
+}
+
+/* No excerpt on search page — density over description */
+.jobs-search-section .job-card-excerpt {
+  display: none;
+}
+
+/* =============================================================================
+   GRID / LIST VIEW ARCHITECTURE
+   The .jobs-view container switches between grid and list layout.
+   JS (CareersJobsController) reads [data-view] and toggles it.
+   Default: data-view="grid"
+
+   <!--
+     WP Config options (future, documented here for CAR-003):
+       grid_list_default     = "grid" | "list"
+       allow_visitor_toggle  = true | false
+       jobs_per_page         = 6 | 9 | 12 | 24
+   -->
+============================================================================= */
+
+/* Grid view — 3-column (default) */
+.jobs-view[data-view="grid"] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* List view — single column, horizontal cards */
+.jobs-view[data-view="list"] {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jobs-view[data-view="list"] .job-card {
+  flex-direction: row;
+}
+
+.jobs-view[data-view="list"] .job-card-body {
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 20px;
+}
+
+.jobs-view[data-view="list"] .job-card-header-row {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 4px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  min-width: 100px;
+}
+
+.jobs-view[data-view="list"] .job-card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.jobs-view[data-view="list"] .job-card-title {
+  font-size: .92rem;
+  margin-bottom: 6px;
+}
+
+.jobs-view[data-view="list"] .job-card-dept {
+  display: none; /* type pill + code in header row is sufficient at list density */
+}
+
+.jobs-view[data-view="list"] .job-card-meta {
+  margin-bottom: 0;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.jobs-view[data-view="list"] .learn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-top: 0;
+}
+
+.jobs-view[data-view="list"] .job-card::before {
+  /* Reposition top bar — left side bar in list mode */
+  top: 0;
+  bottom: 0;
+  right: auto;
+  width: 3px;
+  height: auto;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.jobs-view[data-view="list"] .job-card:hover::before,
+.jobs-view[data-view="list"] .job-card--featured::before {
+  transform: scaleY(1);
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+/* Large tablet (1080px) — 2-col grid */
+@media (max-width: 1080px) {
+  .jobs-view[data-view="grid"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet portrait (880px) — toolbar wraps to two rows */
+@media (max-width: 880px) {
+  .search-toolbar {
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  .toolbar-field {
+    min-width: calc(50% - 16px);
+    flex: 0 0 calc(50% - 16px);
+  }
+
+  .toolbar-search-field {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  .toolbar-sep {
+    display: none;
+  }
+
+  .toolbar-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .jobs-view[data-view="list"] .job-card-meta {
+    flex-wrap: wrap;
+  }
+}
+
+/* Mobile (640px) — fully stacked */
+@media (max-width: 640px) {
+  .search-toolbar {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .toolbar-field {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  .jobs-view[data-view="grid"] {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  /* Revert list view to grid-like stacking on mobile */
+  .jobs-view[data-view="list"] .job-card {
+    flex-direction: column;
+  }
+
+  .jobs-view[data-view="list"] .job-card-body {
+    flex-direction: column;
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .jobs-view[data-view="list"] .job-card-header-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .jobs-view[data-view="list"] .job-card-meta {
+    flex-wrap: wrap;
+  }
+
+  .jobs-view[data-view="list"] .learn {
+    margin-top: auto;
+  }
+
+  .jobs-view-toggle {
+    display: none; /* hide toggle on mobile — grid is only sensible layout */
+  }
+
+  .jobs-search-section {
+    padding-top: 28px;
+    padding-bottom: 40px;
+  }
+}
+
+/* =============================================================================
+   TOOLBAR VISIBILITY ARCHITECTURE — MR-003
+   data-show-toolbar="false" hides the search toolbar.
+   WordPress exposes this as a theme option (careers_search_toolbar_enabled).
+   Same pattern applied in manufacturing-plants.css and products-archive.css.
+============================================================================= */
+
+.jobs-search-section[data-show-toolbar="false"] .search-toolbar {
+  display: none;
+}
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .sort-select,
+  .view-btn {
+    transition: none;
+  }
+}

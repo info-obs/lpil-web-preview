@@ -1,0 +1,212 @@
+/* =============================================================================
+   COMPONENT: FOOTER
+   All class names, structure, and values extracted directly from:
+   assets/html/source/homepage-approved-v1.html  (lines 1740–1865)
+============================================================================= */
+
+footer {
+  background: var(--navy);
+  color: #aebfd6;
+  padding: 64px 0 0
+}
+
+/* =============================================================================
+   FOOT TOP — 5-column grid
+============================================================================= */
+
+.foot-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1.1fr;
+  gap: 34px;
+  padding-bottom: 46px;
+  border-bottom: 1px solid rgba(255, 255, 255, .1)
+}
+
+/* =============================================================================
+   BRAND COLUMN
+============================================================================= */
+
+.foot-brand img {
+  height: 32px;
+  filter: brightness(1.2) contrast(1.2);
+  margin-bottom: 18px
+}
+
+.foot-brand p {
+  font-size: .88rem;
+  color: #94a7c4;
+  max-width: 300px;
+  margin-bottom: 20px
+}
+
+/* Contact block inside brand column */
+.foot-contact {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: .85rem;
+  color: #9fb2cf
+}
+
+.foot-contact a {
+  color: #9fb2cf;
+  transition: color .2s
+}
+
+.foot-contact a:hover {
+  color: #fff
+}
+
+/* Social icons inside brand column */
+.foot-social {
+  display: flex;
+  gap: 10px
+}
+
+.foot-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .08);
+  display: grid;
+  place-items: center;
+  color: #cdd9ec;
+  transition: background .25s, transform .25s
+}
+
+.foot-social a:hover {
+  background: var(--blue);
+  color: #fff;
+  transform: translateY(-3px)
+}
+
+.foot-social a svg {
+  width: 16px;
+  height: 16px
+}
+
+/* =============================================================================
+   NAVIGATION COLUMNS
+============================================================================= */
+
+.foot-col h4 {
+  color: #fff;
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 700
+}
+
+.foot-col ul {
+  list-style: none;
+  display: grid;
+  gap: 11px
+}
+
+.foot-col a {
+  font-size: .88rem;
+  color: #9fb2cf;
+  transition: color .2s, padding-left .2s
+}
+
+.foot-col a:hover {
+  color: #fff;
+  padding-left: 4px
+}
+
+/* =============================================================================
+   FOOT BOTTOM — copyright, legal links, vendor credit
+============================================================================= */
+
+.foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  flex-wrap: wrap;
+  gap: 14px
+}
+
+.foot-bottom p {
+  font-size: .82rem;
+  color: #7f93b3
+}
+
+.foot-bottom .legal {
+  display: flex;
+  gap: 22px
+}
+
+.foot-bottom .legal a {
+  font-size: .82rem;
+  color: #9fb2cf;
+  transition: color .2s
+}
+
+.foot-bottom .legal a:hover {
+  color: #fff
+}
+
+.vendor-credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #8aa0bf;
+  font-size: .82rem;
+  letter-spacing: .01em
+}
+
+.vendor-credit a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #cdd9ec;
+  font-weight: 600;
+  transition: color .2s
+}
+
+.vendor-credit a:hover {
+  color: #fff;
+  font-weight: 900;
+  /* font-size: medium */
+}
+
+.vendor-credit svg {
+  height: 28px;
+  width: auto;
+  display: block
+}
+
+.vendor-credit a:hover svg {
+  height: 30px;
+}
+
+/* =============================================================================
+   RESPONSIVE ENHANCEMENTS
+   Desktop (source): 5-column grid — unchanged.
+   Below tablet: usability enhancements not present in source.
+============================================================================= */
+
+@media (max-width: 880px) {
+  .foot-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px
+  }
+  .foot-brand {
+    grid-column: 1 / -1
+  }
+}
+
+@media (max-width: 640px) {
+  .foot-top {
+    grid-template-columns: 1fr;
+    gap: 24px
+  }
+  .foot-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px
+  }
+}

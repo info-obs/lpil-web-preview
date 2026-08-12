@@ -1,0 +1,3459 @@
+/* =============================================================================
+   MEDIA PAGE — Page-specific components
+   Pages: assets/html/generated/media.html
+          assets/html/generated/media/press-releases.html
+          assets/html/generated/media/news.html
+          assets/html/generated/media/events.html
+          assets/html/generated/media/social.html
+
+   Components defined in this file:
+     C-78  MDC-001  Media Statistics Strip    — 4-stat KPI strip, dark navy
+     C-79  MDC-002  Featured Story Editorial  — full editorial split layout
+     C-80  MDC-003  Press Release Card        — card with date chip, tag, CTA link
+     C-81  MDC-004  News Magazine Layout      — asymmetric primary + side stack
+     C-82  MDC-005  Events List               — event row with date box, dark navy
+     C-83  MDC-006  Global Coverage Visual    — map visual + 4-region stat grid
+     C-84  MDC-007  Social Platform Card      — follower stats + preview + CTA
+     C-85  MDC-008  Media Resource Card       — download card with icon + file meta
+     C-86  MDC-009  Media Contact Card        — editorial contact card on dark bg
+     C-87  MDC-011  Archive Filter Bar        — year/category/region filter toolbar
+     C-88  MDC-012  Press Release Timeline    — grouped chronological archive list
+     C-89  MDC-010  Press Release Spotlight   — featured PR card with dark header
+     C-90  MDC-013  Media Sub-Navigation      — domain section tab bar (all media pages)
+     C-91  MDC-014  News Archive Layout       — 2-col archive+sidebar, news grid, pagination, sidebar widgets
+     C-92  MDC-015  Events Archive Layout     — event card, status badges, tab bar, event grid, schedule widget
+     C-93  MDC-016  Social Hub Layout         — featured post card, content grid, community stats, channels grid, icon variants
+     C-94  MDC-017  Press Release Detail      — metadata bar, share toolbar, article body, pull-quote, exec quote, gallery, PDF viewer, attachments, disclaimer
+============================================================================= */
+
+
+/* =============================================================================
+   C-78 — MDC-001: MEDIA STATISTICS STRIP
+   4-column dark navy stat strip below compact hero.
+   <!-- [CMS: media_stats repeater | fields: stat_value, stat_suffix, stat_label] -->
+============================================================================= */
+
+.mdc-stats-strip {
+  background: var(--navy);
+  padding: 3% 0;
+}
+
+.mdc-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.mdc-stat {
+  padding: 28px 32px;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, .08);
+}
+
+.mdc-stat:last-child {
+  border-right: 0;
+}
+
+.mdc-stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.mdc-stat-label {
+  margin-top: 12px;
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--on-dark-marquee-label);
+  font-weight: 500;
+}
+
+
+/* =============================================================================
+   C-79 — MDC-002: FEATURED STORY EDITORIAL SPLIT
+   Magazine-quality split: large image left, editorial content right.
+   <!-- [CMS: featured_story | fields: category, date, headline, sub, body, image_url, cta_url] -->
+============================================================================= */
+
+.mdc-feature-section {
+  background: var(--white);
+}
+
+.mdc-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.mdc-feature-media {
+  position: relative;
+  min-height: 560px;
+  background: var(--navy);
+}
+
+.mdc-feature-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mdc-feature-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(12, 23, 48, .55) 100%);
+  pointer-events: none;
+}
+
+.mdc-feature-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--red);
+  color: var(--white);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  z-index: 2;
+}
+
+.mdc-feature-content {
+  padding: 56px 52px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mdc-feature-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+
+.mdc-feature-kicker::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.mdc-feature-date {
+  display: block;
+  font-size: .82rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.mdc-feature-content h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  margin-bottom: 16px;
+}
+
+.mdc-feature-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+  font-style: italic;
+  border-left: 3px solid var(--line);
+  padding-left: 16px;
+}
+
+.mdc-feature-body {
+  font-size: .92rem;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+
+/* =============================================================================
+   C-80 — MDC-003: PRESS RELEASE CARD
+   Date chip + category tag + headline + excerpt + inline read link.
+   3-column grid in press-releases section.
+   <!-- [CMS: press_releases repeater | fields: date, tag, headline, excerpt, post_url] -->
+============================================================================= */
+
+.mdc-pr-section {
+  background: var(--grad-media);
+}
+
+.mdc-pr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.mdc-pr-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-medium), transform var(--t-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-pr-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+
+.mdc-pr-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.mdc-pr-date {
+  font-size: .78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 500;
+}
+
+.mdc-pr-tag {
+  display: inline-block;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  background: var(--grad-cat-ico);
+  color: var(--blue);
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(16, 98, 172, .12);
+}
+
+.mdc-pr-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.mdc-pr-card p {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.mdc-pr-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  transition: gap var(--t-fast);
+  margin-top: auto;
+}
+
+.mdc-pr-link:hover { gap: 10px; }
+
+.mdc-pr-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+
+/* =============================================================================
+   C-81 — MDC-004: NEWS MAGAZINE LAYOUT
+   Asymmetric editorial layout: 1 large primary card (left) + 2 stacked (right).
+   <!-- [CMS: media_coverage repeater | fields: source, date, headline, image_url, post_url] -->
+============================================================================= */
+
+.mdc-news-section {
+  background: var(--white);
+}
+
+.mdc-news-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.mdc-news-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mdc-news-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-news-card:hover { box-shadow: var(--shadow); }
+
+.mdc-news-img {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.mdc-news-card--primary .mdc-news-img { height: 320px; }
+
+.mdc-news-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--t-slow);
+}
+
+.mdc-news-card:hover .mdc-news-img img { transform: scale(1.04); }
+
+.mdc-news-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-news-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.mdc-news-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.mdc-news-card--primary h3 { font-size: 1.25rem; }
+
+.mdc-news-date {
+  font-size: .78rem;
+  color: var(--muted);
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.mdc-news-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .83rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  transition: gap var(--t-fast);
+  margin-top: 12px;
+}
+
+.mdc-news-link:hover { gap: 10px; }
+
+
+/* =============================================================================
+   C-82 — MDC-005: EVENTS LIST
+   Dark navy section with timeline-style event rows.
+   Grid: date box | divider | body | event type badge.
+   <!-- [CMS: events repeater | fields: day, month, year, title, location, type, cta_url] -->
+============================================================================= */
+
+.mdc-events-section {
+  background: var(--navy);
+}
+
+.mdc-events-section .section-head {
+  color: var(--white);
+}
+
+.mdc-events-section .section-head .eyebrow {
+  color: var(--light-blue);
+}
+
+.mdc-events-section .section-head p { color: var(--on-dark-reel-body); }
+
+.mdc-events-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+  border: 1px solid rgba(255, 255, 255, .07);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.mdc-event-item {
+  display: grid;
+  grid-template-columns: 80px 1px 1fr auto;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+  transition: background var(--t-medium);
+}
+
+.mdc-event-item:last-child { border-bottom: 0; }
+
+.mdc-event-item:hover { background: rgba(255, 255, 255, .04); }
+
+.mdc-event-date {
+  text-align: center;
+}
+
+.mdc-event-date-day {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.mdc-event-date-mon {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--light-blue);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.mdc-event-vr {
+  width: 1px;
+  height: 44px;
+  background: rgba(255, 255, 255, .14);
+}
+
+.mdc-event-body {}
+
+.mdc-event-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 7px;
+}
+
+.mdc-event-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: .83rem;
+  color: var(--on-dark-reel-label);
+}
+
+.mdc-event-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mdc-event-meta-item svg {
+  opacity: .65;
+  flex-shrink: 0;
+}
+
+.mdc-event-type {
+  display: inline-block;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: var(--light-blue);
+  white-space: nowrap;
+}
+
+
+/* =============================================================================
+   C-83 — MDC-006: GLOBAL COVERAGE VISUAL
+   Signature section: world map visual + 4-region stat grid.
+   <!-- [CMS: coverage_regions repeater | fields: region_name, country_count, region_sub] -->
+============================================================================= */
+
+.mdc-coverage-section {
+  background: var(--white);
+  overflow: hidden;
+}
+
+.mdc-coverage-headline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.mdc-coverage-headline .section-head {
+  text-align: left;
+  margin: 0;
+  max-width: 560px;
+}
+
+.mdc-coverage-headline .section-head h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+}
+
+.mdc-coverage-visual {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--grad-map-panel);
+  height: 340px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mdc-coverage-visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: .35;
+  mix-blend-mode: multiply;
+}
+
+.mdc-coverage-overlay-stats {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  z-index: 2;
+}
+
+.mdc-coverage-main-num {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 9vw, 7rem);
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+
+.mdc-coverage-main-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 8px;
+}
+
+.mdc-coverage-regions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.mdc-coverage-region {
+  background: var(--grad-cat-ico);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  border: 1px solid rgba(16, 98, 172, .1);
+  transition: box-shadow var(--t-medium), transform var(--t-medium);
+}
+
+.mdc-coverage-region:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.mdc-coverage-region-count {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.mdc-coverage-region-name {
+  margin-top: 8px;
+  font-size: .9rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.mdc-coverage-region-sub {
+  margin-top: 4px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+
+/* =============================================================================
+   C-84 — MDC-007: SOCIAL PLATFORM CARD
+   Platform icon + name + handle + follower count + post preview + follow CTA.
+   3-column grid in light gradient section.
+   <!-- [CMS: social_platforms repeater | fields: platform, handle, followers, preview_text, url] -->
+============================================================================= */
+
+.mdc-social-section {
+  background: var(--grad-divisions);
+}
+
+.mdc-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.mdc-social-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-medium), transform var(--t-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-social-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+
+.mdc-social-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.mdc-social-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.mdc-social-icon--linkedin { background: #0a66c2; }
+.mdc-social-icon--facebook { background: #1877f2; }
+.mdc-social-icon--instagram { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+.mdc-social-icon svg { color: var(--white); }
+
+.mdc-social-name {
+  font-weight: 700;
+  font-size: .98rem;
+  color: var(--text);
+}
+
+.mdc-social-handle {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.mdc-social-stat {
+  margin-bottom: 20px;
+}
+
+.mdc-social-stat-num {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+.mdc-social-stat-label {
+  font-size: .78rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.mdc-social-preview {
+  flex: 1;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  font-size: .84rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.mdc-social-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  transition: gap var(--t-fast);
+  margin-top: auto;
+}
+
+.mdc-social-cta:hover { gap: 11px; }
+
+
+/* =============================================================================
+   C-85 — MDC-008: MEDIA RESOURCE CARD
+   Icon + title + description + file size + download button.
+   4-column download grid on white background.
+   <!-- [CMS: media_resources repeater | fields: icon_type, title, desc, file_size, file_url] -->
+============================================================================= */
+
+.mdc-resources-section {
+  background: var(--white);
+}
+
+.mdc-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.mdc-resource-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 22px 28px;
+  text-align: center;
+  background: var(--white);
+  transition: box-shadow var(--t-medium), transform var(--t-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mdc-resource-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+
+.mdc-resource-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cert-ico);
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+}
+
+.mdc-resource-icon svg {
+  color: var(--blue);
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.mdc-resource-card h3 {
+  font-size: .96rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.mdc-resource-card p {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 12px;
+}
+
+.mdc-resource-size {
+  font-size: .74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+
+/* =============================================================================
+   C-86 — MDC-009: MEDIA CONTACT CARD
+   Avatar initial + name + role + region + email link on dark navy background.
+   3-column grid in media contacts section.
+   <!-- [CMS: media_contacts repeater | fields: initials, name, role, region, email] -->
+============================================================================= */
+
+.mdc-contacts-section {
+  background: var(--navy);
+}
+
+.mdc-contacts-section .section-head {
+  color: var(--white);
+}
+
+.mdc-contacts-section .section-head .eyebrow { color: var(--light-blue); }
+
+.mdc-contacts-section .section-head h2 { color: var(--white); }
+
+.mdc-contacts-section .section-head p { color: var(--on-dark-reel-body); }
+
+.mdc-contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.mdc-contact-card {
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  text-align: center;
+  transition: background var(--t-medium), border-color var(--t-medium);
+}
+
+.mdc-contact-card:hover {
+  background: rgba(255, 255, 255, .09);
+  border-color: rgba(255, 255, 255, .14);
+}
+
+.mdc-contact-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: var(--grad-marquee);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -.02em;
+}
+
+.mdc-contact-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 5px;
+}
+
+.mdc-contact-role {
+  font-size: .84rem;
+  color: var(--on-dark-reel-label);
+  margin-bottom: 5px;
+}
+
+.mdc-contact-region {
+  font-size: .75rem;
+  color: var(--on-dark-footer-general);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+
+.mdc-contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .84rem;
+  color: var(--light-blue);
+  text-decoration: none;
+  transition: color var(--t-fast);
+  word-break: break-all;
+}
+
+.mdc-contact-email:hover { color: var(--white); }
+
+.mdc-contact-email svg {
+  flex-shrink: 0;
+  opacity: .7;
+}
+
+
+/* =============================================================================
+   ARCHIVE INTRODUCTION — Intro strip for press-releases.html
+   Quick stats + category filter chips.
+   <!-- [CMS: archive intro static | quick_stats: total_releases, category_count, since_year] -->
+============================================================================= */
+
+.mdc-archive-intro-section { background: var(--white); }
+
+.mdc-archive-intro-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 60px;
+}
+
+.mdc-archive-intro-text p {
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.8;
+  margin-top: 12px;
+}
+
+.mdc-archive-qs {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+}
+
+.mdc-archive-qs-item { text-align: center; }
+
+.mdc-archive-qs-num {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.mdc-archive-qs-label {
+  font-size: .74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.mdc-archive-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.mdc-archive-cat-chip {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: var(--white);
+  text-decoration: none;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+}
+
+.mdc-archive-cat-chip:hover,
+.mdc-archive-cat-chip[aria-pressed="true"] {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
+
+
+/* =============================================================================
+   C-89 — MDC-010: PRESS RELEASE SPOTLIGHT
+   Wide featured card for the most recent/important release.
+   Dark header strip + white body grid (content + sidebar).
+   <!-- [CMS: featured_press_release | single | fields: ref_no, date, category, region, headline, sub, body, facts, pdf_url] -->
+============================================================================= */
+
+.mdc-pr-spotlight-section { background: var(--grad-media); }
+
+.mdc-pr-spotlight {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.mdc-pr-spotlight-header {
+  background: var(--navy);
+  padding: 22px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mdc-pr-spotlight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--light-blue);
+  background: rgba(255, 255, 255, .08);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, .14);
+}
+
+.mdc-pr-spotlight-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .8rem;
+  color: var(--on-dark-footer-general);
+}
+
+.mdc-pr-spotlight-header-ref {
+  font-family: var(--font-heading);
+  font-size: .78rem;
+  color: var(--on-dark-footer-general);
+  letter-spacing: .04em;
+}
+
+.mdc-pr-spotlight-body {
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 36px;
+  align-items: start;
+}
+
+.mdc-pr-spotlight-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.mdc-pr-spotlight-content h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  margin-bottom: 18px;
+}
+
+.mdc-pr-spotlight-sub {
+  font-size: .97rem;
+  color: var(--muted);
+  font-style: italic;
+  border-left: 3px solid var(--line);
+  padding-left: 16px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.mdc-pr-spotlight-content p {
+  font-size: .92rem;
+  color: var(--text);
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+
+.mdc-pr-spotlight-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.mdc-pr-spotlight-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mdc-pr-spotlight-fact {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.mdc-pr-spotlight-fact-label {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.mdc-pr-spotlight-fact-value {
+  font-size: .88rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+
+/* =============================================================================
+   C-87 — MDC-011: ARCHIVE FILTER BAR
+   Year / Category / Region selects + search input + result count.
+   Full-width compact section on tinted background.
+   <!-- [CMS: filter bar — client-side JS or server-side in WP; all visual-only in HTML] -->
+============================================================================= */
+
+.mdc-filter-section {
+  background: var(--bg);
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.mdc-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mdc-filter-label {
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.mdc-filter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235a6b8c' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center / 14px 14px;
+  padding: 9px 32px 9px 12px;
+  font-size: .84rem;
+  color: var(--text);
+  font-family: var(--font-body);
+  cursor: pointer;
+  min-width: 140px;
+  transition: border-color var(--t-fast);
+}
+
+.mdc-filter-select:hover { border-color: var(--blue); }
+
+.mdc-filter-select:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+  border-color: var(--blue);
+}
+
+.mdc-filter-search {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 9px 14px;
+  font-size: .84rem;
+  color: var(--text);
+  font-family: var(--font-body);
+  background: var(--white);
+  transition: border-color var(--t-fast);
+}
+
+.mdc-filter-search:hover { border-color: var(--blue); }
+
+.mdc-filter-search:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+  border-color: var(--blue);
+}
+
+.mdc-filter-search::placeholder { color: var(--muted); }
+
+.mdc-filter-count {
+  font-size: .82rem;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+
+/* =============================================================================
+   C-88 — MDC-012: PRESS RELEASE TIMELINE
+   Year-grouped archive list. Year heading + horizontal rule + entry rows.
+   Entry: date | category badge | headline link | read CTA.
+   <!-- [CMS: press_releases_archive repeater | grouped by year | fields: date, category, headline, post_url] -->
+============================================================================= */
+
+.mdc-pr-timeline-section { background: var(--white); }
+
+.mdc-pr-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.mdc-timeline-year-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.mdc-timeline-year-num {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -.04em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.mdc-timeline-year-rule {
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+
+.mdc-timeline-year-count {
+  font-size: .74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.mdc-timeline-entries {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.mdc-timeline-entry {
+  display: grid;
+  grid-template-columns: 110px auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
+  transition: background var(--t-fast);
+}
+
+.mdc-timeline-entry:last-child { border-bottom: 0; }
+
+.mdc-timeline-entry:hover { background: var(--bg); }
+
+.mdc-timeline-date {
+  font-size: .79rem;
+  color: var(--muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.mdc-timeline-entry h3 {
+  font-size: .93rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.mdc-timeline-entry h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+.mdc-timeline-entry h3 a:hover { color: var(--blue); }
+
+.mdc-timeline-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: gap var(--t-fast);
+}
+
+.mdc-timeline-read:hover { gap: 9px; }
+
+
+/* =============================================================================
+   MEDIA KIT CTA SECTION — Dark navy centred CTA (press releases page)
+============================================================================= */
+
+.mdc-kit-section {
+  background: var(--navy);
+  text-align: center;
+}
+
+.mdc-kit-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.mdc-kit-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-3xl);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .12);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 24px;
+}
+
+.mdc-kit-icon svg { color: var(--light-blue); }
+
+.mdc-kit-section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -.025em;
+  margin-bottom: 14px;
+}
+
+.mdc-kit-section p {
+  font-size: .94rem;
+  color: var(--on-dark-reel-body);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.mdc-kit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+/* =============================================================================
+   ARCHIVE CONTACT PANEL — Light editorial contact section (press releases page)
+============================================================================= */
+
+.mdc-archive-contact-section { background: var(--grad-divisions); }
+
+.mdc-archive-contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.mdc-archive-contact-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.025em;
+  margin-bottom: 14px;
+}
+
+.mdc-archive-contact-text p {
+  color: var(--muted);
+  font-size: .93rem;
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
+
+.mdc-archive-contact-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.mdc-archive-contact-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background: var(--grad-marquee);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.mdc-archive-contact-name {
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.mdc-archive-contact-role {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.mdc-archive-contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.mdc-archive-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .83rem;
+  color: var(--blue);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+.mdc-archive-contact-link:hover { color: var(--blue-dark); }
+
+.mdc-archive-contact-link svg { flex-shrink: 0; opacity: .7; }
+
+
+/* =============================================================================
+   RESPONSIVE — TABLET (≤ 1024px)
+============================================================================= */
+
+@media (max-width: 1024px) {
+
+  .mdc-stats { grid-template-columns: repeat(2, 1fr); }
+  .mdc-stat { border-bottom: 1px solid rgba(255, 255, 255, .08); }
+  .mdc-stat:nth-child(2n) { border-right: 0; }
+  .mdc-stat:nth-last-child(-n+2) { border-bottom: 0; }
+
+  .mdc-feature-grid { grid-template-columns: 1fr; }
+  .mdc-feature-media { min-height: 360px; }
+  .mdc-feature-content { padding: 44px 40px; }
+
+  .mdc-pr-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .mdc-news-grid { grid-template-columns: 1fr; }
+  .mdc-news-card--primary .mdc-news-img { height: 260px; }
+
+  .mdc-event-item { grid-template-columns: 70px 1px 1fr; }
+  .mdc-event-type { display: none; }
+
+  .mdc-coverage-headline { flex-direction: column; }
+  .mdc-coverage-regions { grid-template-columns: repeat(2, 1fr); }
+
+  .mdc-social-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .mdc-resources-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .mdc-contacts-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Press releases archive — tablet */
+  .mdc-archive-intro-inner { grid-template-columns: 1fr; gap: 32px; }
+  .mdc-archive-qs { gap: 20px; }
+  .mdc-pr-spotlight-body { grid-template-columns: 1fr; }
+  .mdc-pr-spotlight-aside { flex-direction: row; flex-wrap: wrap; }
+  .mdc-pr-spotlight-fact { flex: 1; min-width: 180px; }
+  .mdc-timeline-entry { grid-template-columns: 90px auto 1fr; }
+  .mdc-timeline-read { display: none; }
+  .mdc-archive-contact-inner { grid-template-columns: 1fr; gap: 36px; }
+  .mdc-kit-actions { flex-direction: column; align-items: center; }
+
+}
+
+
+/* =============================================================================
+   RESPONSIVE — MOBILE (≤ 640px)
+============================================================================= */
+
+@media (max-width: 640px) {
+
+  .mdc-stats-strip { padding: 40px 0; }
+  .mdc-stats { grid-template-columns: repeat(2, 1fr); }
+
+  .mdc-feature-media { min-height: 260px; }
+  .mdc-feature-content { padding: 32px 28px; }
+
+  .mdc-pr-grid { grid-template-columns: 1fr; }
+
+  .mdc-news-grid { grid-template-columns: 1fr; }
+
+  .mdc-event-item {
+    grid-template-columns: 60px 1px 1fr;
+    gap: 18px;
+    padding: 22px 20px;
+  }
+
+  .mdc-event-date-day { font-size: 1.7rem; }
+
+  .mdc-coverage-visual { height: 220px; }
+  .mdc-coverage-main-num { font-size: 4rem; }
+  .mdc-coverage-regions { grid-template-columns: repeat(2, 1fr); }
+
+  .mdc-social-grid { grid-template-columns: 1fr; }
+
+  .mdc-resources-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .mdc-contacts-grid { grid-template-columns: 1fr; }
+
+  /* Press releases archive — mobile */
+  .mdc-archive-qs { gap: 14px; }
+  .mdc-archive-qs-num { font-size: 1.4rem; }
+  .mdc-pr-spotlight-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .mdc-pr-spotlight-header-meta { flex-wrap: wrap; }
+  .mdc-pr-spotlight-body { padding: 24px 20px; }
+  .mdc-timeline-entry {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px 20px;
+  }
+  .mdc-timeline-date { font-size: .74rem; }
+  .mdc-timeline-read { display: inline-flex; }
+  .mdc-filter-bar { flex-direction: column; align-items: stretch; }
+  .mdc-filter-select, .mdc-filter-search { width: 100%; }
+  .mdc-filter-count { margin-left: 0; }
+  .mdc-archive-contact-card { flex-direction: column; }
+
+}
+
+
+/* =============================================================================
+   C-90 — MDC-013: MEDIA SUB-NAVIGATION
+   Horizontal tab bar present on every Media domain page.
+   Active item: .mdc-sub-nav-link--active or [aria-current="page"]
+   Depth note:
+     media.html   → href="media/press-releases.html" etc.
+     media/*.html → href="press-releases.html" etc.
+============================================================================= */
+
+.mdc-sub-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.mdc-sub-nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.mdc-sub-nav-list::-webkit-scrollbar { display: none; }
+
+.mdc-sub-nav-link {
+  display: block;
+  padding: 15px 24px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.mdc-sub-nav-link:hover {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+.mdc-sub-nav-link--active,
+.mdc-sub-nav-link[aria-current="page"] {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+
+/* =============================================================================
+   C-91  MDC-014: NEWS ARCHIVE PAGE — News & Announcements archive layout
+   Pages: assets/html/generated/media/news.html
+   Reuses: C-79 (featured), C-81 (news cards), C-87 (filter bar), C-90 (sub-nav)
+   New in this file: stats section, 2-col archive layout, sidebar widgets, pagination
+============================================================================= */
+
+
+/* --- Stats section (reuses .mdc-archive-qs classes from C-87) --- */
+
+.mdc-news-stats-section {
+  background: var(--bg);
+  padding: 56px 0;
+}
+
+.mdc-news-stats-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mdc-news-stats-inner .mdc-archive-qs {
+  justify-content: center;
+  margin-top: 0;
+  flex-wrap: wrap;
+  gap: 40px 48px;
+}
+
+.mdc-news-stats-inner .mdc-archive-qs-item {
+  min-width: 120px;
+}
+
+
+/* --- Archive section wrapper --- */
+
+.mdc-news-archive-section {
+  background: var(--white);
+}
+
+
+/* --- 2-column archive layout: main + sidebar --- */
+
+.mdc-news-archive-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 56px;
+  align-items: start;
+}
+
+.mdc-news-archive-main {
+  min-width: 0;
+}
+
+
+/* --- News archive 3-col card grid --- */
+
+.mdc-news-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.mdc-news-archive-grid .mdc-news-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-news-archive-grid .mdc-news-img {
+  height: 188px;
+  flex-shrink: 0;
+}
+
+.mdc-news-archive-grid .mdc-news-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-news-archive-grid .mdc-news-link {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+
+/* --- News card meta row (category tag + date) --- */
+
+.mdc-news-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+
+/* --- News card excerpt --- */
+
+.mdc-news-excerpt {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 6px 0 0;
+  flex: 1;
+}
+
+
+/* --- Static Pagination --- */
+
+.mdc-news-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.mdc-page-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--text-muted);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  justify-content: center;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+}
+
+.mdc-page-link:hover {
+  background: var(--bg);
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.mdc-page-link--active {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
+
+.mdc-page-link--prev,
+.mdc-page-link--next {
+  padding: 0 14px;
+}
+
+.mdc-page-link[aria-disabled="true"] {
+  opacity: .4;
+  pointer-events: none;
+}
+
+
+/* --- Sidebar --- */
+
+.mdc-news-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 88px;
+}
+
+.mdc-sidebar-widget {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--line);
+}
+
+.mdc-sidebar-widget-title {
+  font-size: .94rem;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+
+/* --- Sidebar: category list --- */
+
+.mdc-sidebar-cat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mdc-sidebar-cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  transition: background var(--t-fast);
+}
+
+.mdc-sidebar-cat-item:hover {
+  background: var(--white);
+}
+
+.mdc-sidebar-cat-link {
+  font-size: .875rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.mdc-sidebar-cat-link:hover {
+  color: var(--blue);
+}
+
+.mdc-sidebar-cat-count {
+  font-size: .78rem;
+  color: var(--text-muted);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 1px 8px;
+  font-weight: 600;
+}
+
+
+/* --- Sidebar: contact info rows --- */
+
+.mdc-sidebar-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mdc-sidebar-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: .84rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+.mdc-sidebar-contact-row:hover {
+  color: var(--blue);
+}
+
+.mdc-sidebar-contact-row svg {
+  flex-shrink: 0;
+  color: var(--blue);
+}
+
+
+/* --- Sidebar: subscribe form input --- */
+
+.mdc-sidebar-subscribe-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-sidebar-subscribe-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+  transition: border-color var(--t-fast);
+  box-sizing: border-box;
+}
+
+.mdc-sidebar-subscribe-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(16, 98, 172, .12);
+}
+
+
+/* =============================================================================
+   RESPONSIVE — News archive page
+   (existing C-90 sub-nav mobile rules already in the responsive block above)
+============================================================================= */
+
+@media (max-width: 1100px) {
+  .mdc-news-archive-layout {
+    grid-template-columns: 1fr 280px;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .mdc-news-archive-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mdc-news-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .mdc-news-archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .mdc-news-stats-section { padding: 40px 0; }
+
+  .mdc-news-stats-inner .mdc-archive-qs {
+    gap: 28px 32px;
+  }
+
+  .mdc-news-archive-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mdc-news-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .mdc-news-pagination {
+    gap: 4px;
+    margin-top: 36px;
+  }
+
+  .mdc-page-link {
+    min-width: 34px;
+    height: 34px;
+    font-size: .8rem;
+  }
+}
+
+
+/* =============================================================================
+   C-92  MDC-015: EVENTS ARCHIVE PAGE — Events & Exhibitions archive layout
+   Pages: assets/html/generated/media/events.html
+   Reuses: C-06, C-51, C-79, C-87, C-90, C-91 sidebar+layout+pagination, mdc-kit-section, C-44, C-46
+   New: event archive grid, event card, status badges, tab bar, stats section, schedule widget
+============================================================================= */
+
+
+/* --- Event stats band --- */
+
+.mdc-events-stats-section {
+  background: var(--bg);
+  padding: 56px 0;
+}
+
+.mdc-events-stats-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mdc-events-stats-inner .mdc-archive-qs {
+  justify-content: center;
+  margin-top: 0;
+  flex-wrap: wrap;
+  gap: 40px 56px;
+}
+
+.mdc-events-stats-inner .mdc-archive-qs-item {
+  min-width: 120px;
+}
+
+
+/* --- Events archive section --- */
+
+.mdc-event-archive-section {
+  background: var(--white);
+}
+
+.mdc-event-archive-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 56px;
+  align-items: start;
+}
+
+.mdc-event-archive-main {
+  min-width: 0;
+}
+
+
+/* --- Upcoming / Past tab bar --- */
+
+.mdc-event-tabs-bar {
+  display: flex;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 24px;
+}
+
+.mdc-event-tab {
+  padding: 13px 28px;
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.mdc-event-tab:hover {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+.mdc-event-tab--active {
+  color: var(--navy);
+  border-bottom-color: var(--navy);
+}
+
+
+/* --- Event archive grid (3-col desktop) --- */
+
+.mdc-event-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+
+/* --- Event card (archive card — white bg, different from C-82 dark list rows) --- */
+
+.mdc-event-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--t-medium), transform var(--t-medium);
+}
+
+.mdc-event-card:hover {
+  box-shadow: 0 8px 28px rgba(12, 23, 48, .1);
+  transform: translateY(-2px);
+}
+
+.mdc-event-card-banner {
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mdc-event-card-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mdc-event-card-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(12, 23, 48, .78));
+}
+
+.mdc-event-card-banner-foot {
+  position: absolute;
+  bottom: 11px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mdc-event-card-banner-dates {
+  font-size: .72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .92);
+  line-height: 1.45;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+}
+
+.mdc-event-card-body {
+  padding: 18px 18px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mdc-event-card-name {
+  font-size: .975rem;
+  font-weight: 700;
+  color: var(--heading);
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.mdc-event-card-venue {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+
+.mdc-event-card-venue svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--blue);
+  opacity: .75;
+}
+
+.mdc-event-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 0 14px;
+  border-top: 1px solid var(--line);
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.mdc-event-card-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.mdc-event-card-detail-row svg {
+  flex-shrink: 0;
+  opacity: .65;
+  color: var(--blue);
+}
+
+.mdc-event-card-foot {
+  padding: 11px 18px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+
+/* --- Event status badges --- */
+
+.mdc-event-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.mdc-event-status::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.mdc-event-status--upcoming {
+  background: rgba(16, 98, 172, .1);
+  color: var(--blue);
+}
+
+.mdc-event-status--completed {
+  background: var(--bg);
+  color: var(--text-muted);
+}
+
+.mdc-event-status--live {
+  background: rgba(22, 163, 74, .1);
+  color: #16a34a;
+}
+
+.mdc-event-status--registration {
+  background: rgba(234, 88, 12, .1);
+  color: #ea580c;
+}
+
+.mdc-event-status--invitation {
+  background: rgba(139, 92, 246, .1);
+  color: #7c3aed;
+}
+
+
+/* --- Sidebar: upcoming schedule widget --- */
+
+.mdc-sidebar-schedule-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mdc-sidebar-schedule-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.mdc-sidebar-schedule-item:last-child { border-bottom: 0; }
+
+.mdc-sidebar-schedule-date {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 2px;
+}
+
+.mdc-sidebar-schedule-name {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin-bottom: 2px;
+}
+
+.mdc-sidebar-schedule-loc {
+  font-size: .78rem;
+  color: var(--text-muted);
+}
+
+
+/* =============================================================================
+   RESPONSIVE — Events archive page
+============================================================================= */
+
+@media (max-width: 1100px) {
+  .mdc-event-archive-layout {
+    grid-template-columns: 1fr 280px;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .mdc-event-archive-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mdc-event-archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .mdc-events-stats-section { padding: 40px 0; }
+  .mdc-events-stats-inner .mdc-archive-qs { gap: 28px 36px; }
+  .mdc-event-archive-grid { grid-template-columns: 1fr; }
+  .mdc-event-tab { padding: 11px 18px; font-size: .82rem; }
+}
+
+
+/* =============================================================================
+   C-93  MDC-016: SOCIAL HUB PAGE — Social Media Presence hub layout
+   Pages: assets/html/generated/media/social.html
+   Reuses: C-06, C-51, C-78 stats strip, C-79, C-80, C-81, C-84 social cards,
+           C-87, C-90, C-91 sidebar, C-92 tabs, .mdc-archive-cat-chip, C-44, C-46
+   New: icon variants (youtube/x), featured post card family, social archive
+        layout, content badge, community stats 5-col override, channels 5-col grid
+============================================================================= */
+
+
+/* --- Extended icon colour variants (extends C-84) --- */
+
+.mdc-social-icon--youtube { background: #ff0000; }
+.mdc-social-icon--x       { background: #0f1419; }
+
+
+/* --- Featured social posts section --- */
+
+.mdc-social-feed-section {
+  background: var(--white);
+}
+
+.mdc-social-posts-feed {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.mdc-social-post {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--t-medium);
+}
+
+.mdc-social-post:hover {
+  box-shadow: 0 6px 20px rgba(12, 23, 48, .09);
+}
+
+.mdc-social-post-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 18px 14px;
+}
+
+.mdc-social-post-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--grad-media);
+  display: grid;
+  place-items: center;
+  font-size: .72rem;
+  font-weight: 800;
+  color: var(--blue);
+  flex-shrink: 0;
+  letter-spacing: -.02em;
+}
+
+.mdc-social-post-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.mdc-social-post-author {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mdc-social-post-role {
+  font-size: .72rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.mdc-social-post-time {
+  font-size: .7rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.mdc-social-post-platform-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.mdc-social-post-body {
+  padding: 0 18px 14px;
+  font-size: .845rem;
+  color: var(--text);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.mdc-social-post-hashtags {
+  color: var(--blue);
+}
+
+.mdc-social-post-image {
+  height: 185px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mdc-social-post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mdc-social-post-engagement {
+  display: flex;
+  gap: 18px;
+  padding: 10px 18px;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.mdc-social-post-eng-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+
+.mdc-social-post-eng-item svg {
+  flex-shrink: 0;
+  opacity: .65;
+}
+
+.mdc-social-post-cta {
+  padding: 11px 18px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.mdc-social-post-view-link {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap var(--t-fast);
+}
+
+.mdc-social-post-view-link:hover { gap: 10px; }
+
+
+/* --- Social content archive section (var(--bg)) --- */
+
+.mdc-social-archive-section {
+  background: var(--bg);
+}
+
+.mdc-social-archive-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 48px;
+  align-items: start;
+}
+
+.mdc-social-archive-main {
+  min-width: 0;
+}
+
+.mdc-social-content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+/* Constrain image height for content cards in social grid */
+.mdc-social-content-grid .mdc-news-img {
+  height: 150px;
+}
+
+.mdc-social-content-grid .mdc-news-body {
+  padding: 14px 16px;
+}
+
+/* Platform badge on top of content cards */
+.mdc-social-content-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 7px;
+}
+
+.mdc-social-content-badge .mdc-social-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+
+/* --- Community statistics — extends C-78 .mdc-stats-strip --- */
+
+.mdc-social-stats-section {
+  padding: 56px 0;
+}
+
+.mdc-social-community-stats {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.mdc-social-community-stats .mdc-stat-platform {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--light-blue);
+  margin-bottom: 6px;
+}
+
+.mdc-social-community-stats .mdc-stat-num {
+  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+}
+
+
+/* --- Official channels section --- */
+
+.mdc-social-channels-section {
+  background: var(--white);
+}
+
+.mdc-social-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+
+/* =============================================================================
+   RESPONSIVE — Social hub page
+============================================================================= */
+
+@media (max-width: 1280px) {
+  .mdc-social-channels-grid { grid-template-columns: repeat(3, 1fr); }
+  .mdc-social-community-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1100px) {
+  .mdc-social-archive-layout { grid-template-columns: 1fr 260px; gap: 32px; }
+  .mdc-social-posts-feed { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .mdc-social-archive-layout { grid-template-columns: 1fr; }
+  .mdc-social-content-grid { grid-template-columns: repeat(2, 1fr); }
+  .mdc-social-channels-grid { grid-template-columns: repeat(2, 1fr); }
+  .mdc-social-community-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .mdc-social-posts-feed { grid-template-columns: 1fr; }
+  .mdc-social-content-grid { grid-template-columns: 1fr; }
+  .mdc-social-channels-grid { grid-template-columns: 1fr; }
+  .mdc-social-community-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* =============================================================================
+   C-94  MDC-017: PRESS RELEASE DETAIL PAGE
+   Pages: assets/html/generated/media/press-release-detail.html
+   Reuses: C-06, C-51, C-80 (mdc-pr-tag, mdc-pr-link, mdc-pr-card, mdc-pr-grid),
+           C-85 (mdc-resource-icon), C-89 (mdc-pr-spotlight-fact*),
+           C-90 (mdc-sub-nav), C-91 (mdc-news-sidebar, mdc-sidebar-widget*,
+           mdc-sidebar-contact-*), mdc-archive-contact-*, mdc-kit-section, C-44, C-46
+   New:    metadata bar, share toolbar, article body + typography, pull-quote,
+           highlight callout, inline figure + caption, inline gallery,
+           executive quote block, PDF viewer placeholder, attachment cards, legal disclaimer
+============================================================================= */
+
+
+/* --- Metadata bar --- */
+
+.mdc-prd-meta-bar {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.mdc-prd-meta-row {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.mdc-prd-meta-row::-webkit-scrollbar { display: none; }
+
+.mdc-prd-meta-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px;
+  border-right: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.mdc-prd-meta-item:last-child { border-right: 0; }
+
+.mdc-prd-meta-label {
+  font-size: .63rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.mdc-prd-meta-value {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.mdc-prd-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.mdc-prd-status-badge::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.mdc-prd-status-badge--published { background: rgba(22, 163, 74, .1); color: #16a34a; }
+.mdc-prd-status-badge--draft     { background: rgba(234, 88, 12, .1);  color: #ea580c; }
+
+
+/* --- Share toolbar --- */
+
+.mdc-prd-share-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+}
+
+.mdc-prd-share-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mdc-prd-share-label {
+  font-size: .73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--text-muted);
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.mdc-prd-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 7px 14px;
+  background: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+
+.mdc-prd-share-btn:hover {
+  background: var(--bg);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.mdc-prd-share-btn svg { flex-shrink: 0; }
+
+.mdc-prd-share-btn--pdf {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+  margin-left: auto;
+}
+
+.mdc-prd-share-btn--pdf:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+
+/* --- Article layout (2-col: article main + sidebar) --- */
+
+.mdc-prd-article-section {
+  background: var(--white);
+}
+
+.mdc-prd-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 56px;
+  align-items: start;
+}
+
+.mdc-prd-main {
+  min-width: 0;
+}
+
+
+/* --- Article header above body --- */
+
+.mdc-prd-article-head {
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 2px solid var(--line);
+}
+
+.mdc-prd-article-head h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: var(--heading);
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  margin-bottom: 16px;
+}
+
+.mdc-prd-article-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--line);
+  padding-left: 16px;
+}
+
+.mdc-prd-article-byline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+
+.mdc-prd-article-byline .mdc-pr-tag { font-size: .68rem; }
+
+
+/* --- Article body typography --- */
+
+.mdc-prd-article {
+  color: var(--text);
+  line-height: 1.9;
+}
+
+.mdc-prd-dateline {
+  font-size: .84rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.mdc-prd-article h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  color: var(--heading);
+  letter-spacing: -.02em;
+  margin: 40px 0 14px;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+
+.mdc-prd-article h2:first-of-type {
+  margin-top: 28px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.mdc-prd-article h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--heading);
+  margin: 24px 0 10px;
+}
+
+.mdc-prd-article p {
+  font-size: .94rem;
+  color: var(--text);
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.mdc-prd-article ul,
+.mdc-prd-article ol {
+  margin: 4px 0 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mdc-prd-article li {
+  font-size: .94rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.mdc-prd-article strong { font-weight: 700; color: var(--heading); }
+
+
+/* --- Pull quote (blockquote inside article) --- */
+
+.mdc-prd-pull-quote {
+  border-left: 4px solid var(--blue);
+  padding: 20px 28px;
+  margin: 32px 0;
+  background: var(--grad-cat-ico);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  position: relative;
+}
+
+.mdc-prd-pull-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: -4px;
+  left: 16px;
+  font-size: 4.5rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--blue);
+  opacity: .15;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.mdc-prd-pull-quote p {
+  font-size: 1.02rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.75;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.mdc-prd-pull-quote cite {
+  display: block;
+  margin-top: 10px;
+  font-size: .79rem;
+  font-style: normal;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+
+/* --- Highlight callout (key fact or statement) --- */
+
+.mdc-prd-highlight {
+  background: rgba(16, 98, 172, .06);
+  border: 1px solid rgba(16, 98, 172, .18);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.mdc-prd-highlight p {
+  font-size: .93rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+
+
+/* --- Inline article figure + caption --- */
+
+.mdc-prd-figure {
+  margin: 32px 0;
+}
+
+.mdc-prd-figure img {
+  width: 100%;
+  border-radius: var(--radius);
+  display: block;
+}
+
+.mdc-prd-figure figcaption {
+  font-size: .77rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  line-height: 1.55;
+  padding-left: 6px;
+  border-left: 2px solid var(--line);
+}
+
+
+/* --- Inline article gallery (2-col image grid) --- */
+
+.mdc-prd-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.mdc-prd-gallery-item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.mdc-prd-gallery-item img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--t-slow);
+}
+
+.mdc-prd-gallery-item:hover img { transform: scale(1.04); }
+
+.mdc-prd-gallery figcaption {
+  font-size: .74rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  line-height: 1.45;
+  grid-column: 1 / -1;
+  padding-left: 6px;
+  border-left: 2px solid var(--line);
+}
+
+
+/* --- Executive quote block --- */
+
+.mdc-prd-exec-quote {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 22px;
+  align-items: start;
+  padding: 28px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  margin: 36px 0;
+}
+
+.mdc-prd-exec-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: var(--grad-marquee);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -.02em;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.mdc-prd-exec-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+.mdc-prd-exec-kicker {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.mdc-prd-exec-text {
+  font-size: .95rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.8;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.mdc-prd-exec-name {
+  font-size: .86rem;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.mdc-prd-exec-title {
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+
+/* --- PDF viewer placeholder --- */
+
+.mdc-prd-pdf-section {
+  background: var(--bg);
+}
+
+.mdc-prd-pdf-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.mdc-prd-pdf-viewer {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.mdc-prd-pdf-toolbar {
+  background: var(--navy);
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mdc-prd-pdf-toolbar-title {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--light-blue);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mdc-prd-pdf-toolbar-title svg { opacity: .8; }
+
+.mdc-prd-pdf-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mdc-prd-pdf-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .76rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .8);
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  text-decoration: none;
+  transition: background var(--t-fast), color var(--t-fast);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.mdc-prd-pdf-toolbar-btn:hover {
+  background: rgba(255, 255, 255, .16);
+  color: var(--white);
+}
+
+.mdc-prd-pdf-placeholder {
+  background: #f1f3f5;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mdc-prd-pdf-placeholder-doc {
+  width: 72px;
+  height: 88px;
+  background: var(--white);
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  position: relative;
+  padding: 14px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mdc-prd-pdf-placeholder-doc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 16px 16px 0;
+  border-color: transparent #e2e8f0 transparent transparent;
+}
+
+.mdc-prd-placeholder-line {
+  height: 5px;
+  border-radius: 2px;
+  background: #cbd5e1;
+}
+
+.mdc-prd-pdf-placeholder-label {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.mdc-prd-pdf-placeholder-sub {
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+
+
+/* --- Attachments section --- */
+
+.mdc-prd-attachments-section {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+
+.mdc-prd-attachments-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.mdc-prd-attachment-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: box-shadow var(--t-medium), transform var(--t-medium);
+}
+
+.mdc-prd-attachment-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.mdc-prd-attachment-type {
+  font-size: .68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 14px;
+}
+
+.mdc-prd-attachment-type--pdf  { background: rgba(220, 38, 38, .1);   color: #dc2626; }
+.mdc-prd-attachment-type--jpg  { background: rgba(16, 98, 172, .1);   color: var(--blue); }
+.mdc-prd-attachment-type--zip  { background: rgba(139, 92, 246, .1);  color: #7c3aed; }
+.mdc-prd-attachment-type--docx { background: rgba(22, 163, 74, .1);   color: #16a34a; }
+
+.mdc-prd-attachment-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-3xl);
+  background: var(--grad-cert-ico);
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+}
+
+.mdc-prd-attachment-icon svg {
+  color: var(--blue);
+  width: 22px;
+  height: 22px;
+}
+
+.mdc-prd-attachment-name {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.mdc-prd-attachment-desc {
+  font-size: .79rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  flex: 1;
+}
+
+.mdc-prd-attachment-size {
+  font-size: .72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.mdc-prd-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--blue);
+  border: 1px solid rgba(16, 98, 172, .25);
+  border-radius: var(--radius-sm);
+  padding: 7px 14px;
+  text-decoration: none;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.mdc-prd-download-btn:hover {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
+
+
+/* --- Legal disclaimer section --- */
+
+.mdc-prd-disclaimer-section {
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+.mdc-prd-disclaimer {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.mdc-prd-disclaimer-title {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mdc-prd-disclaimer-body {
+  font-size: .78rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.mdc-prd-disclaimer-body p { margin-bottom: 10px; }
+.mdc-prd-disclaimer-body p:last-child { margin-bottom: 0; }
+
+
+/* =============================================================================
+   RESPONSIVE — Press Release Detail
+============================================================================= */
+
+@media (max-width: 1100px) {
+  .mdc-prd-layout { grid-template-columns: 1fr 260px; gap: 40px; }
+  .mdc-prd-attachments-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .mdc-prd-layout { grid-template-columns: 1fr; }
+  .mdc-prd-exec-quote { grid-template-columns: 60px 1fr; gap: 16px; }
+  .mdc-prd-gallery { grid-template-columns: 1fr; }
+  .mdc-prd-gallery-item img { height: 220px; }
+  .mdc-prd-pdf-placeholder { height: 340px; }
+}
+
+@media (max-width: 640px) {
+  .mdc-prd-meta-item { padding: 10px 14px; }
+  .mdc-prd-share-btn { font-size: .75rem; padding: 6px 10px; }
+  .mdc-prd-share-btn--pdf { margin-left: 0; }
+  .mdc-prd-exec-quote { grid-template-columns: 1fr; gap: 14px; }
+  .mdc-prd-exec-avatar { width: 56px; height: 56px; font-size: 1rem; }
+  .mdc-prd-pdf-placeholder { height: 260px; }
+  .mdc-prd-attachments-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* =============================================================================
+   C-93.1 / MDC-016.1 — Social Hub Architecture Refinement (MEDIA-001-P5-R1)
+   Platform switcher removed. Featured posts: image-first, badge+headline+excerpt.
+   Filter bar (Year/Division/Search) above category chips — reuses .mdc-filter-*.
+============================================================================= */
+
+.mdc-social-post-headline {
+  font-family: var(--font-heading);
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--heading);
+  line-height: 1.35;
+  margin: 10px 0 8px;
+  letter-spacing: -.015em;
+}
+
+.mdc-social-post-excerpt {
+  font-size: .86rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Channels: 2-col on small mobile (Phase 6) */
+@media (max-width: 640px) {
+  .mdc-social-channels-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* =============================================================================
+   C-94.1 / MDC-017.1 — Corporate Press Header + View Selector + Article Wrap
+   Press Release Detail Architecture Refinement (MEDIA-001-P6-R1)
+   Replaces standalone metadata bar + share bar. Introduces sticky view selector.
+   Article becomes full-width (sidebar removed). Disclaimer → compact <details>.
+============================================================================= */
+
+/* Corporate Press Header */
+.mdc-prd-corp-header { background: var(--bg); border-bottom: 2px solid var(--navy); padding: 28px 0 0; }
+.mdc-prd-corp-header-inner { display: flex; flex-direction: column; gap: 0; }
+.mdc-prd-corp-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.mdc-prd-corp-logo img { height: 26px; width: auto; }
+.mdc-prd-corp-doc-type { font-size: .7rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--navy); border: 2px solid var(--navy); padding: 4px 10px; border-radius: 3px; }
+.mdc-prd-corp-title { font-family: var(--font-heading); font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 700; color: var(--heading); line-height: 1.3; margin: 0 0 10px; max-width: 820px; }
+.mdc-prd-corp-deck { font-size: .88rem; color: var(--text-muted); line-height: 1.65; margin: 0 0 16px; max-width: 760px; }
+.mdc-prd-corp-meta-row { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+.mdc-prd-corp-meta-item { display: flex; align-items: center; gap: 5px; font-size: .77rem; color: var(--heading); }
+.mdc-prd-corp-meta-label { font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; font-size: .68rem; }
+.mdc-prd-corp-actions { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 0; }
+
+/* Share/action buttons inside corp header */
+.mdc-prd-share-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .75rem; font-weight: 600; color: var(--heading);
+  background: var(--white); border: 1px solid var(--line);
+  padding: 5px 10px; border-radius: var(--radius-sm);
+  text-decoration: none; cursor: pointer;
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+  white-space: nowrap;
+}
+.mdc-prd-share-btn:hover { border-color: var(--navy); color: var(--navy); background: var(--bg); }
+.mdc-prd-share-btn--pdf { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.mdc-prd-share-btn--pdf:hover { background: var(--blue); border-color: var(--blue); color: var(--white); }
+
+/* Status badge */
+.mdc-prd-status-badge { display: inline-flex; align-items: center; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
+.mdc-prd-status-badge--published { background: #dcfce7; color: #166534; }
+.mdc-prd-status-badge--draft { background: #fef9c3; color: #854d0e; }
+
+/* View Selector bar — sticky below fixed nav */
+.mdc-prd-view-selector-bar { background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 62px; z-index: calc(var(--z-header) - 10); }
+.mdc-prd-view-selector { display: flex; }
+.mdc-prd-view-tab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 22px; font-size: .84rem; font-weight: 600;
+  color: var(--text-muted); text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: color var(--t-fast), border-color var(--t-fast);
+  white-space: nowrap;
+}
+.mdc-prd-view-tab:hover,
+.mdc-prd-view-tab--active { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* Article wrapper — full-width centred, no sidebar */
+.mdc-prd-article-wrap { max-width: 820px; margin: 0 auto; }
+.mdc-prd-back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .8rem; font-weight: 600; color: var(--text-muted);
+  text-decoration: none; margin-bottom: 20px;
+  transition: color var(--t-fast);
+}
+.mdc-prd-back-link:hover { color: var(--blue); }
+.mdc-prd-article-byline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-bottom: 28px; font-size: .8rem; color: var(--text-muted); }
+
+/* Compact legal disclaimer */
+.mdc-prd-disclaimer-section { background: var(--bg); }
+.mdc-prd-disclaimer-details { border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--white); }
+.mdc-prd-disclaimer-summary {
+  cursor: pointer; list-style: none; padding: 11px 16px;
+  font-size: .79rem; font-weight: 600; color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px; user-select: none;
+}
+.mdc-prd-disclaimer-summary::-webkit-details-marker { display: none; }
+.mdc-prd-disclaimer-details[open] .mdc-prd-disclaimer-summary { border-bottom: 1px solid var(--line); }
+.mdc-prd-disclaimer-body { padding: 14px 16px; }
+.mdc-prd-disclaimer-body p { font-size: .78rem; color: var(--text-muted); margin-bottom: 8px; line-height: 1.65; }
+.mdc-prd-disclaimer-body p:last-child { margin-bottom: 0; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .mdc-prd-view-tab { padding: 12px 18px; }
+}
+@media (max-width: 640px) {
+  .mdc-prd-corp-top { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .mdc-prd-corp-meta-row { gap: 5px 12px; }
+  .mdc-prd-corp-title { font-size: 1.05rem; }
+  .mdc-prd-view-tab { padding: 11px 14px; font-size: .78rem; gap: 6px; }
+  .mdc-prd-article-wrap { max-width: 100%; }
+}

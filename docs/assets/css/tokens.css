@@ -1,0 +1,160 @@
+/* =============================================================================
+   DESIGN TOKENS
+   Source of truth : assets/html/source/homepage-approved-v1.html
+   Catalogue        : docs/16_Design_Token_Catalogue.md
+   Visual system    : docs/07_Visual_Design_System.md
+
+   All values extracted directly. Nothing invented.
+   Do not add values here that do not exist in the approved design.
+============================================================================= */
+
+:root {
+
+  /* -------------------------------------------------------------------------
+     BRAND COLORS
+  ------------------------------------------------------------------------- */
+  --blue:       #1062AC;   /* primary action / links / icons */
+  --blue-dark:  #0c4f8c;   /* primary hover state */
+  --indigo:     #3E4194;   /* secondary accent / gradient pair */
+  --red:        #EB3236;   /* accent / eyebrow bar / red CTA */
+  --red-dark:   #cc2a2e;   /* red hover state */
+  --soft-blue:  #658CB8;   /* muted icon / tertiary */
+  --light-blue: #B7D0EC;   /* accent on dark backgrounds */
+
+  /* -------------------------------------------------------------------------
+     SURFACE COLORS
+  ------------------------------------------------------------------------- */
+  --bg:    #F7FAF9;   /* page background */
+  --white: #ffffff;   /* card / button / overlay */
+  --navy:  #0c1730;   /* dark section bg: footer / hero / careers / showreel */
+
+  /* -------------------------------------------------------------------------
+     TEXT COLORS
+  ------------------------------------------------------------------------- */
+  --text:  #1E2B4A;   /* primary body text */
+  --muted: #5a6b8c;   /* secondary / caption text */
+
+  /* -------------------------------------------------------------------------
+     BORDER
+  ------------------------------------------------------------------------- */
+  --line: #e3eaf2;   /* card borders / section dividers */
+
+  /* -------------------------------------------------------------------------
+     ON-DARK TEXT SCALE
+     Use exclusively inside dark / navy / gradient sections.
+  ------------------------------------------------------------------------- */
+  --on-dark-hero-subtitle:  #dbe8f6;
+  --on-dark-hero-kicker:    #bcd6f1;
+  --on-dark-hero-line1:     #d6e6f6;
+  --on-dark-marquee-label:  #cfe0f3;
+  --on-dark-reel-body:      #c4d4ea;
+  --on-dark-reel-label:     #9fb6d6;
+  --on-dark-careers-p:      #d4e2f3;
+  --on-dark-contact-p:      #dbe7f6;
+  --on-dark-footer-brand:   #94a7c4;
+  --on-dark-footer-nav:     #9fb2cf;
+  --on-dark-footer-copy:    #7f93b3;
+  --on-dark-footer-general: #aebfd6;
+
+  /* -------------------------------------------------------------------------
+     SECTION BACKGROUND GRADIENTS
+  ------------------------------------------------------------------------- */
+  --grad-marquee:       linear-gradient(100deg, var(--blue), var(--indigo));
+  --grad-divisions:     linear-gradient(180deg, #fff, #eef4fb 60%);
+  --grad-showreel:      linear-gradient(160deg, var(--navy), #13264c);
+  --grad-manufacturing: linear-gradient(180deg, #eef4fb, #fff);
+  --grad-quality:       linear-gradient(125deg, var(--blue) 0%, var(--blue-dark) 55%, var(--indigo) 100%);
+  --grad-media:         linear-gradient(180deg, #fff, #eef4fb);
+  --grad-contact:       linear-gradient(115deg, var(--blue), var(--indigo));
+  --grad-map-panel:     linear-gradient(160deg, #eaf3fc, #dcebf8);
+  --grad-div-img-bg:    linear-gradient(135deg, var(--blue), var(--indigo));
+  --grad-mfg-img-bg:    linear-gradient(135deg, var(--soft-blue), var(--blue));
+  --grad-cat-ico:       linear-gradient(135deg, #e8f1fb, #dceaf8);
+  --grad-cert-ico:      linear-gradient(135deg, #eaf2fb, #d4e6f8);
+  --grad-mfg-check:     linear-gradient(135deg, #1062AC, #1A85E3);
+
+  /* -------------------------------------------------------------------------
+     SHADOWS
+  ------------------------------------------------------------------------- */
+  --shadow-sm:            0 2px 10px rgba(16, 98, 172, .06);
+  --shadow:               0 12px 34px rgba(15, 27, 56, .10);
+  --shadow-lg:            0 26px 60px rgba(15, 27, 56, .18);
+  --shadow-btn-primary:   0 10px 24px rgba(16, 98, 172, .3);
+  --shadow-btn-red:       0 10px 24px rgba(235, 50, 54, .28);
+  --shadow-play:          0 12px 40px rgba(0, 0, 0, .35);
+  --shadow-div-badge:     0 6px 14px rgba(13, 49, 94, .35);
+  --shadow-cert:          0 14px 30px rgba(8, 30, 62, .28);
+  --shadow-cert-hover:    0 24px 46px rgba(8, 30, 62, .4);
+  --shadow-cert-ico:      0 4px 12px rgba(16, 98, 172, .18);
+  --shadow-header:        0 4px 22px rgba(15, 27, 56, .08);
+  --shadow-nav-mobile:    -20px 0 50px rgba(15, 27, 56, .2);
+  --shadow-search-focus:  0 14px 36px rgba(16, 98, 172, .18);
+
+  /* -------------------------------------------------------------------------
+     BORDER RADIUS
+  ------------------------------------------------------------------------- */
+  --radius:      16px;   /* primary card token */
+  --radius-xs:   2px;
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   9px;
+  --radius-xl:   10px;
+  --radius-2xl:  11px;
+  --radius-3xl:  12px;
+  --radius-4xl:  14px;
+  --radius-5xl:  16px;
+  --radius-6xl:  20px;
+  --radius-pill: 30px;
+  --radius-full: 50%;
+
+  /* -------------------------------------------------------------------------
+     CONTAINERS
+  ------------------------------------------------------------------------- */
+  --maxw:                    1220px;
+  --container-hero-copy:     760px;
+  --container-section-head:  680px;
+  --container-quality-quote: 820px;
+  --container-careers:       560px;
+
+  /* -------------------------------------------------------------------------
+     TYPOGRAPHY
+  ------------------------------------------------------------------------- */
+  --font-heading: 'Sora', sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  /* -------------------------------------------------------------------------
+     TRANSITIONS
+     Named by speed. Apply to any property as needed.
+  ------------------------------------------------------------------------- */
+  --t-instant:   .1s linear;
+  --t-fast:      .2s ease;
+  --t-normal:    .25s ease;
+  --t-medium:    .3s ease;
+  --t-emphasis:  .35s ease;
+  --t-slow:      .4s cubic-bezier(.2, .7, .2, 1);
+  --t-reveal:    .8s cubic-bezier(.2, .7, .2, 1);
+  --t-reveal-sm: .7s cubic-bezier(.2, .7, .2, 1);
+  --t-hero:      .9s cubic-bezier(.2, .7, .2, 1);
+  --ease-spring: cubic-bezier(.2, .7, .2, 1);
+  --ease-ping:   cubic-bezier(0, 0, .2, 1);
+
+  /* -------------------------------------------------------------------------
+     Z-INDEX LAYER SYSTEM
+     Ordered ascending — higher value = higher in the visual stack.
+     All page-level z-index values must reference a named layer token.
+     Component-internal z-indexes (card badges, play buttons, iframe
+     overlays) operate within local position:relative stacking contexts
+     and may use raw integers (1–10) directly in component CSS.
+  ------------------------------------------------------------------------- */
+  --z-base:          0;   /* Default document flow                          */
+  --z-content:       1;   /* Raised elements within component contexts       */
+  --z-dropdown:    100;   /* Dropdowns, popovers, select menus               */
+  --z-sticky:      200;   /* Sticky page elements (sidebar, table headers)   */
+  --z-header:      300;   /* Fixed site header (stacking context)            */
+  --z-nav-backdrop: 290;  /* Mobile nav backdrop — below header stacking ctx */
+  --z-nav-drawer:   320;  /* Mobile nav drawer — within header ctx (>backdrop) */
+  --z-nav-btn:      330;  /* Mobile hamburger button — above open drawer     */
+  --z-modal:        400;  /* Modal dialogs                                   */
+  --z-toast:        500;  /* Toast / snackbar notifications                  */
+  --z-tooltip:      600;  /* Tooltips and pointer-attached overlays          */
+}

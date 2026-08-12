@@ -1,0 +1,14 @@
+{
+  "id": "business",
+  "land":          "#EFF3F8",
+  "landHover":     "#D8E8F5",
+  "water":         "#C5DCF0",
+  "border":        "#FFFFFF",
+  "borderWidth":   0.5,
+  "markerFill":    "#0D57A2",
+  "markerStroke":  "#FFFFFF",
+  "markerPulse":   "#42A5F5",
+  "clusterFill":   "#0D57A2",
+  "clusterStroke": "#FFFFFF",
+  "clusterText":   "#FFFFFF"
+}

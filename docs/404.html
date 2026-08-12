@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script>(function(){if(sessionStorage.getItem("oktoberry_preview_authenticated")!=="1"){document.documentElement.style.visibility="hidden";try{sessionStorage.setItem("oktoberry_preview_redirect",location.href);}catch(e){}}})();</script>
+  <link rel="stylesheet" href="/assets/css/preview-gate.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+  ============================================================
+  PAGE: 404 Not Found — Premium Branded Experience
+  URL pattern : Any URL not matching a WordPress route
+  WordPress template: 404.php  ← This HTML file is the canonical design.
+  Concept: "Looks like this page dissolved before reaching you."
+  Visual: 3D pharmaceutical capsule (blue "404" cap + white/red Laborate cap)
+          split open with white medicine granules spilling.
+  Prompt: 404-001-P1-R2
+
+  FUTURE WORDPRESS IMPLEMENTATION NOTES:
+  ─────────────────────────────────────────────────────────────
+  • This file replaces the existing placeholder 404.php template.
+  • All text marked [CMS:] is configurable through ACF Theme Options
+    (Theme Settings → 404 Page Options).
+  • Capsule illustration: [CMS: 404_capsule_image] — ACF Image field.
+    Fallback: /images/404-capsule.png (bundled with theme).
+  • CTA labels and URLs: [CMS: 404_cta_primary_label, 404_cta_primary_url,
+    404_cta_secondary_label, 404_cta_secondary_url].
+  • Utility links: [CMS: 404_util_links] — ACF Repeater.
+  ─────────────────────────────────────────────────────────────
+  robots: noindex, nofollow — 404 pages must not be indexed.
+  ============================================================
+  -->
+
+  <meta name="robots" content="noindex, nofollow">
+  <!-- [CMS: page title supplied by WordPress: 'Page Not Found — Laborate Pharmaceuticals India Ltd.'] -->
+  <title>Page Not Found — Laborate Pharmaceuticals India Ltd.</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <!-- 404 page styles — nf-* namespace -->
+  <link rel="stylesheet" href="/assets/css/components/404-page.css">
+
+</head>
+
+<body>
+
+  <!-- Skip navigation -->
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+
+  <!-- Scroll-progress bar -->
+  <div id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-hidden="true"></div>
+
+  <!-- Site header -->
+  <!-- [CMS: get_template_part('template-parts/global/navbar')] -->
+  <header id="header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="logo" href="index.html" aria-label="Laborate Pharmaceuticals — Home">
+        <!-- [CMS: get_custom_logo()] -->
+        <img
+          src="https://laborate.com/images/logo.png"
+          alt="Laborate Pharmaceuticals India Ltd."
+          height="34"
+          width="auto"
+        >
+      </a>
+      <!-- [CMS: wp_nav_menu(['theme_location' => 'primary-nav'])] -->
+      <ul class="nav-links" id="navLinks" role="list">
+
+        <li class="nav-meta">
+          <a class="logo" href="index.html" aria-label="Laborate Pharmaceuticals — Home" tabindex="-1">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="28" width="auto">
+          </a>
+          <button class="nav-close" id="navClose" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </li>
+
+        <li class="has-children">
+          <a href="about.html">About Us</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand About Us submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="about/why-laborate.html">Why Laborate</a></li>
+            <li><a href="about/leadership.html">Leadership</a></li>
+            <li><a href="about/awards.html">Awards &amp; Recognition</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="brands.html">Brands</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Brands submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="brands/elite.html">Elite</a></li>
+            <li><a href="brands/aqualab.html">Aqualab</a></li>
+            <li><a href="brands/labolia-beaute.html">Labolia Beauté</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="products.html">Products</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Products submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="products/catalogue.html">Product Catalogue</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="manufacturing.html">Manufacturing</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Manufacturing submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="manufacturing/facilities.html">Facilities</a></li>
+          </ul>
+        </li>
+
+        <li><a href="quality.html">Quality</a></li>
+
+        <li class="has-children">
+          <a href="global.html">Global Presence</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Global Presence submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="global/map.html">Global Map</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="media.html">Media</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Media submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="media/press-releases.html">Press Releases</a></li>
+            <li><a href="media/news.html">News</a></li>
+            <li><a href="media/events.html">Events</a></li>
+            <li><a href="media/social.html">Social</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="business.html">Business</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Business submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="business/contract-manufacturing.html">Contract Manufacturing</a></li>
+            <li><a href="business/distributor.html">Distributor Partnerships</a></li>
+          </ul>
+        </li>
+
+        <li class="has-children">
+          <a href="careers.html">Careers</a>
+          <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Expand Careers submenu"><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-sub" role="list">
+            <li><a href="careers/jobs.html">Open Positions</a></li>
+          </ul>
+        </li>
+
+        <li><a href="contact.html">Contact Us</a></li>
+
+      </ul>
+      <div class="nav-right">
+        <a href="search.html" class="nav-search" aria-label="Search" data-nav-search>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true" tabindex="-1"></div>
+
+  <main id="main-content">
+
+    <!--
+    ============================================================
+    S1: Illustration Stage — Capsule Visual + CTAs (page hero)
+    Primary branded composition. Capsule illustration is the hero focal point.
+    [CMS: 404_headline, 404_capsule_image, 404_cta_primary_*, 404_cta_secondary_*, 404_util_links]
+    ============================================================
+    -->
+    <section class="nf-stage" aria-labelledby="nf-page-heading">
+
+      <!-- Capsule illustration — primary visual -->
+      <!-- [CMS: 404_capsule_image — ACF Image. Fallback: 404-capsule.png bundled with theme.
+           To replace: Appearance → Theme Settings → 404 Page Options → Capsule Image.
+           Recommended size: 1360 × 680px @2x (680 × 340px display). PNG with transparent/white bg.] -->
+      <figure class="nf-capsule" role="img" aria-label="A pharmaceutical capsule split open with the number 404 on one half and the Laborate logo on the other, with medicine granules spilling out">
+        <img
+          src="/assets/images/404-capsule.png"
+          alt="404 capsule — a blue medicine capsule labelled '404' split open beside a white capsule bearing the Laborate logo, with white granules spilling between them"
+          width="680"
+          height="340"
+          loading="eager"
+          decoding="async"
+        >
+      </figure>
+
+      <!-- [CMS: 404_headline — ACF Text field] -->
+      <h1 class="nf-headline" id="nf-page-heading">Oops<span class="nf-accent">.</span></h1>
+
+      <!-- Copy block — tagline + body -->
+      <!-- [CMS: 404_tagline, 404_body] -->
+      <p class="nf-tagline">
+        Looks like this page <span class="nf-accent">dissolved</span> before reaching you!
+      </p>
+
+      <p class="nf-body">
+        The page you're looking for may have been moved, removed, or the link may be incorrect.
+      </p>
+
+      <!-- CTA buttons -->
+      <!-- [CMS: 404_cta_primary_label / 404_cta_primary_url] -->
+      <!-- [CMS: 404_cta_secondary_label / 404_cta_secondary_url] -->
+      <div class="nf-actions" role="group" aria-label="Navigation options">
+        <a href="products/catalogue.html" class="btn btn-primary">
+          Browse Products
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="index.html" class="btn nf-btn-outline">
+          Return to Homepage
+        </a>
+      </div>
+
+      <!-- Utility links -->
+      <!-- [CMS: 404_util_links — ACF Repeater (max 4 items).
+           Fields: util_icon (Select: search|phone|link|mail), util_label (Text), util_url (URL).] -->
+      <nav class="nf-utils" aria-label="Additional navigation options">
+
+        <a href="products/catalogue.html" class="nf-util-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m21 21-4.3-4.3"/>
+          </svg>
+          Search Website
+        </a>
+
+        <span class="nf-util-sep" aria-hidden="true"></span>
+
+        <a href="contact.html" class="nf-util-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true" focusable="false">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.4 2 2 0 0 1 3.54 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 5.83 5.83l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Contact Us
+        </a>
+
+        <span class="nf-util-sep" aria-hidden="true"></span>
+
+        <!-- [CMS: Report Broken Link — future implementation may use Fluent Forms or wp-admin submission.
+             For now links to contact form with pre-filled subject parameter.] -->
+        <a href="contact.html?subject=Broken+Link+Report" class="nf-util-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true" focusable="false">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          Report Broken Link
+        </a>
+
+      </nav><!-- /.nf-utils -->
+
+    </section><!-- /.nf-stage -->
+
+
+    <!--
+    ============================================================
+    S2: Need Help — Contact Band (C-44 compact, reused exactly)
+    [CMS: contact_band_heading, contact_band_body, contact_band_cta_label, contact_band_cta_url]
+    No redesign — identical to all other inner page contact bands.
+    ============================================================
+    -->
+    <section class="contact-band" aria-labelledby="nf-contact-heading">
+      <div class="wrap contact-inner reveal">
+        <div class="contact-left">
+          <div class="c-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div>
+            <!-- [CMS: 404_assist_heading] -->
+            <h3 id="nf-contact-heading">Still can't find what you're looking for?</h3>
+            <!-- [CMS: 404_assist_body] -->
+            <p>Our team is happy to help you find the right product, document, or contact. Reach us directly and we'll respond within two business days.</p>
+          </div>
+        </div>
+        <!-- [CMS: 404_assist_cta_label, 404_assist_cta_url] -->
+        <a href="contact.html" class="btn btn-light">Contact Our Team <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section><!-- /.contact-band -->
+
+
+  </main><!-- /#main-content -->
+
+
+  <!--
+  ============================================================
+  COMPONENT: Footer (C-46) — unchanged from site standard
+  [CMS: get_template_part('template-parts/global/footer')]
+  ============================================================
+  -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+
+        <div class="foot-brand">
+          <a href="index.html" aria-label="Laborate Pharmaceuticals — Home">
+            <img src="https://laborate.com/images/logo.png" alt="Laborate Pharmaceuticals India Ltd." height="32" loading="lazy">
+          </a>
+          <p>A global pharmaceutical manufacturing and healthcare solutions company, delivering quality medicines from research to patients worldwide since 1985.</p>
+          <div class="foot-contact">
+            <span>E-11, Industrial Area, Panipat-132103, India</span>
+            <a href="mailto:info@laborate.com">info@laborate.com</a>
+            <a href="tel:+911803508200">+91-180-3508200</a>
+          </div>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/laborate-pharmaceuticals-india-limited/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4zM8 8h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.74 1.85-2.74 3.77V24H8z" /></svg></a>
+            <a href="https://www.facebook.com/laborate.india.ltd/" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.75-1.6 1.5V12h2.7l-.43 2.9h-2.3v7A10 10 0 0 0 22 12z" /></svg></a>
+            <a href="https://www.instagram.com/laborate.india.ltd/?hl=en" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.3.07 1.69.07 4.9s0 3.6-.07 4.9c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.3.06-1.69.07-4.9.07s-3.6 0-4.9-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.8 2.2 12 2.2zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38zm6.97-11.4a1.58 1.58 0 1 0 0 3.15 1.58 1.58 0 0 0 0-3.15z" /></svg></a>
+          </div>
+        </div>
+
+        <div class="foot-col">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="about.html">Company Overview</a></li>
+            <li><a href="about/leadership.html">Leadership</a></li>
+            <li><a href="about/awards.html">Awards &amp; Recognition</a></li>
+            <li><a href="about/why-laborate.html">Why Laborate</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Brands</h4>
+          <ul>
+            <li><a href="brands.html">Elite</a></li>
+            <li><a href="brands.html">Aqualab</a></li>
+            <li><a href="brands.html">OTC Health</a></li>
+            <li><a href="business/contract-manufacturing.html">CDMO</a></li>
+            <li><a href="global.html">Exports</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products/catalogue.html">Product Catalogue</a></li>
+            <li><a href="products.html">Products Overview</a></li>
+            <li><a href="products/catalogue.html">Search Products</a></li>
+            <li><a href="contact.html?type=product#ctc-form">Product Enquiry</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="manufacturing.html">Manufacturing</a></li>
+            <li><a href="quality.html">Quality</a></li>
+            <li><a href="global.html">Global</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="resources.html">Resources</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /.foot-top -->
+
+      <div class="foot-bottom">
+        <p>&copy; 2026 Laborate Pharmaceuticals India Ltd. All rights reserved.</p>
+        <div class="legal">
+          <a href="legal/privacy-policy.html">Privacy Policy</a>
+          <a href="legal/terms-and-conditions.html">Terms &amp; Conditions</a>
+          <a href="legal/cookie-policy.html">Cookie Policy</a>
+          <a href="legal/disclaimer.html">Disclaimer</a>
+          <a href="legal/accessibility-statement.html">Accessibility</a>
+          <a href="legal/sitemap.html">Sitemap</a>
+        </div>
+        <div class="vendor-credit">
+          Powered by
+          <a href="https://www.oktoberry.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 116 167" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oktoberry">
+              <g id="berry" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <g><path d="m531.21 275.21c25.098 14.923 256.99 142.47 322.2 181.67-26.355 13.024-121.46 67.697-170.76 93.167-30.819-48.883-158.28-256.83-170.65-275.59 13.023 0.15475 12.286 0.42988 19.208 0.75503z" fill="#0c4269" /><path d="m170.65 462.99c58.347 27.536 135.66 69.198 170.68 87.195-4.2644 6.11-165.82 243.55-170.67 249.83-0.0262-9.9814-0.0508-329.71-0.0119-337.03z" fill="#1988d7" /><path d="m853.39 456.88c0.52027 47.958 0.35951 305.13-0.0146 343.12-4.0215-5.8717-170.71-249.96-170.71-249.96 42.689-22.387 138.65-77.425 170.73-93.159z" fill="#062337" /><path d="m512.05 1016.9c0.0744-11.808-0.5955-115.5-0.0492-172.85 60.841-7.7268 329.53-42.472 341.38-44.039 0 0-336.25 213.97-341.33 216.88z" /><path d="m512.01 844.04c-0.14148 57.245 0.16143 163.77 0.0427 172.86-46.625-25.866-303.75-194.75-341.4-216.89 54.722 7.007 221.54 21.896 341.35 44.033z" fill="#0a3452" /><path d="m170.67 462.99c71.769-44.473 208.19-126.17 321.24-187.35 5.8745-1.1628 13.439-1.0717 20.092-1.1948-54.813 86.485-158.39 256.45-170.67 275.71" fill="#5bafec" /></g>
+                <path d="m852.5 53.3c-0.45794-0.7872-0.15035-1.3261 0.68472-2.0475 0.24038 0.56464 0.0914 1.3908-0.68472 2.0475z" fill="#224f38" />
+                <g><path d="m512 274.45c6.4257 6.6504 167.58 270.74 170.66 275.58-3.6502-0.0455-339.39 0.14376-341.33 0.13047 1.0021-1.4787 164.27-267.37 170.66-275.71z" fill="#1365a0" /><path d="m341.33 550.17c3.0641 0.0176 323.33-0.41843 341.34-0.13493-6.3066 10.5-170.22 293.28-170.67 294.02-0.71653-1.1746-162.38-278.35-170.67-293.89z" fill="#0b3d60" /><path d="m341.33 550.17c6.1989 10.382 149.02 256.32 170.67 293.87-58.996-10.129-317.82-40.079-341.33-44.044 4.3815-5.9158 163.89-240.5 170.67-249.83z" fill="#115c92" /><path d="m512 844.05c2.2022-4.7744 167.81-289.45 170.67-294.02 4.815 7.0103 165.28 241.73 170.71 249.98-13.144 1.8281-315 41.036-341.38 44.042z" fill="#03111b" /></g>
+                <path d="m374.39 387.55c-0.917-0.23787-1.4729-0.82087-2.0288-1.4039 0.24138-0.23002 0.4828-0.46009 0.72416-0.6901 0.55524 0.58294 1.1106 1.1659 1.3047 2.094z" fill="#cda9d7" />
+              </g>
+              <g id="leaves" transform="matrix(.16557 0 0 .16557 -28.251 -1.4766)">
+                <path d="m542.13 274.88c-6.7035 0.68517-17.083 0.23972-24.825-0.32194 48.528-83.188 208.91-166.17 330.83-221.53-31.735 150.69-165.75 212.4-306 221.85z" fill="#224f38" />
+                <path d="m517.3 274.55c-2.8104-0.0709-3.6594-0.094-6.5029-0.0649 23.129-168.51 180.79-245.37 338.08-221.15-13.701 6.8053-223.19 91.913-331.57 221.21z" fill="#83b149" />
+                <path d="m512 274.45c-3.2163 0.0569-7.8881 0.19224-10.931 0.2638-27.372-115.65-76.282-179.9-191.71-265.8 45.036 7.9968 89.138 20.814 125.5 49.995 60.193 48.767 98.875 138.97 77.137 215.54z" fill="#264f3b" />
+                <path d="m309.38 8.9225c14.552 10.351 28.399 20.55 42.064 30.989 63.487 48.502 125.69 124.46 149.64 234.81-1.735 0.0622-2.5166 0.11893-4.344 0.25622-25.293-59.867-56.832-96.438-80.395-111.1-27.886-17.346-55.033-28.8-76.595-54.481-34.588-41.195-35.595-94.03-30.364-100.48z" fill="#a3ca46" />
+              </g>
+            </svg>
+            Oktoberry Systems
+          </a>
+        </div>
+      </div><!-- /.foot-bottom -->
+
+    </div><!-- /.wrap -->
+  </footer>
+
+  <!-- ES module entry point -->
+  <script type="module" src="/assets/js/app.js"></script>
+
+<script src="/assets/js/preview-gate.js"></script>
+</body>
+</html>

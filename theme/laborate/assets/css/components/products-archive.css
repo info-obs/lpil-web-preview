@@ -1,0 +1,538 @@
+/* =============================================================================
+   PRODUCTS ARCHIVE — CSS
+   New components for the Product Catalogue (/products/) page.
+
+   Component Registry:
+     C-22 ext  Category Filter Chip (active state + URL binding + keyboard)
+     C-52      Product Card (CMP-101)
+     C-53      Product Grid (CMP-102)
+     C-54      Pagination
+     C-58      Empty State
+
+   C-41 ext (taxonomy tag pill) is defined here and shared with products-detail.css.
+
+   Existing reused (unchanged):
+     C-12  .eyebrow
+     C-13  .section-head
+     C-20  .learn
+     C-23  .btn .btn-primary .btn-light
+     C-44  .contact-band
+     C-50  .img-wrap
+     .prod-search  (extended via form wrapper — no CSS change needed)
+     .cat, .cat-ico, .cat-grid  (extended via .cat--active modifier)
+
+   Source of visual truth: homepage-approved-v1.html + design tokens.
+   Never introduce new color values — use only existing tokens.
+============================================================================= */
+
+/* =============================================================================
+   C-41 EXTENDED — TAXONOMY TAG PILL
+   Extends the existing .tag (which is scoped to .media-body in cards.css).
+   New standalone + colour variant for use in product cards and detail pages.
+
+   .tag--pill  — pill shape with background (for overlaying on images, headers)
+   .tag--blue  — blue text variant (taxonomy, division, dosage form)
+   Colour: rgba(16, 98, 172, .1) bg + var(--blue) text — reuses existing token.
+============================================================================= */
+
+/* Standalone tag base — not scoped to media-body */
+.tag {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.tag--blue {
+  color: var(--blue);
+}
+
+/* Pill shape — adds background and padding */
+.tag--pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(16, 98, 172, .1);
+  color: var(--blue);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* White pill variant — for overlaying on dark/image backgrounds */
+.tag--pill-white {
+  background: rgba(255, 255, 255, .92);
+  color: var(--blue);
+}
+
+/* =============================================================================
+   PRODUCTS ARCHIVE SECTION
+============================================================================= */
+
+.products-archive-section {
+  background: var(--bg);
+}
+
+/* =============================================================================
+   C-22 EXTENDED — CATEGORY FILTER ACTIVE STATE
+   Persistent active state (matches the hover visual from homepage cards.css).
+   On archive page, .cat items are <a> links; styles apply to either <a> or <div>.
+
+   .cat-filter  — modifier on .cat-grid for the 9-chip archive filter bar
+   .cat--active — modifier on individual .cat for the selected dosage form
+   .cat--all    — the "All Products" chip (first chip; always has a wider icon)
+============================================================================= */
+
+/* Archive filter grid — 9 columns (All + 8 dosage forms) */
+.cat-filter {
+  grid-template-columns: repeat(9, 1fr);
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+/* Remove default link styles from <a.cat> chips */
+.cat-filter a.cat {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Active chip — persistent version of the .cat:hover state */
+.cat--active {
+  border-color: var(--light-blue);
+  box-shadow: var(--shadow);
+}
+
+.cat--active .cat-ico {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.cat--active span {
+  color: var(--blue);
+}
+
+/* Focus-visible ring for keyboard users */
+a.cat:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   ARCHIVE META BAR — result count + sort
+============================================================================= */
+
+.archive-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 28px 0 22px;
+}
+
+.result-count {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.result-count strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* =============================================================================
+   C-53 — PRODUCT GRID (CMP-102)
+   4 columns desktop → 3 tablet → 2 mobile → 1 small mobile
+   Uses same gap/stagger pattern as .div-grid and .media-grid.
+============================================================================= */
+
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* =============================================================================
+   C-52 — PRODUCT CARD (CMP-101)
+   Visual design derived from .div-card (divisions) and .media-card (media).
+   Full card is clickable via stretched-link pattern on .learn::after.
+
+   States:
+     PROD-001  Default
+     PROD-002  Hover (translateY -8px, shadow-lg, image scale 1.05)
+     PROD-003  Focus (keyboard)
+     PROD-004  Active (mousedown)
+
+   Behaviors: BHV-HOV-002 (elevation), BHV-HOV-003 (image zoom)
+============================================================================= */
+
+.prod-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: transform .4s cubic-bezier(.2, .7, .2, 1), box-shadow .4s;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* stretched-link anchor */
+}
+
+.prod-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Red top-bar accent on hover — consistent with .div-card pattern */
+.prod-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s;
+  z-index: 4;
+}
+
+.prod-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* --- Card image area --- */
+.prod-card-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--grad-mfg-img-bg);
+}
+
+.prod-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s;
+}
+
+.prod-card:hover .prod-card-img img {
+  transform: scale(1.05);
+}
+
+/* Division tag pill overlaid on image — bottom-left */
+.prod-card-img .tag--pill {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+/* --- Card body --- */
+.prod-card-body {
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Dosage form + strength meta row */
+.prod-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.prod-dosage-form {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* Bullet separator between dosage form and strength */
+.prod-card-meta .sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.prod-strength-meta {
+  font-size: .78rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Product name — h3 inside card body */
+.prod-card-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+
+/* Short product description */
+.prod-card-excerpt {
+  font-size: .82rem;
+  color: var(--muted);
+  flex: 1;
+  margin-bottom: 16px;
+  line-height: 1.55;
+
+  /* Two-line clamp to maintain card height consistency */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* "View Product →" link (C-20 reused) — stretched link covers the card */
+.prod-card .learn {
+  margin-top: auto;
+}
+
+/* Stretched link — .learn::after covers the entire .prod-card */
+.prod-card .learn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: var(--radius);
+}
+
+/* Arrow moves on card hover (not just link hover) */
+.prod-card:hover .learn svg {
+  transform: translateX(4px);
+}
+
+/* Focus ring for keyboard users — on the .learn link */
+.prod-card .learn:focus-visible {
+  outline: none;
+}
+
+.prod-card .learn:focus-visible::after {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   C-58 — EMPTY STATE
+   Used for: no search results, no products in category, no products available.
+   Hidden by default; shown via [hidden] attribute removal or JS.
+   Behaviors: BHV-SRH-003, BHV-ANI-001
+============================================================================= */
+
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.empty-state__icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  border-radius: var(--radius);
+  background: var(--grad-cat-ico);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+}
+
+.empty-state__icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.empty-state__title {
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+}
+
+.empty-state__body {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+
+/* =============================================================================
+   C-54 — PAGINATION
+   Used on: All archive pages (products, careers, media, resources).
+   Semantic: <nav aria-label="Pagination"><ol class="pagination">
+
+   States:
+   - Default item: outlined number
+   - Active item: .pagination__item--active — blue bg, white text
+   - Prev/Next: icon buttons with labels
+   - Ellipsis: muted separator
+============================================================================= */
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+
+/* Base page number / button */
+.pagination__num,
+.pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius-xl);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+/* Hover state */
+.pagination__num:hover,
+.pagination__btn:hover {
+  background: var(--bg);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* Active / current page */
+.pagination__item--active .pagination__num,
+span.pagination__num[aria-current="page"] {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+  box-shadow: var(--shadow-btn-primary);
+  cursor: default;
+}
+
+/* Prev / Next arrows — slightly wider */
+.pagination__btn {
+  gap: 6px;
+  font-size: .8rem;
+  letter-spacing: .02em;
+}
+
+/* Disabled prev/next */
+.pagination__item--prev.pagination__item--disabled .pagination__btn,
+.pagination__item--next.pagination__item--disabled .pagination__btn {
+  opacity: .4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Ellipsis separator */
+.pagination__item--ellipsis span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+/* Focus ring */
+.pagination__num:focus-visible,
+.pagination__btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   RESPONSIVE
+============================================================================= */
+
+/* Tablet landscape (1080px) */
+@media (max-width: 1080px) {
+  .cat-filter { grid-template-columns: repeat(5, 1fr); }
+  .prod-grid  { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Tablet portrait (880px) */
+@media (max-width: 880px) {
+  .cat-filter { grid-template-columns: repeat(4, 1fr); }
+  .prod-grid  { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobile (640px) */
+@media (max-width: 640px) {
+  .cat-filter { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .prod-grid  { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .archive-meta { margin: 20px 0 16px; }
+
+  .pagination__num,
+  .pagination__btn { min-width: 36px; height: 36px; font-size: .78rem; }
+}
+
+/* Small mobile (420px) */
+@media (max-width: 420px) {
+  .cat-filter { grid-template-columns: repeat(2, 1fr); }
+  .prod-grid  { grid-template-columns: 1fr; }
+
+  /* Hide ellipsis page numbers on small screens — show only prev/current/next */
+  .pagination__item:not(.pagination__item--active):not(.pagination__item--prev):not(.pagination__item--next):not(.pagination__item--ellipsis) {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   TOOLBAR VISIBILITY ARCHITECTURE — MR-003
+   data-show-toolbar="false" hides the category filter bar.
+   WordPress exposes this as a theme option (products_show_filter_toolbar).
+   Same pattern applied in manufacturing-plants.css and careers-jobs.css.
+============================================================================= */
+
+.products-archive-section[data-show-toolbar="false"] .cat-filter {
+  display: none;
+}
+
+/* =============================================================================
+   REDUCED MOTION
+============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .prod-card,
+  .prod-card::before,
+  .prod-card-img img,
+  .prod-card .learn svg {
+    transition: none;
+    animation: none;
+  }
+
+  .prod-card:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+  }
+}

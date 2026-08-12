@@ -1,0 +1,755 @@
+/* =============================================================================
+   BRANDS PAGE — brands-page.css  (BRAND-001-P1-R3)
+   Page:     /brands/
+   File:     assets/html/generated/brands.html
+   Sections: Hero (C-06 compact-sm) · Stats Strip (C-38) · Brand Ecosystem (C-50) ·
+             Parent Brands (C-106) · Product Brands (C-109) ·
+             Therapeutic Categories (C-107) · Partner Band ·
+             Brand Resources (C-110) · Contact Band (C-44)
+
+   Brand hierarchy: Laborate (corporate) → Parent Brands → Sub-brands → Products
+   .brd-card--featured retained in CSS for future CMS use (not used in current HTML).
+
+   Class prefix: brd-  (Brands page classes)
+   Reused global: .section, .wrap, .eyebrow, .btn, .reveal, .section-head,
+                  .about-grid, .about-media, .about-text, .img-wrap, .badge,
+                  .abt-stats-strip, .abt-stats, .abt-stat, .abt-stat-icon,
+                  .contact-band, .contact-inner (from main.css)
+   Brand accent colour injected via inline CSS var: --brd-accent
+============================================================================= */
+
+/* ── 1. Hero ─────────────────────────────────────────────────────────────── */
+
+/* Hero has no CTA buttons — the floating stats strip is the natural visual
+   transition. Extra bottom margin on the tagline creates breathing space. */
+[data-section="brd-hero"] .sub {
+  margin-bottom: 56px;
+}
+
+/* ── 2. Stats strip — enterprise dashboard visual pass ────────────────────── */
+/* about-page.css (via main.css) sets margin-top: -52px globally. Without hero
+   CTAs, the full overlap is preserved so the glass card floats cleanly below. */
+[data-section="brd-stats"] {
+  margin-top: -52px; /* full overlap — hero has no CTA buttons to protect */
+}
+
+/* Visual enhancement: larger icons, stronger values, more vertical breathing */
+[data-section="brd-stats"] .abt-stat {
+  padding: 28px 16px;
+}
+
+[data-section="brd-stats"] .abt-stat-icon {
+  width: 37px;
+  height: 37px;
+  margin-bottom: 14px;
+}
+
+[data-section="brd-stats"] .abt-stat-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+[data-section="brd-stats"] .abt-stat-num {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  margin-bottom: 6px;
+}
+
+[data-section="brd-stats"] .abt-stat-label {
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+/* Mobile: revert to compact sizing to avoid overcrowding 2-col grid */
+@media (max-width: 640px) {
+  [data-section="brd-stats"] .abt-stat {
+    padding: 24px 12px;
+  }
+
+  [data-section="brd-stats"] .abt-stat-icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  [data-section="brd-stats"] .abt-stat-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  [data-section="brd-stats"] .abt-stat-num {
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+  }
+}
+
+/* ── 3. Brand Ecosystem editorial — about-grid reused, no new rules ──────── */
+
+/* ── 4. Parent Brands (C-106) ────────────────────────────────────────────── */
+
+.brd-directory {
+  background: var(--bg);
+}
+
+/* 2-column grid for parent brand cards */
+.brd-parent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 52px;
+}
+
+/* Flagship (Laborate) spans full width, internal 3-panel layout */
+.brd-card--featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 0;
+}
+
+.brd-card--featured .brd-card-accent {
+  grid-column: 1 / -1;
+}
+
+.brd-card--featured .brd-card-header {
+  grid-column: 1 / 2;
+}
+
+.brd-card--featured .brd-card-body {
+  grid-column: 2 / 3;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  padding-left: 32px;
+  padding-right: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brd-card--featured .brd-card-ctas {
+  grid-column: 3 / 4;
+  border-left: 0;
+  padding-left: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.brd-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.brd-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.brd-card--coming-soon {
+  opacity: 0.72;
+}
+
+.brd-card--coming-soon:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Accent stripe at top of each card */
+.brd-card-accent {
+  height: 5px;
+  background: var(--brd-accent, var(--blue));
+}
+
+.brd-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px 16px;
+}
+
+.brd-card-logo {
+  display: flex;
+  align-items: center;
+  min-height: 52px; /* consistent height for all logo types: icon, wordmark, lockup */
+}
+
+/* Real logo image — inserted by WordPress when brand_logo is set.
+   object-fit:contain + left-center ensures any aspect ratio displays cleanly.
+   Supported: square icon (1:1) · landscape wordmark (3:1+) · stacked lockup (1:2+) */
+.brd-card-logo-img {
+  display: block;
+  max-width: 150px;
+  max-height: 44px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.brd-card-logo--placeholder {
+  color: var(--muted);
+}
+
+.brd-wordmark {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.brd-card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.brd-card-since {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.brd-card-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.brd-card-badge--flagship {
+  background: rgba(16, 98, 172, 0.1);
+  color: var(--blue);
+}
+
+.brd-card-badge--soon {
+  background: rgba(90, 107, 140, 0.12);
+  color: var(--muted);
+}
+
+.brd-card-body {
+  padding: 4px 24px 20px;
+  flex: 1;
+}
+
+.brd-card-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+  line-height: 1.15;
+}
+
+.brd-card-tagline {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+.brd-card-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px 16px;
+  margin: 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.brd-spec dt {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.brd-spec dd {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.brd-card-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 24px 24px;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+}
+
+.brd-cta-internal,
+.brd-cta-external,
+.brd-cta-notify,
+.brd-cta-overview,
+.brd-cta-products {
+  flex-shrink: 0;
+}
+
+.brd-cta-external svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* Disabled website CTA — parent brands without a live website */
+.brd-cta-website-soon {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Icon-only external website link — Action 3 in brand card framework */
+.brd-cta-ext-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.brd-cta-ext-icon:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+  background: rgba(0, 24, 68, .04);
+}
+
+/* ── 5. Product Brands — Compact Tiles (C-109) ────────────────────────────── */
+
+.brd-product-section {
+  background: var(--bg);
+}
+
+.brd-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.brd-tile {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 168px; /* consistent height across all tiles */
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.brd-tile:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.brd-tile-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: var(--brd-accent, var(--blue));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* CMS logo image replaces initials — object-fit:contain preserves aspect ratio.
+   WordPress: if get_field('product_logo') → <img class="brd-tile-logo-img" ...> */
+.brd-tile-logo img,
+.brd-tile-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px; /* inset padding so logo doesn't bleed to edge */
+}
+
+.brd-tile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.brd-tile-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.brd-tile-parent {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.brd-tile-cta {
+  margin-top: auto;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--blue);
+  border-radius: 8px;
+}
+
+.brd-tile-cta:hover {
+  background: rgba(16, 98, 172, 0.06);
+  border-color: rgba(16, 98, 172, 0.3);
+}
+
+.brd-tile-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* ── 6. Therapeutic Categories (C-107) ───────────────────────────────────── */
+
+.brd-cat-section {
+  background: var(--white);
+}
+
+.brd-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.brd-cat-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  transition: box-shadow var(--t-fast), border-color var(--t-fast);
+}
+
+.brd-cat-card:hover {
+  border-color: rgba(16, 98, 172, 0.3);
+  box-shadow: var(--shadow-sm);
+}
+
+.brd-cat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: rgba(16, 98, 172, 0.08);
+  border-radius: 12px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.brd-cat-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.brd-cat-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.brd-cat-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* ── 7. Partner & Distribute — dark navy band ─────────────────────────────── */
+
+.brd-biz-section {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.brd-biz-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+
+.brd-biz-eyebrow {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.brd-biz-section h2 {
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.brd-biz-section p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+
+.brd-biz-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.brd-biz-points li {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.88rem;
+  padding-left: 18px;
+  position: relative;
+}
+
+.brd-biz-points li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.brd-biz-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+  min-width: 220px;
+  align-items: stretch;
+}
+
+.brd-biz-btn-ghost {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.brd-biz-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--white);
+}
+
+/* ── 8. Brand Resources — Resource Cards (C-110) ─────────────────────────── */
+
+.brd-resources-section {
+  background: var(--white);
+}
+
+.brd-res-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.brd-res-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 220px; /* slight extra height for better vertical rhythm */
+  transition: box-shadow var(--t-fast), border-color var(--t-fast);
+}
+
+.brd-res-card:hover {
+  border-color: rgba(16, 98, 172, 0.3);
+  box-shadow: var(--shadow-sm);
+}
+
+.brd-res-card-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(16, 98, 172, 0.08);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.brd-res-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.brd-res-card-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.brd-res-card-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.brd-res-card-link:hover {
+  text-decoration: underline;
+}
+
+.brd-res-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  /* Parent brands: keep 2-col, collapse the featured card's 3-panel layout */
+  .brd-card--featured {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .brd-card--featured .brd-card-accent {
+    grid-column: 1 / -1;
+  }
+
+  .brd-card--featured .brd-card-header {
+    grid-column: 1 / -1;
+  }
+
+  .brd-card--featured .brd-card-body {
+    grid-column: 1 / -1;
+    border-left: none;
+    border-right: none;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 0;
+  }
+
+  .brd-card--featured .brd-card-ctas {
+    grid-column: 1 / -1;
+    border-left: none;
+    padding-left: 24px;
+    flex-direction: row;
+  }
+
+  .brd-biz-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .brd-biz-actions {
+    flex-direction: row;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 860px) {
+  .brd-parent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brd-cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brd-res-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .brd-card--featured {
+    grid-template-columns: 1fr;
+  }
+
+  .brd-card--featured .brd-card-ctas {
+    flex-direction: column;
+  }
+
+  .brd-cat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brd-tile-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brd-res-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brd-hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brd-biz-actions {
+    flex-direction: column;
+  }
+
+  .brd-card-specs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brd-card,
+  .brd-cat-card,
+  .brd-tile,
+  .brd-res-card {
+    transition: none;
+  }
+}
