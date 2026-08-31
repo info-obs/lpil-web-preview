@@ -19,10 +19,10 @@
 (function () {
   'use strict';
 
-  var SESSION_KEY  = 'oktoberry_preview_authenticated';
+  var SESSION_KEY = 'oktoberry_preview_authenticated';
   var REDIRECT_KEY = 'oktoberry_preview_redirect';
   // SHA-256 of "Laborate25"
-  var PIN_HASH = 'e821e6f7d651ef21c79059619706b35fa05720a56197479b96b357442212c697';
+  var PIN_HASH = '723f54cd2f798821631f1ee655c9c018174969ac26dc284c96f3e5967dc42511';
 
   // ── Already authenticated ──────────────────────────────────────────────────
   if (sessionStorage.getItem(SESSION_KEY) === '1') {
@@ -56,14 +56,11 @@
   overlay.innerHTML = [
     '<div class="gate-card">',
     '  <div class="gate-logo" aria-hidden="true">',
-    '    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">',
-    '      <rect width="32" height="32" rx="8" fill="#1062AC"/>',
-    '      <path d="M8 24V8h4v12h8v4H8z" fill="#fff"/>',
-    '      <path d="M20 8h4v4h-4V8z" fill="#EB3236"/>',
-    '    </svg>',
-    '    <span class="gate-brand">LABORATE</span>',
+    '    <img src="https://laborate.com/images/logo.png" alt="Client Logo" class="icon-style">',
+    '    <!--span class="gate-brand">LABORATE</span-->',
     '  </div>',
     '  <h1 class="gate-title" id="gate-title">Website Preview</h1>',
+    '  <h3 class="gate-sub-title" id="item-id">ID: 11</h3>',
     '  <p class="gate-desc" id="gate-desc">This preview is access-restricted. Please enter the preview PIN to continue.</p>',
     '  <form class="gate-form" id="gate-form" novalidate>',
     '    <div class="gate-field">',
@@ -110,7 +107,7 @@
   }
 
   // ── Form submission ────────────────────────────────────────────────────────
-  var form    = document.getElementById('gate-form');
+  var form = document.getElementById('gate-form');
   var errorEl = document.getElementById('gate-error');
 
   function showError(msg) {
