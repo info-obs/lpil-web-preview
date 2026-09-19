@@ -22,7 +22,7 @@
   var SESSION_KEY = 'oktoberry_preview_authenticated';
   var REDIRECT_KEY = 'oktoberry_preview_redirect';
   // SHA-256 of "Laborate25"
-  var PIN_HASH = '723f54cd2f798821631f1ee655c9c018174969ac26dc284c96f3e5967dc42511';
+  var PIN_HASH = '4f2344d213d77ca17646f0427fe06bec225e2a0fb7875bdbee52d3eae92c2757';
 
   // ── Already authenticated ──────────────────────────────────────────────────
   if (sessionStorage.getItem(SESSION_KEY) === '1') {
